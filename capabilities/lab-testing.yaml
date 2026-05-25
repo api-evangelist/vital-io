@@ -1,0 +1,1382 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vital Lab Testing API
+  description: Vital Lab Testing API. 56 operations. Self-contained Naftiko capability covering the Lab Testing business surface
+    of the Junction (Vital) health-data platform.
+  tags:
+  - Vital
+  - Junction
+  - Lab Testing
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    VITAL_API_KEY: VITAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: lab_testing
+    baseUri: https://api.us.junction.com
+    description: Vital Lab Testing API business capability. Self-contained, no shared references.
+    resources:
+    - name: v3-lab-tests
+      path: /v3/lab_tests
+      operations:
+      - name: get_lab_tests_for_team_v3_lab_tests_get
+        method: GET
+        description: Get Lab Tests For Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: generation_method
+          in: query
+          type: string
+          description: Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab
+            tests should be returned.
+          required: false
+        - name: lab_slug
+          in: query
+          type: string
+          description: Filter by the slug of the lab for these lab tests.
+          required: false
+        - name: collection_method
+          in: query
+          type: string
+          description: Filter by the collection method for these lab tests.
+          required: false
+        - name: status
+          in: query
+          type: string
+          description: Filter by the status of these lab tests.
+          required: false
+        - name: marker_ids
+          in: query
+          type: string
+          description: Filter to only include lab tests containing these marker IDs.
+          required: false
+        - name: provider_ids
+          in: query
+          type: string
+          description: Filter to only include lab tests containing these provider IDs.
+          required: false
+        - name: name
+          in: query
+          type: string
+          description: Filter by the name of the lab test (a case-insensitive substring search).
+          required: false
+        - name: order_key
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: order_direction
+          in: query
+          type: string
+          description: ''
+          required: false
+      - name: create_lab_test_for_team_v3_lab_tests_post
+        method: POST
+        description: Create Lab Test For Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: update_lab_test_for_team_v3_lab_tests__lab_test_id__patch
+        method: PATCH
+        description: Update Lab Test For Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab_test_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: get_lab_test_for_team_v3_lab_tests__lab_test_id__get
+        method: GET
+        description: Get Lab Test For Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab_test_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: lab_account_id
+          in: query
+          type: string
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          required: false
+    - name: v3-lab-tests-markers
+      path: /v3/lab_tests/markers
+      operations:
+      - name: get_markers_v3_lab_tests_markers_get
+        method: GET
+        description: Get Markers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab_id
+          in: query
+          type: string
+          description: The identifier Vital assigned to a lab partner.
+          required: false
+        - name: lab_slug
+          in: query
+          type: string
+          description: The slug of the lab for these markers. If both lab_id and lab_slug are provided, lab_slug will be used.
+          required: false
+        - name: name
+          in: query
+          type: string
+          description: The name or test code of an individual biomarker or a panel.
+          required: false
+        - name: a_la_carte_enabled
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: lab_account_id
+          in: query
+          type: string
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          required: false
+        - name: page
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: size
+          in: query
+          type: integer
+          description: ''
+          required: false
+    - name: v3-lab-tests-list-order-set-markers
+      path: /v3/lab_tests/list_order_set_markers
+      operations:
+      - name: get_markers_for_order_set_v3_lab_tests_list_order_set_markers_post
+        method: POST
+        description: Get Markers For Order Set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: size
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-lab-tests--markers
+      path: /v3/lab_tests/{lab_test_id}/markers
+      operations:
+      - name: get_markers_for_test_v3_lab_tests__lab_test_id__markers_get
+        method: GET
+        description: Get Markers For Test
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab_test_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: lab_account_id
+          in: query
+          type: string
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          required: false
+        - name: page
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: size
+          in: query
+          type: integer
+          description: ''
+          required: false
+      - name: get_markers_by_provider_id_v3_lab_tests__lab_id__markers__provider_id__get
+        method: GET
+        description: Get Markers By Provider Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: provider_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: lab_id
+          in: path
+          type: integer
+          description: ''
+          required: true
+        - name: lab_account_id
+          in: query
+          type: string
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          required: false
+    - name: v3-lab-tests-labs
+      path: /v3/lab_tests/labs
+      operations:
+      - name: get_labs_v3_lab_tests_labs_get
+        method: GET
+        description: Get Labs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v3-compendium-search
+      path: /v3/compendium/search
+      operations:
+      - name: search_compendium_v3_compendium_search_post
+        method: POST
+        description: Search Compendium
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-compendium-convert
+      path: /v3/compendium/convert
+      operations:
+      - name: convert_compendium_v3_compendium_convert_post
+        method: POST
+        description: Convert Compendium
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-lab-test-lab-account
+      path: /v3/lab_test/lab_account
+      operations:
+      - name: get_team_lab_accounts_v3_lab_test_lab_account_get
+        method: GET
+        description: Get Team Lab Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab_account_id
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: status
+          in: query
+          type: string
+          description: ''
+          required: false
+    - name: v3-lab-test
+      path: /v3/lab_test
+      operations:
+      - name: get_paginated_lab_tests_for_team_v3_lab_test_get
+        method: GET
+        description: Get Paginated Lab Tests For Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab_test_limit
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: generation_method
+          in: query
+          type: string
+          description: Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab
+            tests should be returned.
+          required: false
+        - name: lab_slug
+          in: query
+          type: string
+          description: Filter by the slug of the lab for these lab tests.
+          required: false
+        - name: collection_method
+          in: query
+          type: string
+          description: Filter by the collection method for these lab tests.
+          required: false
+        - name: status
+          in: query
+          type: string
+          description: Filter by the status of these lab tests.
+          required: false
+        - name: marker_ids
+          in: query
+          type: string
+          description: Filter to only include lab tests containing these marker IDs.
+          required: false
+        - name: provider_ids
+          in: query
+          type: string
+          description: Filter to only include lab tests containing these provider IDs.
+          required: false
+        - name: name
+          in: query
+          type: string
+          description: Filter by the name of the lab test (a case-insensitive substring search).
+          required: false
+        - name: order_key
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: order_direction
+          in: query
+          type: string
+          description: ''
+          required: false
+    - name: v3-lab-test--collection-instruction-pdf
+      path: /v3/lab_test/{lab_test_id}/collection_instruction_pdf
+      operations:
+      - name: get_lab_test_collection_instructions_url_v3_lab_test__lab_test_id__collection_instruction_
+        method: GET
+        description: Get Lab Test Collection Instructions Url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab_test_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v3-order-transaction
+      path: /v3/order_transaction/{transaction_id}
+      operations:
+      - name: get_order_transaction_v3_order_transaction__transaction_id__get
+        method: GET
+        description: Get Order Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transaction_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v3-order-transaction--result
+      path: /v3/order_transaction/{transaction_id}/result
+      operations:
+      - name: get_order_transaction_result_v3_order_transaction__transaction_id__result_get
+        method: GET
+        description: Get Order Transaction Result
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transaction_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v3-order-transaction--result-pdf
+      path: /v3/order_transaction/{transaction_id}/result/pdf
+      operations:
+      - name: get_order_transaction_result_pdf_v3_order_transaction__transaction_id__result_pdf_get
+        method: GET
+        description: Get Order Transaction Result Pdf
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transaction_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v3-orders
+      path: /v3/orders
+      operations:
+      - name: get_orders_v3_orders_get
+        method: GET
+        description: Get Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search_input
+          in: query
+          type: string
+          description: Search by order id, user id, patient name, shipping dob, or shipping recipient name.
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: false
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+        - name: updated_start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: false
+        - name: updated_end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 00:00:00
+          required: false
+        - name: status
+          in: query
+          type: string
+          description: Filter by low level status.
+          required: false
+        - name: order_key
+          in: query
+          type: string
+          description: Order key to sort by.
+          required: false
+        - name: order_direction
+          in: query
+          type: string
+          description: Order direction to sort by.
+          required: false
+        - name: order_type
+          in: query
+          type: string
+          description: Filter by method used to perform the lab test.
+          required: false
+        - name: is_critical
+          in: query
+          type: string
+          description: Filter by critical order status.
+          required: false
+        - name: interpretation
+          in: query
+          type: string
+          description: Filter by result interpretation of the lab test.
+          required: false
+        - name: order_activation_types
+          in: query
+          type: string
+          description: Filter by activation type.
+          required: false
+        - name: user_id
+          in: query
+          type: string
+          description: Filter by user ID.
+          required: false
+        - name: patient_name
+          in: query
+          type: string
+          description: Filter by patient name.
+          required: false
+        - name: shipping_recipient_name
+          in: query
+          type: string
+          description: Filter by shipping recipient name.
+          required: false
+        - name: order_ids
+          in: query
+          type: string
+          description: Filter by order ids.
+          required: false
+        - name: order_transaction_id
+          in: query
+          type: string
+          description: Filter by order transaction ID
+          required: false
+        - name: page
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: size
+          in: query
+          type: integer
+          description: ''
+          required: false
+    - name: v3-order-testkit-register
+      path: /v3/order/testkit/register
+      operations:
+      - name: register_testkit_v3_order_testkit_register_post
+        method: POST
+        description: Register Testkit
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order-testkit
+      path: /v3/order/testkit
+      operations:
+      - name: create_testkit_order_v3_order_testkit_post
+        method: POST
+        description: Create Testkit Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order-phlebotomy-appointment-availability
+      path: /v3/order/phlebotomy/appointment/availability
+      operations:
+      - name: get_order_appointment_availability_v3_order_phlebotomy_appointment_availability_post
+        method: POST
+        description: Get Order Appointment Availability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: start_date
+          in: query
+          type: string
+          description: Start date for appointment availability
+          required: false
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--phlebotomy-appointment-book
+      path: /v3/order/{order_id}/phlebotomy/appointment/book
+      operations:
+      - name: book_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_book_post
+        method: POST
+        description: Book Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--phlebotomy-appointment-request
+      path: /v3/order/{order_id}/phlebotomy/appointment/request
+      operations:
+      - name: request_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_request_post
+        method: POST
+        description: Request Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--phlebotomy-appointment-reschedule
+      path: /v3/order/{order_id}/phlebotomy/appointment/reschedule
+      operations:
+      - name: reschedule_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_reschedule_pa
+        method: PATCH
+        description: Reschedule Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--phlebotomy-appointment-cancel
+      path: /v3/order/{order_id}/phlebotomy/appointment/cancel
+      operations:
+      - name: cancel_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_cancel_patch
+        method: PATCH
+        description: Cancel Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order-phlebotomy-appointment-cancellation-reasons
+      path: /v3/order/phlebotomy/appointment/cancellation-reasons
+      operations:
+      - name: get_phlebotomy_appointment_cancellation_reasons_v3_order_phlebotomy_appointment_cancellati
+        method: GET
+        description: Get Phlebotomy Appointment Cancellation Reasons
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v3-order--phlebotomy-appointment
+      path: /v3/order/{order_id}/phlebotomy/appointment
+      operations:
+      - name: get_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_get
+        method: GET
+        description: Get Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+    - name: v3-order-area-info
+      path: /v3/order/area/info
+      operations:
+      - name: get_area_info_v3_order_area_info_get
+        method: GET
+        description: Get Area Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zip_code
+          in: query
+          type: string
+          description: Zip code of the area to check
+          required: true
+        - name: radius
+          in: query
+          type: string
+          description: Radius in which to search in miles
+          required: false
+        - name: lab
+          in: query
+          type: string
+          description: Lab to check for PSCs
+          required: false
+        - name: labs
+          in: query
+          type: string
+          description: List of labs to check for PSCs
+          required: false
+        - name: lab_account_id
+          in: query
+          type: string
+          description: Lab Account ID to use for availability checks
+          required: false
+    - name: v3-order-psc-info
+      path: /v3/order/psc/info
+      operations:
+      - name: get_psc_info_v3_order_psc_info_get
+        method: GET
+        description: Get Psc Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: zip_code
+          in: query
+          type: string
+          description: Zip code of the area to check
+          required: true
+        - name: lab_id
+          in: query
+          type: integer
+          description: Lab ID to check for PSCs
+          required: true
+        - name: radius
+          in: query
+          type: string
+          description: Radius in which to search in miles. Note that we limit to 30 PSCs.
+          required: false
+        - name: capabilities
+          in: query
+          type: string
+          description: Filter for only locations with certain capabilities
+          required: false
+        - name: lab_account_id
+          in: query
+          type: string
+          description: Lab Account ID to use for availability checks
+          required: false
+    - name: v3-order--psc-info
+      path: /v3/order/{order_id}/psc/info
+      operations:
+      - name: get_order_psc_info_v3_order__order_id__psc_info_get
+        method: GET
+        description: Get Order Psc Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: radius
+          in: query
+          type: string
+          description: Radius in which to search in miles
+          required: false
+        - name: capabilities
+          in: query
+          type: string
+          description: Filter for only locations with certain capabilities
+          required: false
+    - name: v3-order--result-pdf
+      path: /v3/order/{order_id}/result/pdf
+      operations:
+      - name: get_lab_test_result_v3_order__order_id__result_pdf_get
+        method: GET
+        description: Get Lab Test Result
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v3-order--result-metadata
+      path: /v3/order/{order_id}/result/metadata
+      operations:
+      - name: get_lab_test_result_metadata_v3_order__order_id__result_metadata_get
+        method: GET
+        description: Get Lab Test Result Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v3-order--result
+      path: /v3/order/{order_id}/result
+      operations:
+      - name: get_lab_test_result_raw_v3_order__order_id__result_get
+        method: GET
+        description: Get Lab Test Result Raw
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v3-order--labels-pdf
+      path: /v3/order/{order_id}/labels/pdf
+      operations:
+      - name: get_order_labels_v3_order__order_id__labels_pdf_get
+        method: GET
+        description: Get Order Labels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: number_of_labels
+          in: query
+          type: integer
+          description: Number of labels to generate
+          required: false
+        - name: collection_date
+          in: query
+          type: string
+          description: Collection date
+          required: true
+    - name: v3-order-psc-appointment-availability
+      path: /v3/order/psc/appointment/availability
+      operations:
+      - name: get_psc_appointment_availability_v3_order_psc_appointment_availability_post
+        method: POST
+        description: Get Psc Appointment Availability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: lab
+          in: query
+          type: string
+          description: Lab to check for availability
+          required: true
+        - name: start_date
+          in: query
+          type: string
+          description: Start date for appointment availability
+          required: false
+        - name: site_codes
+          in: query
+          type: string
+          description: List of site codes to fetch availability for
+          required: false
+        - name: zip_code
+          in: query
+          type: string
+          description: Zip code of the area to check
+          required: false
+        - name: radius
+          in: query
+          type: string
+          description: Radius in which to search in miles
+          required: false
+        - name: allow_stale
+          in: query
+          type: boolean
+          description: If true, allows cached availability data to be returned.
+          required: false
+    - name: v3-order--psc-appointment-book
+      path: /v3/order/{order_id}/psc/appointment/book
+      operations:
+      - name: book_phlebotomy_appointment_v3_order__order_id__psc_appointment_book_post
+        method: POST
+        description: Book Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: x-idempotency-key
+          in: header
+          type: string
+          description: '[!] This feature (Idempotency Key) is under closed beta. Idempotency Key support for booking PSC appointment.'
+          required: false
+        - name: x-idempotency-error
+          in: header
+          type: string
+          description: If `no-cache`, applies idempotency only to successful outcomes.
+          required: false
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--psc-appointment-reschedule
+      path: /v3/order/{order_id}/psc/appointment/reschedule
+      operations:
+      - name: reschedule_phlebotomy_appointment_v3_order__order_id__psc_appointment_reschedule_patch
+        method: PATCH
+        description: Reschedule Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--psc-appointment-cancel
+      path: /v3/order/{order_id}/psc/appointment/cancel
+      operations:
+      - name: cancel_phlebotomy_appointment_v3_order__order_id__psc_appointment_cancel_patch
+        method: PATCH
+        description: Cancel Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order-psc-appointment-cancellation-reasons
+      path: /v3/order/psc/appointment/cancellation-reasons
+      operations:
+      - name: get_phlebotomy_appointment_cancellation_reasons_v3_order_psc_appointment_cancellation_reas
+        method: GET
+        description: Get Phlebotomy Appointment Cancellation Reasons
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v3-order--psc-appointment
+      path: /v3/order/{order_id}/psc/appointment
+      operations:
+      - name: get_phlebotomy_appointment_v3_order__order_id__psc_appointment_get
+        method: GET
+        description: Get Phlebotomy Appointment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+    - name: v3-order-resend-events
+      path: /v3/order/resend_events
+      operations:
+      - name: resend_order_webhook_v3_order_resend_events_post
+        method: POST
+        description: Resend Order Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--collection-instruction-pdf
+      path: /v3/order/{order_id}/collection_instruction_pdf
+      operations:
+      - name: get_order_collection_instructions_url_v3_order__order_id__collection_instruction_pdf_get
+        method: GET
+        description: Get Order Collection Instructions Url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+    - name: v3-order--requisition-pdf
+      path: /v3/order/{order_id}/requisition/pdf
+      operations:
+      - name: get_order_requisition_url_v3_order__order_id__requisition_pdf_get
+        method: GET
+        description: Get Order Requisition Url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+    - name: v3-order--abn-pdf
+      path: /v3/order/{order_id}/abn_pdf
+      operations:
+      - name: get_order_abn_v3_order__order_id__abn_pdf_get
+        method: GET
+        description: Get Order Abn
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+    - name: v3-order
+      path: /v3/order/{order_id}
+      operations:
+      - name: get_order_v3_order__order_id__get
+        method: GET
+        description: Get Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+      - name: update_order_v3_order__order_id__patch
+        method: PATCH
+        description: Update Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: create_order_v3_order_post
+        method: POST
+        description: Create Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: X-Idempotency-Key
+          in: header
+          type: string
+          description: ''
+          required: false
+        - name: X-Idempotency-Error
+          in: header
+          type: string
+          description: ''
+          required: false
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order-import
+      path: /v3/order/import
+      operations:
+      - name: import_order_v3_order_import_post
+        method: POST
+        description: Import Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-order--cancel
+      path: /v3/order/{order_id}/cancel
+      operations:
+      - name: cancel_order_v3_order__order_id__cancel_post
+        method: POST
+        description: Cancel Order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+    - name: v3-order--test
+      path: /v3/order/{order_id}/test
+      operations:
+      - name: order_process_simulate_v3_order__order_id__test_post
+        method: POST
+        description: Order Process Simulate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: final_status
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: delay
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: v3-order--draw-completed
+      path: /v3/order/{order_id}/draw_completed
+      operations:
+      - name: update_on_site_collection_order_draw_completed_v3_order__order_id__draw_completed_patch
+        method: PATCH
+        description: Update On Site Collection Order Draw Completed
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order_id
+          in: path
+          type: string
+          description: Your Order ID.
+          required: true
+    - name: v3-insurance-search-payor
+      path: /v3/insurance/search/payor
+      operations:
+      - name: post_insurance_payor_information_v3_insurance_search_payor_post
+        method: POST
+        description: Post Insurance Payor Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: search_insurance_payor_information_v3_insurance_search_payor_get
+        method: GET
+        description: Search Insurance Payor Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: insurance_name
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: provider_payor_id
+          in: query
+          type: string
+          description: ''
+          required: false
+    - name: v3-insurance-search-diagnosis
+      path: /v3/insurance/search/diagnosis
+      operations:
+      - name: search_diagnosis_v3_insurance_search_diagnosis_get
+        method: GET
+        description: Search Diagnosis
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: diagnosis_query
+          in: query
+          type: string
+          description: ''
+          required: true
+    - name: v3-insurance-validate-icd-codes
+      path: /v3/insurance/validate_icd_codes
+      operations:
+      - name: validate_icd_codes_v3_insurance_validate_icd_codes_post
+        method: POST
+        description: Validate Icd Codes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v3-payor
+      path: /v3/payor
+      operations:
+      - name: create_payor_v3_payor_post
+        method: POST
+        description: Create Payor
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    auth:
+      type: apiKey
+      in: header
+      name: X-Vital-API-Key
+      valueFrom:
+        env: VITAL_API_KEY

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.us.junction.com/v2/user",
+    "headers": {
+      "X-Vital-API-Key": "sk_us_<your-sandbox-team-key>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "client_user_id": "patient-7c1b0f5a-9e0d-4f0e-9b3a-3e2c4f1a0b6e",
+      "fallback_time_zone": "America/New_York",
+      "fallback_birth_date": "1988-04-12"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "user_id": "9d1e7f8a-44c1-4f9b-9a5d-1d2e3f4a5b6c",
+      "client_user_id": "patient-7c1b0f5a-9e0d-4f0e-9b3a-3e2c4f1a0b6e",
+      "team_id": "0c4b6e2a-9f0f-4a51-9b22-7d8e9f0a1b2c",
+      "created_on": "2026-05-25T14:30:12.341Z",
+      "fallback_time_zone": "America/New_York",
+      "fallback_birth_date": "1988-04-12",
+      "connected_sources": []
+    }
+  }
+}

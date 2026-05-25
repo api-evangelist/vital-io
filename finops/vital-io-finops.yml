@@ -1,0 +1,107 @@
+finopsAlignment:
+  framework: FinOps Framework
+  dataSpec: FOCUS 1.0
+  provider:
+    id: vital-io
+    name: Vital (Junction)
+    url: https://www.junction.com
+    pricingPage: https://www.tryvital.com/pricing
+  generatedAt: '2026-05-25'
+
+billableSurfaces:
+- id: wearables-active-users
+  name: Wearables — Active Users (per-user/month)
+  description: |
+    Primary metered unit on the Launch / Grow / Scale plans. Pricing is per active end-user
+    per month; "active" is defined as a user with at least one ingested data point in the
+    billing period.
+  serviceCategory: Health Data Platform
+  serviceName: Vital Wearables Data
+  chargeCategory: Usage
+  pricingUnit: user/month
+  pricingQuantity: 1
+  listUnitPrice:
+    Launch: 0.50 USD
+    Grow: "< 0.50 USD (negotiated)"
+    Scale: custom
+  commitment: monthly minimum on Launch (300 USD / month)
+
+- id: lab-testing-per-test
+  name: Lab Testing — per test ordered
+  description: |
+    Lab tests are metered separately and priced per fulfilled test. Junction passes through
+    lab-vendor pricing without upcharge and adds a platform fee. Specific SKUs vary by lab and
+    region; some carriers settle via insurance / payor.
+  serviceCategory: Health Data Platform
+  serviceName: Vital Lab Testing
+  chargeCategory: Usage
+  pricingUnit: test
+  pricingQuantity: 1
+  listUnitPrice: quote-based
+  notes:
+  - At-home testkits typically require a 250-kit minimum order (flexible by request).
+  - Some flows can be billed to the patient's insurance through the Insurance / Payor API.
+
+- id: lab-report-parser
+  name: Lab Report Parser — per job
+  description: Submitting a PDF lab report for parsing into the Junction biomarker schema.
+  serviceCategory: Health Data Platform
+  serviceName: Vital Lab Report Parser
+  chargeCategory: Usage
+  pricingUnit: parser job
+  pricingQuantity: 1
+  listUnitPrice: included on Grow / Scale (verify on quote)
+
+- id: sense-queries
+  name: Sense — Continuous Queries
+  description: |
+    Defined and materialized continuous queries that recompute as new data lands. Scale-tier
+    capability that requires the Analytics API entitlement.
+  serviceCategory: Health Data Platform
+  serviceName: Vital Sense
+  chargeCategory: Usage
+  pricingUnit: continuous-query / month
+  pricingQuantity: 1
+  listUnitPrice: Scale-plan add-on
+
+- id: etl-pipelines
+  name: ETL Pipelines (BYO destination)
+  description: Forwarding ingested data to Azure Event Hubs, Google Cloud Pub/Sub, or RabbitMQ.
+  serviceCategory: Health Data Platform
+  serviceName: Vital ETL
+  chargeCategory: Usage
+  pricingUnit: pipeline-month
+  listUnitPrice: Scale-plan add-on
+
+focusFields:
+  ChargeCategory: [Usage, Commitment]
+  ServiceCategory: Health Data Platform
+  CommitmentDiscountType:
+  - tier (volume on Grow / Scale)
+  - bundled (lab-testing add-on)
+  ChargePeriodStart: month boundary, team-local
+  ChargePeriodEnd: month boundary, team-local
+
+allocationDimensions:
+- team_id
+- region (us / eu)
+- environment (production / sandbox)
+- provider (per wearable source: fitbit, oura, ...)
+- lab (per fulfillment lab: quest, labcorp, ...)
+- collection_method (testkit / at_home_phlebotomy / walk_in_test / on_site)
+
+optimizationLevers:
+- name: Right-size active users
+  description: Reconcile platform "active user" count vs internal MAU; archive inactive users.
+- name: Prefer webhooks / ETL over polling
+  description: Polling timeseries endpoints inflates request volume without business value.
+- name: Pin provider scope per user
+  description: Only request scopes you actually consume (sleep vs. full HealthKit) — narrower
+    scopes reduce ingest volume and downstream storage / Sense cost.
+- name: Bundle lab orders
+  description: Multiple markers under one order amortize fixed per-order fees.
+
+references:
+- https://www.tryvital.com/pricing
+- https://docs.junction.com/home/welcome
+- https://focus.finos.org/

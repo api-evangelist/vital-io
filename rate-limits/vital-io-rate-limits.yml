@@ -1,0 +1,51 @@
+apiCommonsRateLimits: '0.1'
+provider:
+  id: vital-io
+  name: Vital (Junction)
+  url: https://www.junction.com
+  documentation: https://docs.junction.com/home/rate-limiting
+generatedAt: '2026-05-25'
+authenticationScope:
+  - Per team API key (X-Vital-API-Key, prefixes pk_us_ / pk_eu_ / sk_us_ / sk_eu_)
+  - Per management API key (x-vital-management-api-key)
+responseSignals:
+  '429':
+    meaning: Too Many Requests — the team has exceeded the configured per-endpoint rate window.
+    standardHeaders:
+      - Retry-After
+  '503':
+    meaning: Service Unavailable — typically transient upstream provider or lab backpressure;
+      treated as a back-off signal alongside 429.
+    standardHeaders:
+      - Retry-After
+recommendedClientStrategy:
+  - Honor Retry-After when present.
+  - Exponential back-off with jitter starting at 1s, capped at 60s, for both 429 and 503.
+  - Prefer batch / bulk endpoints for high-volume operations (bulk_import, bulk_op, summary range queries).
+  - Subscribe to webhooks or ETL pipelines instead of polling for fresh data.
+limits:
+  notes: |
+    Junction does not publish a single global numeric rate-limit; limits are applied per
+    endpoint and per team. Webhooks and ETL pipelines are the supported path for high-volume
+    fan-out. Public documentation: https://docs.junction.com/home/rate-limiting.
+  classes:
+  - id: standard-rest
+    description: Standard read/write REST operations (users, summaries, timeseries, link, team).
+    behavior: Soft per-endpoint quotas; bursts return 429 with Retry-After.
+  - id: bulk
+    description: Bulk operations (bulk_import, bulk_op, bulk_trigger_historical_pull).
+    behavior: Lower call-frequency cap but each call covers many users; designed for backfills.
+  - id: lab-testing
+    description: Lab-testing endpoints (order, lab_tests, compendium, appointments).
+    behavior: Throttling reflects downstream lab-network capacity; 503 can appear during lab outages.
+  - id: sense-queries
+    description: Sense aggregate queries and result-table reads.
+    behavior: Heavier per-call cost; expect tighter limits than standard REST.
+quotas:
+  webhookDelivery:
+    description: Webhook deliveries are managed via Svix with built-in retry, dead-letter, and
+      per-endpoint signing secrets; consumers do not call the API for delivery, so do not contribute
+      to API rate limits.
+references:
+  - https://docs.junction.com/home/rate-limiting
+  - https://docs.junction.com/api-details/junction-api

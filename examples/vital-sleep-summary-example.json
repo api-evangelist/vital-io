@@ -1,0 +1,41 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.us.junction.com/v2/summary/sleep/9d1e7f8a-44c1-4f9b-9a5d-1d2e3f4a5b6c?start_date=2026-05-20&end_date=2026-05-24",
+    "headers": {
+      "X-Vital-API-Key": "sk_us_<your-sandbox-team-key>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "sleep": [
+        {
+          "id": "8f2c1d3e-7b9a-4c5d-9e0f-1a2b3c4d5e6f",
+          "user_id": "9d1e7f8a-44c1-4f9b-9a5d-1d2e3f4a5b6c",
+          "calendar_date": "2026-05-24",
+          "bedtime_start": "2026-05-23T22:42:00-04:00",
+          "bedtime_end": "2026-05-24T06:18:00-04:00",
+          "timezone_offset": -14400,
+          "duration": 27360,
+          "total": 25920,
+          "awake": 1440,
+          "light": 14040,
+          "rem": 6120,
+          "deep": 5760,
+          "score": 82,
+          "hr_average": 58.4,
+          "hr_lowest": 49.0,
+          "hrv_avg": 64.2,
+          "respiratory_rate": 14.6,
+          "temperature_delta": -0.18,
+          "source": {
+            "provider": "oura",
+            "type": "ring",
+            "name": "Oura Ring Gen 3"
+          }
+        }
+      ]
+    }
+  }
+}

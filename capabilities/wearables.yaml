@@ -1,0 +1,3692 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vital Wearables Data API
+  description: Vital Wearables Data API. 95 operations. Self-contained Naftiko capability covering the Wearables Data business
+    surface of the Junction (Vital) health-data platform.
+  tags:
+  - Vital
+  - Junction
+  - Wearables Data
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    VITAL_API_KEY: VITAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: wearables
+    baseUri: https://api.us.junction.com
+    description: Vital Wearables Data API business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-summary-electrocardiogram
+      path: /v2/summary/electrocardiogram/{user_id}
+      operations:
+      - name: get_user_electrocardiogram_v2_summary_electrocardiogram__user_id__get
+        method: GET
+        description: Get User Electrocardiogram
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: start_date
+          in: query
+          type: string
+          description: ''
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+    - name: v2-summary-sleep-cycle
+      path: /v2/summary/sleep_cycle/{user_id}
+      operations:
+      - name: get_user_sleep_cycle_v2_summary_sleep_cycle__user_id__get
+        method: GET
+        description: Get User Sleep Cycle
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: start_date
+          in: query
+          type: string
+          description: ''
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+    - name: v2-summary-profile
+      path: /v2/summary/profile/{user_id}
+      operations:
+      - name: get_user_profile_v2_summary_profile__user_id__get
+        method: GET
+        description: Get User Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+    - name: v2-summary-profile--raw
+      path: /v2/summary/profile/{user_id}/raw
+      operations:
+      - name: get_user_profile_raw_v2_summary_profile__user_id__raw_get
+        method: GET
+        description: Get User Profile Raw
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+    - name: v2-summary-devices--raw
+      path: /v2/summary/devices/{user_id}/raw
+      operations:
+      - name: get_user_devices_raw_v2_summary_devices__user_id__raw_get
+        method: GET
+        description: Get User Devices Raw
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+    - name: v2-summary-activity
+      path: /v2/summary/activity/{user_id}
+      operations:
+      - name: get_user_activity_v2_summary_activity__user_id__get
+        method: GET
+        description: Get User Activity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-activity--raw
+      path: /v2/summary/activity/{user_id}/raw
+      operations:
+      - name: get_user_activity_raw_v2_summary_activity__user_id__raw_get
+        method: GET
+        description: Get User Activity Raw
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-workouts
+      path: /v2/summary/workouts/{user_id}
+      operations:
+      - name: get_user_workouts_v2_summary_workouts__user_id__get
+        method: GET
+        description: Get User Workouts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-workouts--raw
+      path: /v2/summary/workouts/{user_id}/raw
+      operations:
+      - name: get_user_workouts_raw_v2_summary_workouts__user_id__raw_get
+        method: GET
+        description: Get User Workouts Raw
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-sleep
+      path: /v2/summary/sleep/{user_id}
+      operations:
+      - name: get_user_sleep_v2_summary_sleep__user_id__get
+        method: GET
+        description: Get User Sleep
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-sleep--raw
+      path: /v2/summary/sleep/{user_id}/raw
+      operations:
+      - name: get_user_sleep_raw_v2_summary_sleep__user_id__raw_get
+        method: GET
+        description: Get User Sleep Raw
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-body
+      path: /v2/summary/body/{user_id}
+      operations:
+      - name: get_user_body_v2_summary_body__user_id__get
+        method: GET
+        description: Get User Body
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-body--raw
+      path: /v2/summary/body/{user_id}/raw
+      operations:
+      - name: get_user_body_raw_v2_summary_body__user_id__raw_get
+        method: GET
+        description: Get User Body Raw
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-meal
+      path: /v2/summary/meal/{user_id}
+      operations:
+      - name: get_meals_v2_summary_meal__user_id__get
+        method: GET
+        description: Get Meals
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-summary-menstrual-cycle
+      path: /v2/summary/menstrual_cycle/{user_id}
+      operations:
+      - name: get_user_menstrual_cycles_v2_summary_menstrual_cycle__user_id__get
+        method: GET
+        description: Get User Menstrual Cycles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: ''
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: ''
+          required: false
+    - name: v2-timeseries-sleep--stream
+      path: /v2/timeseries/sleep/{sleep_id}/stream
+      operations:
+      - name: get_user_sleep_stream_v2_timeseries_sleep__sleep_id__stream_get
+        method: GET
+        description: Get User Sleep Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sleep_id
+          in: path
+          type: string
+          description: The Vital Sleep ID
+          required: true
+    - name: v2-timeseries-workouts--stream
+      path: /v2/timeseries/workouts/{workout_id}/stream
+      operations:
+      - name: get_user_workouts_v2_timeseries_workouts__workout_id__stream_get
+        method: GET
+        description: Get User Workouts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workout_id
+          in: path
+          type: string
+          description: The Vital ID for the workout
+          required: true
+    - name: v2-timeseries--workout-swimming-stroke-grouped
+      path: /v2/timeseries/{user_id}/workout_swimming_stroke/grouped
+      operations:
+      - name: get_workout_swimming_stroke_grouped
+        method: GET
+        description: Workout Swimming Stroke
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--workout-distance-grouped
+      path: /v2/timeseries/{user_id}/workout_distance/grouped
+      operations:
+      - name: get_workout_distance_grouped
+        method: GET
+        description: Workout Distance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--heart-rate-recovery-one-minute-grouped
+      path: /v2/timeseries/{user_id}/heart_rate_recovery_one_minute/grouped
+      operations:
+      - name: get_heart_rate_recovery_one_minute_grouped
+        method: GET
+        description: Heart Rate Recovery One Minute
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--waist-circumference-grouped
+      path: /v2/timeseries/{user_id}/waist_circumference/grouped
+      operations:
+      - name: get_waist_circumference_grouped
+        method: GET
+        description: Waist Circumference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--lean-body-mass-grouped
+      path: /v2/timeseries/{user_id}/lean_body_mass/grouped
+      operations:
+      - name: get_lean_body_mass_grouped
+        method: GET
+        description: Lean Body Mass
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--body-mass-index-grouped
+      path: /v2/timeseries/{user_id}/body_mass_index/grouped
+      operations:
+      - name: get_body_mass_index_grouped
+        method: GET
+        description: Body Mass Index
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--basal-body-temperature-grouped
+      path: /v2/timeseries/{user_id}/basal_body_temperature/grouped
+      operations:
+      - name: get_basal_body_temperature_grouped
+        method: GET
+        description: Basal Body Temperature
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--handwashing-grouped
+      path: /v2/timeseries/{user_id}/handwashing/grouped
+      operations:
+      - name: get_handwashing_grouped
+        method: GET
+        description: Handwashing
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--daylight-exposure-grouped
+      path: /v2/timeseries/{user_id}/daylight_exposure/grouped
+      operations:
+      - name: get_daylight_exposure_grouped
+        method: GET
+        description: Daylight Exposure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--uv-exposure-grouped
+      path: /v2/timeseries/{user_id}/uv_exposure/grouped
+      operations:
+      - name: get_uv_exposure_grouped
+        method: GET
+        description: Uv Exposure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--fall-grouped
+      path: /v2/timeseries/{user_id}/fall/grouped
+      operations:
+      - name: get_fall_grouped
+        method: GET
+        description: Fall
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--inhaler-usage-grouped
+      path: /v2/timeseries/{user_id}/inhaler_usage/grouped
+      operations:
+      - name: get_inhaler_usage_grouped
+        method: GET
+        description: Inhaler Usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--peak-expiratory-flow-rate-grouped
+      path: /v2/timeseries/{user_id}/peak_expiratory_flow_rate/grouped
+      operations:
+      - name: get_peak_expiratory_flow_rate_grouped
+        method: GET
+        description: Peak Expiratory Flow Rate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--forced-vital-capacity-grouped
+      path: /v2/timeseries/{user_id}/forced_vital_capacity/grouped
+      operations:
+      - name: get_forced_vital_capacity_grouped
+        method: GET
+        description: Forced Vital Capacity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--forced-expiratory-volume-1-grouped
+      path: /v2/timeseries/{user_id}/forced_expiratory_volume_1/grouped
+      operations:
+      - name: get_forced_expiratory_volume_1_grouped
+        method: GET
+        description: Forced Expiratory Volume 1
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--wheelchair-push-grouped
+      path: /v2/timeseries/{user_id}/wheelchair_push/grouped
+      operations:
+      - name: get_wheelchair_push_grouped
+        method: GET
+        description: Wheelchair Push
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--sleep-breathing-disturbance-grouped
+      path: /v2/timeseries/{user_id}/sleep_breathing_disturbance/grouped
+      operations:
+      - name: get_sleep_breathing_disturbance_grouped
+        method: GET
+        description: Sleep Breathing Disturbance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--sleep-apnea-alert-grouped
+      path: /v2/timeseries/{user_id}/sleep_apnea_alert/grouped
+      operations:
+      - name: get_sleep_apnea_alert_grouped
+        method: GET
+        description: Sleep Apnea Alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--stand-duration-grouped
+      path: /v2/timeseries/{user_id}/stand_duration/grouped
+      operations:
+      - name: get_stand_duration_grouped
+        method: GET
+        description: Stand Duration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--stand-hour-grouped
+      path: /v2/timeseries/{user_id}/stand_hour/grouped
+      operations:
+      - name: get_stand_hour_grouped
+        method: GET
+        description: Stand Hour
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--heart-rate-alert-grouped
+      path: /v2/timeseries/{user_id}/heart_rate_alert/grouped
+      operations:
+      - name: get_heart_rate_alert_grouped
+        method: GET
+        description: Heart Rate Alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--afib-burden-grouped
+      path: /v2/timeseries/{user_id}/afib_burden/grouped
+      operations:
+      - name: get_afib_burden_grouped
+        method: GET
+        description: Afib Burden
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--workout-duration-grouped
+      path: /v2/timeseries/{user_id}/workout_duration/grouped
+      operations:
+      - name: get_workout_duration_grouped
+        method: GET
+        description: Workout Duration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--vo2-max-grouped
+      path: /v2/timeseries/{user_id}/vo2_max/grouped
+      operations:
+      - name: get_vo2_max_grouped
+        method: GET
+        description: Vo2 Max
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--stress-level-grouped
+      path: /v2/timeseries/{user_id}/stress_level/grouped
+      operations:
+      - name: get_stress_level_grouped
+        method: GET
+        description: Stress Level
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--mindfulness-minutes-grouped
+      path: /v2/timeseries/{user_id}/mindfulness_minutes/grouped
+      operations:
+      - name: get_mindfulness_minutes_grouped
+        method: GET
+        description: Mindfulness Minutes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--caffeine-grouped
+      path: /v2/timeseries/{user_id}/caffeine/grouped
+      operations:
+      - name: get_caffeine_grouped
+        method: GET
+        description: Caffeine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--water-grouped
+      path: /v2/timeseries/{user_id}/water/grouped
+      operations:
+      - name: get_water_grouped
+        method: GET
+        description: Water
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--steps-grouped
+      path: /v2/timeseries/{user_id}/steps/grouped
+      operations:
+      - name: get_steps_grouped
+        method: GET
+        description: Steps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--floors-climbed-grouped
+      path: /v2/timeseries/{user_id}/floors_climbed/grouped
+      operations:
+      - name: get_floors_climbed_grouped
+        method: GET
+        description: Floors Climbed
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--distance-grouped
+      path: /v2/timeseries/{user_id}/distance/grouped
+      operations:
+      - name: get_distance_grouped
+        method: GET
+        description: Distance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--calories-basal-grouped
+      path: /v2/timeseries/{user_id}/calories_basal/grouped
+      operations:
+      - name: get_calories_basal_grouped
+        method: GET
+        description: Calories Basal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--calories-active-grouped
+      path: /v2/timeseries/{user_id}/calories_active/grouped
+      operations:
+      - name: get_calories_active_grouped
+        method: GET
+        description: Calories Active
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--respiratory-rate-grouped
+      path: /v2/timeseries/{user_id}/respiratory_rate/grouped
+      operations:
+      - name: get_respiratory_rate_grouped
+        method: GET
+        description: Respiratory Rate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--note-grouped
+      path: /v2/timeseries/{user_id}/note/grouped
+      operations:
+      - name: get_note_grouped
+        method: GET
+        description: Note
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--insulin-injection-grouped
+      path: /v2/timeseries/{user_id}/insulin_injection/grouped
+      operations:
+      - name: get_insulin_injection_grouped
+        method: GET
+        description: Insulin Injection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--ige-grouped
+      path: /v2/timeseries/{user_id}/ige/grouped
+      operations:
+      - name: get_ige_grouped
+        method: GET
+        description: Ige
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--igg-grouped
+      path: /v2/timeseries/{user_id}/igg/grouped
+      operations:
+      - name: get_igg_grouped
+        method: GET
+        description: Igg
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--hypnogram-grouped
+      path: /v2/timeseries/{user_id}/hypnogram/grouped
+      operations:
+      - name: get_hypnogram_grouped
+        method: GET
+        description: Hypnogram
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--hrv-grouped
+      path: /v2/timeseries/{user_id}/hrv/grouped
+      operations:
+      - name: get_hrv_grouped
+        method: GET
+        description: Heart Rate Variability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--heartrate-grouped
+      path: /v2/timeseries/{user_id}/heartrate/grouped
+      operations:
+      - name: get_heartrate_grouped
+        method: GET
+        description: Heart Rate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--glucose-grouped
+      path: /v2/timeseries/{user_id}/glucose/grouped
+      operations:
+      - name: get_glucose_grouped
+        method: GET
+        description: Glucose
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--cholesterol-grouped
+      path: /v2/timeseries/{user_id}/cholesterol/grouped
+      operations:
+      - name: get_cholesterol_grouped
+        method: GET
+        description: Cholesterol
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--carbohydrates-grouped
+      path: /v2/timeseries/{user_id}/carbohydrates/grouped
+      operations:
+      - name: get_carbohydrates_grouped
+        method: GET
+        description: Carbohydrates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--body-temperature-delta-grouped
+      path: /v2/timeseries/{user_id}/body_temperature_delta/grouped
+      operations:
+      - name: get_body_temperature_delta_grouped
+        method: GET
+        description: Body Temperature Delta
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--body-temperature-grouped
+      path: /v2/timeseries/{user_id}/body_temperature/grouped
+      operations:
+      - name: get_body_temperature_grouped
+        method: GET
+        description: Body Temperature
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--body-weight-grouped
+      path: /v2/timeseries/{user_id}/body_weight/grouped
+      operations:
+      - name: get_body_weight_grouped
+        method: GET
+        description: Body Weight
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--body-fat-grouped
+      path: /v2/timeseries/{user_id}/body_fat/grouped
+      operations:
+      - name: get_body_fat_grouped
+        method: GET
+        description: Body Fat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--blood-oxygen-grouped
+      path: /v2/timeseries/{user_id}/blood_oxygen/grouped
+      operations:
+      - name: get_blood_oxygen_grouped
+        method: GET
+        description: Blood Oxygen
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--electrocardiogram-voltage-grouped
+      path: /v2/timeseries/{user_id}/electrocardiogram_voltage/grouped
+      operations:
+      - name: get_electrocardiogram_voltage_grouped
+        method: GET
+        description: Electrocardiogram Voltage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--blood-pressure-grouped
+      path: /v2/timeseries/{user_id}/blood_pressure/grouped
+      operations:
+      - name: get_blood_pressure_grouped
+        method: GET
+        description: Blood Pressure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--vo2-max
+      path: /v2/timeseries/{user_id}/vo2_max
+      operations:
+      - name: get_vo2_max
+        method: GET
+        description: Vo2 Max
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--stress-level
+      path: /v2/timeseries/{user_id}/stress_level
+      operations:
+      - name: get_stress_level
+        method: GET
+        description: Stress Level
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--mindfulness-minutes
+      path: /v2/timeseries/{user_id}/mindfulness_minutes
+      operations:
+      - name: get_mindfulness_minutes
+        method: GET
+        description: Mindfulness Minutes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--caffeine
+      path: /v2/timeseries/{user_id}/caffeine
+      operations:
+      - name: get_caffeine
+        method: GET
+        description: Caffeine
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--water
+      path: /v2/timeseries/{user_id}/water
+      operations:
+      - name: get_water
+        method: GET
+        description: Water
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--steps
+      path: /v2/timeseries/{user_id}/steps
+      operations:
+      - name: get_steps
+        method: GET
+        description: Steps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--floors-climbed
+      path: /v2/timeseries/{user_id}/floors_climbed
+      operations:
+      - name: get_floors_climbed
+        method: GET
+        description: Floors Climbed
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--distance
+      path: /v2/timeseries/{user_id}/distance
+      operations:
+      - name: get_distance
+        method: GET
+        description: Distance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--calories-basal
+      path: /v2/timeseries/{user_id}/calories_basal
+      operations:
+      - name: get_calories_basal
+        method: GET
+        description: Calories Basal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--calories-active
+      path: /v2/timeseries/{user_id}/calories_active
+      operations:
+      - name: get_calories_active
+        method: GET
+        description: Calories Active
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--respiratory-rate
+      path: /v2/timeseries/{user_id}/respiratory_rate
+      operations:
+      - name: get_respiratory_rate
+        method: GET
+        description: Respiratory Rate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--ige
+      path: /v2/timeseries/{user_id}/ige
+      operations:
+      - name: get_ige
+        method: GET
+        description: Ige
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--igg
+      path: /v2/timeseries/{user_id}/igg
+      operations:
+      - name: get_igg
+        method: GET
+        description: Igg
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--hypnogram
+      path: /v2/timeseries/{user_id}/hypnogram
+      operations:
+      - name: get_hypnogram
+        method: GET
+        description: Hypnogram
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--hrv
+      path: /v2/timeseries/{user_id}/hrv
+      operations:
+      - name: get_hrv
+        method: GET
+        description: Heart Rate Variability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--heartrate
+      path: /v2/timeseries/{user_id}/heartrate
+      operations:
+      - name: get_heartrate
+        method: GET
+        description: Heart Rate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--glucose
+      path: /v2/timeseries/{user_id}/glucose
+      operations:
+      - name: get_glucose
+        method: GET
+        description: Glucose
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--cholesterol-triglycerides
+      path: /v2/timeseries/{user_id}/cholesterol/triglycerides
+      operations:
+      - name: get_cholesterol_triglycerides
+        method: GET
+        description: Cholesterol/Triglycerides
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--cholesterol-total
+      path: /v2/timeseries/{user_id}/cholesterol/total
+      operations:
+      - name: get_cholesterol_total
+        method: GET
+        description: Cholesterol/Total
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--cholesterol-ldl
+      path: /v2/timeseries/{user_id}/cholesterol/ldl
+      operations:
+      - name: get_cholesterol_ldl
+        method: GET
+        description: Cholesterol/Ldl
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--cholesterol-hdl
+      path: /v2/timeseries/{user_id}/cholesterol/hdl
+      operations:
+      - name: get_cholesterol_hdl
+        method: GET
+        description: Cholesterol/Hdl
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--cholesterol
+      path: /v2/timeseries/{user_id}/cholesterol
+      operations:
+      - name: get_cholesterol
+        method: GET
+        description: Cholesterol
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--body-weight
+      path: /v2/timeseries/{user_id}/body_weight
+      operations:
+      - name: get_body_weight
+        method: GET
+        description: Body Weight
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--body-fat
+      path: /v2/timeseries/{user_id}/body_fat
+      operations:
+      - name: get_body_fat
+        method: GET
+        description: Body Fat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--blood-oxygen
+      path: /v2/timeseries/{user_id}/blood_oxygen
+      operations:
+      - name: get_blood_oxygen
+        method: GET
+        description: Blood Oxygen
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--electrocardiogram-voltage
+      path: /v2/timeseries/{user_id}/electrocardiogram_voltage
+      operations:
+      - name: get_electrocardiogram_voltage
+        method: GET
+        description: Electrocardiogram Voltage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    - name: v2-timeseries--blood-pressure
+      path: /v2/timeseries/{user_id}/blood_pressure
+      operations:
+      - name: get_blood_pressure
+        method: GET
+        description: Blood Pressure
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: query
+          type: string
+          description: Provider oura/strava etc
+          required: false
+        - name: start_date
+          in: query
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time
+            will be set to 00:00:00
+          required: true
+        - name: end_date
+          in: query
+          type: string
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will
+            be set to 23:59:59
+          required: false
+    auth:
+      type: apiKey
+      in: header
+      name: X-Vital-API-Key
+      valueFrom:
+        env: VITAL_API_KEY

@@ -1,0 +1,97 @@
+extends:
+- spectral:oas
+
+documentationUrl: https://github.com/api-evangelist/vital-io
+
+rules:
+  # Junction-specific conventions discovered from upstream OpenAPI 3.1 spec
+  # (https://github.com/tryVital/vital-fern-api).
+
+  vital-info-title-junction-or-vital:
+    description: API title must be "Junction API", or a Vital-prefixed sub-API title.
+    given: $.info.title
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(Junction API|Vital .* API|Vital Sense API|Vital Wearables Data API)$"
+
+  vital-info-contact-url-junction-docs:
+    description: API contact.url should point to docs.junction.com.
+    given: $.info.contact
+    severity: warn
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: ".*docs\\.junction\\.com.*"
+
+  vital-servers-regional-set:
+    description: Servers list should include US and EU regional production and sandbox base URLs.
+    given: $.servers
+    severity: warn
+    then:
+      function: length
+      functionOptions:
+        min: 2
+
+  vital-server-url-allowed:
+    description: Server URLs must use the api.{region}.junction.com or api.sandbox.{region}.junction.com pattern.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api(\\.sandbox)?\\.(us|eu)\\.junction\\.com/?$"
+
+  vital-paths-versioned:
+    description: All paths must be versioned under /v1/, /v2/, /v3/, or grouped namespace (/aggregate/, /lab_report/).
+    given: $.paths[*]~
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/(v\\d+|aggregate|lab_report)/"
+
+  vital-operation-operation-id-snake-case:
+    description: Operation IDs follow snake_case (Fern convention).
+    given: $.paths[*][*].operationId
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"
+
+  vital-operation-tags-required:
+    description: Every operation should declare at least one tag.
+    given: $.paths[*][get,post,patch,put,delete]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  vital-operation-summary-title-case:
+    description: Operation summaries use Title Case.
+    given: $.paths[*][*].summary
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  vital-security-api-key-header:
+    description: Document an X-Vital-API-Key apiKey security scheme.
+    given: $.components.securitySchemes
+    severity: warn
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            ".*":
+              type: object
+              properties:
+                type: {enum: [apiKey, oauth2, http]}
+                in: {enum: [header, query]}
+                name: {type: string}

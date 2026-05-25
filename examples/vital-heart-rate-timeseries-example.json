@@ -1,0 +1,35 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.us.junction.com/v2/timeseries/9d1e7f8a-44c1-4f9b-9a5d-1d2e3f4a5b6c/heartrate?start_date=2026-05-24T00:00:00Z&end_date=2026-05-24T01:00:00Z",
+    "headers": {
+      "X-Vital-API-Key": "sk_us_<your-sandbox-team-key>"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "data": [
+        {
+          "id": "01HG2P5Q3R8S9T0V1W2X3Y4Z5A",
+          "timestamp": "2026-05-24T00:00:08Z",
+          "value": 56,
+          "unit": "bpm",
+          "timezone_offset": -14400,
+          "type": "resting",
+          "source": {"provider": "oura", "type": "ring", "name": "Oura Ring Gen 3"}
+        },
+        {
+          "id": "01HG2P5Q3R8S9T0V1W2X3Y4Z5B",
+          "timestamp": "2026-05-24T00:05:08Z",
+          "value": 54,
+          "unit": "bpm",
+          "timezone_offset": -14400,
+          "type": "resting",
+          "source": {"provider": "oura", "type": "ring", "name": "Oura Ring Gen 3"}
+        }
+      ],
+      "next_cursor": null
+    }
+  }
+}

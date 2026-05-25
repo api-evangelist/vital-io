@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vital-io/main/json-schema/vital-sleep-summary-schema.json",
+  "title": "VitalSleepSummary",
+  "description": "A normalized per-night sleep summary aggregated from any supported wearable/device source. One record per sleep session.",
+  "type": "object",
+  "required": ["id", "user_id", "calendar_date", "source"],
+  "properties": {
+    "id": {"type": "string", "format": "uuid"},
+    "user_id": {"type": "string", "format": "uuid"},
+    "calendar_date": {"type": "string", "format": "date", "description": "Calendar date the sleep session ended on."},
+    "bedtime_start": {"type": "string", "format": "date-time"},
+    "bedtime_end": {"type": "string", "format": "date-time"},
+    "timezone_offset": {"type": "integer", "description": "Offset from UTC in seconds."},
+    "duration": {"type": "integer", "description": "Total duration in bed, in seconds."},
+    "total": {"type": "integer", "description": "Total sleep time in seconds (all stages combined)."},
+    "awake": {"type": "integer", "description": "Awake time in seconds."},
+    "light": {"type": "integer", "description": "Light-sleep time in seconds."},
+    "rem": {"type": "integer", "description": "REM-sleep time in seconds."},
+    "deep": {"type": "integer", "description": "Deep-sleep time in seconds."},
+    "score": {"type": ["integer", "null"], "description": "Provider-reported sleep score (0-100)."},
+    "hr_average": {"type": ["number", "null"]},
+    "hr_lowest": {"type": ["number", "null"]},
+    "hrv_avg": {"type": ["number", "null"]},
+    "respiratory_rate": {"type": ["number", "null"]},
+    "temperature_delta": {"type": ["number", "null"]},
+    "source": {
+      "type": "object",
+      "required": ["provider", "type"],
+      "properties": {
+        "provider": {"type": "string", "examples": ["oura", "whoop", "garmin", "fitbit", "apple_health_kit"]},
+        "type": {"type": "string", "examples": ["watch", "ring", "phone", "manual"]},
+        "name": {"type": "string"}
+      }
+    }
+  }
+}

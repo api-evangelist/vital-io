@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.us.junction.com/v2/link/token",
+    "headers": {
+      "X-Vital-API-Key": "sk_us_<your-sandbox-team-key>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "user_id": "9d1e7f8a-44c1-4f9b-9a5d-1d2e3f4a5b6c",
+      "provider": "oura",
+      "redirect_url": "https://your-app.example.com/vital/callback"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "link_token": "lt_us_01HG2K9X3Y4ZAB7C8D9E0F1G2H",
+      "link_web_url": "https://link.junction.com/?token=lt_us_01HG2K9X3Y4ZAB7C8D9E0F1G2H",
+      "expires_at": "2026-05-25T15:00:12Z"
+    }
+  }
+}

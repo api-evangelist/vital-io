@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vital-io/main/json-schema/vital-provider-schema.json",
+  "title": "VitalProvider",
+  "description": "A wearable, device, or health-data provider supported by the Junction (Vital) platform. Returned by GET /v2/providers. 300+ providers are supported.",
+  "type": "object",
+  "required": ["slug", "name", "logo", "auth_type"],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "description": "Stable identifier for the provider used in Link tokens and connection endpoints.",
+      "examples": ["fitbit", "garmin", "oura", "whoop", "withings", "dexcom_v3", "freestyle_libre", "apple_health_kit", "android_health_connect"]
+    },
+    "name": {"type": "string"},
+    "logo": {"type": "string", "format": "uri"},
+    "auth_type": {
+      "type": "string",
+      "enum": ["oauth", "email", "password", "sdk", "demo"],
+      "description": "How end users connect this provider."
+    },
+    "supported_resources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "examples": ["sleep", "activity", "body", "workouts", "heartrate", "hrv", "glucose"]
+      }
+    },
+    "status": {"type": "string", "enum": ["live", "beta", "deprecated"]}
+  }
+}

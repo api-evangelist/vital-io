@@ -1,0 +1,75 @@
+aid: vital-io
+name: Vital (Junction)
+reviewer: Kin Lane
+reviewedOn: '2026-05-25'
+tier: 1
+score: 92
+summary: >-
+  Vital — operating under the new name Junction since the 2025 rebrand — runs one of the cleanest
+  developer-facing health-data APIs in the market: a single OpenAPI 3.1 source of truth with
+  ~189 paths covering wearable summaries, timeseries, lab ordering and fulfillment across all
+  50 US states, a lab-report parser, continuous-query aggregation (Sense), and team / management
+  administration. The platform is HIPAA, SOC 2 Type 2, ISO 27001, and GDPR-ready with separate
+  US (api.us.junction.com) and EU (api.eu.junction.com) deployments, regional API-key prefixes,
+  Svix-backed webhooks, and BYO ETL pipelines to Azure / GCP / RabbitMQ. SDK coverage is broad
+  and Fern-generated — Python, TypeScript/Node, Go, Java on the server, plus first-party Swift,
+  Kotlin, Flutter, and React Native bindings for HealthKit / Health Connect / Bluetooth devices.
+strengths:
+- Single canonical OpenAPI 3.1 spec published openly at github.com/tryVital/vital-fern-api.
+- Normalized schema across 300+ wearable/device providers — one Sleep, one Activity, one Heart Rate.
+- Nationwide lab network in one API with explicit support for NY, NJ, and RI.
+- First-class mobile SDKs (Swift, Kotlin, Flutter, RN) covering HealthKit + Health Connect + BLE.
+- Regional residency built in (US/EU base URLs and regional API keys).
+- Svix-backed webhooks and BYO ETL pipelines for operational data exfiltration.
+- Clear pricing transparency on the Wearables side (per active user) with a public free start.
+weaknesses:
+- Brand split between "Vital" (legacy SDK / repo names) and "Junction" (current docs / app)
+  can confuse first-time integrators.
+- Lab-testing pricing is quote-based with a 250-kit minimum that can be a barrier for smaller teams.
+- Some flagship SDK repos are marked archived (vital-python, vital-node, vital-go, vital-java)
+  while the published packages on npm/PyPI continue to ship — needs a clearer canonical-repo story.
+- Rate-limit policy is documented but not numerically quantified.
+opportunities:
+- Add explicit MCP-server packaging for Claude / agentic ecosystems on top of the existing
+  normalized schema — Junction's surface is a near-ideal tool surface for health-data AI agents.
+- Document a hard-floor numeric rate-limit policy for each endpoint class.
+- Consolidate the "Vital" → "Junction" brand transition in repo names and SDK package names
+  (the npm packages are still @tryvital/*).
+risks:
+- Operating in a regulated space; any BAA / SOC 2 lapse could constrain customer adoption.
+- Lab-network capacity at peak (flu season, post-pandemic spikes) can surface as 503s.
+artifacts:
+- apis.yml
+- openapi/vital-openapi-original.json
+- openapi/vital-users-api-openapi.yml
+- openapi/vital-link-api-openapi.yml
+- openapi/vital-wearables-api-openapi.yml
+- openapi/vital-lab-testing-api-openapi.yml
+- openapi/vital-lab-report-parser-api-openapi.yml
+- openapi/vital-sense-api-openapi.yml
+- openapi/vital-team-api-openapi.yml
+- capabilities/users.yaml
+- capabilities/link.yaml
+- capabilities/wearables.yaml
+- capabilities/lab-testing.yaml
+- capabilities/lab-report-parser.yaml
+- capabilities/sense.yaml
+- capabilities/team.yaml
+- capabilities/management.yaml
+- plans/vital-io-plans-pricing.yml
+- rate-limits/vital-io-rate-limits.yml
+- finops/vital-io-finops.yml
+- rules/vital-rules.yml
+- vocabulary/vital-io-vocabulary.yml
+- json-ld/vital-io-context.jsonld
+sources:
+- https://www.junction.com
+- https://docs.junction.com
+- https://docs.junction.com/llms.txt
+- https://docs.junction.com/api-details/junction-api
+- https://docs.junction.com/api-details/junction-management-api
+- https://docs.junction.com/wearables/providers/introduction
+- https://www.tryvital.com/pricing
+- https://github.com/tryVital
+- https://github.com/tryVital/vital-fern-api
+- https://techcrunch.com/2025/03/11/junction-an-api-to-link-health-wearables-with-labs-raises-18m/

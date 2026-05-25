@@ -1,0 +1,29 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vital Management API
+  description: Vital Management API. Programmatic management of Junction organizations, teams, members, API keys, ETL pipelines,
+    custom credentials, scope requirements, webhook subscriptions, physician assignments, and lab-account team assignments.
+    Authenticated with x-vital-management-api-key (distinct from team-level X-Vital-API-Key).
+  tags:
+  - Vital
+  - Junction
+  - Management
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    VITAL_MANAGEMENT_API_KEY: VITAL_MANAGEMENT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: management
+    baseUri: https://api.us.junction.com
+    description: Junction Management API business capability. Endpoints documented at https://docs.junction.com/api-details/junction-management-api.
+    auth:
+      type: apiKey
+      in: header
+      name: x-vital-management-api-key
+      valueFrom:
+        env: VITAL_MANAGEMENT_API_KEY
+    documentation: https://docs.junction.com/api-details/junction-management-api

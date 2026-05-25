@@ -1,0 +1,378 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vital Users API
+  description: Vital Users API. 19 operations. Self-contained Naftiko capability covering the Users business surface of the
+    Junction (Vital) health-data platform.
+  tags:
+  - Vital
+  - Junction
+  - Users
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    VITAL_API_KEY: VITAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: users
+    baseUri: https://api.us.junction.com
+    description: Vital Users API business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-user
+      path: /v2/user
+      operations:
+      - name: get_teams_users_v2_user_get
+        method: GET
+        description: Get Teams Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: offset
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: limit
+          in: query
+          type: integer
+          description: ''
+          required: false
+      - name: create_user_v2_user_post
+        method: POST
+        description: Create User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deregister_provider_v2_user__user_id___provider__delete
+        method: DELETE
+        description: Deregister Provider
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: provider
+          in: path
+          type: string
+          description: Provider slug. e.g., `oura`, `fitbit`, `garmin`.
+          required: true
+      - name: patch_user_v2_user__user_id__patch
+        method: PATCH
+        description: Patch User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delete_user_v2_user__user_id__delete
+        method: DELETE
+        description: Delete User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+      - name: get_user_v2_user__user_id__get
+        method: GET
+        description: Get User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v2-user-metrics
+      path: /v2/user/metrics
+      operations:
+      - name: get_teams_metrics_v2_user_metrics_get
+        method: GET
+        description: Get Teams Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-user-providers
+      path: /v2/user/providers/{user_id}
+      operations:
+      - name: get_connected_providers_v2_user_providers__user_id__get
+        method: GET
+        description: Get Connected Providers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v2-user--info-latest
+      path: /v2/user/{user_id}/info/latest
+      operations:
+      - name: get_user_demographcis_v2_user__user_id__info_latest_get
+        method: GET
+        description: Get User Demographcis
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v2-user--insurance
+      path: /v2/user/{user_id}/insurance
+      operations:
+      - name: create_insurance_v2_user__user_id__insurance_post
+        method: POST
+        description: Create Insurance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-user--insurance-latest
+      path: /v2/user/{user_id}/insurance/latest
+      operations:
+      - name: get_latest_insurance_v2_user__user_id__insurance_latest_get
+        method: GET
+        description: Get Latest Insurance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: is_primary
+          in: query
+          type: boolean
+          description: ''
+          required: false
+    - name: v2-user--info
+      path: /v2/user/{user_id}/info
+      operations:
+      - name: create_user_demographics_v2_user__user_id__info_patch
+        method: PATCH
+        description: Create User Demographics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v2-user-resolve
+      path: /v2/user/resolve/{client_user_id}
+      operations:
+      - name: get_user_by_client_user_id_v2_user_resolve__client_user_id__get
+        method: GET
+        description: Get User By Client User Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: client_user_id
+          in: path
+          type: string
+          description: A unique ID representing the end user. Typically this will be a user ID number from your application.
+            Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+          required: true
+    - name: v2-user-undo-delete
+      path: /v2/user/undo_delete
+      operations:
+      - name: undo_user_delete_v2_user_undo_delete_post
+        method: POST
+        description: Undo User Delete
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: query
+          type: string
+          description: User ID to undo deletion. Mutually exclusive with `client_user_id`.
+          required: false
+        - name: client_user_id
+          in: query
+          type: string
+          description: Client User ID to undo deletion. Mutually exclusive with `user_id`.
+          required: false
+    - name: v2-user-refresh
+      path: /v2/user/refresh/{user_id}
+      operations:
+      - name: refresh_user_id_v2_user_refresh__user_id__post
+        method: POST
+        description: Refresh User Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: timeout
+          in: query
+          type: number
+          description: ''
+          required: false
+    - name: v2-user--device
+      path: /v2/user/{user_id}/device
+      operations:
+      - name: get_user_devices_v2_user__user_id__device_get
+        method: GET
+        description: Get User Devices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+      - name: get_user_device_v2_user__user_id__device__device_id__get
+        method: GET
+        description: Get User Device
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: device_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v2-user--sign-in-token
+      path: /v2/user/{user_id}/sign_in_token
+      operations:
+      - name: get_user_sign_in_token_v2_user__user_id__sign_in_token_post
+        method: POST
+        description: Get User Sign In Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v2-user--create-portal-url
+      path: /v2/user/{user_id}/create_portal_url
+      operations:
+      - name: create_user_portal_url_v2_user__user_id__create_portal_url_post
+        method: POST
+        description: Create User Portal Url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: path
+          type: string
+          description: ''
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    auth:
+      type: apiKey
+      in: header
+      name: X-Vital-API-Key
+      valueFrom:
+        env: VITAL_API_KEY

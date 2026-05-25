@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vital-io/main/json-schema/vital-heart-rate-timeseries-schema.json",
+  "title": "VitalHeartRateTimeseries",
+  "description": "A single heart-rate sample returned by GET /v2/timeseries/{user_id}/heartrate. The endpoint returns a paginated list of these samples ordered by timestamp.",
+  "type": "object",
+  "required": ["id", "timestamp", "value", "unit", "source"],
+  "properties": {
+    "id": {"type": "string", "format": "uuid"},
+    "timestamp": {"type": "string", "format": "date-time", "description": "Sample timestamp (RFC3339)."},
+    "value": {"type": "number", "description": "Heart rate value."},
+    "unit": {"type": "string", "enum": ["bpm"], "description": "Beats per minute."},
+    "timezone_offset": {"type": "integer", "description": "Offset from UTC in seconds."},
+    "type": {"type": "string", "description": "Activity context, e.g. resting, workout."},
+    "source": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": {"type": "string", "examples": ["fitbit", "garmin", "oura", "whoop", "apple_health_kit"]},
+        "type": {"type": "string"},
+        "name": {"type": "string"}
+      }
+    }
+  }
+}

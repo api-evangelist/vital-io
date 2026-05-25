@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/schema",
+  "title": "VitalLabOrderStructure",
+  "description": "Operational structure of a Junction (Vital) lab order. Captures the canonical fulfillment lifecycle across all collection methods.",
+  "entity": "LabOrder",
+  "identity": {"primary": "id", "scope": "team"},
+  "lifecycle": {
+    "states": [
+      "received",
+      "ordered",
+      "out_for_delivery",
+      "delivered_to_consumer",
+      "sample_with_lab",
+      "completed",
+      "partial_results",
+      "cancelled",
+      "failure"
+    ],
+    "transitions": [
+      {"from": "-", "to": "received", "trigger": "POST /v3/order"},
+      {"from": "received", "to": "ordered", "trigger": "lab acceptance"},
+      {"from": "ordered", "to": "out_for_delivery", "trigger": "testkit shipped (testkit method)"},
+      {"from": "out_for_delivery", "to": "delivered_to_consumer", "trigger": "carrier delivery confirmation"},
+      {"from": "*", "to": "sample_with_lab", "trigger": "sample received by lab"},
+      {"from": "sample_with_lab", "to": "completed", "trigger": "all markers reported"},
+      {"from": "sample_with_lab", "to": "partial_results", "trigger": "some markers reported"},
+      {"from": "*", "to": "cancelled", "trigger": "explicit cancellation"},
+      {"from": "*", "to": "failure", "trigger": "fulfillment exception"}
+    ]
+  },
+  "collectionMethods": ["testkit", "at_home_phlebotomy", "walk_in_test", "on_site"],
+  "relationships": [
+    {"name": "user", "cardinality": "many-to-one", "target": "User", "via": "user_id"},
+    {"name": "team", "cardinality": "many-to-one", "target": "Team", "via": "team_id"},
+    {"name": "lab_test", "cardinality": "many-to-one", "target": "LabTest", "via": "lab_test_id"},
+    {"name": "transactions", "cardinality": "one-to-many", "target": "OrderTransaction", "via": "order_id"},
+    {"name": "results", "cardinality": "one-to-many", "target": "LabResult", "via": "order_id"}
+  ]
+}

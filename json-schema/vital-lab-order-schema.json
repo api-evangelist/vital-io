@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vital-io/main/json-schema/vital-lab-order-schema.json",
+  "title": "VitalLabOrder",
+  "description": "A lab-test order placed through the Junction (Vital) Lab Testing API. Spans testkit, at-home phlebotomy, walk-in PSC, and on-site collection methods across the US lab network.",
+  "type": "object",
+  "required": ["id", "team_id", "user_id", "lab_test_id", "status", "collection_method"],
+  "properties": {
+    "id": {"type": "string", "format": "uuid"},
+    "team_id": {"type": "string", "format": "uuid"},
+    "user_id": {"type": "string", "format": "uuid"},
+    "lab_test_id": {"type": "string", "format": "uuid", "description": "The lab-test SKU being ordered."},
+    "collection_method": {
+      "type": "string",
+      "enum": ["testkit", "at_home_phlebotomy", "walk_in_test", "on_site"]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "received", "ordered", "out_for_delivery", "delivered_to_consumer",
+        "sample_with_lab", "completed", "cancelled", "failure", "partial_results"
+      ]
+    },
+    "patient_details": {
+      "type": "object",
+      "properties": {
+        "first_name": {"type": "string"},
+        "last_name": {"type": "string"},
+        "dob": {"type": "string", "format": "date"},
+        "gender": {"type": "string"},
+        "email": {"type": "string", "format": "email"},
+        "phone_number": {"type": "string"}
+      }
+    },
+    "patient_address": {
+      "type": "object",
+      "properties": {
+        "street": {"type": "string"},
+        "city": {"type": "string"},
+        "state": {"type": "string"},
+        "zip": {"type": "string"},
+        "country": {"type": "string", "default": "US"}
+      }
+    },
+    "physician": {
+      "type": "object",
+      "properties": {
+        "first_name": {"type": "string"},
+        "last_name": {"type": "string"},
+        "npi": {"type": "string"}
+      }
+    },
+    "ordered_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string"},
+          "occurred_at": {"type": "string", "format": "date-time"}
+        }
+      }
+    }
+  }
+}

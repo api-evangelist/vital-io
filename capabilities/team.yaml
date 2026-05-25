@@ -1,0 +1,189 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vital Team API
+  description: Vital Team API. 8 operations. Self-contained Naftiko capability covering the Team business surface of the Junction
+    (Vital) health-data platform.
+  tags:
+  - Vital
+  - Junction
+  - Team
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    VITAL_API_KEY: VITAL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: team
+    baseUri: https://api.us.junction.com
+    description: Vital Team API business capability. Self-contained, no shared references.
+    resources:
+    - name: v2-team
+      path: /v2/team/{team_id}
+      operations:
+      - name: get_team_v2_team__team_id__get
+        method: GET
+        description: Get Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: team_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v2-team-users-search
+      path: /v2/team/users/search
+      operations:
+      - name: search_team_users_by_uuid_or_client_user_id_v2_team_users_search_get
+        method: GET
+        description: Search Team Users By Uuid Or Client User Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query_id
+          in: query
+          type: string
+          description: ''
+          required: false
+    - name: v2-team-svix-url
+      path: /v2/team/svix/url
+      operations:
+      - name: get_svix_webhook_url_v2_team_svix_url_get
+        method: GET
+        description: Get Svix Webhook Url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-team-source-priorities
+      path: /v2/team/source/priorities
+      operations:
+      - name: get_source_priorities_v2_team_source_priorities_get
+        method: GET
+        description: Get Source Priorities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: data_type
+          in: query
+          type: string
+          description: ''
+          required: false
+      - name: update_source_priorities_v2_team_source_priorities_patch
+        method: PATCH
+        description: Update Source Priorities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v2-team--physicians
+      path: /v2/team/{team_id}/physicians
+      operations:
+      - name: get_team_physicians_v2_team__team_id__physicians_get
+        method: GET
+        description: Get Team Physicians
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: team_id
+          in: path
+          type: string
+          description: ''
+          required: true
+    - name: v2-introspect-resources
+      path: /v2/introspect/resources
+      operations:
+      - name: introspect_resources_v2_introspect_resources_get
+        method: GET
+        description: Introspect Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: query
+          type: string
+          description: Filter by user ID.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: user_limit
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: cursor
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+    - name: v2-introspect-historical-pull
+      path: /v2/introspect/historical_pull
+      operations:
+      - name: introspect_historical_pulls_v2_introspect_historical_pull_get
+        method: GET
+        description: Introspect Historical Pulls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user_id
+          in: query
+          type: string
+          description: Filter by user ID.
+          required: false
+        - name: provider
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: user_limit
+          in: query
+          type: integer
+          description: ''
+          required: false
+        - name: cursor
+          in: query
+          type: string
+          description: ''
+          required: false
+        - name: next_cursor
+          in: query
+          type: string
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          required: false
+    auth:
+      type: apiKey
+      in: header
+      name: X-Vital-API-Key
+      valueFrom:
+        env: VITAL_API_KEY

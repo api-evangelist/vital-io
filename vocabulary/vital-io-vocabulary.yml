@@ -1,0 +1,93 @@
+name: Vital (Junction) Platform Vocabulary
+description: Normative vocabulary and taxonomy for the Junction (formerly Vital / tryVital) health-data API
+  platform. Maps the platform's first-class concepts onto canonical schema.org, LOINC, and FHIR-aligned terms
+  so that downstream consumers (Naftiko, AI agents, JSON-LD readers) can reason consistently across providers.
+version: 0.1.0
+created: '2026-05-25'
+modified: '2026-05-25'
+namespaces:
+  vital: https://raw.githubusercontent.com/api-evangelist/vital-io/main/json-ld/vital-io-context.jsonld#
+  schema: https://schema.org/
+  loinc: https://loinc.org/
+  uo: http://purl.obolibrary.org/obo/UO_
+concepts:
+  Identity:
+  - term: User
+    alignsWith: [schema:Patient]
+    description: An end user / data subject on the Junction platform.
+  - term: Team
+    alignsWith: [schema:Organization]
+    description: A tenant of the Junction platform. Owns users, lab accounts, webhook subscriptions, and ETL pipelines.
+  - term: Organization
+    alignsWith: [schema:Organization]
+    description: Parent tenancy containing one or more teams. Governed by the Management API.
+  Connectivity:
+  - term: Provider
+    description: A wearable, device, lab, or health-data source supported by Junction. 300+ providers.
+    examples: [Fitbit, Garmin, Oura, Whoop, Withings, Polar, Strava, Dexcom, Freestyle Libre, Apple HealthKit, Android Health Connect, Samsung Health]
+  - term: Connection
+    description: A live binding between a User and a Provider, granting Junction permission to pull data.
+  - term: Link Token
+    description: One-time token consumed by the Vital Link Widget to drive a Connection flow.
+  WearableData:
+  - term: Summary
+    description: Aggregated daily metric — sleep, activity, body, workouts, menstrual cycle, ECG, meals, profile.
+  - term: Timeseries
+    description: Per-sample metric — heart rate, HRV, glucose, blood pressure, SpO2, temperature, steps,
+      distance, calories (active/basal), sleep stream, workout stream.
+  - term: Resource
+    description: A category of normalized data exposed by Junction (sleep, activity, glucose, ...). Resource
+      availability per user is queryable via Introspect.
+  LabTesting:
+  - term: LabTest
+    alignsWith: [schema:MedicalTest]
+    description: A SKU in the Junction lab-test compendium.
+  - term: Order
+    alignsWith: [schema:Order, schema:MedicalProcedure]
+    description: A request to fulfill a lab test for a User using one of the supported collection methods.
+  - term: CollectionMethod
+    values: [testkit, at_home_phlebotomy, walk_in_test, on_site]
+  - term: OrderTransaction
+    description: A discrete fulfillment artifact under an Order — typically the sample-to-results pipeline run.
+  - term: Biomarker / Marker
+    alignsWith: [schema:Observation, loinc:Code]
+    description: A measured analyte (HbA1c, HDL, vitamin D, ...). Typed by LOINC where possible.
+  - term: Compendium
+    description: The catalog of available biomarkers, markers, panels, and lab-test SKUs Junction supports.
+  - term: Payor / Insurance
+    alignsWith: [schema:Organization]
+    description: Insurance carrier referenced when ordering insurance-billed lab tests.
+  - term: Physician
+    alignsWith: [schema:Physician]
+    description: Ordering provider (NPI-identified) responsible for a lab order.
+  - term: PSC
+    description: Patient Service Center — a walk-in collection site.
+  Sense:
+  - term: ContinuousQuery
+    description: A named, persisted aggregation defined once and recomputed as new user data lands.
+  - term: ResultTable
+    description: Materialized output of a continuous query, indexed by user and time.
+  Operations:
+  - term: Webhook
+    alignsWith: [schema:WebAPI]
+    description: HTTP subscription delivered by Svix; signed with a per-endpoint secret.
+  - term: ETL Pipeline
+    description: BYO destination forwarding ingested data to Azure Event Hubs, Google Cloud Pub/Sub, or RabbitMQ.
+  - term: Region
+    values: [us, eu]
+    description: Data residency for production and sandbox deployments.
+  - term: Environment
+    values: [production, sandbox]
+  Compliance:
+  - HIPAA
+  - SOC 2 Type 2
+  - ISO 27001
+  - GDPR
+authentication:
+  team_api_key:
+    header: X-Vital-API-Key
+    prefixes: [pk_us_, pk_eu_, sk_us_, sk_eu_]
+    description: Team-level secret used for all standard Junction API calls.
+  management_api_key:
+    header: x-vital-management-api-key
+    description: Org-level secret used for the Junction Management API; not interchangeable with team key.

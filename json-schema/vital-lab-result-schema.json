@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vital-io/main/json-schema/vital-lab-result-schema.json",
+  "title": "VitalLabResult",
+  "description": "Normalized lab-result payload for a completed Junction (Vital) order. Returned by GET /v3/order_transaction/{transaction_id}/result. Contains a structured list of biomarker measurements plus order metadata.",
+  "type": "object",
+  "required": ["order_id", "user_id", "lab_test_id", "markers"],
+  "properties": {
+    "order_id": {"type": "string", "format": "uuid"},
+    "user_id": {"type": "string", "format": "uuid"},
+    "lab_test_id": {"type": "string", "format": "uuid"},
+    "lab": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer"},
+        "name": {"type": "string", "examples": ["Quest", "Labcorp", "BioReference"]}
+      }
+    },
+    "collected_at": {"type": "string", "format": "date-time"},
+    "reported_at": {"type": "string", "format": "date-time"},
+    "markers": {
+      "type": "array",
+      "description": "Individual biomarker measurements (HbA1c, HDL, LDL, etc.).",
+      "items": {
+        "type": "object",
+        "required": ["name", "value", "unit", "type"],
+        "properties": {
+          "id": {"type": "integer"},
+          "name": {"type": "string", "examples": ["Hemoglobin A1c", "HDL Cholesterol", "Vitamin D, 25-Hydroxy"]},
+          "value": {"type": ["number", "string", "null"]},
+          "unit": {"type": ["string", "null"]},
+          "reference_range": {
+            "type": "object",
+            "properties": {
+              "min": {"type": ["number", "null"]},
+              "max": {"type": ["number", "null"]},
+              "text": {"type": ["string", "null"]}
+            }
+          },
+          "interpretation": {"type": ["string", "null"], "enum": [null, "normal", "abnormal", "low", "high", "critical"]},
+          "loinc_code": {"type": ["string", "null"]},
+          "type": {"type": "string"},
+          "notes": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "pdf_url": {"type": ["string", "null"], "format": "uri"}
+  }
+}

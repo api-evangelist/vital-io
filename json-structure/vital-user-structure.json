@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/schema",
+  "title": "VitalUserStructure",
+  "description": "Operational structure of a Junction (Vital) user resource. Describes the lifecycle and required relationships rather than just the data shape.",
+  "entity": "User",
+  "identity": {
+    "primary": "user_id",
+    "alternate": ["client_user_id"],
+    "scope": "team"
+  },
+  "lifecycle": {
+    "states": ["created", "active", "soft_deleted"],
+    "transitions": [
+      {"from": "-", "to": "created", "trigger": "POST /v2/user"},
+      {"from": "created", "to": "active", "trigger": "first connection / data ingest"},
+      {"from": "*", "to": "soft_deleted", "trigger": "DELETE /v2/user/{user_id}"},
+      {"from": "soft_deleted", "to": "created", "trigger": "POST /v2/user/{user_id}/undo_delete"}
+    ]
+  },
+  "relationships": [
+    {"name": "team", "cardinality": "many-to-one", "target": "Team", "via": "team_id"},
+    {"name": "connections", "cardinality": "one-to-many", "target": "Connection", "via": "user_id"},
+    {"name": "orders", "cardinality": "one-to-many", "target": "LabOrder", "via": "user_id"},
+    {"name": "summaries", "cardinality": "one-to-many", "target": "Summary", "via": "user_id"},
+    {"name": "timeseries", "cardinality": "one-to-many", "target": "TimeseriesSample", "via": "user_id"}
+  ]
+}
