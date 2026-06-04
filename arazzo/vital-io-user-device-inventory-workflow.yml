@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Vital Inventory a User's Connected Devices
+  summary: Resolve a user by client_user_id, list their devices, and fetch the first device in detail.
+  description: >-
+    A device-management flow for connected health hardware. The workflow resolves
+    a Vital user from your own client_user_id, lists the devices connected to
+    that user, and then fetches the first device in full detail. Use it to build
+    a device dashboard or to confirm a newly connected device has registered.
+    Every step spells out its request inline, including the x-vital-api-key
+    header, so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalUsersApi
+  url: ../openapi/vital-users-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: user-device-inventory
+  summary: Resolve a user, list their devices, and fetch the first device detail.
+  description: >-
+    Resolves a user from client_user_id, lists their connected devices, then
+    retrieves the first device's full record.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - clientUserId
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      clientUserId:
+        type: string
+        description: A unique ID representing the end user in your application.
+  steps:
+  - stepId: resolveUser
+    description: Resolve the Vital user_id from your client_user_id.
+    operationId: get_user_by_client_user_id_v2_user_resolve__client_user_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: client_user_id
+      in: path
+      value: $inputs.clientUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/user_id
+  - stepId: listDevices
+    description: >-
+      List the devices connected to the user and capture the id of the first
+      device.
+    operationId: get_user_devices_v2_user__user_id__device_get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: user_id
+      in: path
+      value: $steps.resolveUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.length > 0
+      type: jsonpath
+    outputs:
+      deviceId: $response.body#/0/id
+      provider: $response.body#/0/provider
+  - stepId: getDevice
+    description: Fetch the full detail record for the first connected device.
+    operationId: get_user_device_v2_user__user_id__device__device_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: user_id
+      in: path
+      value: $steps.resolveUser.outputs.userId
+    - name: device_id
+      in: path
+      value: $steps.listDevices.outputs.deviceId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deviceId: $response.body#/id
+      provider: $response.body#/provider
+      sourceType: $response.body#/source_type
+  outputs:
+    userId: $steps.resolveUser.outputs.userId
+    deviceId: $steps.getDevice.outputs.deviceId
+    deviceProvider: $steps.getDevice.outputs.provider

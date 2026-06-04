@@ -255,6 +255,39 @@ apis:
     physician assignments, and lab-account team assignments.
 name: Vital
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/vital-io-at-home-phlebotomy-booking-workflow.yml
+    name: Vital Schedule an At-Home Phlebotomy Draw
+    summary: Confirm phlebotomy coverage for an address, place an at-home order, find a slot, and book it.
+  - url: arazzo/vital-io-await-order-results-workflow.yml
+    name: Vital Await Lab Order Completion and Retrieve Results
+    summary: Poll an existing order until it completes, then pull its result metadata and raw results.
+  - url: arazzo/vital-io-browse-lab-tests-markers-workflow.yml
+    name: Vital Browse Lab Tests and Inspect Markers
+    summary: List your team's lab tests, fetch one in detail, and enumerate its biomarkers.
+  - url: arazzo/vital-io-cancel-order-notify-portal-workflow.yml
+    name: Vital Cancel a Lab Order and Send the User a Portal Link
+    summary: Cancel an order, confirm the cancellation, then mint a communications portal URL deeplinked to it.
+  - url: arazzo/vital-io-create-order-poll-status-workflow.yml
+    name: Vital Create a Lab Order and Poll Until Resolved
+    summary: Place an order set lab order for a user and poll its lifecycle status until it completes, cancels, or fails.
+  - url: arazzo/vital-io-demo-connection-verify-sources-workflow.yml
+    name: Vital Connect a Demo Provider and Verify Connected Sources
+    summary: Create a user, attach a demo provider, then confirm the connection landed on the user record.
+  - url: arazzo/vital-io-mobile-signin-token-handoff-workflow.yml
+    name: Vital Provision a User and Hand Off a Mobile Sign-In Token
+    summary: Create a Vital user, mint a mobile sign-in token, and read back the user's connected providers.
+  - url: arazzo/vital-io-onboard-user-connect-wearable-workflow.yml
+    name: Vital Onboard a User and Connect a Wearable
+    summary: Create a Vital user, mint a Link token, and surface the available providers to connect.
+  - url: arazzo/vital-io-testkit-order-register-workflow.yml
+    name: Vital Create and Register a Lab Testkit Order
+    summary: Create an unregistered testkit order, register it against a sample, then read the order back.
+  - url: arazzo/vital-io-user-device-inventory-workflow.yml
+    name: Vital Inventory a User's Connected Devices
+    summary: Resolve a user by client_user_id, list their devices, and fetch the first device in detail.
 - url: https://www.junction.com
   name: Vital / Junction
   type: Portal

@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Vital Await Lab Order Completion and Retrieve Results
+  summary: Poll an existing order until it completes, then pull its result metadata and raw results.
+  description: >-
+    Picks up an already-placed lab order and drives it to results. The workflow
+    polls the order's latest lifecycle event until it reaches completed (or stops
+    on a cancelled/failed terminal state), then fetches the result metadata
+    (lab, provider, sample dates) and the full raw JSON results. Every step
+    spells out its request inline, including the x-vital-api-key header, so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalLabTestingApi
+  url: ../openapi/vital-lab-testing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: await-order-results
+  summary: Poll an order to completion and retrieve its metadata and raw results.
+  description: >-
+    Polls an order until completed, then retrieves result metadata and raw
+    result data. Stops early if the order is cancelled or failed.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - orderId
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      orderId:
+        type: string
+        description: The Vital Order ID to await results for.
+  steps:
+  - stepId: pollOrder
+    description: >-
+      Read the order and inspect the latest event. Loops while in progress, ends
+      the workflow if cancelled or failed, and proceeds to results once completed.
+    operationId: get_order_v3_order__order_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      lastEventStatus: $response.body#/last_event/status
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollOrder
+      criteria:
+      - context: $response.body
+        condition: $.last_event.status != 'completed' && $.last_event.status != 'cancelled' && $.last_event.status != 'failed'
+        type: jsonpath
+    - name: orderCompleted
+      type: goto
+      stepId: getResultMetadata
+      criteria:
+      - context: $response.body
+        condition: $.last_event.status == 'completed'
+        type: jsonpath
+    - name: orderTerminated
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.last_event.status == 'cancelled' || $.last_event.status == 'failed'
+        type: jsonpath
+  - stepId: getResultMetadata
+    description: >-
+      Fetch metadata about the order's results, such as lab metadata, provider,
+      and sample dates.
+    operationId: get_lab_test_result_metadata_v3_order__order_id__result_metadata_get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      metadata: $response.body
+  - stepId: getRawResult
+    description: Fetch both the metadata and the raw JSON test data for the order.
+    operationId: get_lab_test_result_raw_v3_order__order_id__result_get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      results: $response.body
+  outputs:
+    finalStatus: $steps.pollOrder.outputs.lastEventStatus
+    metadata: $steps.getResultMetadata.outputs.metadata
+    results: $steps.getRawResult.outputs.results

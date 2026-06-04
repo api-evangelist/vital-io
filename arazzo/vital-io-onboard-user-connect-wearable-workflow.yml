@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: Vital Onboard a User and Connect a Wearable
+  summary: Create a Vital user, mint a Link token, and surface the available providers to connect.
+  description: >-
+    The canonical first run for any wearable integration on Vital (Junction).
+    The workflow creates a Vital user from your own client_user_id, generates a
+    one-time Vital Link token scoped to that user, and then reads back the list
+    of providers the token can connect so your custom Link experience can present
+    them to the end user. Every step spells out its request inline, including the
+    x-vital-api-key header, so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalUsersApi
+  url: ../openapi/vital-users-api-openapi.yml
+  type: openapi
+- name: vitalLinkApi
+  url: ../openapi/vital-link-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: onboard-user-connect-wearable
+  summary: Create a Vital user and prepare a Link token plus provider list for wearable connection.
+  description: >-
+    Creates a Vital user for the supplied client_user_id, generates a Vital Link
+    token for that user, and lists the providers the token can offer so the
+    end user can pick a wearable to connect.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - clientUserId
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      clientUserId:
+        type: string
+        description: A unique ID representing the end user in your application.
+      fallbackTimeZone:
+        type: string
+        description: Optional IANA timezone (e.g. America/Los_Angeles) used for timezone-agnostic data.
+      redirectUrl:
+        type: string
+        description: Optional URL to redirect to after a successful or failed Link connection.
+  steps:
+  - stepId: createUser
+    description: >-
+      Create a Vital user tied to your client_user_id and capture the Vital
+      user_id used for all subsequent interactions.
+    operationId: create_user_v2_user_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        client_user_id: $inputs.clientUserId
+        fallback_time_zone: $inputs.fallbackTimeZone
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/user_id
+      clientUserId: $response.body#/client_user_id
+  - stepId: generateLinkToken
+    description: >-
+      Generate a one-time Vital Link token (valid for 10 minutes) for the new
+      user so a wearable provider connection can be initiated.
+    operationId: generate_vital_link_token_v2_link_token_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $steps.createUser.outputs.userId
+        redirect_url: $inputs.redirectUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      linkToken: $response.body#/link_token
+      linkWebUrl: $response.body#/link_web_url
+  - stepId: listProviders
+    description: >-
+      List the providers available for this Link token so your custom Link UI
+      can present the end user with selectable wearable sources.
+    operationId: get_providers_v2_link_providers_get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-vital-link-token
+      in: header
+      value: $steps.generateLinkToken.outputs.linkToken
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providers: $response.body
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    linkToken: $steps.generateLinkToken.outputs.linkToken
+    linkWebUrl: $steps.generateLinkToken.outputs.linkWebUrl
+    providers: $steps.listProviders.outputs.providers

@@ -1,0 +1,113 @@
+arazzo: 1.0.1
+info:
+  title: Vital Create and Register a Lab Testkit Order
+  summary: Create an unregistered testkit order, register it against a sample, then read the order back.
+  description: >-
+    The fulfilment flow for self-collection test kits. The workflow creates an
+    unregistered testkit order for a user and lab test, registers that kit
+    against a physical sample id (binding patient details to the sample), and
+    then reads the resulting order to confirm its state. Every step spells out
+    its request inline, including the x-vital-api-key header, so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalLabTestingApi
+  url: ../openapi/vital-lab-testing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: testkit-order-register
+  summary: Create a testkit order, register the kit against a sample, and read the order.
+  description: >-
+    Creates an unregistered testkit order, registers it to a sample id with
+    patient details, then fetches the order to confirm the registration.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - userId
+    - labTestId
+    - shippingDetails
+    - sampleId
+    - patientDetails
+    - patientAddress
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      userId:
+        type: string
+        description: The Vital user_id the testkit order is for.
+      labTestId:
+        type: string
+        description: The lab test id the testkit is for.
+      shippingDetails:
+        type: object
+        description: Shipping address object per ShippingAddressWithValidation.
+      sampleId:
+        type: string
+        description: The physical sample id printed on the testkit to register.
+      patientDetails:
+        type: object
+        description: Patient details object per PatientDetailsWithValidation.
+      patientAddress:
+        type: object
+        description: Patient address object per PatientAddressWithValidation.
+  steps:
+  - stepId: createTestkitOrder
+    description: Create an unregistered testkit order for the user and lab test.
+    operationId: create_testkit_order_v3_order_testkit_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $inputs.userId
+        lab_test_id: $inputs.labTestId
+        shipping_details: $inputs.shippingDetails
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/order/id
+      status: $response.body#/status
+  - stepId: registerTestkit
+    description: >-
+      Register the testkit against the physical sample id, binding the patient's
+      details and address to the sample.
+    operationId: register_testkit_v3_order_testkit_register_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        sample_id: $inputs.sampleId
+        patient_details: $inputs.patientDetails
+        patient_address: $inputs.patientAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/order/id
+      status: $response.body#/status
+  - stepId: getOrder
+    description: Read the registered order to confirm its latest lifecycle state.
+    operationId: get_order_v3_order__order_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $steps.registerTestkit.outputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/id
+      lastEventStatus: $response.body#/last_event/status
+      sampleId: $response.body#/sample_id
+  outputs:
+    orderId: $steps.getOrder.outputs.orderId
+    sampleId: $steps.getOrder.outputs.sampleId
+    status: $steps.getOrder.outputs.lastEventStatus

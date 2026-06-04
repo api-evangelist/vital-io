@@ -1,0 +1,85 @@
+arazzo: 1.0.1
+info:
+  title: Vital Browse Lab Tests and Inspect Markers
+  summary: List your team's lab tests, fetch one in detail, and enumerate its biomarkers.
+  description: >-
+    A discovery flow for the Vital lab-testing catalog. The workflow lists the
+    lab tests your team has access to, selects the first one, fetches its full
+    detail record, and then enumerates the markers (biomarkers) associated with
+    that lab test, including reflex markers. Use it to drive a catalog browser or
+    to resolve a lab_test_id before placing an order. Every step spells out its
+    request inline, including the x-vital-api-key header, so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalLabTestingApi
+  url: ../openapi/vital-lab-testing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: browse-lab-tests-markers
+  summary: List lab tests, fetch one in detail, and list its markers.
+  description: >-
+    Lists the team's lab tests, picks the first, retrieves its detail record,
+    then lists the markers belonging to that lab test.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+  steps:
+  - stepId: listLabTests
+    description: >-
+      List the lab tests the team has access to and capture the id of the first
+      one for inspection.
+    operationId: get_lab_tests_for_team_v3_lab_tests_get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.length > 0
+      type: jsonpath
+    outputs:
+      labTestId: $response.body#/0/id
+      labTestName: $response.body#/0/name
+  - stepId: getLabTest
+    description: Fetch the full detail record for the selected lab test.
+    operationId: get_lab_test_for_team_v3_lab_tests__lab_test_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: lab_test_id
+      in: path
+      value: $steps.listLabTests.outputs.labTestId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      labTestId: $response.body#/id
+      slug: $response.body#/slug
+      sampleType: $response.body#/sample_type
+  - stepId: getMarkersForTest
+    description: >-
+      List all markers for the selected lab test, including any associated reflex
+      markers.
+    operationId: get_markers_for_test_v3_lab_tests__lab_test_id__markers_get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: lab_test_id
+      in: path
+      value: $steps.getLabTest.outputs.labTestId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      markers: $response.body#/markers
+  outputs:
+    labTestId: $steps.getLabTest.outputs.labTestId
+    labTestSlug: $steps.getLabTest.outputs.slug
+    markers: $steps.getMarkersForTest.outputs.markers

@@ -1,0 +1,139 @@
+arazzo: 1.0.1
+info:
+  title: Vital Schedule an At-Home Phlebotomy Draw
+  summary: Confirm phlebotomy coverage for an address, place an at-home order, find a slot, and book it.
+  description: >-
+    The end-to-end at-home blood draw flow. The workflow first checks whether the
+    end user's ZIP code is served by Vital's phlebotomy network, then creates an
+    at-home phlebotomy order for the user, queries the available appointment time
+    slots for the order's address, and books the first available slot using its
+    booking key. Every step spells out its request inline, including the
+    x-vital-api-key header, so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalLabTestingApi
+  url: ../openapi/vital-lab-testing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: at-home-phlebotomy-booking
+  summary: Verify coverage, create an at-home order, fetch slots, and book a phlebotomy appointment.
+  description: >-
+    Checks phlebotomy coverage for a ZIP, creates an at-home phlebotomy order,
+    lists available appointment slots, and books the first one.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - zipCode
+    - userId
+    - patientDetails
+    - patientAddress
+    - orderSet
+    - appointmentAddress
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      zipCode:
+        type: string
+        description: Five-digit ZIP code to verify phlebotomy coverage for.
+      userId:
+        type: string
+        description: The Vital user_id the order is placed for.
+      patientDetails:
+        type: object
+        description: Patient details object per PatientDetailsWithValidation.
+      patientAddress:
+        type: object
+        description: Patient address object per PatientAddressWithValidation.
+      orderSet:
+        type: object
+        description: The OrderSetRequest describing the panels/markers to order.
+      appointmentAddress:
+        type: object
+        description: The at-home phlebotomy appointment address (USAddress).
+  steps:
+  - stepId: checkAreaInfo
+    description: >-
+      Confirm the ZIP code is served by the phlebotomy network before placing an
+      at-home order.
+    operationId: get_area_info_v3_order_area_info_get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: zip_code
+      in: query
+      value: $inputs.zipCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      zipCode: $response.body#/zip_code
+      phlebotomy: $response.body#/phlebotomy
+  - stepId: createOrder
+    description: >-
+      Create an at-home phlebotomy order for the user from the supplied order
+      set.
+    operationId: create_order_v3_order_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $inputs.userId
+        patient_details: $inputs.patientDetails
+        patient_address: $inputs.patientAddress
+        order_set: $inputs.orderSet
+        collection_method: at_home_phlebotomy
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/order/id
+  - stepId: getAvailability
+    description: >-
+      Fetch the available phlebotomy appointment time slots for the appointment
+      address and capture the booking key of the first slot.
+    operationId: get_order_appointment_availability_v3_order_phlebotomy_appointment_availability_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload: $inputs.appointmentAddress
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.slots.length > 0
+      type: jsonpath
+    outputs:
+      bookingKey: $response.body#/slots/0/slots/0/booking_key
+  - stepId: bookAppointment
+    description: >-
+      Book the at-home phlebotomy appointment for the order using the selected
+      slot's booking key.
+    operationId: book_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_book_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $steps.createOrder.outputs.orderId
+    requestBody:
+      contentType: application/json
+      payload:
+        booking_key: $steps.getAvailability.outputs.bookingKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      appointmentId: $response.body#/id
+      status: $response.body#/status
+      startAt: $response.body#/start_at
+  outputs:
+    orderId: $steps.createOrder.outputs.orderId
+    appointmentId: $steps.bookAppointment.outputs.appointmentId
+    appointmentStatus: $steps.bookAppointment.outputs.status

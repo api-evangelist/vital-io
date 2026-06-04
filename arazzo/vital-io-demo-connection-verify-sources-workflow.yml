@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Vital Connect a Demo Provider and Verify Connected Sources
+  summary: Create a user, attach a demo provider, then confirm the connection landed on the user record.
+  description: >-
+    A sandbox-friendly end-to-end test of Vital's connection model. The workflow
+    creates a Vital user, connects that user to a demo provider (Vital's
+    synthetic test data source), and then reads back both the user's connected
+    providers and the full user record to confirm the demo source is attached.
+    Every step spells out its request inline, including the x-vital-api-key
+    header, so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalUsersApi
+  url: ../openapi/vital-users-api-openapi.yml
+  type: openapi
+- name: vitalLinkApi
+  url: ../openapi/vital-link-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: demo-connection-verify-sources
+  summary: Create a user, connect a demo provider, and verify the connected sources.
+  description: >-
+    Creates a Vital user, attaches a demo provider to generate synthetic data,
+    then confirms the connection by reading the connected providers and the user
+    record.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - clientUserId
+    - provider
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      clientUserId:
+        type: string
+        description: A unique ID representing the end user in your application.
+      provider:
+        type: string
+        description: Demo provider slug to connect (e.g. fitbit, oura, freestyle_libre, apple_health_kit).
+  steps:
+  - stepId: createUser
+    description: Create a Vital user tied to your client_user_id.
+    operationId: create_user_v2_user_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        client_user_id: $inputs.clientUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/user_id
+  - stepId: connectDemo
+    description: >-
+      Connect the new user to the given demo provider so Vital begins generating
+      synthetic wearable data for them.
+    operationId: create_demo_connection_v2_link_connect_demo_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $steps.createUser.outputs.userId
+        provider: $inputs.provider
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.success == true
+      type: jsonpath
+    outputs:
+      success: $response.body#/success
+      detail: $response.body#/detail
+  - stepId: getConnectedProviders
+    description: >-
+      Read the user's connected providers to confirm the demo source is now
+      attached.
+    operationId: get_connected_providers_v2_user_providers__user_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: user_id
+      in: path
+      value: $steps.createUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providers: $response.body#/providers
+  - stepId: getUser
+    description: >-
+      Read the full user record, which includes the connected_sources array for
+      a final confirmation of the connection state.
+    operationId: get_user_v2_user__user_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: user_id
+      in: path
+      value: $steps.createUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      connectedSources: $response.body#/connected_sources
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    connectedProviders: $steps.getConnectedProviders.outputs.providers
+    connectedSources: $steps.getUser.outputs.connectedSources

@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Vital Cancel a Lab Order and Send the User a Portal Link
+  summary: Cancel an order, confirm the cancellation, then mint a communications portal URL deeplinked to it.
+  description: >-
+    A remediation flow for when an order must be pulled back. The workflow
+    cancels the order, reads it back to confirm the latest event is cancelled,
+    and then generates a long-lived communications portal URL deeplinked to the
+    cancelled order so it can be emailed or texted to the end user. Every step
+    spells out its request inline, including the x-vital-api-key header, so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalLabTestingApi
+  url: ../openapi/vital-lab-testing-api-openapi.yml
+  type: openapi
+- name: vitalUsersApi
+  url: ../openapi/vital-users-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cancel-order-notify-portal
+  summary: Cancel an order, confirm it, and create a communications portal URL for the user.
+  description: >-
+    Cancels a lab order, verifies the cancellation by reading the order, then
+    mints a communications portal URL deeplinked to the order for the user.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - orderId
+    - userId
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      orderId:
+        type: string
+        description: The Vital Order ID to cancel.
+      userId:
+        type: string
+        description: The Vital user_id the order belongs to.
+  steps:
+  - stepId: cancelOrder
+    description: Cancel the order and capture the returned status message.
+    operationId: cancel_order_v3_order__order_id__cancel_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/order/id
+      status: $response.body#/status
+      message: $response.body#/message
+  - stepId: confirmCancelled
+    description: >-
+      Read the order back and confirm its latest event reports a cancelled
+      status.
+    operationId: get_order_v3_order__order_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.last_event.status == 'cancelled'
+      type: jsonpath
+    outputs:
+      lastEventStatus: $response.body#/last_event/status
+  - stepId: createPortalUrl
+    description: >-
+      Generate a long-lived communications portal URL deeplinked to the cancelled
+      order so it can be sent to the user over email or SMS.
+    operationId: create_user_portal_url_v2_user__user_id__create_portal_url_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: user_id
+      in: path
+      value: $inputs.userId
+    requestBody:
+      contentType: application/json
+      payload:
+        context: communications
+        order_id: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      url: $response.body#/url
+      expiresIn: $response.body#/expires_in
+  outputs:
+    orderId: $steps.cancelOrder.outputs.orderId
+    finalStatus: $steps.confirmCancelled.outputs.lastEventStatus
+    portalUrl: $steps.createPortalUrl.outputs.url

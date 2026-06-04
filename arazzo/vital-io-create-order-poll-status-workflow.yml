@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Vital Create a Lab Order and Poll Until Resolved
+  summary: Place an order set lab order for a user and poll its lifecycle status until it completes, cancels, or fails.
+  description: >-
+    The core ordering loop for Vital lab testing. The workflow creates an order
+    for a user against an order set, then repeatedly reads the order and inspects
+    the latest lifecycle event, branching back to poll while the order is still
+    in flight and ending once the order reaches a terminal state (completed,
+    cancelled, or failed). Every step spells out its request inline, including the
+    x-vital-api-key header, so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalLabTestingApi
+  url: ../openapi/vital-lab-testing-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-order-poll-status
+  summary: Create a lab order and poll until it reaches a terminal status.
+  description: >-
+    Creates a lab order for a user from an order set, then polls the order's
+    latest event status, looping while in progress and ending on a terminal
+    status.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - userId
+    - patientDetails
+    - patientAddress
+    - orderSet
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      userId:
+        type: string
+        description: The Vital user_id the order is placed for.
+      patientDetails:
+        type: object
+        description: Patient details object (name, dob, gender, etc.) per PatientDetailsWithValidation.
+      patientAddress:
+        type: object
+        description: Patient address object per PatientAddressWithValidation.
+      orderSet:
+        type: object
+        description: The OrderSetRequest describing the panels/markers to order.
+      physician:
+        type: object
+        description: Optional physician details for the order.
+  steps:
+  - stepId: createOrder
+    description: >-
+      Create a lab order for the user from the supplied order set and capture the
+      new order id.
+    operationId: create_order_v3_order_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $inputs.userId
+        patient_details: $inputs.patientDetails
+        patient_address: $inputs.patientAddress
+        order_set: $inputs.orderSet
+        physician: $inputs.physician
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/order/id
+      status: $response.body#/status
+      message: $response.body#/message
+  - stepId: getOrder
+    description: >-
+      Read the order and capture the status of its latest lifecycle event.
+      Branches back to poll while the order is still in progress and ends when a
+      terminal status is reached.
+    operationId: get_order_v3_order__order_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: order_id
+      in: path
+      value: $steps.createOrder.outputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/id
+      lastEventStatus: $response.body#/last_event/status
+      updatedAt: $response.body#/updated_at
+    onSuccess:
+    - name: orderInProgress
+      type: goto
+      stepId: getOrder
+      criteria:
+      - context: $response.body
+        condition: $.last_event.status != 'completed' && $.last_event.status != 'cancelled' && $.last_event.status != 'failed'
+        type: jsonpath
+    - name: orderResolved
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.last_event.status == 'completed' || $.last_event.status == 'cancelled' || $.last_event.status == 'failed'
+        type: jsonpath
+  outputs:
+    orderId: $steps.createOrder.outputs.orderId
+    finalStatus: $steps.getOrder.outputs.lastEventStatus

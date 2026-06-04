@@ -1,0 +1,87 @@
+arazzo: 1.0.1
+info:
+  title: Vital Provision a User and Hand Off a Mobile Sign-In Token
+  summary: Create a Vital user, mint a mobile sign-in token, and read back the user's connected providers.
+  description: >-
+    The handoff flow for Vital's mobile SDKs. The workflow creates a Vital user
+    for your client_user_id, generates a sign-in token your mobile app can use to
+    authenticate the SDK as that user, and reads the user's connected providers
+    so the app can render the current connection state on launch. Every step
+    spells out its request inline, including the x-vital-api-key header, so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: vitalUsersApi
+  url: ../openapi/vital-users-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: mobile-signin-token-handoff
+  summary: Create a user, mint a sign-in token, and list connected providers for a mobile SDK.
+  description: >-
+    Creates a Vital user, generates a mobile sign-in token, and lists the user's
+    connected providers for the SDK to display.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - clientUserId
+    properties:
+      apiKey:
+        type: string
+        description: Your Vital API key, sent in the x-vital-api-key header.
+      clientUserId:
+        type: string
+        description: A unique ID representing the end user in your application.
+  steps:
+  - stepId: createUser
+    description: Create a Vital user tied to your client_user_id.
+    operationId: create_user_v2_user_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        client_user_id: $inputs.clientUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      userId: $response.body#/user_id
+  - stepId: getSignInToken
+    description: >-
+      Generate a sign-in token the mobile SDK can use to authenticate as this
+      user.
+    operationId: get_user_sign_in_token_v2_user__user_id__sign_in_token_post
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: user_id
+      in: path
+      value: $steps.createUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      signInToken: $response.body#/sign_in_token
+  - stepId: getConnectedProviders
+    description: >-
+      Read the user's connected providers so the mobile app can render the
+      current connection state.
+    operationId: get_connected_providers_v2_user_providers__user_id__get
+    parameters:
+    - name: x-vital-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: user_id
+      in: path
+      value: $steps.createUser.outputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      providers: $response.body#/providers
+  outputs:
+    userId: $steps.createUser.outputs.userId
+    signInToken: $steps.getSignInToken.outputs.signInToken
+    connectedProviders: $steps.getConnectedProviders.outputs.providers
