@@ -1,0 +1,3990 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Wearables Data API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "summary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Electrocardiogram",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/electrocardiogram/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              }
+            ]
+          },
+          "docs": "Get electrocardiogram summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Sleep Cycle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/sleep_cycle/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              }
+            ]
+          },
+          "docs": "Get sleep cycle for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/profile/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              }
+            ]
+          },
+          "docs": "Get profile for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Profile Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/profile/:user_id/raw",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              }
+            ]
+          },
+          "docs": "Get raw profile for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Devices Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/devices/:user_id/raw",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              }
+            ]
+          },
+          "docs": "Get Devices for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/activity/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get activity summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Activity Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/activity/:user_id/raw",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get raw activity summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Workouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/workouts/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get workout summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Workouts Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/workouts/:user_id/raw",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get raw workout summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Sleep",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/sleep/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get sleep summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Sleep Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/sleep/:user_id/raw",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get raw sleep summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Body",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/body/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get Body summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Body Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/body/:user_id/raw",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get raw Body summary for user_id"
+        },
+        {
+          "info": {
+            "name": "Get Meals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/meal/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Get user's meals"
+        },
+        {
+          "info": {
+            "name": "Get User Menstrual Cycles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/summary/menstrual_cycle/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get User Menstrual Cycles"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "timeseries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Sleep Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/sleep/:sleep_id/stream",
+            "params": [
+              {
+                "name": "sleep_id",
+                "value": "",
+                "type": "path",
+                "description": "The Vital Sleep ID"
+              }
+            ]
+          },
+          "docs": "Get Sleep stream for a user_id"
+        },
+        {
+          "info": {
+            "name": "Get User Workouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/workouts/:workout_id/stream",
+            "params": [
+              {
+                "name": "workout_id",
+                "value": "",
+                "type": "path",
+                "description": "The Vital ID for the workout"
+              }
+            ]
+          },
+          "docs": "Get User Workouts"
+        },
+        {
+          "info": {
+            "name": "Workout Swimming Stroke",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/workout_swimming_stroke/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Workout Swimming Stroke"
+        },
+        {
+          "info": {
+            "name": "Workout Distance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/workout_distance/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Workout Distance"
+        },
+        {
+          "info": {
+            "name": "Heart Rate Recovery One Minute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/heart_rate_recovery_one_minute/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Heart Rate Recovery One Minute"
+        },
+        {
+          "info": {
+            "name": "Waist Circumference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/waist_circumference/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Waist Circumference"
+        },
+        {
+          "info": {
+            "name": "Lean Body Mass",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/lean_body_mass/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Lean Body Mass"
+        },
+        {
+          "info": {
+            "name": "Body Mass Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/body_mass_index/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Body Mass Index"
+        },
+        {
+          "info": {
+            "name": "Basal Body Temperature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/basal_body_temperature/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Basal Body Temperature"
+        },
+        {
+          "info": {
+            "name": "Handwashing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/handwashing/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Handwashing"
+        },
+        {
+          "info": {
+            "name": "Daylight Exposure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/daylight_exposure/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Daylight Exposure"
+        },
+        {
+          "info": {
+            "name": "Uv Exposure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/uv_exposure/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Uv Exposure"
+        },
+        {
+          "info": {
+            "name": "Fall",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/fall/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Fall"
+        },
+        {
+          "info": {
+            "name": "Inhaler Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/inhaler_usage/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Inhaler Usage"
+        },
+        {
+          "info": {
+            "name": "Peak Expiratory Flow Rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/peak_expiratory_flow_rate/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Peak Expiratory Flow Rate"
+        },
+        {
+          "info": {
+            "name": "Forced Vital Capacity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/forced_vital_capacity/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Forced Vital Capacity"
+        },
+        {
+          "info": {
+            "name": "Forced Expiratory Volume 1",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/forced_expiratory_volume_1/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Forced Expiratory Volume 1"
+        },
+        {
+          "info": {
+            "name": "Wheelchair Push",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/wheelchair_push/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Wheelchair Push"
+        },
+        {
+          "info": {
+            "name": "Sleep Breathing Disturbance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/sleep_breathing_disturbance/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Sleep Breathing Disturbance"
+        },
+        {
+          "info": {
+            "name": "Sleep Apnea Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/sleep_apnea_alert/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Sleep Apnea Alert"
+        },
+        {
+          "info": {
+            "name": "Stand Duration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/stand_duration/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Stand Duration"
+        },
+        {
+          "info": {
+            "name": "Stand Hour",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/stand_hour/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Stand Hour"
+        },
+        {
+          "info": {
+            "name": "Heart Rate Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/heart_rate_alert/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Heart Rate Alert"
+        },
+        {
+          "info": {
+            "name": "Afib Burden",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/afib_burden/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Afib Burden"
+        },
+        {
+          "info": {
+            "name": "Workout Duration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/workout_duration/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Workout Duration"
+        },
+        {
+          "info": {
+            "name": "Vo2 Max",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/vo2_max/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Vo2 Max"
+        },
+        {
+          "info": {
+            "name": "Stress Level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/stress_level/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Stress Level"
+        },
+        {
+          "info": {
+            "name": "Mindfulness Minutes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/mindfulness_minutes/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Mindfulness Minutes"
+        },
+        {
+          "info": {
+            "name": "Caffeine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/caffeine/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Caffeine"
+        },
+        {
+          "info": {
+            "name": "Water",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/water/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Water"
+        },
+        {
+          "info": {
+            "name": "Steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/steps/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Steps"
+        },
+        {
+          "info": {
+            "name": "Floors Climbed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/floors_climbed/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Floors Climbed"
+        },
+        {
+          "info": {
+            "name": "Distance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/distance/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Distance"
+        },
+        {
+          "info": {
+            "name": "Calories Basal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/calories_basal/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Calories Basal"
+        },
+        {
+          "info": {
+            "name": "Calories Active",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/calories_active/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Calories Active"
+        },
+        {
+          "info": {
+            "name": "Respiratory Rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/respiratory_rate/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Respiratory Rate"
+        },
+        {
+          "info": {
+            "name": "Note",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/note/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Note"
+        },
+        {
+          "info": {
+            "name": "Insulin Injection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/insulin_injection/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Insulin Injection"
+        },
+        {
+          "info": {
+            "name": "Ige",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/ige/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Ige"
+        },
+        {
+          "info": {
+            "name": "Igg",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/igg/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Igg"
+        },
+        {
+          "info": {
+            "name": "Hypnogram",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/hypnogram/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Hypnogram"
+        },
+        {
+          "info": {
+            "name": "Heart Rate Variability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/hrv/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Heart Rate Variability"
+        },
+        {
+          "info": {
+            "name": "Heart Rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/heartrate/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Heart Rate"
+        },
+        {
+          "info": {
+            "name": "Glucose",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/glucose/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Glucose"
+        },
+        {
+          "info": {
+            "name": "Cholesterol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/cholesterol/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Cholesterol"
+        },
+        {
+          "info": {
+            "name": "Carbohydrates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/carbohydrates/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Carbohydrates"
+        },
+        {
+          "info": {
+            "name": "Body Temperature Delta",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/body_temperature_delta/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Body Temperature Delta"
+        },
+        {
+          "info": {
+            "name": "Body Temperature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/body_temperature/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Body Temperature"
+        },
+        {
+          "info": {
+            "name": "Body Weight",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/body_weight/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Body Weight"
+        },
+        {
+          "info": {
+            "name": "Body Fat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/body_fat/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Body Fat"
+        },
+        {
+          "info": {
+            "name": "Blood Oxygen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/blood_oxygen/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Blood Oxygen"
+        },
+        {
+          "info": {
+            "name": "Electrocardiogram Voltage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/electrocardiogram_voltage/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Electrocardiogram Voltage"
+        },
+        {
+          "info": {
+            "name": "Blood Pressure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/blood_pressure/grouped",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query",
+                "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Blood Pressure"
+        },
+        {
+          "info": {
+            "name": "Vo2 Max",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/vo2_max",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Vo2 Max"
+        },
+        {
+          "info": {
+            "name": "Stress Level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/stress_level",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Stress Level"
+        },
+        {
+          "info": {
+            "name": "Mindfulness Minutes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/mindfulness_minutes",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Mindfulness Minutes"
+        },
+        {
+          "info": {
+            "name": "Caffeine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/caffeine",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Caffeine"
+        },
+        {
+          "info": {
+            "name": "Water",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/water",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Water"
+        },
+        {
+          "info": {
+            "name": "Steps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/steps",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Steps"
+        },
+        {
+          "info": {
+            "name": "Floors Climbed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/floors_climbed",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Floors Climbed"
+        },
+        {
+          "info": {
+            "name": "Distance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/distance",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Distance"
+        },
+        {
+          "info": {
+            "name": "Calories Basal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/calories_basal",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Calories Basal"
+        },
+        {
+          "info": {
+            "name": "Calories Active",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/calories_active",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Calories Active"
+        },
+        {
+          "info": {
+            "name": "Respiratory Rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/respiratory_rate",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Respiratory Rate"
+        },
+        {
+          "info": {
+            "name": "Ige",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/ige",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Ige"
+        },
+        {
+          "info": {
+            "name": "Igg",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/igg",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Igg"
+        },
+        {
+          "info": {
+            "name": "Hypnogram",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/hypnogram",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Hypnogram"
+        },
+        {
+          "info": {
+            "name": "Heart Rate Variability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/hrv",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Heart Rate Variability"
+        },
+        {
+          "info": {
+            "name": "Heart Rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/heartrate",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Heart Rate"
+        },
+        {
+          "info": {
+            "name": "Glucose",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/glucose",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Glucose"
+        },
+        {
+          "info": {
+            "name": "Cholesterol/Triglycerides",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/cholesterol/triglycerides",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Cholesterol/Triglycerides"
+        },
+        {
+          "info": {
+            "name": "Cholesterol/Total",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/cholesterol/total",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Cholesterol/Total"
+        },
+        {
+          "info": {
+            "name": "Cholesterol/Ldl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/cholesterol/ldl",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Cholesterol/Ldl"
+        },
+        {
+          "info": {
+            "name": "Cholesterol/Hdl",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/cholesterol/hdl",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Cholesterol/Hdl"
+        },
+        {
+          "info": {
+            "name": "Cholesterol",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/cholesterol",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Cholesterol"
+        },
+        {
+          "info": {
+            "name": "Body Weight",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/body_weight",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Body Weight"
+        },
+        {
+          "info": {
+            "name": "Body Fat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/body_fat",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Body Fat"
+        },
+        {
+          "info": {
+            "name": "Blood Oxygen",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/blood_oxygen",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Blood Oxygen"
+        },
+        {
+          "info": {
+            "name": "Electrocardiogram Voltage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/electrocardiogram_voltage",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Electrocardiogram Voltage"
+        },
+        {
+          "info": {
+            "name": "Blood Pressure",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/timeseries/:user_id/blood_pressure",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query",
+                "description": "Provider oura/strava etc"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              }
+            ]
+          },
+          "docs": "Blood Pressure"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

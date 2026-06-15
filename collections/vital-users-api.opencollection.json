@@ -1,0 +1,408 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Users API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "user",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Teams Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET All users for team."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "POST Create a Vital user given a client_user_id and returns the user_id."
+        },
+        {
+          "info": {
+            "name": "Get Teams Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/metrics"
+          },
+          "docs": "GET metrics for team."
+        },
+        {
+          "info": {
+            "name": "Get Connected Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/providers/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GET Users connected providers"
+        },
+        {
+          "info": {
+            "name": "Get User Demographcis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/:user_id/info/latest",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get User Demographcis"
+        },
+        {
+          "info": {
+            "name": "Create Insurance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/user/:user_id/insurance",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Insurance"
+        },
+        {
+          "info": {
+            "name": "Get Latest Insurance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/:user_id/insurance/latest",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "is_primary",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Latest Insurance"
+        },
+        {
+          "info": {
+            "name": "Create User Demographics",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v2/user/:user_id/info",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create User Demographics"
+        },
+        {
+          "info": {
+            "name": "Get User By Client User Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/resolve/:client_user_id",
+            "params": [
+              {
+                "name": "client_user_id",
+                "value": "",
+                "type": "path",
+                "description": "A unique ID representing the end user. Typically this will be a user ID number from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id."
+              }
+            ]
+          },
+          "docs": "GET user_id from client_user_id."
+        },
+        {
+          "info": {
+            "name": "Deregister Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.us.junction.com/v2/user/:user_id/:provider",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path",
+                "description": "Provider slug. e.g., `oura`, `fitbit`, `garmin`."
+              }
+            ]
+          },
+          "docs": "Deregister Provider"
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get User"
+        },
+        {
+          "info": {
+            "name": "Patch User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v2/user/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch User"
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.us.junction.com/v2/user/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete User"
+        },
+        {
+          "info": {
+            "name": "Undo User Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/user/undo_delete",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "User ID to undo deletion. Mutually exclusive with `client_user_id`."
+              },
+              {
+                "name": "client_user_id",
+                "value": "",
+                "type": "query",
+                "description": "Client User ID to undo deletion. Mutually exclusive with `user_id`."
+              }
+            ]
+          },
+          "docs": "Undo User Delete"
+        },
+        {
+          "info": {
+            "name": "Refresh User Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/user/refresh/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "timeout",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Trigger a manual refresh for a specific user"
+        },
+        {
+          "info": {
+            "name": "Get User Devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/:user_id/device",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get User Devices"
+        },
+        {
+          "info": {
+            "name": "Get User Device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/user/:user_id/device/:device_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "device_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get User Device"
+        },
+        {
+          "info": {
+            "name": "Get User Sign In Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/user/:user_id/sign_in_token",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get User Sign In Token"
+        },
+        {
+          "info": {
+            "name": "Create User Portal Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/user/:user_id/create_portal_url",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create User Portal Url"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

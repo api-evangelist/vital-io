@@ -1,0 +1,3267 @@
+{
+  "info": {
+    "_postman_id": "68a3b9fc-7baa-442e-9d99-44ed9d8386ea",
+    "name": "Vital Users API",
+    "description": "Create and manage end users on the Junction (Vital) platform. Each Vital user represents a person whose health data (wearables, labs) flows through your team. Includes user CRUD, demographics, insurance, sign-in tokens, and connected-provider listing.\n\nContact Support:\n Name: Junction (Vital) Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:20:22.000Z",
+    "updatedAt": "2026-06-05T15:20:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-68a3b9fc-7baa-442e-9d99-44ed9d8386ea"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "metrics",
+              "item": [
+                {
+                  "name": "Get Teams Metrics",
+                  "id": "dde31cf8-190e-4df1-82a3-ad95d4b505bd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/metrics",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        "metrics"
+                      ]
+                    },
+                    "description": "GET metrics for team."
+                  },
+                  "response": [
+                    {
+                      "id": "40d97824-d44c-48c8-a4c8-16204d0e952e",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/metrics",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "metrics"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"team_id\": \"<string>\",\n  \"number_of_connected_sources\": 0,\n  \"number_of_users\": 0,\n  \"number_of_errored_connected_sources\": 0,\n  \"number_of_ordered_tests\": 0\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-40d97824-d44c-48c8-a4c8-16204d0e952e"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-dde31cf8-190e-4df1-82a3-ad95d4b505bd"
+                }
+              ],
+              "id": "2e1c74ad-55c9-4633-b060-eb24ff4bcb05",
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-2e1c74ad-55c9-4633-b060-eb24ff4bcb05"
+            },
+            {
+              "name": "providers",
+              "item": [
+                {
+                  "name": "{user_id}",
+                  "item": [
+                    {
+                      "name": "Get Connected Providers",
+                      "id": "c54f52a8-dc44-4728-ad8f-1cdf8f5d7cd0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/providers/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "providers",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8e817f07-bc78-46ee-835b-d0ccee6b0397",
+                              "key": "user_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "GET Users connected providers"
+                      },
+                      "response": [
+                        {
+                          "id": "beb266c7-e50d-49a0-82d4-2a1ef2228015",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/providers/:user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "providers",
+                                ":user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"sed0\": [\n    {\n      \"name\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"logo\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"resource_availability\": {\n        \"deserunt_7\": {\n          \"status\": \"available\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        }\n      },\n      \"external_user_id\": \"<string>\",\n      \"error_details\": {\n        \"error_type\": \"required_scopes_not_granted\",\n        \"error_message\": \"<string>\",\n        \"errored_at\": \"<dateTime>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"logo\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"resource_availability\": {\n        \"eiusmod5\": {\n          \"status\": \"unavailable\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        },\n        \"Ut6\": {\n          \"status\": \"available\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        },\n        \"sint9a6\": {\n          \"status\": \"unavailable\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        }\n      },\n      \"external_user_id\": \"<string>\",\n      \"error_details\": {\n        \"error_type\": \"webhook_registration_failed\",\n        \"error_message\": \"<string>\",\n        \"errored_at\": \"<dateTime>\"\n      }\n    }\n  ],\n  \"irure_e3\": [\n    {\n      \"name\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"logo\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"resource_availability\": {\n        \"sint_4\": {\n          \"status\": \"unavailable\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        },\n        \"sit5\": {\n          \"status\": \"available\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        }\n      },\n      \"external_user_id\": \"<string>\",\n      \"error_details\": {\n        \"error_type\": \"token_refresh_failed\",\n        \"error_message\": \"<string>\",\n        \"errored_at\": \"<dateTime>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"logo\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"resource_availability\": {\n        \"anim_1f\": {\n          \"status\": \"unavailable\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        }\n      },\n      \"external_user_id\": \"<string>\",\n      \"error_details\": {\n        \"error_type\": \"deregistered_per_provider\",\n        \"error_message\": \"<string>\",\n        \"errored_at\": \"<dateTime>\"\n      }\n    }\n  ],\n  \"amet95\": [\n    {\n      \"name\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"logo\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"resource_availability\": {\n        \"enim_3\": {\n          \"status\": \"unavailable\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        }\n      },\n      \"external_user_id\": \"<string>\",\n      \"error_details\": {\n        \"error_type\": \"required_scopes_not_granted\",\n        \"error_message\": \"<string>\",\n        \"errored_at\": \"<dateTime>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"slug\": \"<string>\",\n      \"logo\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"status\": \"<string>\",\n      \"resource_availability\": {\n        \"non6f\": {\n          \"status\": \"unavailable\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        },\n        \"culpa_21b\": {\n          \"status\": \"unavailable\",\n          \"scope_requirements\": {\n            \"user_granted\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            },\n            \"user_denied\": {\n              \"required\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"optional\": [\n                \"<string>\",\n                \"<string>\"\n              ]\n            }\n          }\n        }\n      },\n      \"external_user_id\": \"<string>\",\n      \"error_details\": {\n        \"error_type\": \"required_scopes_not_granted\",\n        \"error_message\": \"<string>\",\n        \"errored_at\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-beb266c7-e50d-49a0-82d4-2a1ef2228015"
+                        },
+                        {
+                          "id": "fec5987c-fb7a-4246-bf47-ac8d8ece47b3",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/providers/:user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "providers",
+                                ":user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-fec5987c-fb7a-4246-bf47-ac8d8ece47b3"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-c54f52a8-dc44-4728-ad8f-1cdf8f5d7cd0"
+                    }
+                  ],
+                  "id": "4753be37-e25a-45ca-ad27-81d3fa1a5471",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-4753be37-e25a-45ca-ad27-81d3fa1a5471"
+                }
+              ],
+              "id": "4e1431ea-dba8-4018-8af2-6b30bba1339e",
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-4e1431ea-dba8-4018-8af2-6b30bba1339e"
+            },
+            {
+              "name": "{user_id}",
+              "item": [
+                {
+                  "name": "info",
+                  "item": [
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Get User Demographcis",
+                          "id": "24d68f99-8deb-4b70-913a-f3c5fa4d6366",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/info/latest",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "info",
+                                "latest"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "77d7ad2d-e9a1-4016-8344-d67db765efb0",
+                                  "key": "user_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "c8ff1450-e934-485d-91d2-96155f6bed7a",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/user/:user_id/info/latest",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "user",
+                                    ":user_id",
+                                    "info",
+                                    "latest"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"address\": {\n    \"first_line\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"second_line\": \"<string>\",\n    \"access_notes\": \"<string>\"\n  },\n  \"medical_proxy\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"race\": \"asian\",\n  \"ethnicity\": \"hispanic\",\n  \"sexual_orientation\": \"heterosexual_or_straight\",\n  \"gender_identity\": \"female_to_male_ftm_transgender_male_trans_man\"\n}",
+                              "createdAt": "2026-06-05T15:20:22.000Z",
+                              "updatedAt": "2026-06-05T15:20:22.000Z",
+                              "uid": "35240-c8ff1450-e934-485d-91d2-96155f6bed7a"
+                            },
+                            {
+                              "id": "29dddf4d-ab85-4621-8f3f-07a473b3cd26",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/user/:user_id/info/latest",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "user",
+                                    ":user_id",
+                                    "info",
+                                    "latest"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:22.000Z",
+                              "updatedAt": "2026-06-05T15:20:22.000Z",
+                              "uid": "35240-29dddf4d-ab85-4621-8f3f-07a473b3cd26"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-24d68f99-8deb-4b70-913a-f3c5fa4d6366"
+                        }
+                      ],
+                      "id": "790bc3de-075a-4a99-b47b-a5ede80d2123",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-790bc3de-075a-4a99-b47b-a5ede80d2123"
+                    },
+                    {
+                      "name": "Create User Demographics",
+                      "id": "5deb5097-474f-4045-acbf-27de40ba7572",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"address\": {\n    \"first_line\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"second_line\": \"<string>\",\n    \"access_notes\": \"<string>\"\n  },\n  \"medical_proxy\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"race\": \"indigenous_native_american_alaska_native\",\n  \"ethnicity\": \"ashkenazi_jewish\",\n  \"sexual_orientation\": \"dont_know\",\n  \"gender_identity\": \"other\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id/info",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id",
+                            "info"
+                          ],
+                          "variable": [
+                            {
+                              "id": "dfab2daf-6aea-455e-b574-5edad073d00b",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "05dfdaa7-579e-429d-9dd2-8bba9181cff3",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"address\": {\n    \"first_line\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"second_line\": \"<string>\",\n    \"access_notes\": \"<string>\"\n  },\n  \"medical_proxy\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"race\": \"indigenous_native_american_alaska_native\",\n  \"ethnicity\": \"ashkenazi_jewish\",\n  \"sexual_orientation\": \"dont_know\",\n  \"gender_identity\": \"other\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/info",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "info"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"address\": {\n    \"first_line\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"second_line\": \"<string>\",\n    \"access_notes\": \"<string>\"\n  },\n  \"medical_proxy\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"race\": \"asian\",\n  \"ethnicity\": \"hispanic\",\n  \"sexual_orientation\": \"heterosexual_or_straight\",\n  \"gender_identity\": \"female_to_male_ftm_transgender_male_trans_man\"\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-05dfdaa7-579e-429d-9dd2-8bba9181cff3"
+                        },
+                        {
+                          "id": "9e44051a-3c3a-4790-8c19-2b1d4c26483b",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone_number\": \"<string>\",\n  \"gender\": \"<string>\",\n  \"dob\": \"<date>\",\n  \"address\": {\n    \"first_line\": \"<string>\",\n    \"country\": \"<string>\",\n    \"zip\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"second_line\": \"<string>\",\n    \"access_notes\": \"<string>\"\n  },\n  \"medical_proxy\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"race\": \"indigenous_native_american_alaska_native\",\n  \"ethnicity\": \"ashkenazi_jewish\",\n  \"sexual_orientation\": \"dont_know\",\n  \"gender_identity\": \"other\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/info",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "info"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-9e44051a-3c3a-4790-8c19-2b1d4c26483b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-5deb5097-474f-4045-acbf-27de40ba7572"
+                    }
+                  ],
+                  "id": "c8c82311-f950-4908-be2b-b8808fb3c224",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-c8c82311-f950-4908-be2b-b8808fb3c224"
+                },
+                {
+                  "name": "insurance",
+                  "item": [
+                    {
+                      "name": "latest",
+                      "item": [
+                        {
+                          "name": "Get Latest Insurance",
+                          "id": "def6d6dd-0737-4e30-aabf-3a8a8cc6ec88",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/insurance/latest?is_primary=true",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "insurance",
+                                "latest"
+                              ],
+                              "query": [
+                                {
+                                  "key": "is_primary",
+                                  "value": "true"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4880213a-5ced-4070-bf61-a1b07b22779c",
+                                  "key": "user_id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "54075ccd-b7b6-4c5f-a7ca-de5675c195d3",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/user/:user_id/insurance/latest?is_primary=true",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "user",
+                                    ":user_id",
+                                    "insurance",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "is_primary",
+                                      "value": "true"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"member_id\": \"<string>\",\n  \"payor_code\": \"<string>\",\n  \"relationship\": \"Other\",\n  \"insured\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"gender\": \"female\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"dob\": \"<date>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"company\": {\n    \"name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    }\n  },\n  \"group_id\": \"<string>\",\n  \"guarantor\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"is_primary\": true\n}",
+                              "createdAt": "2026-06-05T15:20:22.000Z",
+                              "updatedAt": "2026-06-05T15:20:22.000Z",
+                              "uid": "35240-54075ccd-b7b6-4c5f-a7ca-de5675c195d3"
+                            },
+                            {
+                              "id": "6db81052-32a5-4ebe-9aa5-323d50cde64b",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/user/:user_id/insurance/latest?is_primary=true",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "user",
+                                    ":user_id",
+                                    "insurance",
+                                    "latest"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "is_primary",
+                                      "value": "true"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:22.000Z",
+                              "updatedAt": "2026-06-05T15:20:22.000Z",
+                              "uid": "35240-6db81052-32a5-4ebe-9aa5-323d50cde64b"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-def6d6dd-0737-4e30-aabf-3a8a8cc6ec88"
+                        }
+                      ],
+                      "id": "dd707305-47ad-4dc7-ae07-e22925d158a7",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-dd707305-47ad-4dc7-ae07-e22925d158a7"
+                    },
+                    {
+                      "name": "Create Insurance",
+                      "id": "d21f8ad6-42ec-4ad5-96d8-ea1c796d9f13",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"payor_code\": \"<string>\",\n  \"member_id\": \"<string>\",\n  \"relationship\": \"Other\",\n  \"insured\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"gender\": \"female\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"dob\": \"<date>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"group_id\": \"<string>\",\n  \"guarantor\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"is_primary\": true\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id/insurance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id",
+                            "insurance"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ca35a720-b5b1-4bdb-a0e3-dfb0d56a09d6",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e3f99156-4676-44e5-a8d5-558c3df0ca74",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"payor_code\": \"<string>\",\n  \"member_id\": \"<string>\",\n  \"relationship\": \"Other\",\n  \"insured\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"gender\": \"female\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"dob\": \"<date>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"group_id\": \"<string>\",\n  \"guarantor\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"is_primary\": true\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/insurance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "insurance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"member_id\": \"<string>\",\n  \"payor_code\": \"<string>\",\n  \"relationship\": \"Other\",\n  \"insured\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"gender\": \"female\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"dob\": \"<date>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"company\": {\n    \"name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    }\n  },\n  \"group_id\": \"<string>\",\n  \"guarantor\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"is_primary\": true\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-e3f99156-4676-44e5-a8d5-558c3df0ca74"
+                        },
+                        {
+                          "id": "b8c4a880-fc41-42a3-84a9-cff5b1433c58",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"payor_code\": \"<string>\",\n  \"member_id\": \"<string>\",\n  \"relationship\": \"Other\",\n  \"insured\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"gender\": \"female\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"dob\": \"<date>\",\n    \"email\": \"<string>\",\n    \"phone_number\": \"<string>\"\n  },\n  \"group_id\": \"<string>\",\n  \"guarantor\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"address\": {\n      \"first_line\": \"<string>\",\n      \"country\": \"<string>\",\n      \"zip\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"second_line\": \"<string>\",\n      \"access_notes\": \"<string>\"\n    },\n    \"phone_number\": \"<string>\",\n    \"household_income\": \"<integer>\",\n    \"household_size\": \"<integer>\",\n    \"email\": \"<string>\"\n  },\n  \"is_primary\": true\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/insurance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "insurance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-b8c4a880-fc41-42a3-84a9-cff5b1433c58"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-d21f8ad6-42ec-4ad5-96d8-ea1c796d9f13"
+                    }
+                  ],
+                  "id": "1156ea93-f886-484d-975a-d2490b812188",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-1156ea93-f886-484d-975a-d2490b812188"
+                },
+                {
+                  "name": "{provider}",
+                  "item": [
+                    {
+                      "name": "Deregister Provider",
+                      "id": "58aa088c-fd17-4e4d-8ba7-f4f19b163de8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id/:provider",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id",
+                            ":provider"
+                          ],
+                          "variable": [
+                            {
+                              "id": "66224d1e-416a-4a59-adae-67abe7ce7c1a",
+                              "key": "user_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "36580599-581c-4609-a0ac-804d482ba60d",
+                              "key": "provider",
+                              "value": "my_fitness_pal",
+                              "description": "(Required) Provider slug. e.g., `oura`, `fitbit`, `garmin`."
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a4b619c6-676c-4d0e-8917-13343feb2a3b",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/:provider",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                ":provider"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                },
+                                {
+                                  "key": "provider"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\"\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-a4b619c6-676c-4d0e-8917-13343feb2a3b"
+                        },
+                        {
+                          "id": "c51b0510-d74e-4c43-85f4-0a901db8d6bd",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/:provider",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                ":provider"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                },
+                                {
+                                  "key": "provider"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-c51b0510-d74e-4c43-85f4-0a901db8d6bd"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-58aa088c-fd17-4e4d-8ba7-f4f19b163de8"
+                    }
+                  ],
+                  "id": "ffafa914-895d-47da-b479-91ab66749a3c",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-ffafa914-895d-47da-b479-91ab66749a3c"
+                },
+                {
+                  "name": "device",
+                  "item": [
+                    {
+                      "name": "{device_id}",
+                      "item": [
+                        {
+                          "name": "Get User Device",
+                          "id": "c751bb64-01fd-4bcd-b978-fe58b862acb8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/device/:device_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "device",
+                                ":device_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "badd1047-52de-4be8-98a5-f0d33b9d609b",
+                                  "key": "user_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "7e4c9647-88b8-4171-8e81-b98c7e18262f",
+                                  "key": "device_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d3bf24b9-e517-40c3-a00c-770b056cf341",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/user/:user_id/device/:device_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "user",
+                                    ":user_id",
+                                    "device",
+                                    ":device_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    },
+                                    {
+                                      "key": "device_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"user_id\": \"<uuid>\",\n  \"provider\": \"<string>\",\n  \"source_type\": \"chest_strap\",\n  \"app_id\": \"<string>\",\n  \"device_manufacturer\": \"<string>\",\n  \"device_model\": \"<string>\",\n  \"device_version\": \"<string>\",\n  \"device_id\": \"<string>\"\n}",
+                              "createdAt": "2026-06-05T15:20:22.000Z",
+                              "updatedAt": "2026-06-05T15:20:22.000Z",
+                              "uid": "35240-d3bf24b9-e517-40c3-a00c-770b056cf341"
+                            },
+                            {
+                              "id": "eff8349f-82dd-493c-a2af-46c4337d6533",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/user/:user_id/device/:device_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "user",
+                                    ":user_id",
+                                    "device",
+                                    ":device_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    },
+                                    {
+                                      "key": "device_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:22.000Z",
+                              "updatedAt": "2026-06-05T15:20:22.000Z",
+                              "uid": "35240-eff8349f-82dd-493c-a2af-46c4337d6533"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-c751bb64-01fd-4bcd-b978-fe58b862acb8"
+                        }
+                      ],
+                      "id": "d71c5972-3cee-4911-8166-e9a00ab88d5a",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-d71c5972-3cee-4911-8166-e9a00ab88d5a"
+                    },
+                    {
+                      "name": "Get User Devices",
+                      "id": "9bc1c0c0-f6c1-41f2-870a-8f6caef25eb1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id/device",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id",
+                            "device"
+                          ],
+                          "variable": [
+                            {
+                              "id": "459092af-dd61-412d-a1db-ff256020fe20",
+                              "key": "user_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "6cc0432d-8902-42c7-a4df-9737faa1666e",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/device",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "device"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"user_id\": \"<uuid>\",\n    \"provider\": \"<string>\",\n    \"source_type\": \"app\",\n    \"app_id\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"device_version\": \"<string>\",\n    \"device_id\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"user_id\": \"<uuid>\",\n    \"provider\": \"<string>\",\n    \"source_type\": \"unknown\",\n    \"app_id\": \"<string>\",\n    \"device_manufacturer\": \"<string>\",\n    \"device_model\": \"<string>\",\n    \"device_version\": \"<string>\",\n    \"device_id\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-6cc0432d-8902-42c7-a4df-9737faa1666e"
+                        },
+                        {
+                          "id": "8a80301e-781d-4310-9447-aff614c42c9f",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/device",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "device"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-8a80301e-781d-4310-9447-aff614c42c9f"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-9bc1c0c0-f6c1-41f2-870a-8f6caef25eb1"
+                    }
+                  ],
+                  "id": "1fef73c5-02b0-49d9-8bfc-3835b91fb0da",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-1fef73c5-02b0-49d9-8bfc-3835b91fb0da"
+                },
+                {
+                  "name": "sign_in_token",
+                  "item": [
+                    {
+                      "name": "Get User Sign In Token",
+                      "id": "b77cc4ce-2eb0-4a96-8c15-fa7221ac494a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id/sign_in_token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id",
+                            "sign_in_token"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f2a42985-ce25-42e7-8df4-bb6e33848f01",
+                              "key": "user_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d1e86354-4a3e-46ce-b65c-7d719b204e37",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/sign_in_token",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "sign_in_token"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_id\": \"<uuid>\",\n  \"sign_in_token\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-d1e86354-4a3e-46ce-b65c-7d719b204e37"
+                        },
+                        {
+                          "id": "ec1071d9-d262-4b93-ba0a-99705a3ff771",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/sign_in_token",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "sign_in_token"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-ec1071d9-d262-4b93-ba0a-99705a3ff771"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-b77cc4ce-2eb0-4a96-8c15-fa7221ac494a"
+                    }
+                  ],
+                  "id": "af4b39b8-eb9b-4a75-abb0-a9d54040f7a1",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-af4b39b8-eb9b-4a75-abb0-a9d54040f7a1"
+                },
+                {
+                  "name": "create_portal_url",
+                  "item": [
+                    {
+                      "name": "Create User Portal Url",
+                      "id": "932295f5-4a8f-4684-ae23-e1d186d1351d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"context\": \"launch\",\n  \"order_id\": \"<uuid>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id/create_portal_url",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id",
+                            "create_portal_url"
+                          ],
+                          "variable": [
+                            {
+                              "id": "80d794d1-f946-4ace-93c6-a239d68017eb",
+                              "key": "user_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "65cdf790-af9e-4bd6-9b6a-3b6f2d38b57a",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"context\": \"launch\",\n  \"order_id\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/create_portal_url",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "create_portal_url"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"url\": \"<string>\",\n  \"expires_in\": \"<integer>\"\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-65cdf790-af9e-4bd6-9b6a-3b6f2d38b57a"
+                        },
+                        {
+                          "id": "2618d13e-f47d-4481-bac3-9dea71af6b6d",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"context\": \"launch\",\n  \"order_id\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/:user_id/create_portal_url",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                ":user_id",
+                                "create_portal_url"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-2618d13e-f47d-4481-bac3-9dea71af6b6d"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-932295f5-4a8f-4684-ae23-e1d186d1351d"
+                    }
+                  ],
+                  "id": "4cb5735d-df24-4b7b-916f-1a6b99a81640",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-4cb5735d-df24-4b7b-916f-1a6b99a81640"
+                },
+                {
+                  "name": "Patch User",
+                  "id": "a4dc7b3d-69b1-416c-9a85-ebc9c7e9f719",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fallback_time_zone\": \"<string>\",\n  \"fallback_birth_date\": \"<date>\",\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\",\n  \"client_user_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c6db20ab-2a13-4eb3-96dc-62f3baa3c857",
+                          "key": "user_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "8b6c1bdf-1bd2-420f-996c-b9b3481513cf",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"fallback_time_zone\": \"<string>\",\n  \"fallback_birth_date\": \"<date>\",\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\",\n  \"client_user_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-8b6c1bdf-1bd2-420f-996c-b9b3481513cf"
+                    },
+                    {
+                      "id": "2ef00852-d05f-49a2-980b-b5a02562af54",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"fallback_time_zone\": \"<string>\",\n  \"fallback_birth_date\": \"<date>\",\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\",\n  \"client_user_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-2ef00852-d05f-49a2-980b-b5a02562af54"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-a4dc7b3d-69b1-416c-9a85-ebc9c7e9f719"
+                },
+                {
+                  "name": "Delete User",
+                  "id": "f9f68736-b792-4bc0-9731-199649785ad9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "69fef1a7-6872-46f6-a736-a14af4dcf253",
+                          "key": "user_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "13d6367c-a5ca-43cf-8978-b3cdadf2ac4a",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\"\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-13d6367c-a5ca-43cf-8978-b3cdadf2ac4a"
+                    },
+                    {
+                      "id": "6bdc4f29-7f35-4df7-930b-9e30224beded",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-6bdc4f29-7f35-4df7-930b-9e30224beded"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-f9f68736-b792-4bc0-9731-199649785ad9"
+                },
+                {
+                  "name": "Get User",
+                  "id": "d97c0add-c3ec-4ff6-a1bc-71cd946f427b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4131c38f-4e9a-49fe-9a5e-79152180f058",
+                          "key": "user_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "744966a3-9f77-4883-8c0b-034a022f5f9d",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"user_id\": \"<uuid>\",\n  \"team_id\": \"<uuid>\",\n  \"client_user_id\": \"<string>\",\n  \"created_on\": \"<dateTime>\",\n  \"connected_sources\": [\n    {\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      },\n      \"created_on\": \"<dateTime>\",\n      \"source\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      }\n    },\n    {\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      },\n      \"created_on\": \"<dateTime>\",\n      \"source\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      }\n    }\n  ],\n  \"fallback_time_zone\": {\n    \"id\": \"<string>\",\n    \"source_slug\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"fallback_birth_date\": {\n    \"value\": \"<date>\",\n    \"source_slug\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\"\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-744966a3-9f77-4883-8c0b-034a022f5f9d"
+                    },
+                    {
+                      "id": "e0545011-a1b6-42fa-bfb9-3d2e44985efa",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-e0545011-a1b6-42fa-bfb9-3d2e44985efa"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-d97c0add-c3ec-4ff6-a1bc-71cd946f427b"
+                }
+              ],
+              "id": "6e1c5d43-5538-4dfa-ad38-0d674ca518fb",
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-6e1c5d43-5538-4dfa-ad38-0d674ca518fb"
+            },
+            {
+              "name": "resolve",
+              "item": [
+                {
+                  "name": "{client_user_id}",
+                  "item": [
+                    {
+                      "name": "Get User By Client User Id",
+                      "id": "646e1ff4-3a46-4a2d-b355-7800f9c6b501",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/resolve/:client_user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "resolve",
+                            ":client_user_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e568668f-d7b6-44a6-9866-08c9e01d3a7a",
+                              "key": "client_user_id",
+                              "value": "<string>",
+                              "description": "(Required) A unique ID representing the end user. Typically this will be a user ID number from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id."
+                            }
+                          ]
+                        },
+                        "description": "GET user_id from client_user_id."
+                      },
+                      "response": [
+                        {
+                          "id": "f68d6d3d-589b-4642-a299-2cc01aa87b93",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/resolve/:client_user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "resolve",
+                                ":client_user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "client_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_id\": \"<uuid>\",\n  \"team_id\": \"<uuid>\",\n  \"client_user_id\": \"<string>\",\n  \"created_on\": \"<dateTime>\",\n  \"connected_sources\": [\n    {\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      },\n      \"created_on\": \"<dateTime>\",\n      \"source\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      }\n    },\n    {\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      },\n      \"created_on\": \"<dateTime>\",\n      \"source\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      }\n    }\n  ],\n  \"fallback_time_zone\": {\n    \"id\": \"<string>\",\n    \"source_slug\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"fallback_birth_date\": {\n    \"value\": \"<date>\",\n    \"source_slug\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\"\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-f68d6d3d-589b-4642-a299-2cc01aa87b93"
+                        },
+                        {
+                          "id": "bedf0bbc-9d23-49d9-ab11-de1fb0d5795c",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/resolve/:client_user_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "resolve",
+                                ":client_user_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "client_user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-bedf0bbc-9d23-49d9-ab11-de1fb0d5795c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-646e1ff4-3a46-4a2d-b355-7800f9c6b501"
+                    }
+                  ],
+                  "id": "18457dd4-f8a3-468b-b895-44d9cf12f732",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-18457dd4-f8a3-468b-b895-44d9cf12f732"
+                }
+              ],
+              "id": "7e83ad21-4bda-4608-8038-a212fedeba8e",
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-7e83ad21-4bda-4608-8038-a212fedeba8e"
+            },
+            {
+              "name": "undo_delete",
+              "item": [
+                {
+                  "name": "Undo User Delete",
+                  "id": "8a0961a6-a950-48c4-8828-2470d324f63e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/undo_delete?user_id=<uuid>&client_user_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        "undo_delete"
+                      ],
+                      "query": [
+                        {
+                          "description": "User ID to undo deletion. Mutually exclusive with `client_user_id`.",
+                          "key": "user_id",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "description": "Client User ID to undo deletion. Mutually exclusive with `user_id`.",
+                          "key": "client_user_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "cb780940-907d-46ca-aa70-586d3ba67b06",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/undo_delete?user_id=<uuid>&client_user_id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "undo_delete"
+                          ],
+                          "query": [
+                            {
+                              "description": "User ID to undo deletion. Mutually exclusive with `client_user_id`.",
+                              "key": "user_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "description": "Client User ID to undo deletion. Mutually exclusive with `user_id`.",
+                              "key": "client_user_id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\"\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-cb780940-907d-46ca-aa70-586d3ba67b06"
+                    },
+                    {
+                      "id": "09cfb319-a279-4e5a-93b6-fc7361148fc7",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/undo_delete?user_id=<uuid>&client_user_id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "undo_delete"
+                          ],
+                          "query": [
+                            {
+                              "description": "User ID to undo deletion. Mutually exclusive with `client_user_id`.",
+                              "key": "user_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "description": "Client User ID to undo deletion. Mutually exclusive with `user_id`.",
+                              "key": "client_user_id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-09cfb319-a279-4e5a-93b6-fc7361148fc7"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-8a0961a6-a950-48c4-8828-2470d324f63e"
+                }
+              ],
+              "id": "9b040625-158e-4fbe-b376-d8b242cee344",
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-9b040625-158e-4fbe-b376-d8b242cee344"
+            },
+            {
+              "name": "refresh",
+              "item": [
+                {
+                  "name": "{user_id}",
+                  "item": [
+                    {
+                      "name": "Refresh User Id",
+                      "id": "7337c356-0658-4627-b971-0c42ab157203",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/refresh/:user_id?timeout=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "refresh",
+                            ":user_id"
+                          ],
+                          "query": [
+                            {
+                              "key": "timeout",
+                              "value": "10"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a56c2aaa-2766-4a0e-a750-45a0a1c06248",
+                              "key": "user_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Trigger a manual refresh for a specific user"
+                      },
+                      "response": [
+                        {
+                          "id": "e5496444-d231-4b72-b239-f061b57d3639",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/refresh/:user_id?timeout=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "refresh",
+                                ":user_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "timeout",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"user_id\": \"<uuid>\",\n  \"refreshed_sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"in_progress_sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"failed_sources\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-e5496444-d231-4b72-b239-f061b57d3639"
+                        },
+                        {
+                          "id": "fb3e6398-6420-4acd-ab8f-e9363dd354e9",
+                          "name": "Accepted",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/refresh/:user_id?timeout=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "refresh",
+                                ":user_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "timeout",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"user_id\": \"<uuid>\",\n  \"refreshed_sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"in_progress_sources\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"failed_sources\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-fb3e6398-6420-4acd-ab8f-e9363dd354e9"
+                        },
+                        {
+                          "id": "3cbe764b-0c73-4540-b8bf-d4a90bcb4be8",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/refresh/:user_id?timeout=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "refresh",
+                                ":user_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "timeout",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"user_id\": \"<uuid>\",\n  \"error\": \"<string>\",\n  \"failed_sources\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-3cbe764b-0c73-4540-b8bf-d4a90bcb4be8"
+                        },
+                        {
+                          "id": "34c0d98b-c94b-494a-9137-04a126a091a8",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/user/refresh/:user_id?timeout=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "user",
+                                "refresh",
+                                ":user_id"
+                              ],
+                              "query": [
+                                {
+                                  "key": "timeout",
+                                  "value": "10"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:22.000Z",
+                          "updatedAt": "2026-06-05T15:20:22.000Z",
+                          "uid": "35240-34c0d98b-c94b-494a-9137-04a126a091a8"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:22.000Z",
+                      "updatedAt": "2026-06-05T15:20:22.000Z",
+                      "uid": "35240-7337c356-0658-4627-b971-0c42ab157203"
+                    }
+                  ],
+                  "id": "1b691e7c-64a5-4a56-9016-f6078586b512",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-1b691e7c-64a5-4a56-9016-f6078586b512"
+                }
+              ],
+              "id": "045b6f2c-0f17-45d4-b6a7-c6ce204793da",
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-045b6f2c-0f17-45d4-b6a7-c6ce204793da"
+            },
+            {
+              "name": "Get Teams Users",
+              "id": "6d78d158-7cdb-42fc-ae95-7823ab6a7f3b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/user?offset=0&limit=100",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "user"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ]
+                },
+                "description": "GET All users for team."
+              },
+              "response": [
+                {
+                  "id": "6e5903ec-d09a-4af3-aa95-f8afabfbb845",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-vital-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user?offset=0&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user"
+                      ],
+                      "query": [
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"users\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"team_id\": \"<uuid>\",\n      \"client_user_id\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"connected_sources\": [\n        {\n          \"provider\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          },\n          \"created_on\": \"<dateTime>\",\n          \"source\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          }\n        },\n        {\n          \"provider\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          },\n          \"created_on\": \"<dateTime>\",\n          \"source\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          }\n        }\n      ],\n      \"fallback_time_zone\": {\n        \"id\": \"<string>\",\n        \"source_slug\": \"<string>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"fallback_birth_date\": {\n        \"value\": \"<date>\",\n        \"source_slug\": \"<string>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"ingestion_start\": \"<date>\",\n      \"ingestion_end\": \"<date>\"\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"team_id\": \"<uuid>\",\n      \"client_user_id\": \"<string>\",\n      \"created_on\": \"<dateTime>\",\n      \"connected_sources\": [\n        {\n          \"provider\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          },\n          \"created_on\": \"<dateTime>\",\n          \"source\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          }\n        },\n        {\n          \"provider\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          },\n          \"created_on\": \"<dateTime>\",\n          \"source\": {\n            \"name\": \"<string>\",\n            \"slug\": \"<string>\",\n            \"logo\": \"<string>\"\n          }\n        }\n      ],\n      \"fallback_time_zone\": {\n        \"id\": \"<string>\",\n        \"source_slug\": \"<string>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"fallback_birth_date\": {\n        \"value\": \"<date>\",\n        \"source_slug\": \"<string>\",\n        \"updated_at\": \"<dateTime>\"\n      },\n      \"ingestion_start\": \"<date>\",\n      \"ingestion_end\": \"<date>\"\n    }\n  ],\n  \"total\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-6e5903ec-d09a-4af3-aa95-f8afabfbb845"
+                },
+                {
+                  "id": "6919dac2-d06a-43c0-999c-4cf8449b813c",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-vital-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user?offset=0&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user"
+                      ],
+                      "query": [
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-6919dac2-d06a-43c0-999c-4cf8449b813c"
+                }
+              ],
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-6d78d158-7cdb-42fc-ae95-7823ab6a7f3b"
+            },
+            {
+              "name": "Create User",
+              "id": "e33bc18e-1ac8-45b0-b705-b443102ad3c3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_user_id\": \"<string>\",\n  \"fallback_time_zone\": \"<string>\",\n  \"fallback_birth_date\": \"<date>\",\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/user",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "user"
+                  ]
+                },
+                "description": "POST Create a Vital user given a client_user_id and returns the user_id."
+              },
+              "response": [
+                {
+                  "id": "f93dfc62-f96a-4669-a852-06f5b484629e",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-vital-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_user_id\": \"<string>\",\n  \"fallback_time_zone\": \"<string>\",\n  \"fallback_birth_date\": \"<date>\",\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"user_id\": \"<uuid>\",\n  \"team_id\": \"<uuid>\",\n  \"client_user_id\": \"<string>\",\n  \"created_on\": \"<dateTime>\",\n  \"connected_sources\": [\n    {\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      },\n      \"created_on\": \"<dateTime>\",\n      \"source\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      }\n    },\n    {\n      \"provider\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      },\n      \"created_on\": \"<dateTime>\",\n      \"source\": {\n        \"name\": \"<string>\",\n        \"slug\": \"<string>\",\n        \"logo\": \"<string>\"\n      }\n    }\n  ],\n  \"fallback_time_zone\": {\n    \"id\": \"<string>\",\n    \"source_slug\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"fallback_birth_date\": {\n    \"value\": \"<date>\",\n    \"source_slug\": \"<string>\",\n    \"updated_at\": \"<dateTime>\"\n  },\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\"\n}",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-f93dfc62-f96a-4669-a852-06f5b484629e"
+                },
+                {
+                  "id": "8a0a1eff-bbc8-4246-8461-5d4b83148e93",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-vital-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_user_id\": \"<string>\",\n  \"fallback_time_zone\": \"<string>\",\n  \"fallback_birth_date\": \"<date>\",\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": {\n    \"error_type\": \"<string>\",\n    \"error_message\": \"<string>\",\n    \"user_id\": \"<uuid>\",\n    \"created_on\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-8a0a1eff-bbc8-4246-8461-5d4b83148e93"
+                },
+                {
+                  "id": "c432d8a8-beea-473b-b23c-d31f4f9ec613",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-vital-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_user_id\": \"<string>\",\n  \"fallback_time_zone\": \"<string>\",\n  \"fallback_birth_date\": \"<date>\",\n  \"ingestion_start\": \"<date>\",\n  \"ingestion_end\": \"<date>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:20:22.000Z",
+                  "updatedAt": "2026-06-05T15:20:22.000Z",
+                  "uid": "35240-c432d8a8-beea-473b-b23c-d31f4f9ec613"
+                }
+              ],
+              "createdAt": "2026-06-05T15:20:22.000Z",
+              "updatedAt": "2026-06-05T15:20:22.000Z",
+              "uid": "35240-e33bc18e-1ac8-45b0-b705-b443102ad3c3"
+            }
+          ],
+          "id": "3f02165d-f68e-47f2-916a-f2dcee686ad0",
+          "createdAt": "2026-06-05T15:20:22.000Z",
+          "updatedAt": "2026-06-05T15:20:22.000Z",
+          "uid": "35240-3f02165d-f68e-47f2-916a-f2dcee686ad0"
+        }
+      ],
+      "id": "445dd457-1ddd-46d4-a4e1-52abd819e676",
+      "createdAt": "2026-06-05T15:20:22.000Z",
+      "updatedAt": "2026-06-05T15:20:22.000Z",
+      "uid": "35240-445dd457-1ddd-46d4-a4e1-52abd819e676"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.us.junction.com"
+    }
+  ]
+}

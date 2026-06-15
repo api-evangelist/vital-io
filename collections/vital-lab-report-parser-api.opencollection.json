@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Lab Report Parser API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "lab_report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Lab Report Parser Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/lab_report/v1/parser/job",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Creates a parse job, uploads the file(s) to provider, persists the job row,\nand starts the ParseLabReport. Returns a generated job_id."
+        },
+        {
+          "info": {
+            "name": "Get Lab Report Parser Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/lab_report/v1/parser/job/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the parse job status and stored result if completed.\n\nReturns:\n    ParseLabResultJobResponse with job status and parsed data (if complete)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

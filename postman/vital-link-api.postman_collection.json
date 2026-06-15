@@ -1,0 +1,2649 @@
+{
+  "info": {
+    "_postman_id": "739ffb9a-0c2c-4ed0-82f6-bafd210ea0ff",
+    "name": "Vital Link API",
+    "description": "Connect end users to their wearable and health-data providers (Fitbit, Garmin, Oura, Whoop, Apple HealthKit, Dexcom, and 300+ more). Generate Link tokens that drive the Vital Link Widget, OAuth/email/password provider flows, bulk operations, demo providers, and the list of supported providers.\n\nContact Support:\n Name: Junction (Vital) Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:20:26.000Z",
+    "updatedAt": "2026-06-05T15:20:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-739ffb9a-0c2c-4ed0-82f6-bafd210ea0ff"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "link",
+          "item": [
+            {
+              "name": "bulk_op",
+              "item": [
+                {
+                  "name": "List Bulk Ops",
+                  "id": "f839edc4-aed4-44d8-b852-9d94135d1570",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/link/bulk_op?next_cursor=<string>&page_size=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "link",
+                        "bulk_op"
+                      ],
+                      "query": [
+                        {
+                          "key": "next_cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "4bca9924-4f86-42da-9147-545ef296f9a5",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_op?next_cursor=<string>&page_size=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_op"
+                          ],
+                          "query": [
+                            {
+                              "key": "next_cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "page_size",
+                              "value": "10"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"type\": \"link_bulk_import\",\n      \"status\": \"failure\",\n      \"provider\": \"garmin\",\n      \"pending\": \"<integer>\",\n      \"processed\": \"<integer>\",\n      \"started_at\": \"<dateTime>\",\n      \"ended_at\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"link_bulk_import\",\n      \"status\": \"aborted\",\n      \"provider\": \"dexcom\",\n      \"pending\": \"<integer>\",\n      \"processed\": \"<integer>\",\n      \"started_at\": \"<dateTime>\",\n      \"ended_at\": \"<dateTime>\"\n    }\n  ],\n  \"next_cursor\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-4bca9924-4f86-42da-9147-545ef296f9a5"
+                    },
+                    {
+                      "id": "38c79c74-433c-4008-a0c1-4b5d99200aff",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_op?next_cursor=<string>&page_size=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_op"
+                          ],
+                          "query": [
+                            {
+                              "key": "next_cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "page_size",
+                              "value": "10"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-38c79c74-433c-4008-a0c1-4b5d99200aff"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-f839edc4-aed4-44d8-b852-9d94135d1570"
+                }
+              ],
+              "id": "d1c81361-433a-4f9b-829e-02396e1c6c89",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-d1c81361-433a-4f9b-829e-02396e1c6c89"
+            },
+            {
+              "name": "bulk_import",
+              "item": [
+                {
+                  "name": "Bulk Import Connections",
+                  "id": "5a2ff20d-f984-45b2-9a71-aa68472d60ea",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"provider\": \"runkeeper\",\n  \"connections\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"wait_for_completion\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/link/bulk_import",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "link",
+                        "bulk_import"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "11e7102f-bc9c-4f92-9783-e1ba1332e9e8",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"provider\": \"runkeeper\",\n  \"connections\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"wait_for_completion\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_import"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"user_ids_imported\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"user_ids_failed\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-11e7102f-bc9c-4f92-9783-e1ba1332e9e8"
+                    },
+                    {
+                      "id": "4eb66246-f493-4626-bd47-6f9ff787d982",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"provider\": \"runkeeper\",\n  \"connections\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"wait_for_completion\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_import"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-4eb66246-f493-4626-bd47-6f9ff787d982"
+                    },
+                    {
+                      "id": "3152319d-5cb3-45a1-b5a0-8408b62394c9",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"provider\": \"runkeeper\",\n  \"connections\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"wait_for_completion\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_import"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-3152319d-5cb3-45a1-b5a0-8408b62394c9"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-5a2ff20d-f984-45b2-9a71-aa68472d60ea"
+                }
+              ],
+              "id": "c6aeb836-6435-4bf2-8f8a-6790c62b71d6",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-c6aeb836-6435-4bf2-8f8a-6790c62b71d6"
+            },
+            {
+              "name": "bulk_trigger_historical_pull",
+              "item": [
+                {
+                  "name": "Bulk Trigger Historical Pull",
+                  "id": "dd8d4c39-c323-41b2-8897-d1f27f8d3959",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"provider\": \"wahoo\",\n  \"wait_for_completion\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/link/bulk_trigger_historical_pull",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "link",
+                        "bulk_trigger_historical_pull"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "2579bae3-c02d-4815-bc75-d4ea79653146",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"provider\": \"wahoo\",\n  \"wait_for_completion\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_trigger_historical_pull",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_trigger_historical_pull"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-2579bae3-c02d-4815-bc75-d4ea79653146"
+                    },
+                    {
+                      "id": "1c5a8542-25fa-4306-864d-87cc79190c9a",
+                      "name": "Accepted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"provider\": \"wahoo\",\n  \"wait_for_completion\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_trigger_historical_pull",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_trigger_historical_pull"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-1c5a8542-25fa-4306-864d-87cc79190c9a"
+                    },
+                    {
+                      "id": "49cef2f3-fdb4-4bf9-b9cc-598569f39aed",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"provider\": \"wahoo\",\n  \"wait_for_completion\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_trigger_historical_pull",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_trigger_historical_pull"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-49cef2f3-fdb4-4bf9-b9cc-598569f39aed"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-dd8d4c39-c323-41b2-8897-d1f27f8d3959"
+                }
+              ],
+              "id": "22711f46-88c8-4ccb-808c-bfdf191428c7",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-22711f46-88c8-4ccb-808c-bfdf191428c7"
+            },
+            {
+              "name": "bulk_export",
+              "item": [
+                {
+                  "name": "Bulk Export Connections",
+                  "id": "db66c703-98d6-4558-99ef-dc50f9a9d195",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"provider\": \"garmin\",\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"next_token\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/link/bulk_export",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "link",
+                        "bulk_export"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "459f81ef-f56b-4aad-9396-df4b5ec6073a",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"provider\": \"garmin\",\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"next_token\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_export",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_export"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"access_token\": \"<string>\",\n      \"refresh_token\": \"<string>\",\n      \"provider_id\": \"<string>\",\n      \"expires_at\": \"<integer>\",\n      \"oauth_scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"next_token\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-459f81ef-f56b-4aad-9396-df4b5ec6073a"
+                    },
+                    {
+                      "id": "fc56cd55-0330-4492-aead-e52d3bd6dfe5",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"provider\": \"garmin\",\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"next_token\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_export",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_export"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-fc56cd55-0330-4492-aead-e52d3bd6dfe5"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-db66c703-98d6-4558-99ef-dc50f9a9d195"
+                }
+              ],
+              "id": "d3227b48-1819-4021-948d-2170c3cbc86d",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-d3227b48-1819-4021-948d-2170c3cbc86d"
+            },
+            {
+              "name": "bulk_pause",
+              "item": [
+                {
+                  "name": "Bulk Pause Connections",
+                  "id": "aec58dfc-b417-43e6-86b3-a1302bdd2073",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"provider\": \"fitbit\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/link/bulk_pause",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "link",
+                        "bulk_pause"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "d3112633-2c82-4424-a753-5295843c2d73",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"provider\": \"fitbit\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_pause",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_pause"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-d3112633-2c82-4424-a753-5295843c2d73"
+                    },
+                    {
+                      "id": "4ec380f5-4c6b-4798-8b7b-3c3547138c93",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"provider\": \"fitbit\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/bulk_pause",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "bulk_pause"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-4ec380f5-4c6b-4798-8b7b-3c3547138c93"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-aec58dfc-b417-43e6-86b3-a1302bdd2073"
+                }
+              ],
+              "id": "a5f09c89-c0b1-44c4-ac96-bd37cc41ac8a",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-a5f09c89-c0b1-44c4-ac96-bd37cc41ac8a"
+            },
+            {
+              "name": "token",
+              "item": [
+                {
+                  "name": "Generate Vital Link Token",
+                  "id": "b84cdda7-d79e-4d73-8619-5e99ec350d5b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<uuid>\",\n  \"provider\": \"onetouch_ble\",\n  \"redirect_url\": \"<string>\",\n  \"filter_on_providers\": [\n    \"omron_ble\"\n  ],\n  \"on_error\": \"<string>\",\n  \"on_close\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/link/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "link",
+                        "token"
+                      ]
+                    },
+                    "description": "Endpoint to generate a user link token, to be used throughout the vital\nlink process. The vital link token is a one time use token, that\nexpires after 10 minutes. If you would like vital-link widget to launch\nwith a specific provider, pass in a provider in the body. If you would\nlike to redirect to a custom url after successful or error connection,\npass in your own custom redirect_url parameter."
+                  },
+                  "response": [
+                    {
+                      "id": "e7c78fe4-6b05-4029-94de-4bbb409daa20",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_id\": \"<uuid>\",\n  \"provider\": \"onetouch_ble\",\n  \"redirect_url\": \"<string>\",\n  \"filter_on_providers\": [\n    \"omron_ble\"\n  ],\n  \"on_error\": \"<string>\",\n  \"on_close\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"link_token\": \"<string>\",\n  \"link_web_url\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-e7c78fe4-6b05-4029-94de-4bbb409daa20"
+                    },
+                    {
+                      "id": "8c8958af-353c-41ab-83af-074391dddae6",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_id\": \"<uuid>\",\n  \"provider\": \"onetouch_ble\",\n  \"redirect_url\": \"<string>\",\n  \"filter_on_providers\": [\n    \"omron_ble\"\n  ],\n  \"on_error\": \"<string>\",\n  \"on_close\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "token"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-8c8958af-353c-41ab-83af-074391dddae6"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-b84cdda7-d79e-4d73-8619-5e99ec350d5b"
+                }
+              ],
+              "id": "22b43ffe-d798-423a-879f-57f4634c3185",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-22b43ffe-d798-423a-879f-57f4634c3185"
+            },
+            {
+              "name": "code",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Token",
+                      "id": "c2892796-956b-487f-88f9-bb019887915f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/code/create?user_id=<uuid>&expires_at=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "code",
+                            "create"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "user_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "description": "When the link code should expire. Defaults to server time plus 1 hour.",
+                              "key": "expires_at",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        },
+                        "description": "Generate a token to invite a user of Vital mobile app to your team"
+                      },
+                      "response": [
+                        {
+                          "id": "9ca890a4-9826-454c-8aec-6b596bbfaab2",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/link/code/create?user_id=<uuid>&expires_at=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "link",
+                                "code",
+                                "create"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "user_id",
+                                  "value": "<uuid>"
+                                },
+                                {
+                                  "description": "When the link code should expire. Defaults to server time plus 1 hour.",
+                                  "key": "expires_at",
+                                  "value": "<dateTime>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"skeua919f886\",\n  \"exchange_url\": \"tryvital://tryvital?code=pkus54d134b9\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-9ca890a4-9826-454c-8aec-6b596bbfaab2"
+                        },
+                        {
+                          "id": "10dfcf4c-63c3-4c13-9dd9-f30c2093fb18",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/link/code/create?user_id=<uuid>&expires_at=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "link",
+                                "code",
+                                "create"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "user_id",
+                                  "value": "<uuid>"
+                                },
+                                {
+                                  "description": "When the link code should expire. Defaults to server time plus 1 hour.",
+                                  "key": "expires_at",
+                                  "value": "<dateTime>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-10dfcf4c-63c3-4c13-9dd9-f30c2093fb18"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-c2892796-956b-487f-88f9-bb019887915f"
+                    }
+                  ],
+                  "id": "e0ba3180-2fc2-4c7e-9ce6-d47344282bf1",
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-e0ba3180-2fc2-4c7e-9ce6-d47344282bf1"
+                }
+              ],
+              "id": "1c0e669a-b70c-4cda-a5ee-be04ca040204",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-1c0e669a-b70c-4cda-a5ee-be04ca040204"
+            },
+            {
+              "name": "provider",
+              "item": [
+                {
+                  "name": "oauth",
+                  "item": [
+                    {
+                      "name": "{oauth_provider}",
+                      "item": [
+                        {
+                          "name": "Generate Oauth Link Endpoint",
+                          "id": "02f1e3cd-f5a7-4462-9ae9-92273ac00183",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "x-vital-link-token",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/link/provider/oauth/:oauth_provider",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "link",
+                                "provider",
+                                "oauth",
+                                ":oauth_provider"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4d14860e-d45f-4630-bf9c-b45b94dc2415",
+                                  "key": "oauth_provider",
+                                  "value": "wahoo",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "This endpoint generates an OAuth link for oauth provider"
+                          },
+                          "response": [
+                            {
+                              "id": "0a1237fa-e3f4-4093-9c01-38419c7c16f3",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "x-vital-link-token",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/link/provider/oauth/:oauth_provider",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "link",
+                                    "provider",
+                                    "oauth",
+                                    ":oauth_provider"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "oauth_provider"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"description\": \"<string>\",\n  \"logo\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"group\": \"<string>\",\n  \"oauth_url\": \"<string>\",\n  \"auth_type\": \"sdk\",\n  \"source_type\": \"lab\",\n  \"is_active\": \"<boolean>\",\n  \"backfill_num_days\": \"<integer>\"\n}",
+                              "createdAt": "2026-06-05T15:20:27.000Z",
+                              "updatedAt": "2026-06-05T15:20:27.000Z",
+                              "uid": "35240-0a1237fa-e3f4-4093-9c01-38419c7c16f3"
+                            },
+                            {
+                              "id": "9b28db52-3d1a-4a36-a47c-301b497fce00",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "x-vital-link-token",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/link/provider/oauth/:oauth_provider",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "link",
+                                    "provider",
+                                    "oauth",
+                                    ":oauth_provider"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "oauth_provider"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:27.000Z",
+                              "updatedAt": "2026-06-05T15:20:27.000Z",
+                              "uid": "35240-9b28db52-3d1a-4a36-a47c-301b497fce00"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-02f1e3cd-f5a7-4462-9ae9-92273ac00183"
+                        }
+                      ],
+                      "id": "c4f45397-079a-47af-b758-bb04b2aea3f5",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-c4f45397-079a-47af-b758-bb04b2aea3f5"
+                    }
+                  ],
+                  "id": "3bb31493-c8ed-4b38-8b42-bbd643ff8be0",
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-3bb31493-c8ed-4b38-8b42-bbd643ff8be0"
+                },
+                {
+                  "name": "password",
+                  "item": [
+                    {
+                      "name": "{provider}",
+                      "item": [
+                        {
+                          "name": "complete_mfa",
+                          "item": [
+                            {
+                              "name": "Complete Password Provider Mfa",
+                              "id": "52a996e5-dafa-4658-a130-8aae4213145c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "x-vital-link-token",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"mfa_code\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/link/provider/password/:provider/complete_mfa",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "link",
+                                    "provider",
+                                    "password",
+                                    ":provider",
+                                    "complete_mfa"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b6c13702-01a7-4960-9a44-78558f007f7c",
+                                      "key": "provider",
+                                      "value": "dexcom",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                },
+                                "description": "This connects auth providers that are password based."
+                              },
+                              "response": [
+                                {
+                                  "id": "238881e0-bc5d-462b-ada9-df1f39418832",
+                                  "name": "Successful Response",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "x-vital-link-token",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-vital-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"mfa_code\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v2/link/provider/password/:provider/complete_mfa",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v2",
+                                        "link",
+                                        "provider",
+                                        "password",
+                                        ":provider",
+                                        "complete_mfa"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "provider"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"state\": \"success\",\n  \"provider\": \"kardia\",\n  \"connected\": \"<boolean>\",\n  \"provider_id\": \"<string>\",\n  \"redirect_url\": \"<string>\",\n  \"error_type\": \"invalid_token\",\n  \"error\": \"<string>\",\n  \"provider_mfa\": {\n    \"method\": \"sms\",\n    \"hint\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-06-05T15:20:27.000Z",
+                                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                                  "uid": "35240-238881e0-bc5d-462b-ada9-df1f39418832"
+                                },
+                                {
+                                  "id": "0384686a-79d6-4375-80f2-aad25cbadd7c",
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "x-vital-link-token",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "x-vital-api-key",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"mfa_code\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v2/link/provider/password/:provider/complete_mfa",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v2",
+                                        "link",
+                                        "provider",
+                                        "password",
+                                        ":provider",
+                                        "complete_mfa"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "provider"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                                  "createdAt": "2026-06-05T15:20:27.000Z",
+                                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                                  "uid": "35240-0384686a-79d6-4375-80f2-aad25cbadd7c"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:20:27.000Z",
+                              "updatedAt": "2026-06-05T15:20:27.000Z",
+                              "uid": "35240-52a996e5-dafa-4658-a130-8aae4213145c"
+                            }
+                          ],
+                          "id": "be53cf9a-2142-44ad-b6f6-c705f4bc819d",
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-be53cf9a-2142-44ad-b6f6-c705f4bc819d"
+                        },
+                        {
+                          "name": "Connect Password Provider",
+                          "id": "f1474301-1eaf-4482-aa47-435452ef1b27",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "x-vital-link-token",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"region\": \"no\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/link/provider/password/:provider",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "link",
+                                "provider",
+                                "password",
+                                ":provider"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "afe997ef-6770-4f23-843f-f772e2212d8b",
+                                  "key": "provider",
+                                  "value": "dexcom",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "This connects auth providers that are password based."
+                          },
+                          "response": [
+                            {
+                              "id": "322dc9ba-0407-4d0a-bba5-1cef83ab3051",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "x-vital-link-token",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"region\": \"no\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/link/provider/password/:provider",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "link",
+                                    "provider",
+                                    "password",
+                                    ":provider"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "provider"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"state\": \"success\",\n  \"provider\": \"kardia\",\n  \"connected\": \"<boolean>\",\n  \"provider_id\": \"<string>\",\n  \"redirect_url\": \"<string>\",\n  \"error_type\": \"invalid_token\",\n  \"error\": \"<string>\",\n  \"provider_mfa\": {\n    \"method\": \"sms\",\n    \"hint\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:27.000Z",
+                              "updatedAt": "2026-06-05T15:20:27.000Z",
+                              "uid": "35240-322dc9ba-0407-4d0a-bba5-1cef83ab3051"
+                            },
+                            {
+                              "id": "352da25b-7104-48f7-89a8-512a7d0f65c3",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "x-vital-link-token",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"region\": \"no\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/link/provider/password/:provider",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "link",
+                                    "provider",
+                                    "password",
+                                    ":provider"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "provider"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:27.000Z",
+                              "updatedAt": "2026-06-05T15:20:27.000Z",
+                              "uid": "35240-352da25b-7104-48f7-89a8-512a7d0f65c3"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-f1474301-1eaf-4482-aa47-435452ef1b27"
+                        }
+                      ],
+                      "id": "e7efcb6b-79aa-4483-94aa-3aa98c284048",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-e7efcb6b-79aa-4483-94aa-3aa98c284048"
+                    }
+                  ],
+                  "id": "1a679a53-39b0-4c2b-bd77-e4fb7169fdae",
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-1a679a53-39b0-4c2b-bd77-e4fb7169fdae"
+                },
+                {
+                  "name": "email",
+                  "item": [
+                    {
+                      "name": "{provider}",
+                      "item": [
+                        {
+                          "name": "Connect Email Auth Provider",
+                          "id": "cff879d6-6e99-4375-ab59-66cd4e22ad47",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "x-vital-link-token",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"provider\": \"contour_ble\",\n  \"region\": \"ph\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/link/provider/email/:provider",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "link",
+                                "provider",
+                                "email",
+                                ":provider"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b05205ca-fa99-4494-bb3e-13b616756024",
+                                  "key": "provider",
+                                  "value": "freestyle_libre",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "This connects auth providers that are email based."
+                          },
+                          "response": [
+                            {
+                              "id": "defb2a59-8fc2-40c1-9bcb-47f4b470a200",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "x-vital-link-token",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<string>\",\n  \"provider\": \"contour_ble\",\n  \"region\": \"ph\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/link/provider/email/:provider",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "link",
+                                    "provider",
+                                    "email",
+                                    ":provider"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "provider"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-06-05T15:20:27.000Z",
+                              "updatedAt": "2026-06-05T15:20:27.000Z",
+                              "uid": "35240-defb2a59-8fc2-40c1-9bcb-47f4b470a200"
+                            },
+                            {
+                              "id": "a15ad01c-afb7-4f8e-b9a6-f8d06cb22887",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "x-vital-link-token",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"email\": \"<string>\",\n  \"provider\": \"contour_ble\",\n  \"region\": \"ph\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v2/link/provider/email/:provider",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v2",
+                                    "link",
+                                    "provider",
+                                    "email",
+                                    ":provider"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "provider"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:27.000Z",
+                              "updatedAt": "2026-06-05T15:20:27.000Z",
+                              "uid": "35240-a15ad01c-afb7-4f8e-b9a6-f8d06cb22887"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-cff879d6-6e99-4375-ab59-66cd4e22ad47"
+                        }
+                      ],
+                      "id": "73ef3d31-c920-4130-a6c7-1795beb2f1ec",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-73ef3d31-c920-4130-a6c7-1795beb2f1ec"
+                    }
+                  ],
+                  "id": "45ce6098-ca64-457a-8d46-f6693cd3e4b4",
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-45ce6098-ca64-457a-8d46-f6693cd3e4b4"
+                }
+              ],
+              "id": "4dfa1bfd-9c9a-4c83-a768-698e3f20a0c8",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-4dfa1bfd-9c9a-4c83-a768-698e3f20a0c8"
+            },
+            {
+              "name": "providers",
+              "item": [
+                {
+                  "name": "Get Providers",
+                  "id": "5bf50dd8-452e-4e53-9fe9-4d8e7de11b58",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "x-vital-link-token",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/link/providers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "link",
+                        "providers"
+                      ]
+                    },
+                    "description": "GET List of all available providers given the generated link token."
+                  },
+                  "response": [
+                    {
+                      "id": "a7705c4c-dd3a-4fd7-9b1b-806510740539",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "x-vital-link-token",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/providers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "providers"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"description\": \"<string>\",\n    \"logo\": \"<string>\",\n    \"oauth_url\": \"<string>\",\n    \"auth_type\": \"email\",\n    \"form_components\": {}\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"description\": \"<string>\",\n    \"logo\": \"<string>\",\n    \"oauth_url\": \"<string>\",\n    \"auth_type\": \"email\",\n    \"form_components\": {}\n  }\n]",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-a7705c4c-dd3a-4fd7-9b1b-806510740539"
+                    },
+                    {
+                      "id": "a2414c5a-ef46-424f-8a3f-85e9fa60c19e",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "x-vital-link-token",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/providers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "providers"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-a2414c5a-ef46-424f-8a3f-85e9fa60c19e"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-5bf50dd8-452e-4e53-9fe9-4d8e7de11b58"
+                }
+              ],
+              "id": "a23d54d7-b201-4049-a06d-90a562b27990",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-a23d54d7-b201-4049-a06d-90a562b27990"
+            },
+            {
+              "name": "connect",
+              "item": [
+                {
+                  "name": "demo",
+                  "item": [
+                    {
+                      "name": "Create Demo Connection",
+                      "id": "00c3a4ce-8317-472c-b40a-7bf291f628be",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user_id\": \"<string>\",\n  \"provider\": \"fitbit\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/link/connect/demo",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "link",
+                            "connect",
+                            "demo"
+                          ]
+                        },
+                        "description": "POST Connect the given Vital user to a demo provider."
+                      },
+                      "response": [
+                        {
+                          "id": "ed05f0e8-e78c-4e12-9cc8-5c693c8d1ffa",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_id\": \"<string>\",\n  \"provider\": \"fitbit\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/link/connect/demo",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "link",
+                                "connect",
+                                "demo"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"success\": \"<boolean>\",\n  \"detail\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-ed05f0e8-e78c-4e12-9cc8-5c693c8d1ffa"
+                        },
+                        {
+                          "id": "32038dd4-4e75-4222-83b9-fc6453cac982",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user_id\": \"<string>\",\n  \"provider\": \"fitbit\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/link/connect/demo",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "link",
+                                "connect",
+                                "demo"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:27.000Z",
+                          "updatedAt": "2026-06-05T15:20:27.000Z",
+                          "uid": "35240-32038dd4-4e75-4222-83b9-fc6453cac982"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:27.000Z",
+                      "updatedAt": "2026-06-05T15:20:27.000Z",
+                      "uid": "35240-00c3a4ce-8317-472c-b40a-7bf291f628be"
+                    }
+                  ],
+                  "id": "d04a6f07-1d52-4df7-882f-ab0194e14e03",
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-d04a6f07-1d52-4df7-882f-ab0194e14e03"
+                }
+              ],
+              "id": "d3aba528-613f-419f-9580-53667bf754e7",
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-d3aba528-613f-419f-9580-53667bf754e7"
+            }
+          ],
+          "id": "704efc99-1fea-4869-ae38-b0ad8b85fde9",
+          "createdAt": "2026-06-05T15:20:27.000Z",
+          "updatedAt": "2026-06-05T15:20:27.000Z",
+          "uid": "35240-704efc99-1fea-4869-ae38-b0ad8b85fde9"
+        },
+        {
+          "name": "providers",
+          "item": [
+            {
+              "name": "Get List Of Providers",
+              "id": "296f0949-29c4-4f04-a822-4c7b58082609",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/providers?source_type=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "providers"
+                  ],
+                  "query": [
+                    {
+                      "key": "source_type",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Get Provider list"
+              },
+              "response": [
+                {
+                  "id": "19f105d5-abdc-4de9-9e54-cb8ed14728ea",
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-vital-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/providers?source_type=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "providers"
+                      ],
+                      "query": [
+                        {
+                          "key": "source_type",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"description\": \"<string>\",\n    \"logo\": \"<string>\",\n    \"auth_type\": \"oauth\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"slug\": \"<string>\",\n    \"description\": \"<string>\",\n    \"logo\": \"<string>\",\n    \"auth_type\": \"sdk\"\n  }\n]",
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-19f105d5-abdc-4de9-9e54-cb8ed14728ea"
+                },
+                {
+                  "id": "52610504-7a45-4d69-9f0d-e04ee0ea24b5",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-vital-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/providers?source_type=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "providers"
+                      ],
+                      "query": [
+                        {
+                          "key": "source_type",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:20:27.000Z",
+                  "updatedAt": "2026-06-05T15:20:27.000Z",
+                  "uid": "35240-52610504-7a45-4d69-9f0d-e04ee0ea24b5"
+                }
+              ],
+              "createdAt": "2026-06-05T15:20:27.000Z",
+              "updatedAt": "2026-06-05T15:20:27.000Z",
+              "uid": "35240-296f0949-29c4-4f04-a822-4c7b58082609"
+            }
+          ],
+          "id": "01d5d9a8-25f0-4a50-b7a3-07effd9c2989",
+          "createdAt": "2026-06-05T15:20:27.000Z",
+          "updatedAt": "2026-06-05T15:20:27.000Z",
+          "uid": "35240-01d5d9a8-25f0-4a50-b7a3-07effd9c2989"
+        }
+      ],
+      "id": "95e03f43-15d1-48cc-8cff-da020e0e7e43",
+      "createdAt": "2026-06-05T15:20:27.000Z",
+      "updatedAt": "2026-06-05T15:20:27.000Z",
+      "uid": "35240-95e03f43-15d1-48cc-8cff-da020e0e7e43"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.us.junction.com"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Sense API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Query One",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.us.junction.com/aggregate/v1/user/:user_id/query",
+        "headers": [
+          {
+            "name": "accept",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "user_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Query One"
+    },
+    {
+      "info": {
+        "name": "Get Result Table For Query",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.us.junction.com/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/result_table",
+        "headers": [
+          {
+            "name": "accept",
+            "value": ""
+          }
+        ],
+        "params": [
+          {
+            "name": "user_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "query_id_or_slug",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get Result Table For Query"
+    },
+    {
+      "info": {
+        "name": "Get Task History For Query",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.us.junction.com/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/task_history",
+        "params": [
+          {
+            "name": "user_id",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "query_id_or_slug",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "next_cursor",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Get Task History For Query"
+    }
+  ],
+  "bundled": true
+}

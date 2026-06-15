@@ -1,0 +1,432 @@
+{
+  "info": {
+    "_postman_id": "db2eacd7-1174-4970-abbf-cd57a59abd05",
+    "name": "Vital Lab Report Parser API",
+    "description": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:20:53.000Z",
+    "updatedAt": "2026-06-05T15:20:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-db2eacd7-1174-4970-abbf-cd57a59abd05"
+  },
+  "item": [
+    {
+      "name": "lab_report",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "parser",
+              "item": [
+                {
+                  "name": "job",
+                  "item": [
+                    {
+                      "name": "{job_id}",
+                      "item": [
+                        {
+                          "name": "Get Lab Report Parser Job",
+                          "id": "4426391f-9973-4445-b6a6-e770e8c9d265",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/lab_report/v1/parser/job/:job_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lab_report",
+                                "v1",
+                                "parser",
+                                "job",
+                                ":job_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6f972e5d-59ef-454b-91c4-fc653ca3a7ae",
+                                  "key": "job_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the parse job status and stored result if completed.\n\nReturns:\n    ParseLabResultJobResponse with job status and parsed data (if complete)"
+                          },
+                          "response": [
+                            {
+                              "id": "9d5e892e-6c38-4bdd-873e-e3a4b16671f0",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/lab_report/v1/parser/job/:job_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "lab_report",
+                                    "v1",
+                                    "parser",
+                                    "job",
+                                    ":job_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"status\": \"completed\",\n  \"needs_human_review\": \"<boolean>\",\n  \"is_reviewed\": \"<boolean>\",\n  \"failure_reason\": \"low_quality\",\n  \"data\": {\n    \"metadata\": {\n      \"patient_first_name\": \"<string>\",\n      \"patient_last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"gender\": \"other\",\n      \"lab_name\": \"<string>\",\n      \"date_reported\": \"<string>\",\n      \"date_collected\": \"<string>\",\n      \"specimen_number\": \"<string>\"\n    },\n    \"results\": [\n      {\n        \"test_name\": \"<string>\",\n        \"value\": \"<string>\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"numeric\",\n        \"units\": \"<string>\",\n        \"max_reference_range\": \"<number>\",\n        \"min_reference_range\": \"<number>\",\n        \"source_panel_name\": \"<string>\",\n        \"loinc_matches\": [\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          },\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          }\n        ],\n        \"loinc_match_status\": \"no_match\",\n        \"interpretation\": \"critical\",\n        \"is_above_max_range\": \"<boolean>\",\n        \"is_below_min_range\": \"<boolean>\"\n      },\n      {\n        \"test_name\": \"<string>\",\n        \"value\": \"<string>\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"comment\",\n        \"units\": \"<string>\",\n        \"max_reference_range\": \"<number>\",\n        \"min_reference_range\": \"<number>\",\n        \"source_panel_name\": \"<string>\",\n        \"loinc_matches\": [\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          },\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          }\n        ],\n        \"loinc_match_status\": \"needs_review\",\n        \"interpretation\": \"abnormal\",\n        \"is_above_max_range\": \"<boolean>\",\n        \"is_below_min_range\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:53.000Z",
+                              "updatedAt": "2026-06-05T15:20:53.000Z",
+                              "uid": "35240-9d5e892e-6c38-4bdd-873e-e3a4b16671f0"
+                            },
+                            {
+                              "id": "88db1f46-8f72-4ea9-b500-35c2a3c95b9c",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/lab_report/v1/parser/job/:job_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "lab_report",
+                                    "v1",
+                                    "parser",
+                                    "job",
+                                    ":job_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "job_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:53.000Z",
+                              "updatedAt": "2026-06-05T15:20:53.000Z",
+                              "uid": "35240-88db1f46-8f72-4ea9-b500-35c2a3c95b9c"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:53.000Z",
+                          "updatedAt": "2026-06-05T15:20:53.000Z",
+                          "uid": "35240-4426391f-9973-4445-b6a6-e770e8c9d265"
+                        }
+                      ],
+                      "id": "feec5139-cfd1-4d04-aff0-fc7e8d69f8de",
+                      "createdAt": "2026-06-05T15:20:53.000Z",
+                      "updatedAt": "2026-06-05T15:20:53.000Z",
+                      "uid": "35240-feec5139-cfd1-4d04-aff0-fc7e8d69f8de"
+                    },
+                    {
+                      "name": "Create Lab Report Parser Job",
+                      "id": "47db3faf-da79-4472-9313-8018b35d4a7a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file",
+                              "value": "<binary>,<binary>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "user_id",
+                              "value": "<uuid>",
+                              "type": "text"
+                            },
+                            {
+                              "key": "needs_human_review",
+                              "value": "false",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/lab_report/v1/parser/job",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "lab_report",
+                            "v1",
+                            "parser",
+                            "job"
+                          ]
+                        },
+                        "description": "Creates a parse job, uploads the file(s) to provider, persists the job row,\nand starts the ParseLabReport. Returns a generated job_id."
+                      },
+                      "response": [
+                        {
+                          "id": "3b885674-7160-4630-94b2-5bc7bebf18a8",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file",
+                                  "value": "<binary>,<binary>",
+                                  "type": "text"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "user_id",
+                                  "value": "<uuid>",
+                                  "type": "text"
+                                },
+                                {
+                                  "key": "needs_human_review",
+                                  "value": "false",
+                                  "type": "text"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/lab_report/v1/parser/job",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lab_report",
+                                "v1",
+                                "parser",
+                                "job"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"status\": \"completed\",\n  \"needs_human_review\": \"<boolean>\",\n  \"is_reviewed\": \"<boolean>\",\n  \"failure_reason\": \"low_quality\",\n  \"data\": {\n    \"metadata\": {\n      \"patient_first_name\": \"<string>\",\n      \"patient_last_name\": \"<string>\",\n      \"dob\": \"<string>\",\n      \"gender\": \"other\",\n      \"lab_name\": \"<string>\",\n      \"date_reported\": \"<string>\",\n      \"date_collected\": \"<string>\",\n      \"specimen_number\": \"<string>\"\n    },\n    \"results\": [\n      {\n        \"test_name\": \"<string>\",\n        \"value\": \"<string>\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"numeric\",\n        \"units\": \"<string>\",\n        \"max_reference_range\": \"<number>\",\n        \"min_reference_range\": \"<number>\",\n        \"source_panel_name\": \"<string>\",\n        \"loinc_matches\": [\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          },\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          }\n        ],\n        \"loinc_match_status\": \"no_match\",\n        \"interpretation\": \"critical\",\n        \"is_above_max_range\": \"<boolean>\",\n        \"is_below_min_range\": \"<boolean>\"\n      },\n      {\n        \"test_name\": \"<string>\",\n        \"value\": \"<string>\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"comment\",\n        \"units\": \"<string>\",\n        \"max_reference_range\": \"<number>\",\n        \"min_reference_range\": \"<number>\",\n        \"source_panel_name\": \"<string>\",\n        \"loinc_matches\": [\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          },\n          {\n            \"loinc_code\": \"<string>\",\n            \"loinc_name\": \"<string>\",\n            \"confidence_score\": \"<number>\",\n            \"display_name\": \"\"\n          }\n        ],\n        \"loinc_match_status\": \"needs_review\",\n        \"interpretation\": \"abnormal\",\n        \"is_above_max_range\": \"<boolean>\",\n        \"is_below_min_range\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:53.000Z",
+                          "updatedAt": "2026-06-05T15:20:53.000Z",
+                          "uid": "35240-3b885674-7160-4630-94b2-5bc7bebf18a8"
+                        },
+                        {
+                          "id": "76bccaf0-213e-4aa8-b73f-6ccd4831e33c",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file",
+                                  "value": "<binary>,<binary>",
+                                  "type": "text"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "user_id",
+                                  "value": "<uuid>",
+                                  "type": "text"
+                                },
+                                {
+                                  "key": "needs_human_review",
+                                  "value": "false",
+                                  "type": "text"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/lab_report/v1/parser/job",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "lab_report",
+                                "v1",
+                                "parser",
+                                "job"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:20:53.000Z",
+                          "updatedAt": "2026-06-05T15:20:53.000Z",
+                          "uid": "35240-76bccaf0-213e-4aa8-b73f-6ccd4831e33c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:20:53.000Z",
+                      "updatedAt": "2026-06-05T15:20:53.000Z",
+                      "uid": "35240-47db3faf-da79-4472-9313-8018b35d4a7a"
+                    }
+                  ],
+                  "id": "39ecf16c-af4f-4124-a125-10398ccb7947",
+                  "createdAt": "2026-06-05T15:20:53.000Z",
+                  "updatedAt": "2026-06-05T15:20:53.000Z",
+                  "uid": "35240-39ecf16c-af4f-4124-a125-10398ccb7947"
+                }
+              ],
+              "id": "27dedfd0-4dea-403f-b5a2-0c80043176e8",
+              "createdAt": "2026-06-05T15:20:53.000Z",
+              "updatedAt": "2026-06-05T15:20:53.000Z",
+              "uid": "35240-27dedfd0-4dea-403f-b5a2-0c80043176e8"
+            }
+          ],
+          "id": "ce67cbff-158c-4064-8b3f-f4a06ebc7d79",
+          "createdAt": "2026-06-05T15:20:53.000Z",
+          "updatedAt": "2026-06-05T15:20:53.000Z",
+          "uid": "35240-ce67cbff-158c-4064-8b3f-f4a06ebc7d79"
+        }
+      ],
+      "id": "9018a0bd-e924-4784-bb0f-282fab3c8506",
+      "createdAt": "2026-06-05T15:20:53.000Z",
+      "updatedAt": "2026-06-05T15:20:53.000Z",
+      "uid": "35240-9018a0bd-e924-4784-bb0f-282fab3c8506"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.us.junction.com"
+    }
+  ]
+}

@@ -1,0 +1,1262 @@
+{
+  "info": {
+    "_postman_id": "9c34236f-aebc-4453-ae0c-b0e2183da893",
+    "name": "Vital Team API",
+    "description": "Read and administer team-level resources on the Junction (Vital) platform: get team metadata, search users, manage Svix webhook portal URLs, list/check team configuration, and access team-level introspection of historical pulls and resource availability.\n\nContact Support:\n Name: Junction (Vital) Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:21:01.000Z",
+    "updatedAt": "2026-06-05T15:21:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9c34236f-aebc-4453-ae0c-b0e2183da893"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "team",
+          "item": [
+            {
+              "name": "{team_id}",
+              "item": [
+                {
+                  "name": "physicians",
+                  "item": [
+                    {
+                      "name": "Get Team Physicians",
+                      "id": "01b73072-229b-4320-81df-fcd788c32733",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/team/:team_id/physicians",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "team",
+                            ":team_id",
+                            "physicians"
+                          ],
+                          "variable": [
+                            {
+                              "id": "81dd70eb-1da8-4fbd-ab2d-1176ebad3baf",
+                              "key": "team_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "36463d6d-7767-4613-93d8-8c6e658d3e17",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/:team_id/physicians",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                ":team_id",
+                                "physicians"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"npi\": \"<string>\"\n  },\n  {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"npi\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-36463d6d-7767-4613-93d8-8c6e658d3e17"
+                        },
+                        {
+                          "id": "8346e7e8-d439-4262-97f1-7d6c0966252c",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/:team_id/physicians",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                ":team_id",
+                                "physicians"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "team_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-8346e7e8-d439-4262-97f1-7d6c0966252c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-01b73072-229b-4320-81df-fcd788c32733"
+                    }
+                  ],
+                  "id": "ae42f449-6310-44b0-9531-130ddf695066",
+                  "createdAt": "2026-06-05T15:21:01.000Z",
+                  "updatedAt": "2026-06-05T15:21:01.000Z",
+                  "uid": "35240-ae42f449-6310-44b0-9531-130ddf695066"
+                },
+                {
+                  "name": "Get Team",
+                  "id": "e5bdde39-ff65-47b3-a070-7f867f00a256",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/team/:team_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "team",
+                        ":team_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c44199dc-e5aa-4218-b417-9af3241d1b93",
+                          "key": "team_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get team."
+                  },
+                  "response": [
+                    {
+                      "id": "262ea14b-d654-486a-9c93-39a93a536aec",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/team/:team_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "team",
+                            ":team_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "team_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"org_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"testkits_texts_enabled\": \"<boolean>\",\n  \"lab_tests_patient_communication_enabled\": \"<boolean>\",\n  \"lab_tests_patient_sms_communication_enabled\": \"<boolean>\",\n  \"lab_tests_patient_email_communication_enabled\": \"<boolean>\",\n  \"delegated_flow\": \"order_and_results_with_vital_physician_network\",\n  \"svix_app_id\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"airtable_api_key\": \"<string>\",\n  \"airtable_base_id\": \"<string>\",\n  \"webhook_secret\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"api_keys\": [\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"created_at\": \"<dateTime>\",\n      \"team_id\": \"<uuid>\",\n      \"deleted_at\": \"<dateTime>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"value\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"created_at\": \"<dateTime>\",\n      \"team_id\": \"<uuid>\",\n      \"deleted_at\": \"<dateTime>\"\n    }\n  ],\n  \"configuration\": {\n    \"libreview\": {\n      \"practice_id\": {\n        \"proident_375\": \"dolore aliquip elit amet\",\n        \"magna_0\": \"id magna quis\",\n        \"pariatur_\": 67543574.02162454\n      },\n      \"strip_tz\": false\n    },\n    \"texts_enabled\": false,\n    \"push_historical_data\": false,\n    \"provider_raw_data\": false,\n    \"reject_duplicate_connection\": false,\n    \"sdk_per_device_activity_timeseries\": false,\n    \"partial_webhooks_enabled\": false,\n    \"minor_ordering_enabled\": false,\n    \"eds_preferences\": {\n      \"preferred\": \"rabbitmq\",\n      \"enabled\": [\n        \"rabbitmq\",\n        \"rabbitmq\"\n      ]\n    },\n    \"event_type_prefixes\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"logo_url\": \"<string>\",\n  \"critical_result_notification_email\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-262ea14b-d654-486a-9c93-39a93a536aec"
+                    },
+                    {
+                      "id": "04c23fc2-b3fb-47ef-b457-ae73aaa187ec",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/team/:team_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "team",
+                            ":team_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "team_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-04c23fc2-b3fb-47ef-b457-ae73aaa187ec"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:01.000Z",
+                  "updatedAt": "2026-06-05T15:21:01.000Z",
+                  "uid": "35240-e5bdde39-ff65-47b3-a070-7f867f00a256"
+                }
+              ],
+              "id": "7802e903-1801-4268-bbd2-69a84da91e00",
+              "createdAt": "2026-06-05T15:21:01.000Z",
+              "updatedAt": "2026-06-05T15:21:01.000Z",
+              "uid": "35240-7802e903-1801-4268-bbd2-69a84da91e00"
+            },
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "search",
+                  "item": [
+                    {
+                      "name": "Search Team Users By Uuid Or Client User Id",
+                      "id": "928cccd0-ba62-4df6-837a-1287d4f57863",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/team/users/search?query_id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "team",
+                            "users",
+                            "search"
+                          ],
+                          "query": [
+                            {
+                              "key": "query_id",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Search team users by user_id"
+                      },
+                      "response": [
+                        {
+                          "id": "6e07311c-4033-4761-ad66-92558cf25d4f",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/users/search?query_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                "users",
+                                "search"
+                              ],
+                              "query": [
+                                {
+                                  "key": "query_id",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"user_id\": \"<uuid>\",\n    \"team_id\": \"<uuid>\",\n    \"client_user_id\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"connected_sources\": [\n      {\n        \"provider\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        },\n        \"created_on\": \"<dateTime>\",\n        \"source\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        }\n      },\n      {\n        \"provider\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        },\n        \"created_on\": \"<dateTime>\",\n        \"source\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        }\n      }\n    ],\n    \"fallback_time_zone\": {\n      \"id\": \"<string>\",\n      \"source_slug\": \"<string>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"fallback_birth_date\": {\n      \"value\": \"<date>\",\n      \"source_slug\": \"<string>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"ingestion_start\": \"<date>\",\n    \"ingestion_end\": \"<date>\"\n  },\n  {\n    \"user_id\": \"<uuid>\",\n    \"team_id\": \"<uuid>\",\n    \"client_user_id\": \"<string>\",\n    \"created_on\": \"<dateTime>\",\n    \"connected_sources\": [\n      {\n        \"provider\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        },\n        \"created_on\": \"<dateTime>\",\n        \"source\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        }\n      },\n      {\n        \"provider\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        },\n        \"created_on\": \"<dateTime>\",\n        \"source\": {\n          \"name\": \"<string>\",\n          \"slug\": \"<string>\",\n          \"logo\": \"<string>\"\n        }\n      }\n    ],\n    \"fallback_time_zone\": {\n      \"id\": \"<string>\",\n      \"source_slug\": \"<string>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"fallback_birth_date\": {\n      \"value\": \"<date>\",\n      \"source_slug\": \"<string>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    \"ingestion_start\": \"<date>\",\n    \"ingestion_end\": \"<date>\"\n  }\n]",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-6e07311c-4033-4761-ad66-92558cf25d4f"
+                        },
+                        {
+                          "id": "d0f814c1-2645-43e3-9c7c-06aa1d1d50a8",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/users/search?query_id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                "users",
+                                "search"
+                              ],
+                              "query": [
+                                {
+                                  "key": "query_id",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-d0f814c1-2645-43e3-9c7c-06aa1d1d50a8"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-928cccd0-ba62-4df6-837a-1287d4f57863"
+                    }
+                  ],
+                  "id": "48d98153-7266-481f-8f62-f05312ee4f36",
+                  "createdAt": "2026-06-05T15:21:01.000Z",
+                  "updatedAt": "2026-06-05T15:21:01.000Z",
+                  "uid": "35240-48d98153-7266-481f-8f62-f05312ee4f36"
+                }
+              ],
+              "id": "8d6bef15-5b38-4bce-a189-1e4e50fb5913",
+              "createdAt": "2026-06-05T15:21:01.000Z",
+              "updatedAt": "2026-06-05T15:21:01.000Z",
+              "uid": "35240-8d6bef15-5b38-4bce-a189-1e4e50fb5913"
+            },
+            {
+              "name": "svix",
+              "item": [
+                {
+                  "name": "url",
+                  "item": [
+                    {
+                      "name": "Get Svix Webhook Url",
+                      "id": "01683902-b7ab-4701-80a5-da14ff95909d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/team/svix/url",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "team",
+                            "svix",
+                            "url"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "1816b7a4-41d7-49f7-aa1d-6532ded0af1f",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/svix/url",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                "svix",
+                                "url"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"labore_3\": true\n}",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-1816b7a4-41d7-49f7-aa1d-6532ded0af1f"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-01683902-b7ab-4701-80a5-da14ff95909d"
+                    }
+                  ],
+                  "id": "ff84c617-46d1-4edc-84ac-8c9b8d09be44",
+                  "createdAt": "2026-06-05T15:21:01.000Z",
+                  "updatedAt": "2026-06-05T15:21:01.000Z",
+                  "uid": "35240-ff84c617-46d1-4edc-84ac-8c9b8d09be44"
+                }
+              ],
+              "id": "e3eac929-33bf-4c1b-92a3-68e7773f9d6c",
+              "createdAt": "2026-06-05T15:21:01.000Z",
+              "updatedAt": "2026-06-05T15:21:01.000Z",
+              "uid": "35240-e3eac929-33bf-4c1b-92a3-68e7773f9d6c"
+            },
+            {
+              "name": "source",
+              "item": [
+                {
+                  "name": "priorities",
+                  "item": [
+                    {
+                      "name": "Get Source Priorities",
+                      "id": "479a23a3-f29c-42e9-baf1-0f00a754a327",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/team/source/priorities?data_type=timeseries",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "team",
+                            "source",
+                            "priorities"
+                          ],
+                          "query": [
+                            {
+                              "key": "data_type",
+                              "value": "timeseries"
+                            }
+                          ]
+                        },
+                        "description": "GET source priorities."
+                      },
+                      "response": [
+                        {
+                          "id": "c19b584e-95c8-499b-b9e7-db5b31d1a1f3",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/source/priorities?data_type=timeseries",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                "source",
+                                "priorities"
+                              ],
+                              "query": [
+                                {
+                                  "key": "data_type",
+                                  "value": "timeseries"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"inc35\": \"ipsum anim\"\n  },\n  {\n    \"exercitation7a\": \"ex nostrud in\",\n    \"adipisicing14\": 84097518.54419416\n  }\n]",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-c19b584e-95c8-499b-b9e7-db5b31d1a1f3"
+                        },
+                        {
+                          "id": "4adb87c7-405b-463e-8b0f-bfb5ef644dc8",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/source/priorities?data_type=timeseries",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                "source",
+                                "priorities"
+                              ],
+                              "query": [
+                                {
+                                  "key": "data_type",
+                                  "value": "timeseries"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-4adb87c7-405b-463e-8b0f-bfb5ef644dc8"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-479a23a3-f29c-42e9-baf1-0f00a754a327"
+                    },
+                    {
+                      "name": "Update Source Priorities",
+                      "id": "10a47535-6004-4525-87be-78d5cbbef7aa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/team/source/priorities",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "team",
+                            "source",
+                            "priorities"
+                          ]
+                        },
+                        "description": "Patch source priorities."
+                      },
+                      "response": [
+                        {
+                          "id": "b38ee63d-62bb-456f-8839-5c084c7ba604",
+                          "name": "Successful Response",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-vital-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/team/source/priorities",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "team",
+                                "source",
+                                "priorities"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"irure_a\": 89200692.2298457,\n    \"eiusmod_1f6\": 85068083.52835476\n  },\n  {\n    \"adipisicing_6f4\": true,\n    \"sed24a\": 37557582.14175081\n  }\n]",
+                          "createdAt": "2026-06-05T15:21:01.000Z",
+                          "updatedAt": "2026-06-05T15:21:01.000Z",
+                          "uid": "35240-b38ee63d-62bb-456f-8839-5c084c7ba604"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-10a47535-6004-4525-87be-78d5cbbef7aa"
+                    }
+                  ],
+                  "id": "3f57a5ee-ebdb-4ba6-8593-7fa16d19ad7b",
+                  "createdAt": "2026-06-05T15:21:01.000Z",
+                  "updatedAt": "2026-06-05T15:21:01.000Z",
+                  "uid": "35240-3f57a5ee-ebdb-4ba6-8593-7fa16d19ad7b"
+                }
+              ],
+              "id": "d64f998c-397c-4853-b57e-82e4dc727047",
+              "createdAt": "2026-06-05T15:21:01.000Z",
+              "updatedAt": "2026-06-05T15:21:01.000Z",
+              "uid": "35240-d64f998c-397c-4853-b57e-82e4dc727047"
+            }
+          ],
+          "id": "6a2bd3a7-48d9-4941-abde-040dd978b45a",
+          "createdAt": "2026-06-05T15:21:01.000Z",
+          "updatedAt": "2026-06-05T15:21:01.000Z",
+          "uid": "35240-6a2bd3a7-48d9-4941-abde-040dd978b45a"
+        },
+        {
+          "name": "introspect",
+          "item": [
+            {
+              "name": "resources",
+              "item": [
+                {
+                  "name": "Introspect Resources",
+                  "id": "4f17aa38-4d5c-4dea-b8a8-7eb7d265ee4b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/introspect/resources?user_id=<uuid>&provider=fitbit&user_limit=50&cursor=<string>&next_cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "introspect",
+                        "resources"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by user ID.",
+                          "key": "user_id",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "key": "provider",
+                          "value": "fitbit"
+                        },
+                        {
+                          "key": "user_limit",
+                          "value": "50"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The cursor for fetching the next page, or `null` to fetch the first page.",
+                          "key": "next_cursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e54acf9e-c610-4e41-9f03-9ae77868ec67",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/introspect/resources?user_id=<uuid>&provider=fitbit&user_limit=50&cursor=<string>&next_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "introspect",
+                            "resources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by user ID.",
+                              "key": "user_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "key": "provider",
+                              "value": "fitbit"
+                            },
+                            {
+                              "key": "user_limit",
+                              "value": "50"
+                            },
+                            {
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The cursor for fetching the next page, or `null` to fetch the first page.",
+                              "key": "next_cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"provider\": {\n        \"sint_3\": {\n          \"veniam2\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"success\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          },\n          \"minim111\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"success\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          }\n        },\n        \"aliquip92\": {\n          \"etd\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"failure\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          },\n          \"adipisicing_6\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"failure\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          }\n        },\n        \"Ut48\": {\n          \"ex__e\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"success\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          },\n          \"irure8\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"success\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          }\n        }\n      }\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"provider\": {\n        \"dolored\": {\n          \"exc35\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"failure\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          }\n        },\n        \"nisi24\": {\n          \"Excepteur_d\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"success\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          },\n          \"anim_358\": {\n            \"last_attempt\": {\n              \"timestamp\": \"<dateTime>\",\n              \"status\": \"failure\"\n            },\n            \"oldest_data\": \"<dateTime>\",\n            \"newest_data\": \"<dateTime>\",\n            \"sent_count\": \"<integer>\"\n          }\n        }\n      }\n    }\n  ],\n  \"next\": \"<string>\",\n  \"next_cursor\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-e54acf9e-c610-4e41-9f03-9ae77868ec67"
+                    },
+                    {
+                      "id": "fb53733e-c86a-4934-8463-e98fbf7db8f9",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/introspect/resources?user_id=<uuid>&provider=fitbit&user_limit=50&cursor=<string>&next_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "introspect",
+                            "resources"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by user ID.",
+                              "key": "user_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "key": "provider",
+                              "value": "fitbit"
+                            },
+                            {
+                              "key": "user_limit",
+                              "value": "50"
+                            },
+                            {
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The cursor for fetching the next page, or `null` to fetch the first page.",
+                              "key": "next_cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-fb53733e-c86a-4934-8463-e98fbf7db8f9"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:01.000Z",
+                  "updatedAt": "2026-06-05T15:21:01.000Z",
+                  "uid": "35240-4f17aa38-4d5c-4dea-b8a8-7eb7d265ee4b"
+                }
+              ],
+              "id": "e140d6b3-0591-4d55-9de2-7aa285c73480",
+              "createdAt": "2026-06-05T15:21:01.000Z",
+              "updatedAt": "2026-06-05T15:21:01.000Z",
+              "uid": "35240-e140d6b3-0591-4d55-9de2-7aa285c73480"
+            },
+            {
+              "name": "historical_pull",
+              "item": [
+                {
+                  "name": "Introspect Historical Pulls",
+                  "id": "094da192-e5c6-40b9-90e3-a736a686d146",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/introspect/historical_pull?user_id=<uuid>&provider=fitbit&user_limit=50&cursor=<string>&next_cursor=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "introspect",
+                        "historical_pull"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by user ID.",
+                          "key": "user_id",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "key": "provider",
+                          "value": "fitbit"
+                        },
+                        {
+                          "key": "user_limit",
+                          "value": "50"
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The cursor for fetching the next page, or `null` to fetch the first page.",
+                          "key": "next_cursor",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "79792392-d9dc-4115-b7b5-061a5189e30d",
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/introspect/historical_pull?user_id=<uuid>&provider=fitbit&user_limit=50&cursor=<string>&next_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "introspect",
+                            "historical_pull"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by user ID.",
+                              "key": "user_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "key": "provider",
+                              "value": "fitbit"
+                            },
+                            {
+                              "key": "user_limit",
+                              "value": "50"
+                            },
+                            {
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The cursor for fetching the next page, or `null` to fetch the first page.",
+                              "key": "next_cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"user_id\": \"<uuid>\",\n      \"provider\": {\n        \"doaba\": {\n          \"pulled\": {\n            \"ex1d5\": {\n              \"status\": \"in_progress\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"provider_unavailable\"\n            },\n            \"quie6\": {\n              \"status\": \"success\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"transport_failure\"\n            },\n            \"amet_945\": {\n              \"status\": \"in_progress\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"provider_unavailable\"\n            }\n          },\n          \"not_pulled\": [\n            \"handwashing\",\n            \"workout_stream\"\n          ]\n        },\n        \"minima82\": {\n          \"pulled\": {\n            \"officia05\": {\n              \"status\": \"in_progress\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"resource_contention\"\n            },\n            \"nostrud_d4\": {\n              \"status\": \"retrying\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"resource_contention\"\n            }\n          },\n          \"not_pulled\": [\n            \"fall\",\n            \"insulin_injection\"\n          ]\n        }\n      }\n    },\n    {\n      \"user_id\": \"<uuid>\",\n      \"provider\": {\n        \"anim5_5\": {\n          \"pulled\": {\n            \"voluptate833\": {\n              \"status\": \"retrying\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"resource_contention\"\n            }\n          },\n          \"not_pulled\": [\n            \"forced_expiratory_volume_1\",\n            \"blood_oxygen\"\n          ]\n        },\n        \"id__6\": {\n          \"pulled\": {\n            \"in8\": {\n              \"status\": \"failure\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"resource_contention\"\n            },\n            \"reprehenderit_9c1\": {\n              \"status\": \"retrying\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"provider_unavailable\"\n            },\n            \"voluptate_b_\": {\n              \"status\": \"scheduled\",\n              \"timeline\": {\n                \"scheduled_at\": \"<dateTime>\",\n                \"started_at\": \"<dateTime>\",\n                \"ended_at\": \"<dateTime>\"\n              },\n              \"release\": \"<string>\",\n              \"range_start\": \"<dateTime>\",\n              \"range_end\": \"<dateTime>\",\n              \"days_with_data\": 0,\n              \"trace_id\": \"<string>\",\n              \"error_details\": \"transport_failure\"\n            }\n          },\n          \"not_pulled\": [\n            \"cholesterol\",\n            \"fat\"\n          ]\n        }\n      }\n    }\n  ],\n  \"next\": \"<string>\",\n  \"next_cursor\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-79792392-d9dc-4115-b7b5-061a5189e30d"
+                    },
+                    {
+                      "id": "ca28c8d1-e093-49c2-ac86-4e320e3d3cab",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-vital-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/introspect/historical_pull?user_id=<uuid>&provider=fitbit&user_limit=50&cursor=<string>&next_cursor=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "introspect",
+                            "historical_pull"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by user ID.",
+                              "key": "user_id",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "key": "provider",
+                              "value": "fitbit"
+                            },
+                            {
+                              "key": "user_limit",
+                              "value": "50"
+                            },
+                            {
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The cursor for fetching the next page, or `null` to fetch the first page.",
+                              "key": "next_cursor",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:21:01.000Z",
+                      "updatedAt": "2026-06-05T15:21:01.000Z",
+                      "uid": "35240-ca28c8d1-e093-49c2-ac86-4e320e3d3cab"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:21:01.000Z",
+                  "updatedAt": "2026-06-05T15:21:01.000Z",
+                  "uid": "35240-094da192-e5c6-40b9-90e3-a736a686d146"
+                }
+              ],
+              "id": "dd62c76a-3807-4e9e-a2d8-bac0621087dc",
+              "createdAt": "2026-06-05T15:21:01.000Z",
+              "updatedAt": "2026-06-05T15:21:01.000Z",
+              "uid": "35240-dd62c76a-3807-4e9e-a2d8-bac0621087dc"
+            }
+          ],
+          "id": "b18984eb-707c-4588-a95e-3d6d8c58fe9c",
+          "createdAt": "2026-06-05T15:21:01.000Z",
+          "updatedAt": "2026-06-05T15:21:01.000Z",
+          "uid": "35240-b18984eb-707c-4588-a95e-3d6d8c58fe9c"
+        }
+      ],
+      "id": "ad83461d-9326-49bb-b1e1-83c10f8ba278",
+      "createdAt": "2026-06-05T15:21:01.000Z",
+      "updatedAt": "2026-06-05T15:21:01.000Z",
+      "uid": "35240-ad83461d-9326-49bb-b1e1-83c10f8ba278"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.us.junction.com"
+    }
+  ]
+}

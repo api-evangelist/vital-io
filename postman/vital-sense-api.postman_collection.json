@@ -1,0 +1,661 @@
+{
+  "info": {
+    "_postman_id": "69b42c20-f503-4956-abe8-15e29c482800",
+    "name": "Vital Sense API",
+    "description": "Junction Sense \u2014 continuous-query and aggregation API for per-user health data. Run on-demand queries against a user's ingested wearable and lab data, fetch the result-table for a continuous query, and read the task-execution history.\n\nContact Support:\n Name: Junction (Vital) Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:20:57.000Z",
+    "updatedAt": "2026-06-05T15:20:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-69b42c20-f503-4956-abe8-15e29c482800"
+  },
+  "item": [
+    {
+      "name": "aggregate",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "user",
+              "item": [
+                {
+                  "name": "{user_id}",
+                  "item": [
+                    {
+                      "name": "query",
+                      "item": [
+                        {
+                          "name": "Query One",
+                          "id": "3641f70d-0500-4964-98d4-e5b8abb0aa5b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"timeframe\": {\n    \"type\": \"<string>\",\n    \"anchor\": \"<date>\",\n    \"past\": {\n      \"unit\": \"week\",\n      \"value\": 1\n    }\n  },\n  \"queries\": [\n    {\n      \"select\": [\n        {\n          \"arg\": {\n            \"sleep\": \"source_type\"\n          },\n          \"func\": \"sum\"\n        },\n        {\n          \"arg\": {\n            \"sleep\": \"source_app_id\"\n          },\n          \"func\": \"sum\"\n        }\n      ],\n      \"group_by\": [\n        {\n          \"date_trunc\": {\n            \"unit\": \"minute\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"menstrual_cycle\"\n          }\n        },\n        {\n          \"date_trunc\": {\n            \"unit\": \"day\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"timeseries\"\n          }\n        }\n      ],\n      \"where\": \"<string>\"\n    },\n    {\n      \"select\": [\n        {\n          \"arg\": {\n            \"sleep\": \"heart_rate_maximum\"\n          },\n          \"func\": \"sum\"\n        },\n        {\n          \"arg\": {\n            \"sleep\": \"time_zone\"\n          },\n          \"func\": \"stddev\"\n        }\n      ],\n      \"group_by\": [\n        {\n          \"date_trunc\": {\n            \"unit\": \"year\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"body\"\n          }\n        },\n        {\n          \"date_trunc\": {\n            \"unit\": \"minute\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"activity\"\n          }\n        }\n      ],\n      \"where\": \"<string>\"\n    }\n  ],\n  \"config\": {\n    \"provider_priority_overrides\": [\n      \"manual\",\n      \"eight_sleep\"\n    ]\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/query",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "aggregate",
+                                "v1",
+                                "user",
+                                ":user_id",
+                                "query"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1967d2cd-59d2-403d-a1bc-3551f0ff6152",
+                                  "key": "user_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b547861b-7afc-431f-8783-8d44ac08e2d9",
+                              "name": "Successful Response",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"timeframe\": {\n    \"type\": \"<string>\",\n    \"anchor\": \"<date>\",\n    \"past\": {\n      \"unit\": \"week\",\n      \"value\": 1\n    }\n  },\n  \"queries\": [\n    {\n      \"select\": [\n        {\n          \"arg\": {\n            \"sleep\": \"source_type\"\n          },\n          \"func\": \"sum\"\n        },\n        {\n          \"arg\": {\n            \"sleep\": \"source_app_id\"\n          },\n          \"func\": \"sum\"\n        }\n      ],\n      \"group_by\": [\n        {\n          \"date_trunc\": {\n            \"unit\": \"minute\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"menstrual_cycle\"\n          }\n        },\n        {\n          \"date_trunc\": {\n            \"unit\": \"day\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"timeseries\"\n          }\n        }\n      ],\n      \"where\": \"<string>\"\n    },\n    {\n      \"select\": [\n        {\n          \"arg\": {\n            \"sleep\": \"heart_rate_maximum\"\n          },\n          \"func\": \"sum\"\n        },\n        {\n          \"arg\": {\n            \"sleep\": \"time_zone\"\n          },\n          \"func\": \"stddev\"\n        }\n      ],\n      \"group_by\": [\n        {\n          \"date_trunc\": {\n            \"unit\": \"year\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"body\"\n          }\n        },\n        {\n          \"date_trunc\": {\n            \"unit\": \"minute\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"activity\"\n          }\n        }\n      ],\n      \"where\": \"<string>\"\n    }\n  ],\n  \"config\": {\n    \"provider_priority_overrides\": [\n      \"manual\",\n      \"eight_sleep\"\n    ]\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/query",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "aggregate",
+                                    "v1",
+                                    "user",
+                                    ":user_id",
+                                    "query"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"results\": [\n    {\n      \"table\": {}\n    },\n    {\n      \"table\": {}\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:20:57.000Z",
+                              "updatedAt": "2026-06-05T15:20:57.000Z",
+                              "uid": "35240-b547861b-7afc-431f-8783-8d44ac08e2d9"
+                            },
+                            {
+                              "id": "46d93001-3411-4dd3-bdaa-c61c98efc3c6",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "x-vital-api-key",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"timeframe\": {\n    \"type\": \"<string>\",\n    \"anchor\": \"<date>\",\n    \"past\": {\n      \"unit\": \"week\",\n      \"value\": 1\n    }\n  },\n  \"queries\": [\n    {\n      \"select\": [\n        {\n          \"arg\": {\n            \"sleep\": \"source_type\"\n          },\n          \"func\": \"sum\"\n        },\n        {\n          \"arg\": {\n            \"sleep\": \"source_app_id\"\n          },\n          \"func\": \"sum\"\n        }\n      ],\n      \"group_by\": [\n        {\n          \"date_trunc\": {\n            \"unit\": \"minute\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"menstrual_cycle\"\n          }\n        },\n        {\n          \"date_trunc\": {\n            \"unit\": \"day\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"timeseries\"\n          }\n        }\n      ],\n      \"where\": \"<string>\"\n    },\n    {\n      \"select\": [\n        {\n          \"arg\": {\n            \"sleep\": \"heart_rate_maximum\"\n          },\n          \"func\": \"sum\"\n        },\n        {\n          \"arg\": {\n            \"sleep\": \"time_zone\"\n          },\n          \"func\": \"stddev\"\n        }\n      ],\n      \"group_by\": [\n        {\n          \"date_trunc\": {\n            \"unit\": \"year\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"body\"\n          }\n        },\n        {\n          \"date_trunc\": {\n            \"unit\": \"minute\",\n            \"value\": 1\n          },\n          \"arg\": {\n            \"index\": \"activity\"\n          }\n        }\n      ],\n      \"where\": \"<string>\"\n    }\n  ],\n  \"config\": {\n    \"provider_priority_overrides\": [\n      \"manual\",\n      \"eight_sleep\"\n    ]\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/query",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "aggregate",
+                                    "v1",
+                                    "user",
+                                    ":user_id",
+                                    "query"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "user_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:20:57.000Z",
+                              "updatedAt": "2026-06-05T15:20:57.000Z",
+                              "uid": "35240-46d93001-3411-4dd3-bdaa-c61c98efc3c6"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:20:57.000Z",
+                          "updatedAt": "2026-06-05T15:20:57.000Z",
+                          "uid": "35240-3641f70d-0500-4964-98d4-e5b8abb0aa5b"
+                        }
+                      ],
+                      "id": "16008235-5f23-4727-aadd-d0e44182e093",
+                      "createdAt": "2026-06-05T15:20:57.000Z",
+                      "updatedAt": "2026-06-05T15:20:57.000Z",
+                      "uid": "35240-16008235-5f23-4727-aadd-d0e44182e093"
+                    },
+                    {
+                      "name": "continuous_query",
+                      "item": [
+                        {
+                          "name": "{query_id_or_slug}",
+                          "item": [
+                            {
+                              "name": "result_table",
+                              "item": [
+                                {
+                                  "name": "Get Result Table For Query",
+                                  "id": "fa51c6ae-81a7-4965-8bb3-f545857416f2",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/result_table",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "aggregate",
+                                        "v1",
+                                        "user",
+                                        ":user_id",
+                                        "continuous_query",
+                                        ":query_id_or_slug",
+                                        "result_table"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "769d629e-f6db-4584-9eb0-a016afdf4ef1",
+                                          "key": "user_id",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "a1b37da4-1138-4b41-81c0-f538264999ee",
+                                          "key": "query_id_or_slug",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "ab282234-43f7-47e2-9233-00236d0d543a",
+                                      "name": "Successful Response",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-vital-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/result_table",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "aggregate",
+                                            "v1",
+                                            "user",
+                                            ":user_id",
+                                            "continuous_query",
+                                            ":query_id_or_slug",
+                                            "result_table"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "user_id"
+                                            },
+                                            {
+                                              "key": "query_id_or_slug"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"table\": {}\n}",
+                                      "createdAt": "2026-06-05T15:20:57.000Z",
+                                      "updatedAt": "2026-06-05T15:20:57.000Z",
+                                      "uid": "35240-ab282234-43f7-47e2-9233-00236d0d543a"
+                                    },
+                                    {
+                                      "id": "c6978d07-dd71-4398-b62e-758ff02c5c1e",
+                                      "name": "Validation Error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-vital-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/result_table",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "aggregate",
+                                            "v1",
+                                            "user",
+                                            ":user_id",
+                                            "continuous_query",
+                                            ":query_id_or_slug",
+                                            "result_table"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "user_id"
+                                            },
+                                            {
+                                              "key": "query_id_or_slug"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                      "code": 422,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                                      "createdAt": "2026-06-05T15:20:57.000Z",
+                                      "updatedAt": "2026-06-05T15:20:57.000Z",
+                                      "uid": "35240-c6978d07-dd71-4398-b62e-758ff02c5c1e"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:20:57.000Z",
+                                  "updatedAt": "2026-06-05T15:20:57.000Z",
+                                  "uid": "35240-fa51c6ae-81a7-4965-8bb3-f545857416f2"
+                                }
+                              ],
+                              "id": "8ddaeb65-a9c8-4f73-8d11-7c465f445396",
+                              "createdAt": "2026-06-05T15:20:57.000Z",
+                              "updatedAt": "2026-06-05T15:20:57.000Z",
+                              "uid": "35240-8ddaeb65-a9c8-4f73-8d11-7c465f445396"
+                            },
+                            {
+                              "name": "task_history",
+                              "item": [
+                                {
+                                  "name": "Get Task History For Query",
+                                  "id": "d419db1f-8ab5-4347-9c2c-9e7df1400fff",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/task_history?next_cursor=<string>&limit=50",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "aggregate",
+                                        "v1",
+                                        "user",
+                                        ":user_id",
+                                        "continuous_query",
+                                        ":query_id_or_slug",
+                                        "task_history"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "next_cursor",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "key": "limit",
+                                          "value": "50"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "69fb5a5b-69c3-420c-8ba1-41d6b3f9293f",
+                                          "key": "user_id",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "4eca9f01-8cd5-4580-ac1a-48fbe0f07a6e",
+                                          "key": "query_id_or_slug",
+                                          "value": "<uuid>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "8690e7fb-d65c-49d4-a3b0-95982030a6fb",
+                                      "name": "Successful Response",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-vital-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/task_history?next_cursor=<string>&limit=50",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "aggregate",
+                                            "v1",
+                                            "user",
+                                            ":user_id",
+                                            "continuous_query",
+                                            ":query_id_or_slug",
+                                            "task_history"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "next_cursor",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "limit",
+                                              "value": "50"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "user_id"
+                                            },
+                                            {
+                                              "key": "query_id_or_slug"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"data\": [\n    {\n      \"query_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"status\": \"scheduled\",\n      \"scheduled_at\": \"<dateTime>\",\n      \"started_at\": \"<dateTime>\",\n      \"ended_at\": \"<dateTime>\",\n      \"error_details\": \"<string>\"\n    },\n    {\n      \"query_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"status\": \"error\",\n      \"scheduled_at\": \"<dateTime>\",\n      \"started_at\": \"<dateTime>\",\n      \"ended_at\": \"<dateTime>\",\n      \"error_details\": \"<string>\"\n    }\n  ],\n  \"next_cursor\": \"<string>\"\n}",
+                                      "createdAt": "2026-06-05T15:20:57.000Z",
+                                      "updatedAt": "2026-06-05T15:20:57.000Z",
+                                      "uid": "35240-8690e7fb-d65c-49d4-a3b0-95982030a6fb"
+                                    },
+                                    {
+                                      "id": "c4014474-e8a9-4c45-ac08-d533830baec8",
+                                      "name": "Validation Error",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: apikey",
+                                            "key": "x-vital-api-key",
+                                            "value": "<API Key>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/aggregate/v1/user/:user_id/continuous_query/:query_id_or_slug/task_history?next_cursor=<string>&limit=50",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "aggregate",
+                                            "v1",
+                                            "user",
+                                            ":user_id",
+                                            "continuous_query",
+                                            ":query_id_or_slug",
+                                            "task_history"
+                                          ],
+                                          "query": [
+                                            {
+                                              "key": "next_cursor",
+                                              "value": "<string>"
+                                            },
+                                            {
+                                              "key": "limit",
+                                              "value": "50"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "user_id"
+                                            },
+                                            {
+                                              "key": "query_id_or_slug"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                      "code": 422,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"detail\": {\n    \"title\": \"Detail\"\n  }\n}",
+                                      "createdAt": "2026-06-05T15:20:57.000Z",
+                                      "updatedAt": "2026-06-05T15:20:57.000Z",
+                                      "uid": "35240-c4014474-e8a9-4c45-ac08-d533830baec8"
+                                    }
+                                  ],
+                                  "createdAt": "2026-06-05T15:20:57.000Z",
+                                  "updatedAt": "2026-06-05T15:20:57.000Z",
+                                  "uid": "35240-d419db1f-8ab5-4347-9c2c-9e7df1400fff"
+                                }
+                              ],
+                              "id": "63baa3b3-43d2-42e0-b7d2-c3716b741d84",
+                              "createdAt": "2026-06-05T15:20:57.000Z",
+                              "updatedAt": "2026-06-05T15:20:57.000Z",
+                              "uid": "35240-63baa3b3-43d2-42e0-b7d2-c3716b741d84"
+                            }
+                          ],
+                          "id": "ac3b16ed-8f9f-40e0-8e70-9e4b31474362",
+                          "createdAt": "2026-06-05T15:20:57.000Z",
+                          "updatedAt": "2026-06-05T15:20:57.000Z",
+                          "uid": "35240-ac3b16ed-8f9f-40e0-8e70-9e4b31474362"
+                        }
+                      ],
+                      "id": "a0ead576-9b62-48a3-942a-209442e71f87",
+                      "createdAt": "2026-06-05T15:20:57.000Z",
+                      "updatedAt": "2026-06-05T15:20:57.000Z",
+                      "uid": "35240-a0ead576-9b62-48a3-942a-209442e71f87"
+                    }
+                  ],
+                  "id": "72f7056d-4678-4e24-99e5-afe579eae680",
+                  "createdAt": "2026-06-05T15:20:57.000Z",
+                  "updatedAt": "2026-06-05T15:20:57.000Z",
+                  "uid": "35240-72f7056d-4678-4e24-99e5-afe579eae680"
+                }
+              ],
+              "id": "642adae1-dd8f-4927-8cd3-219973774365",
+              "createdAt": "2026-06-05T15:20:57.000Z",
+              "updatedAt": "2026-06-05T15:20:57.000Z",
+              "uid": "35240-642adae1-dd8f-4927-8cd3-219973774365"
+            }
+          ],
+          "id": "cf971203-c53f-4c71-bb16-9ca1eda56e83",
+          "createdAt": "2026-06-05T15:20:57.000Z",
+          "updatedAt": "2026-06-05T15:20:57.000Z",
+          "uid": "35240-cf971203-c53f-4c71-bb16-9ca1eda56e83"
+        }
+      ],
+      "id": "2ccad8c1-60ae-406a-8e1f-f23de72e2c7b",
+      "createdAt": "2026-06-05T15:20:57.000Z",
+      "updatedAt": "2026-06-05T15:20:57.000Z",
+      "uid": "35240-2ccad8c1-60ae-406a-8e1f-f23de72e2c7b"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.us.junction.com"
+    }
+  ]
+}

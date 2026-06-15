@@ -1,0 +1,314 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Link API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "link",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Bulk Ops",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/link/bulk_op",
+            "params": [
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Bulk Ops"
+        },
+        {
+          "info": {
+            "name": "Bulk Import Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/bulk_import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Import Connections"
+        },
+        {
+          "info": {
+            "name": "Bulk Trigger Historical Pull",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/bulk_trigger_historical_pull",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Trigger Historical Pull"
+        },
+        {
+          "info": {
+            "name": "Bulk Export Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/bulk_export",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Export Connections"
+        },
+        {
+          "info": {
+            "name": "Bulk Pause Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/bulk_pause",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Pause Connections"
+        },
+        {
+          "info": {
+            "name": "Generate Vital Link Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Endpoint to generate a user link token, to be used throughout the vital\nlink process. The vital link token is a one time use token, that\nexpires after 10 minutes. If you would like vital-link widget to launch\nwith a specific provider, pass in a provider in the body. If you would\nlike to redirect to a custom url after successful or error connection,\npass in your own custom redirect_url parameter."
+        },
+        {
+          "info": {
+            "name": "Create Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/code/create",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "expires_at",
+                "value": "",
+                "type": "query",
+                "description": "When the link code should expire. Defaults to server time plus 1 hour."
+              }
+            ]
+          },
+          "docs": "Generate a token to invite a user of Vital mobile app to your team"
+        },
+        {
+          "info": {
+            "name": "Generate Oauth Link Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/link/provider/oauth/:oauth_provider",
+            "headers": [
+              {
+                "name": "x-vital-link-token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "oauth_provider",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint generates an OAuth link for oauth provider"
+        },
+        {
+          "info": {
+            "name": "Connect Password Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/provider/password/:provider",
+            "headers": [
+              {
+                "name": "x-vital-link-token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This connects auth providers that are password based."
+        },
+        {
+          "info": {
+            "name": "Complete Password Provider Mfa",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/provider/password/:provider/complete_mfa",
+            "headers": [
+              {
+                "name": "x-vital-link-token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This connects auth providers that are password based."
+        },
+        {
+          "info": {
+            "name": "Connect Email Auth Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/provider/email/:provider",
+            "headers": [
+              {
+                "name": "x-vital-link-token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "provider",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This connects auth providers that are email based."
+        },
+        {
+          "info": {
+            "name": "Get Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/link/providers",
+            "headers": [
+              {
+                "name": "x-vital-link-token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "GET List of all available providers given the generated link token."
+        },
+        {
+          "info": {
+            "name": "Create Demo Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v2/link/connect/demo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "POST Connect the given Vital user to a demo provider."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get List Of Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/providers",
+            "params": [
+              {
+                "name": "source_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Provider list"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

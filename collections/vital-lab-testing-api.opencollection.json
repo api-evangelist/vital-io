@@ -1,0 +1,1535 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Lab Testing API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "lab_tests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Lab Tests For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests",
+            "params": [
+              {
+                "name": "generation_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned."
+              },
+              {
+                "name": "lab_slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the slug of the lab for these lab tests."
+              },
+              {
+                "name": "collection_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the collection method for these lab tests."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the status of these lab tests."
+              },
+              {
+                "name": "marker_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these marker IDs."
+              },
+              {
+                "name": "provider_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these provider IDs."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of the lab test (a case-insensitive substring search)."
+              },
+              {
+                "name": "order_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET all the lab tests the team has access to."
+        },
+        {
+          "info": {
+            "name": "Create Lab Test For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/lab_tests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Lab Test For Team"
+        },
+        {
+          "info": {
+            "name": "Get Lab Test For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_test_id",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              }
+            ]
+          },
+          "docs": "GET all the lab tests the team has access to."
+        },
+        {
+          "info": {
+            "name": "Update Lab Test For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_test_id",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Lab Test For Team"
+        },
+        {
+          "info": {
+            "name": "Get Markers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/markers",
+            "params": [
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "query",
+                "description": "The identifier Vital assigned to a lab partner."
+              },
+              {
+                "name": "lab_slug",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the lab for these markers. If both lab_id and lab_slug are provided, lab_slug will be used."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name or test code of an individual biomarker or a panel."
+              },
+              {
+                "name": "a_la_carte_enabled",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List active and orderable markers for a given Lab. Note that reflex markers are not included."
+        },
+        {
+          "info": {
+            "name": "Get Markers For Order Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/lab_tests/list_order_set_markers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Markers For Order Set"
+        },
+        {
+          "info": {
+            "name": "Get Markers For Test",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_test_id/markers",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all markers for a given Lab Test, as well as any associated reflex markers."
+        },
+        {
+          "info": {
+            "name": "Get Markers By Provider Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_id/markers/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              }
+            ]
+          },
+          "docs": "GET a specific marker for the given lab and provider_id"
+        },
+        {
+          "info": {
+            "name": "Get Labs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/labs"
+          },
+          "docs": "GET all the labs."
+        },
+        {
+          "info": {
+            "name": "Get Paginated Lab Tests For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_test",
+            "params": [
+              {
+                "name": "lab_test_limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "generation_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned."
+              },
+              {
+                "name": "lab_slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the slug of the lab for these lab tests."
+              },
+              {
+                "name": "collection_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the collection method for these lab tests."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the status of these lab tests."
+              },
+              {
+                "name": "marker_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these marker IDs."
+              },
+              {
+                "name": "provider_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these provider IDs."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of the lab test (a case-insensitive substring search)."
+              },
+              {
+                "name": "order_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET lab tests the team has access to as a paginated list."
+        },
+        {
+          "info": {
+            "name": "Get Lab Test Collection Instructions Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_test/:lab_test_id/collection_instruction_pdf",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Lab Test Collection Instructions Url"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "compendium",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Compendium",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/compendium/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Compendium"
+        },
+        {
+          "info": {
+            "name": "Convert Compendium",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/compendium/convert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert Compendium"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "lab_account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Team Lab Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_test/lab_account",
+            "params": [
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Team Lab Accounts"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "order_transaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Order Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order_transaction/:transaction_id",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Order Transaction"
+        },
+        {
+          "info": {
+            "name": "Get Order Transaction Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order_transaction/:transaction_id/result",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Order Transaction Result"
+        },
+        {
+          "info": {
+            "name": "Get Order Transaction Result Pdf",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order_transaction/:transaction_id/result/pdf",
+            "params": [
+              {
+                "name": "transaction_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Order Transaction Result Pdf"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/orders",
+            "params": [
+              {
+                "name": "search_input",
+                "value": "",
+                "type": "query",
+                "description": "Search by order id, user id, patient name, shipping dob, or shipping recipient name."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              },
+              {
+                "name": "updated_start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "updated_end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by low level status."
+              },
+              {
+                "name": "order_key",
+                "value": "",
+                "type": "query",
+                "description": "Order key to sort by."
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query",
+                "description": "Order direction to sort by."
+              },
+              {
+                "name": "order_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by method used to perform the lab test."
+              },
+              {
+                "name": "is_critical",
+                "value": "",
+                "type": "query",
+                "description": "Filter by critical order status."
+              },
+              {
+                "name": "interpretation",
+                "value": "",
+                "type": "query",
+                "description": "Filter by result interpretation of the lab test."
+              },
+              {
+                "name": "order_activation_types",
+                "value": "",
+                "type": "query",
+                "description": "Filter by activation type."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID."
+              },
+              {
+                "name": "patient_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient name."
+              },
+              {
+                "name": "shipping_recipient_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by shipping recipient name."
+              },
+              {
+                "name": "order_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order ids."
+              },
+              {
+                "name": "order_transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order transaction ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET many orders with filters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register Testkit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/testkit/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register Testkit"
+        },
+        {
+          "info": {
+            "name": "Create Testkit Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/testkit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an order for an unregistered testkit"
+        },
+        {
+          "info": {
+            "name": "Get Order Appointment Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/phlebotomy/appointment/availability",
+            "params": [
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for appointment availability"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Return the available time slots to book an appointment with a phlebotomist\nfor the given address and order."
+        },
+        {
+          "info": {
+            "name": "Book Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/:order_id/phlebotomy/appointment/book",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Book an at-home phlebotomy appointment."
+        },
+        {
+          "info": {
+            "name": "Request Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/:order_id/phlebotomy/appointment/request",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request an at-home phlebotomy appointment."
+        },
+        {
+          "info": {
+            "name": "Reschedule Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/order/:order_id/phlebotomy/appointment/reschedule",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reschedule a previously booked at-home phlebotomy appointment."
+        },
+        {
+          "info": {
+            "name": "Cancel Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/order/:order_id/phlebotomy/appointment/cancel",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a previously booked at-home phlebotomy appointment."
+        },
+        {
+          "info": {
+            "name": "Get Phlebotomy Appointment Cancellation Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/phlebotomy/appointment/cancellation-reasons"
+          },
+          "docs": "Get the list of reasons for cancelling an at-home phlebotomy appointment."
+        },
+        {
+          "info": {
+            "name": "Get Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/phlebotomy/appointment",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "Get the appointment associated with an order."
+        },
+        {
+          "info": {
+            "name": "Get Area Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/area/info",
+            "params": [
+              {
+                "name": "zip_code",
+                "value": "",
+                "type": "query",
+                "description": "Zip code of the area to check"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius in which to search in miles"
+              },
+              {
+                "name": "lab",
+                "value": "",
+                "type": "query",
+                "description": "Lab to check for PSCs"
+              },
+              {
+                "name": "labs",
+                "value": "",
+                "type": "query",
+                "description": "List of labs to check for PSCs"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "Lab Account ID to use for availability checks"
+              }
+            ]
+          },
+          "docs": "GET information about an area with respect to lab-testing.\n\nInformation returned:\n* Whether a given zip code is served by our Phlebotomy network.\n* List of Lab locations in the area."
+        },
+        {
+          "info": {
+            "name": "Get Psc Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/psc/info",
+            "params": [
+              {
+                "name": "zip_code",
+                "value": "",
+                "type": "query",
+                "description": "Zip code of the area to check"
+              },
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "query",
+                "description": "Lab ID to check for PSCs"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius in which to search in miles. Note that we limit to 30 PSCs."
+              },
+              {
+                "name": "capabilities",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only locations with certain capabilities"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "Lab Account ID to use for availability checks"
+              }
+            ]
+          },
+          "docs": "Get Psc Info"
+        },
+        {
+          "info": {
+            "name": "Get Order Psc Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/psc/info",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius in which to search in miles"
+              },
+              {
+                "name": "capabilities",
+                "value": "",
+                "type": "query",
+                "description": "Filter for only locations with certain capabilities"
+              }
+            ]
+          },
+          "docs": "Get Order Psc Info"
+        },
+        {
+          "info": {
+            "name": "Get Lab Test Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/result/pdf",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This endpoint returns the lab results for the order."
+        },
+        {
+          "info": {
+            "name": "Get Lab Test Result Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/result/metadata",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Return metadata related to order results, such as lab metadata,\nprovider and sample dates."
+        },
+        {
+          "info": {
+            "name": "Get Lab Test Result Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/result",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Return both metadata and raw json test data"
+        },
+        {
+          "info": {
+            "name": "Get Order Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/labels/pdf",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "number_of_labels",
+                "value": "",
+                "type": "query",
+                "description": "Number of labels to generate"
+              },
+              {
+                "name": "collection_date",
+                "value": "",
+                "type": "query",
+                "description": "Collection date"
+              }
+            ]
+          },
+          "docs": "This endpoint returns the printed labels for the order."
+        },
+        {
+          "info": {
+            "name": "Get Psc Appointment Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/psc/appointment/availability",
+            "params": [
+              {
+                "name": "lab",
+                "value": "",
+                "type": "query",
+                "description": "Lab to check for availability"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for appointment availability"
+              },
+              {
+                "name": "site_codes",
+                "value": "",
+                "type": "query",
+                "description": "List of site codes to fetch availability for"
+              },
+              {
+                "name": "zip_code",
+                "value": "",
+                "type": "query",
+                "description": "Zip code of the area to check"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius in which to search in miles"
+              },
+              {
+                "name": "allow_stale",
+                "value": "",
+                "type": "query",
+                "description": "If true, allows cached availability data to be returned."
+              }
+            ]
+          },
+          "docs": "Get Psc Appointment Availability"
+        },
+        {
+          "info": {
+            "name": "Book Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/:order_id/psc/appointment/book",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": ""
+              },
+              {
+                "name": "x-idempotency-error",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Book Phlebotomy Appointment"
+        },
+        {
+          "info": {
+            "name": "Reschedule Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/order/:order_id/psc/appointment/reschedule",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reschedule Phlebotomy Appointment"
+        },
+        {
+          "info": {
+            "name": "Cancel Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/order/:order_id/psc/appointment/cancel",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel Phlebotomy Appointment"
+        },
+        {
+          "info": {
+            "name": "Get Phlebotomy Appointment Cancellation Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/psc/appointment/cancellation-reasons"
+          },
+          "docs": "Get Phlebotomy Appointment Cancellation Reasons"
+        },
+        {
+          "info": {
+            "name": "Get Phlebotomy Appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/psc/appointment",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "Get the appointment associated with an order."
+        },
+        {
+          "info": {
+            "name": "Resend Order Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/resend_events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replay a webhook for a given set of orders"
+        },
+        {
+          "info": {
+            "name": "Get Order Collection Instructions Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/collection_instruction_pdf",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "GET collection instructions for an order"
+        },
+        {
+          "info": {
+            "name": "Get Order Requisition Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/requisition/pdf",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "GET requisition pdf for an order"
+        },
+        {
+          "info": {
+            "name": "Get Order Abn",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id/abn_pdf",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "GET ABN pdf for an order"
+        },
+        {
+          "info": {
+            "name": "Get Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/order/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "GET individual order by ID."
+        },
+        {
+          "info": {
+            "name": "Update Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/order/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a modifiable order's scheduled activation date.\n\nThe order must be in `ordered` or `awaiting_registration` status. Setting\n`activate_by` to a future date reschedules dispatch; setting it to `null`\nclears the schedule and enqueues immediate dispatch for `ordered` orders.\n\nReturns 400 when:\n- the order is not in a modifiable status,\n- the order was created for immediate processing (cannot be scheduled\n  after the fact),\n- `activate_by` is in the past."
+        },
+        {
+          "info": {
+            "name": "Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order",
+            "headers": [
+              {
+                "name": "X-Idempotency-Key",
+                "value": ""
+              },
+              {
+                "name": "X-Idempotency-Error",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Order"
+        },
+        {
+          "info": {
+            "name": "Import Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import Order"
+        },
+        {
+          "info": {
+            "name": "Cancel Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/:order_id/cancel",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "POST cancel order"
+        },
+        {
+          "info": {
+            "name": "Order Process Simulate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/order/:order_id/test",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "final_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "delay",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get available test kits."
+        },
+        {
+          "info": {
+            "name": "Update On Site Collection Order Draw Completed",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/order/:order_id/draw_completed",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Your Order ID."
+              }
+            ]
+          },
+          "docs": "PATCH update on site collection order when draw is completed"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "insurance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Insurance Payor Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/insurance/search/payor",
+            "params": [
+              {
+                "name": "insurance_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider_payor_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Insurance Payor Information"
+        },
+        {
+          "info": {
+            "name": "Post Insurance Payor Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/insurance/search/payor",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post Insurance Payor Information"
+        },
+        {
+          "info": {
+            "name": "Search Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/insurance/search/diagnosis",
+            "params": [
+              {
+                "name": "diagnosis_query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Diagnosis"
+        },
+        {
+          "info": {
+            "name": "Validate Icd Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/insurance/validate_icd_codes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate Icd Codes"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "payor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Payor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/payor",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Payor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
