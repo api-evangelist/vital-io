@@ -59,7 +59,7 @@ apis:
       - url: json-schema/vital-user-schema.json
         type: JSONSchema
       - url: examples/vital-create-user-example.json
-        type: Example
+        type: Examples
     description: >-
       Create, list, get, update, and delete end users on the Junction (Vital) platform. Each user represents a person
       whose wearable, device, and lab data is ingested under your team. Manage user demographics, user insurance
@@ -83,7 +83,7 @@ apis:
       - url: json-schema/vital-provider-schema.json
         type: JSONSchema
       - url: examples/vital-link-token-example.json
-        type: Example
+        type: Examples
     description: >-
       Connect end users to their wearable and health-data providers. Generate Link tokens that drive the Vital Link
       Widget, complete OAuth / email / password / demo provider flows, deregister a connection, complete MFA for
@@ -120,9 +120,9 @@ apis:
       - url: json-schema/vital-heart-rate-timeseries-schema.json
         type: JSONSchema
       - url: examples/vital-sleep-summary-example.json
-        type: Example
+        type: Examples
       - url: examples/vital-heart-rate-timeseries-example.json
-        type: Example
+        type: Examples
     description: >-
       Read normalized wearable-device data across 300+ supported devices. Daily summary endpoints cover sleep, sleep
       cycles, activity, body composition, workouts, menstrual cycle, ECG, meals, and the user profile. Per-sample
@@ -155,9 +155,9 @@ apis:
       - url: json-schema/vital-lab-result-schema.json
         type: JSONSchema
       - url: examples/vital-create-order-example.json
-        type: Example
+        type: Examples
       - url: examples/vital-lab-result-example.json
-        type: Example
+        type: Examples
     description: >-
       Order, fulfill, and retrieve lab tests across a nationwide US lab network spanning all 50 states including NY, NJ,
       and RI. Covers at-home testkits, at-home phlebotomy, walk-in / Patient Service Center collection, and on-site
@@ -246,39 +246,36 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/vital/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/vital-io-at-home-phlebotomy-booking-workflow.yml
-        name: Vital Schedule an At-Home Phlebotomy Draw
-        summary: Confirm phlebotomy coverage for an address, place an at-home order, find a slot, and book it.
-      - url: arazzo/vital-io-await-order-results-workflow.yml
-        name: Vital Await Lab Order Completion and Retrieve Results
-        summary: Poll an existing order until it completes, then pull its result metadata and raw results.
-      - url: arazzo/vital-io-browse-lab-tests-markers-workflow.yml
-        name: Vital Browse Lab Tests and Inspect Markers
-        summary: List your team's lab tests, fetch one in detail, and enumerate its biomarkers.
-      - url: arazzo/vital-io-cancel-order-notify-portal-workflow.yml
-        name: Vital Cancel a Lab Order and Send the User a Portal Link
-        summary: Cancel an order, confirm the cancellation, then mint a communications portal URL deeplinked to it.
-      - url: arazzo/vital-io-create-order-poll-status-workflow.yml
-        name: Vital Create a Lab Order and Poll Until Resolved
-        summary: Place an order set lab order for a user and poll its lifecycle status until it completes, cancels, or fails.
-      - url: arazzo/vital-io-demo-connection-verify-sources-workflow.yml
-        name: Vital Connect a Demo Provider and Verify Connected Sources
-        summary: Create a user, attach a demo provider, then confirm the connection landed on the user record.
-      - url: arazzo/vital-io-mobile-signin-token-handoff-workflow.yml
-        name: Vital Provision a User and Hand Off a Mobile Sign-In Token
-        summary: Create a Vital user, mint a mobile sign-in token, and read back the user's connected providers.
-      - url: arazzo/vital-io-onboard-user-connect-wearable-workflow.yml
-        name: Vital Onboard a User and Connect a Wearable
-        summary: Create a Vital user, mint a Link token, and surface the available providers to connect.
-      - url: arazzo/vital-io-testkit-order-register-workflow.yml
-        name: Vital Create and Register a Lab Testkit Order
-        summary: Create an unregistered testkit order, register it against a sample, then read the order back.
-      - url: arazzo/vital-io-user-device-inventory-workflow.yml
-        name: Vital Inventory a User's Connected Devices
-        summary: Resolve a user by client_user_id, list their devices, and fetch the first device in detail.
+  - type: Arazzo
+    url: arazzo/vital-io-at-home-phlebotomy-booking-workflow.yml
+    name: Vital Schedule an At-Home Phlebotomy Draw
+  - type: Arazzo
+    url: arazzo/vital-io-await-order-results-workflow.yml
+    name: Vital Await Lab Order Completion and Retrieve Results
+  - type: Arazzo
+    url: arazzo/vital-io-browse-lab-tests-markers-workflow.yml
+    name: Vital Browse Lab Tests and Inspect Markers
+  - type: Arazzo
+    url: arazzo/vital-io-cancel-order-notify-portal-workflow.yml
+    name: Vital Cancel a Lab Order and Send the User a Portal Link
+  - type: Arazzo
+    url: arazzo/vital-io-create-order-poll-status-workflow.yml
+    name: Vital Create a Lab Order and Poll Until Resolved
+  - type: Arazzo
+    url: arazzo/vital-io-demo-connection-verify-sources-workflow.yml
+    name: Vital Connect a Demo Provider and Verify Connected Sources
+  - type: Arazzo
+    url: arazzo/vital-io-mobile-signin-token-handoff-workflow.yml
+    name: Vital Provision a User and Hand Off a Mobile Sign-In Token
+  - type: Arazzo
+    url: arazzo/vital-io-onboard-user-connect-wearable-workflow.yml
+    name: Vital Onboard a User and Connect a Wearable
+  - type: Arazzo
+    url: arazzo/vital-io-testkit-order-register-workflow.yml
+    name: Vital Create and Register a Lab Testkit Order
+  - type: Arazzo
+    url: arazzo/vital-io-user-device-inventory-workflow.yml
+    name: Vital Inventory a User's Connected Devices
   - url: https://www.junction.com
     name: Vital / Junction
     type: Portal
@@ -290,7 +287,7 @@ common:
     type: APIReference
   - url: https://docs.junction.com/home/quickstart
     name: Junction Quickstart
-    type: Quickstart
+    type: GettingStarted
   - url: https://docs.junction.com/home/welcome
     name: Junction Welcome / Overview
     type: GettingStarted
@@ -299,10 +296,10 @@ common:
     type: Console
   - url: https://app.junction.com/signup
     name: Junction Sign Up
-    type: SignUp
+    type: Signup
   - url: https://app.junction.com/login
     name: Junction Sign In
-    type: SignIn
+    type: Login
   - url: https://www.tryvital.com/pricing
     name: Junction Pricing
     type: Pricing
@@ -353,46 +350,46 @@ common:
     type: OpenAPI
   - url: https://www.npmjs.com/package/@tryvital/vital-node
     name: '@tryvital/vital-node (Node / TypeScript SDK)'
-    type: SDK
+    type: SDKs
   - url: https://www.npmjs.com/package/@tryvital/vital-link
     name: '@tryvital/vital-link (Link Widget JS)'
-    type: SDK
+    type: SDKs
   - url: https://www.npmjs.com/package/@tryvital/vital-core-react-native
     name: '@tryvital/vital-core-react-native'
-    type: SDK
+    type: SDKs
   - url: https://www.npmjs.com/package/@tryvital/vital-devices-react-native
     name: '@tryvital/vital-devices-react-native'
-    type: SDK
+    type: SDKs
   - url: https://www.npmjs.com/package/@tryvital/vital-health-react-native
     name: '@tryvital/vital-health-react-native'
-    type: SDK
+    type: SDKs
   - url: https://pypi.org/project/vital/
     name: vital (Python SDK on PyPI)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-python
     name: vital-python (Python SDK source)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-node
     name: vital-node (Node SDK source)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-go
     name: vital-go (Go SDK)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-java
     name: vital-java (Java SDK)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-ios
     name: vital-ios (iOS Swift SDK)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-android
     name: vital-android (Android Kotlin SDK)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-flutter
     name: vital-flutter (Flutter SDK)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-react-native
     name: vital-react-native (legacy)
-    type: SDK
+    type: SDKs
   - url: https://github.com/tryVital/vital-connect-rn
     name: vital-connect-rn (React Native Connect app)
     type: SampleApp
@@ -404,7 +401,7 @@ common:
     type: Vocabulary
   - url: json-ld/vital-io-context.jsonld
     name: Vital JSON-LD Context
-    type: JSON-LD
+    type: JSONLD
   - url: plans/vital-io-plans-pricing.yml
     name: Vital Plans and Pricing (API Commons)
     type: Plans
