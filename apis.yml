@@ -244,6 +244,10 @@ apis:
       rotate secret, update headers, patch, delete), scope requirements, physician assignments, and lab-account team
       assignments.
 common:
+  - type: DomainSecurity
+    url: security/vital-io-domain-security.yml
+  - type: Authentication
+    url: authentication/vital-io-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/vital/overview
   - type: Arazzo

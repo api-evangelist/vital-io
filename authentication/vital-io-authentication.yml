@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vital-lab-report-parser-api-openapi.yml, openapi/vital-lab-testing-api-openapi.yml,
+  openapi/vital-link-api-openapi.yml, openapi/vital-openapi-original.json, openapi/vital-openapi-original.yml,
+  openapi/vital-sense-api-openapi.yml, openapi/vital-team-api-openapi.yml, openapi/vital-users-api-openapi.yml,
+  openapi/vital-wearables-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-vital-api-key
+  description: Vital Team API Key
+  sources:
+  - openapi/vital-lab-report-parser-api-openapi.yml
+  - openapi/vital-lab-testing-api-openapi.yml
+  - openapi/vital-link-api-openapi.yml
+  - openapi/vital-openapi-original.json
+  - openapi/vital-openapi-original.yml
+  - openapi/vital-sense-api-openapi.yml
+  - openapi/vital-team-api-openapi.yml
+  - openapi/vital-users-api-openapi.yml
+  - openapi/vital-wearables-api-openapi.yml
