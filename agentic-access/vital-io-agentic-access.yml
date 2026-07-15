@@ -1,0 +1,6926 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/vital-lab-report-parser-api-openapi.yml, openapi/vital-lab-testing-api-openapi.yml,
+  openapi/vital-link-api-openapi.yml, openapi/vital-openapi-original.json, openapi/vital-openapi-original.yml,
+  openapi/vital-sense-api-openapi.yml, openapi/vital-team-api-openapi.yml, openapi/vital-users-api-openapi.yml,
+  openapi/vital-wearables-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 591
+  by_action_class:
+    acting: 147
+    connected: 444
+  by_consequence:
+    write: 90
+    read: 444
+    physical: 57
+  human_in_the_loop_required: 0
+operations:
+- path: /lab_report/v1/parser/job
+  method: post
+  operationId: CreateLabReportParserJob
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lab_report/v1/parser/job/{job_id}
+  method: get
+  operationId: get_lab_report_parser_job_lab_report_v1_parser_job__job_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests
+  method: get
+  operationId: get_lab_tests_for_team_v3_lab_tests_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests
+  method: post
+  operationId: create_lab_test_for_team_v3_lab_tests_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}
+  method: patch
+  operationId: update_lab_test_for_team_v3_lab_tests__lab_test_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}
+  method: get
+  operationId: get_lab_test_for_team_v3_lab_tests__lab_test_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/markers
+  method: get
+  operationId: get_markers_v3_lab_tests_markers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/list_order_set_markers
+  method: post
+  operationId: get_markers_for_order_set_v3_lab_tests_list_order_set_markers_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}/markers
+  method: get
+  operationId: get_markers_for_test_v3_lab_tests__lab_test_id__markers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/{lab_id}/markers/{provider_id}
+  method: get
+  operationId: get_markers_by_provider_id_v3_lab_tests__lab_id__markers__provider_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/labs
+  method: get
+  operationId: get_labs_v3_lab_tests_labs_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/compendium/search
+  method: post
+  operationId: search_compendium_v3_compendium_search_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/compendium/convert
+  method: post
+  operationId: convert_compendium_v3_compendium_convert_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_test/lab_account
+  method: get
+  operationId: get_team_lab_accounts_v3_lab_test_lab_account_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_test
+  method: get
+  operationId: get_paginated_lab_tests_for_team_v3_lab_test_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_test/{lab_test_id}/collection_instruction_pdf
+  method: get
+  operationId: get_lab_test_collection_instructions_url_v3_lab_test__lab_test_id__collection_instruction_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}
+  method: get
+  operationId: get_order_transaction_v3_order_transaction__transaction_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}/result
+  method: get
+  operationId: get_order_transaction_result_v3_order_transaction__transaction_id__result_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}/result/pdf
+  method: get
+  operationId: get_order_transaction_result_pdf_v3_order_transaction__transaction_id__result_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/orders
+  method: get
+  operationId: get_orders_v3_orders_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/testkit/register
+  method: post
+  operationId: register_testkit_v3_order_testkit_register_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/testkit
+  method: post
+  operationId: create_testkit_order_v3_order_testkit_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/phlebotomy/appointment/availability
+  method: post
+  operationId: get_order_appointment_availability_v3_order_phlebotomy_appointment_availability_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/book
+  method: post
+  operationId: book_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_book_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/request
+  method: post
+  operationId: request_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_request_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/reschedule
+  method: patch
+  operationId: reschedule_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_reschedule_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/cancel
+  method: patch
+  operationId: cancel_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_cancel_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/phlebotomy/appointment/cancellation-reasons
+  method: get
+  operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_phlebotomy_appointment_cancellation_reasons_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/phlebotomy/appointment
+  method: get
+  operationId: get_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/area/info
+  method: get
+  operationId: get_area_info_v3_order_area_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/psc/info
+  method: get
+  operationId: get_psc_info_v3_order_psc_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/psc/info
+  method: get
+  operationId: get_order_psc_info_v3_order__order_id__psc_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result/pdf
+  method: get
+  operationId: get_lab_test_result_v3_order__order_id__result_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result/metadata
+  method: get
+  operationId: get_lab_test_result_metadata_v3_order__order_id__result_metadata_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result
+  method: get
+  operationId: get_lab_test_result_raw_v3_order__order_id__result_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/labels/pdf
+  method: get
+  operationId: get_order_labels_v3_order__order_id__labels_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/psc/appointment/availability
+  method: post
+  operationId: get_psc_appointment_availability_v3_order_psc_appointment_availability_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/book
+  method: post
+  operationId: book_phlebotomy_appointment_v3_order__order_id__psc_appointment_book_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/reschedule
+  method: patch
+  operationId: reschedule_phlebotomy_appointment_v3_order__order_id__psc_appointment_reschedule_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/cancel
+  method: patch
+  operationId: cancel_phlebotomy_appointment_v3_order__order_id__psc_appointment_cancel_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/psc/appointment/cancellation-reasons
+  method: get
+  operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_psc_appointment_cancellation_reasons_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/psc/appointment
+  method: get
+  operationId: get_phlebotomy_appointment_v3_order__order_id__psc_appointment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/resend_events
+  method: post
+  operationId: resend_order_webhook_v3_order_resend_events_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/collection_instruction_pdf
+  method: get
+  operationId: get_order_collection_instructions_url_v3_order__order_id__collection_instruction_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/requisition/pdf
+  method: get
+  operationId: get_order_requisition_url_v3_order__order_id__requisition_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/abn_pdf
+  method: get
+  operationId: get_order_abn_v3_order__order_id__abn_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}
+  method: get
+  operationId: get_order_v3_order__order_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}
+  method: patch
+  operationId: update_order_v3_order__order_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order
+  method: post
+  operationId: create_order_v3_order_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/import
+  method: post
+  operationId: import_order_v3_order_import_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/cancel
+  method: post
+  operationId: cancel_order_v3_order__order_id__cancel_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/test
+  method: post
+  operationId: order_process_simulate_v3_order__order_id__test_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/draw_completed
+  method: patch
+  operationId: update_on_site_collection_order_draw_completed_v3_order__order_id__draw_completed_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/insurance/search/payor
+  method: post
+  operationId: post_insurance_payor_information_v3_insurance_search_payor_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/insurance/search/payor
+  method: get
+  operationId: search_insurance_payor_information_v3_insurance_search_payor_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/insurance/search/diagnosis
+  method: get
+  operationId: search_diagnosis_v3_insurance_search_diagnosis_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/insurance/validate_icd_codes
+  method: post
+  operationId: validate_icd_codes_v3_insurance_validate_icd_codes_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/payor
+  method: post
+  operationId: create_payor_v3_payor_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_op
+  method: get
+  operationId: list_bulk_ops_v2_link_bulk_op_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/bulk_import
+  method: post
+  operationId: bulk_import_connections_v2_link_bulk_import_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_trigger_historical_pull
+  method: post
+  operationId: bulk_trigger_historical_pull_v2_link_bulk_trigger_historical_pull_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_export
+  method: post
+  operationId: bulk_export_connections_v2_link_bulk_export_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_pause
+  method: post
+  operationId: bulk_pause_connections_v2_link_bulk_pause_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/token
+  method: post
+  operationId: generate_vital_link_token_v2_link_token_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/code/create
+  method: post
+  operationId: create_token_v2_link_code_create_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/oauth/{oauth_provider}
+  method: get
+  operationId: generate_oauth_link
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/provider/password/{provider}
+  method: post
+  operationId: connect_password_provider_v2_link_provider_password__provider__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/password/{provider}/complete_mfa
+  method: post
+  operationId: complete_password_provider_mfa_v2_link_provider_password__provider__complete_mfa_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/email/{provider}
+  method: post
+  operationId: connect_email_auth_provider_v2_link_provider_email__provider__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/providers
+  method: get
+  operationId: get_providers_v2_link_providers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/connect/demo
+  method: post
+  operationId: create_demo_connection_v2_link_connect_demo_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/providers
+  method: get
+  operationId: get_list_of_providers_v2_providers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/bulk_op
+  method: get
+  operationId: list_bulk_ops_v2_link_bulk_op_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/bulk_import
+  method: post
+  operationId: bulk_import_connections_v2_link_bulk_import_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_trigger_historical_pull
+  method: post
+  operationId: bulk_trigger_historical_pull_v2_link_bulk_trigger_historical_pull_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_export
+  method: post
+  operationId: bulk_export_connections_v2_link_bulk_export_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_pause
+  method: post
+  operationId: bulk_pause_connections_v2_link_bulk_pause_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/token
+  method: post
+  operationId: generate_vital_link_token_v2_link_token_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/code/create
+  method: post
+  operationId: create_token_v2_link_code_create_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/oauth/{oauth_provider}
+  method: get
+  operationId: generate_oauth_link
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/provider/password/{provider}
+  method: post
+  operationId: connect_password_provider_v2_link_provider_password__provider__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/password/{provider}/complete_mfa
+  method: post
+  operationId: complete_password_provider_mfa_v2_link_provider_password__provider__complete_mfa_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/email/{provider}
+  method: post
+  operationId: connect_email_auth_provider_v2_link_provider_email__provider__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/providers
+  method: get
+  operationId: get_providers_v2_link_providers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/connect/demo
+  method: post
+  operationId: create_demo_connection_v2_link_connect_demo_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/summary/electrocardiogram/{user_id}
+  method: get
+  operationId: get_user_electrocardiogram_v2_summary_electrocardiogram__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep_cycle/{user_id}
+  method: get
+  operationId: get_user_sleep_cycle_v2_summary_sleep_cycle__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/profile/{user_id}
+  method: get
+  operationId: get_user_profile_v2_summary_profile__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/profile/{user_id}/raw
+  method: get
+  operationId: get_user_profile_raw_v2_summary_profile__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/devices/{user_id}/raw
+  method: get
+  operationId: get_user_devices_raw_v2_summary_devices__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/activity/{user_id}
+  method: get
+  operationId: get_user_activity_v2_summary_activity__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/activity/{user_id}/raw
+  method: get
+  operationId: get_user_activity_raw_v2_summary_activity__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/workouts/{user_id}
+  method: get
+  operationId: get_user_workouts_v2_summary_workouts__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/workouts/{user_id}/raw
+  method: get
+  operationId: get_user_workouts_raw_v2_summary_workouts__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep/{user_id}
+  method: get
+  operationId: get_user_sleep_v2_summary_sleep__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep/{user_id}/raw
+  method: get
+  operationId: get_user_sleep_raw_v2_summary_sleep__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/body/{user_id}
+  method: get
+  operationId: get_user_body_v2_summary_body__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/body/{user_id}/raw
+  method: get
+  operationId: get_user_body_raw_v2_summary_body__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/meal/{user_id}
+  method: get
+  operationId: get_meals_v2_summary_meal__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/menstrual_cycle/{user_id}
+  method: get
+  operationId: get_user_menstrual_cycles_v2_summary_menstrual_cycle__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/sleep/{sleep_id}/stream
+  method: get
+  operationId: get_user_sleep_stream_v2_timeseries_sleep__sleep_id__stream_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/workouts/{workout_id}/stream
+  method: get
+  operationId: get_user_workouts_v2_timeseries_workouts__workout_id__stream_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_swimming_stroke/grouped
+  method: get
+  operationId: get_workout_swimming_stroke_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_distance/grouped
+  method: get
+  operationId: get_workout_distance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heart_rate_recovery_one_minute/grouped
+  method: get
+  operationId: get_heart_rate_recovery_one_minute_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/waist_circumference/grouped
+  method: get
+  operationId: get_waist_circumference_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/lean_body_mass/grouped
+  method: get
+  operationId: get_lean_body_mass_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_mass_index/grouped
+  method: get
+  operationId: get_body_mass_index_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/basal_body_temperature/grouped
+  method: get
+  operationId: get_basal_body_temperature_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/handwashing/grouped
+  method: get
+  operationId: get_handwashing_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/daylight_exposure/grouped
+  method: get
+  operationId: get_daylight_exposure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/uv_exposure/grouped
+  method: get
+  operationId: get_uv_exposure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/fall/grouped
+  method: get
+  operationId: get_fall_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/inhaler_usage/grouped
+  method: get
+  operationId: get_inhaler_usage_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/peak_expiratory_flow_rate/grouped
+  method: get
+  operationId: get_peak_expiratory_flow_rate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/forced_vital_capacity/grouped
+  method: get
+  operationId: get_forced_vital_capacity_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/forced_expiratory_volume_1/grouped
+  method: get
+  operationId: get_forced_expiratory_volume_1_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/wheelchair_push/grouped
+  method: get
+  operationId: get_wheelchair_push_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/sleep_breathing_disturbance/grouped
+  method: get
+  operationId: get_sleep_breathing_disturbance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/sleep_apnea_alert/grouped
+  method: get
+  operationId: get_sleep_apnea_alert_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stand_duration/grouped
+  method: get
+  operationId: get_stand_duration_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stand_hour/grouped
+  method: get
+  operationId: get_stand_hour_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heart_rate_alert/grouped
+  method: get
+  operationId: get_heart_rate_alert_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/afib_burden/grouped
+  method: get
+  operationId: get_afib_burden_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_duration/grouped
+  method: get
+  operationId: get_workout_duration_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/vo2_max/grouped
+  method: get
+  operationId: get_vo2_max_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stress_level/grouped
+  method: get
+  operationId: get_stress_level_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/mindfulness_minutes/grouped
+  method: get
+  operationId: get_mindfulness_minutes_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/caffeine/grouped
+  method: get
+  operationId: get_caffeine_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/water/grouped
+  method: get
+  operationId: get_water_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/steps/grouped
+  method: get
+  operationId: get_steps_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/floors_climbed/grouped
+  method: get
+  operationId: get_floors_climbed_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/distance/grouped
+  method: get
+  operationId: get_distance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_basal/grouped
+  method: get
+  operationId: get_calories_basal_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_active/grouped
+  method: get
+  operationId: get_calories_active_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/respiratory_rate/grouped
+  method: get
+  operationId: get_respiratory_rate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/note/grouped
+  method: get
+  operationId: get_note_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/insulin_injection/grouped
+  method: get
+  operationId: get_insulin_injection_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/ige/grouped
+  method: get
+  operationId: get_ige_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/igg/grouped
+  method: get
+  operationId: get_igg_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hypnogram/grouped
+  method: get
+  operationId: get_hypnogram_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hrv/grouped
+  method: get
+  operationId: get_hrv_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heartrate/grouped
+  method: get
+  operationId: get_heartrate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/glucose/grouped
+  method: get
+  operationId: get_glucose_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/grouped
+  method: get
+  operationId: get_cholesterol_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/carbohydrates/grouped
+  method: get
+  operationId: get_carbohydrates_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_temperature_delta/grouped
+  method: get
+  operationId: get_body_temperature_delta_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_temperature/grouped
+  method: get
+  operationId: get_body_temperature_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_weight/grouped
+  method: get
+  operationId: get_body_weight_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_fat/grouped
+  method: get
+  operationId: get_body_fat_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_oxygen/grouped
+  method: get
+  operationId: get_blood_oxygen_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/electrocardiogram_voltage/grouped
+  method: get
+  operationId: get_electrocardiogram_voltage_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_pressure/grouped
+  method: get
+  operationId: get_blood_pressure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/vo2_max
+  method: get
+  operationId: get_vo2_max
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stress_level
+  method: get
+  operationId: get_stress_level
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/mindfulness_minutes
+  method: get
+  operationId: get_mindfulness_minutes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/caffeine
+  method: get
+  operationId: get_caffeine
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/water
+  method: get
+  operationId: get_water
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/steps
+  method: get
+  operationId: get_steps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/floors_climbed
+  method: get
+  operationId: get_floors_climbed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/distance
+  method: get
+  operationId: get_distance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_basal
+  method: get
+  operationId: get_calories_basal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_active
+  method: get
+  operationId: get_calories_active
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/respiratory_rate
+  method: get
+  operationId: get_respiratory_rate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/ige
+  method: get
+  operationId: get_ige
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/igg
+  method: get
+  operationId: get_igg
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hypnogram
+  method: get
+  operationId: get_hypnogram
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hrv
+  method: get
+  operationId: get_hrv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heartrate
+  method: get
+  operationId: get_heartrate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/glucose
+  method: get
+  operationId: get_glucose
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/triglycerides
+  method: get
+  operationId: get_cholesterol/triglycerides
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/total
+  method: get
+  operationId: get_cholesterol/total
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/ldl
+  method: get
+  operationId: get_cholesterol/ldl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/hdl
+  method: get
+  operationId: get_cholesterol/hdl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol
+  method: get
+  operationId: get_cholesterol
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_weight
+  method: get
+  operationId: get_body_weight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_fat
+  method: get
+  operationId: get_body_fat
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_oxygen
+  method: get
+  operationId: get_blood_oxygen
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/electrocardiogram_voltage
+  method: get
+  operationId: get_electrocardiogram_voltage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_pressure
+  method: get
+  operationId: get_blood_pressure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user
+  method: get
+  operationId: get_teams_users_v2_user_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user
+  method: post
+  operationId: create_user_v2_user_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/metrics
+  method: get
+  operationId: get_teams_metrics_v2_user_metrics_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/providers/{user_id}
+  method: get
+  operationId: get_connected_providers_v2_user_providers__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/info/latest
+  method: get
+  operationId: get_user_demographcis_v2_user__user_id__info_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/insurance
+  method: post
+  operationId: create_insurance_v2_user__user_id__insurance_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/insurance/latest
+  method: get
+  operationId: get_latest_insurance_v2_user__user_id__insurance_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/info
+  method: patch
+  operationId: create_user_demographics_v2_user__user_id__info_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/resolve/{client_user_id}
+  method: get
+  operationId: get_user_by_client_user_id_v2_user_resolve__client_user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/{provider}
+  method: delete
+  operationId: deregister_provider_v2_user__user_id___provider__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: patch
+  operationId: patch_user_v2_user__user_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: delete
+  operationId: delete_user_v2_user__user_id__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: get
+  operationId: get_user_v2_user__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/undo_delete
+  method: post
+  operationId: undo_user_delete_v2_user_undo_delete_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/refresh/{user_id}
+  method: post
+  operationId: refresh_user_id_v2_user_refresh__user_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/device
+  method: get
+  operationId: get_user_devices_v2_user__user_id__device_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/device/{device_id}
+  method: get
+  operationId: get_user_device_v2_user__user_id__device__device_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/{team_id}
+  method: get
+  operationId: get_team_v2_team__team_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/users/search
+  method: get
+  operationId: search_team_users_by_uuid_or_client_user_id_v2_team_users_search_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/svix/url
+  method: get
+  operationId: get_svix_webhook_url_v2_team_svix_url_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/source/priorities
+  method: get
+  operationId: get_source_priorities_v2_team_source_priorities_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/source/priorities
+  method: patch
+  operationId: update_source_priorities_v2_team_source_priorities_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/team/{team_id}/physicians
+  method: get
+  operationId: get_team_physicians_v2_team__team_id__physicians_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/providers
+  method: get
+  operationId: get_list_of_providers_v2_providers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/introspect/resources
+  method: get
+  operationId: introspect_resources_v2_introspect_resources_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/introspect/historical_pull
+  method: get
+  operationId: introspect_historical_pulls_v2_introspect_historical_pull_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests
+  method: get
+  operationId: get_lab_tests_for_team_v3_lab_tests_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests
+  method: post
+  operationId: create_lab_test_for_team_v3_lab_tests_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}
+  method: patch
+  operationId: update_lab_test_for_team_v3_lab_tests__lab_test_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}
+  method: get
+  operationId: get_lab_test_for_team_v3_lab_tests__lab_test_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/markers
+  method: get
+  operationId: get_markers_v3_lab_tests_markers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/list_order_set_markers
+  method: post
+  operationId: get_markers_for_order_set_v3_lab_tests_list_order_set_markers_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}/markers
+  method: get
+  operationId: get_markers_for_test_v3_lab_tests__lab_test_id__markers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/{lab_id}/markers/{provider_id}
+  method: get
+  operationId: get_markers_by_provider_id_v3_lab_tests__lab_id__markers__provider_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/labs
+  method: get
+  operationId: get_labs_v3_lab_tests_labs_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/compendium/search
+  method: post
+  operationId: search_compendium_v3_compendium_search_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/compendium/convert
+  method: post
+  operationId: convert_compendium_v3_compendium_convert_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_test/lab_account
+  method: get
+  operationId: get_team_lab_accounts_v3_lab_test_lab_account_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_test
+  method: get
+  operationId: get_paginated_lab_tests_for_team_v3_lab_test_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_test/{lab_test_id}/collection_instruction_pdf
+  method: get
+  operationId: get_lab_test_collection_instructions_url_v3_lab_test__lab_test_id__collection_instruction_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}
+  method: get
+  operationId: get_order_transaction_v3_order_transaction__transaction_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}/result
+  method: get
+  operationId: get_order_transaction_result_v3_order_transaction__transaction_id__result_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}/result/pdf
+  method: get
+  operationId: get_order_transaction_result_pdf_v3_order_transaction__transaction_id__result_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/orders
+  method: get
+  operationId: get_orders_v3_orders_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/testkit/register
+  method: post
+  operationId: register_testkit_v3_order_testkit_register_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/testkit
+  method: post
+  operationId: create_testkit_order_v3_order_testkit_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/phlebotomy/appointment/availability
+  method: post
+  operationId: get_order_appointment_availability_v3_order_phlebotomy_appointment_availability_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/book
+  method: post
+  operationId: book_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_book_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/request
+  method: post
+  operationId: request_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_request_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/reschedule
+  method: patch
+  operationId: reschedule_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_reschedule_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/cancel
+  method: patch
+  operationId: cancel_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_cancel_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/phlebotomy/appointment/cancellation-reasons
+  method: get
+  operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_phlebotomy_appointment_cancellation_reasons_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/phlebotomy/appointment
+  method: get
+  operationId: get_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/area/info
+  method: get
+  operationId: get_area_info_v3_order_area_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/psc/info
+  method: get
+  operationId: get_psc_info_v3_order_psc_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/psc/info
+  method: get
+  operationId: get_order_psc_info_v3_order__order_id__psc_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result/pdf
+  method: get
+  operationId: get_lab_test_result_v3_order__order_id__result_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result/metadata
+  method: get
+  operationId: get_lab_test_result_metadata_v3_order__order_id__result_metadata_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result
+  method: get
+  operationId: get_lab_test_result_raw_v3_order__order_id__result_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/labels/pdf
+  method: get
+  operationId: get_order_labels_v3_order__order_id__labels_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/psc/appointment/availability
+  method: post
+  operationId: get_psc_appointment_availability_v3_order_psc_appointment_availability_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/book
+  method: post
+  operationId: book_phlebotomy_appointment_v3_order__order_id__psc_appointment_book_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/reschedule
+  method: patch
+  operationId: reschedule_phlebotomy_appointment_v3_order__order_id__psc_appointment_reschedule_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/cancel
+  method: patch
+  operationId: cancel_phlebotomy_appointment_v3_order__order_id__psc_appointment_cancel_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/psc/appointment/cancellation-reasons
+  method: get
+  operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_psc_appointment_cancellation_reasons_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/psc/appointment
+  method: get
+  operationId: get_phlebotomy_appointment_v3_order__order_id__psc_appointment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/resend_events
+  method: post
+  operationId: resend_order_webhook_v3_order_resend_events_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/collection_instruction_pdf
+  method: get
+  operationId: get_order_collection_instructions_url_v3_order__order_id__collection_instruction_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/requisition/pdf
+  method: get
+  operationId: get_order_requisition_url_v3_order__order_id__requisition_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/abn_pdf
+  method: get
+  operationId: get_order_abn_v3_order__order_id__abn_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}
+  method: get
+  operationId: get_order_v3_order__order_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}
+  method: patch
+  operationId: update_order_v3_order__order_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order
+  method: post
+  operationId: create_order_v3_order_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/import
+  method: post
+  operationId: import_order_v3_order_import_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/cancel
+  method: post
+  operationId: cancel_order_v3_order__order_id__cancel_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/test
+  method: post
+  operationId: order_process_simulate_v3_order__order_id__test_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/draw_completed
+  method: patch
+  operationId: update_on_site_collection_order_draw_completed_v3_order__order_id__draw_completed_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/insurance/search/payor
+  method: post
+  operationId: post_insurance_payor_information_v3_insurance_search_payor_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/insurance/search/payor
+  method: get
+  operationId: search_insurance_payor_information_v3_insurance_search_payor_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/insurance/search/diagnosis
+  method: get
+  operationId: search_diagnosis_v3_insurance_search_diagnosis_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/insurance/validate_icd_codes
+  method: post
+  operationId: validate_icd_codes_v3_insurance_validate_icd_codes_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/payor
+  method: post
+  operationId: create_payor_v3_payor_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lab_report/v1/parser/job
+  method: post
+  operationId: CreateLabReportParserJob
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lab_report/v1/parser/job/{job_id}
+  method: get
+  operationId: get_lab_report_parser_job_lab_report_v1_parser_job__job_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aggregate/v1/user/{user_id}/query
+  method: post
+  operationId: query_one_aggregate_v1_user__user_id__query_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /aggregate/v1/user/{user_id}/continuous_query/{query_id_or_slug}/result_table
+  method: get
+  operationId: get_result_table_for_query_aggregate_v1_user__user_id__continuous_query__query_id_or_slug__result_table_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aggregate/v1/user/{user_id}/continuous_query/{query_id_or_slug}/task_history
+  method: get
+  operationId: get_task_history_for_query_aggregate_v1_user__user_id__continuous_query__query_id_or_slug__task_history_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/sign_in_token
+  method: post
+  operationId: get_user_sign_in_token_v2_user__user_id__sign_in_token_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/create_portal_url
+  method: post
+  operationId: create_user_portal_url_v2_user__user_id__create_portal_url_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_op
+  method: get
+  operationId: list_bulk_ops_v2_link_bulk_op_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/bulk_import
+  method: post
+  operationId: bulk_import_connections_v2_link_bulk_import_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_trigger_historical_pull
+  method: post
+  operationId: bulk_trigger_historical_pull_v2_link_bulk_trigger_historical_pull_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_export
+  method: post
+  operationId: bulk_export_connections_v2_link_bulk_export_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/bulk_pause
+  method: post
+  operationId: bulk_pause_connections_v2_link_bulk_pause_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/token
+  method: post
+  operationId: generate_vital_link_token_v2_link_token_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/code/create
+  method: post
+  operationId: create_token_v2_link_code_create_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/oauth/{oauth_provider}
+  method: get
+  operationId: generate_oauth_link
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/provider/password/{provider}
+  method: post
+  operationId: connect_password_provider_v2_link_provider_password__provider__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/password/{provider}/complete_mfa
+  method: post
+  operationId: complete_password_provider_mfa_v2_link_provider_password__provider__complete_mfa_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/provider/email/{provider}
+  method: post
+  operationId: connect_email_auth_provider_v2_link_provider_email__provider__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/link/providers
+  method: get
+  operationId: get_providers_v2_link_providers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/link/connect/demo
+  method: post
+  operationId: create_demo_connection_v2_link_connect_demo_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/summary/electrocardiogram/{user_id}
+  method: get
+  operationId: get_user_electrocardiogram_v2_summary_electrocardiogram__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep_cycle/{user_id}
+  method: get
+  operationId: get_user_sleep_cycle_v2_summary_sleep_cycle__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/profile/{user_id}
+  method: get
+  operationId: get_user_profile_v2_summary_profile__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/profile/{user_id}/raw
+  method: get
+  operationId: get_user_profile_raw_v2_summary_profile__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/devices/{user_id}/raw
+  method: get
+  operationId: get_user_devices_raw_v2_summary_devices__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/activity/{user_id}
+  method: get
+  operationId: get_user_activity_v2_summary_activity__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/activity/{user_id}/raw
+  method: get
+  operationId: get_user_activity_raw_v2_summary_activity__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/workouts/{user_id}
+  method: get
+  operationId: get_user_workouts_v2_summary_workouts__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/workouts/{user_id}/raw
+  method: get
+  operationId: get_user_workouts_raw_v2_summary_workouts__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep/{user_id}
+  method: get
+  operationId: get_user_sleep_v2_summary_sleep__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep/{user_id}/raw
+  method: get
+  operationId: get_user_sleep_raw_v2_summary_sleep__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/body/{user_id}
+  method: get
+  operationId: get_user_body_v2_summary_body__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/body/{user_id}/raw
+  method: get
+  operationId: get_user_body_raw_v2_summary_body__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/meal/{user_id}
+  method: get
+  operationId: get_meals_v2_summary_meal__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/menstrual_cycle/{user_id}
+  method: get
+  operationId: get_user_menstrual_cycles_v2_summary_menstrual_cycle__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/sleep/{sleep_id}/stream
+  method: get
+  operationId: get_user_sleep_stream_v2_timeseries_sleep__sleep_id__stream_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/workouts/{workout_id}/stream
+  method: get
+  operationId: get_user_workouts_v2_timeseries_workouts__workout_id__stream_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_swimming_stroke/grouped
+  method: get
+  operationId: get_workout_swimming_stroke_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_distance/grouped
+  method: get
+  operationId: get_workout_distance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heart_rate_recovery_one_minute/grouped
+  method: get
+  operationId: get_heart_rate_recovery_one_minute_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/waist_circumference/grouped
+  method: get
+  operationId: get_waist_circumference_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/lean_body_mass/grouped
+  method: get
+  operationId: get_lean_body_mass_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_mass_index/grouped
+  method: get
+  operationId: get_body_mass_index_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/basal_body_temperature/grouped
+  method: get
+  operationId: get_basal_body_temperature_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/handwashing/grouped
+  method: get
+  operationId: get_handwashing_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/daylight_exposure/grouped
+  method: get
+  operationId: get_daylight_exposure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/uv_exposure/grouped
+  method: get
+  operationId: get_uv_exposure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/fall/grouped
+  method: get
+  operationId: get_fall_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/inhaler_usage/grouped
+  method: get
+  operationId: get_inhaler_usage_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/peak_expiratory_flow_rate/grouped
+  method: get
+  operationId: get_peak_expiratory_flow_rate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/forced_vital_capacity/grouped
+  method: get
+  operationId: get_forced_vital_capacity_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/forced_expiratory_volume_1/grouped
+  method: get
+  operationId: get_forced_expiratory_volume_1_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/wheelchair_push/grouped
+  method: get
+  operationId: get_wheelchair_push_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/sleep_breathing_disturbance/grouped
+  method: get
+  operationId: get_sleep_breathing_disturbance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/sleep_apnea_alert/grouped
+  method: get
+  operationId: get_sleep_apnea_alert_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stand_duration/grouped
+  method: get
+  operationId: get_stand_duration_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stand_hour/grouped
+  method: get
+  operationId: get_stand_hour_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heart_rate_alert/grouped
+  method: get
+  operationId: get_heart_rate_alert_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/afib_burden/grouped
+  method: get
+  operationId: get_afib_burden_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_duration/grouped
+  method: get
+  operationId: get_workout_duration_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/vo2_max/grouped
+  method: get
+  operationId: get_vo2_max_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stress_level/grouped
+  method: get
+  operationId: get_stress_level_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/mindfulness_minutes/grouped
+  method: get
+  operationId: get_mindfulness_minutes_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/caffeine/grouped
+  method: get
+  operationId: get_caffeine_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/water/grouped
+  method: get
+  operationId: get_water_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/steps/grouped
+  method: get
+  operationId: get_steps_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/floors_climbed/grouped
+  method: get
+  operationId: get_floors_climbed_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/distance/grouped
+  method: get
+  operationId: get_distance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_basal/grouped
+  method: get
+  operationId: get_calories_basal_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_active/grouped
+  method: get
+  operationId: get_calories_active_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/respiratory_rate/grouped
+  method: get
+  operationId: get_respiratory_rate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/note/grouped
+  method: get
+  operationId: get_note_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/insulin_injection/grouped
+  method: get
+  operationId: get_insulin_injection_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/ige/grouped
+  method: get
+  operationId: get_ige_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/igg/grouped
+  method: get
+  operationId: get_igg_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hypnogram/grouped
+  method: get
+  operationId: get_hypnogram_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hrv/grouped
+  method: get
+  operationId: get_hrv_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heartrate/grouped
+  method: get
+  operationId: get_heartrate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/glucose/grouped
+  method: get
+  operationId: get_glucose_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/grouped
+  method: get
+  operationId: get_cholesterol_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/carbohydrates/grouped
+  method: get
+  operationId: get_carbohydrates_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_temperature_delta/grouped
+  method: get
+  operationId: get_body_temperature_delta_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_temperature/grouped
+  method: get
+  operationId: get_body_temperature_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_weight/grouped
+  method: get
+  operationId: get_body_weight_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_fat/grouped
+  method: get
+  operationId: get_body_fat_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_oxygen/grouped
+  method: get
+  operationId: get_blood_oxygen_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/electrocardiogram_voltage/grouped
+  method: get
+  operationId: get_electrocardiogram_voltage_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_pressure/grouped
+  method: get
+  operationId: get_blood_pressure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/vo2_max
+  method: get
+  operationId: get_vo2_max
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stress_level
+  method: get
+  operationId: get_stress_level
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/mindfulness_minutes
+  method: get
+  operationId: get_mindfulness_minutes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/caffeine
+  method: get
+  operationId: get_caffeine
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/water
+  method: get
+  operationId: get_water
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/steps
+  method: get
+  operationId: get_steps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/floors_climbed
+  method: get
+  operationId: get_floors_climbed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/distance
+  method: get
+  operationId: get_distance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_basal
+  method: get
+  operationId: get_calories_basal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_active
+  method: get
+  operationId: get_calories_active
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/respiratory_rate
+  method: get
+  operationId: get_respiratory_rate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/ige
+  method: get
+  operationId: get_ige
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/igg
+  method: get
+  operationId: get_igg
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hypnogram
+  method: get
+  operationId: get_hypnogram
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hrv
+  method: get
+  operationId: get_hrv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heartrate
+  method: get
+  operationId: get_heartrate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/glucose
+  method: get
+  operationId: get_glucose
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/triglycerides
+  method: get
+  operationId: get_cholesterol/triglycerides
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/total
+  method: get
+  operationId: get_cholesterol/total
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/ldl
+  method: get
+  operationId: get_cholesterol/ldl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/hdl
+  method: get
+  operationId: get_cholesterol/hdl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol
+  method: get
+  operationId: get_cholesterol
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_weight
+  method: get
+  operationId: get_body_weight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_fat
+  method: get
+  operationId: get_body_fat
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_oxygen
+  method: get
+  operationId: get_blood_oxygen
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/electrocardiogram_voltage
+  method: get
+  operationId: get_electrocardiogram_voltage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_pressure
+  method: get
+  operationId: get_blood_pressure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user
+  method: get
+  operationId: get_teams_users_v2_user_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user
+  method: post
+  operationId: create_user_v2_user_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/metrics
+  method: get
+  operationId: get_teams_metrics_v2_user_metrics_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/providers/{user_id}
+  method: get
+  operationId: get_connected_providers_v2_user_providers__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/info/latest
+  method: get
+  operationId: get_user_demographcis_v2_user__user_id__info_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/insurance
+  method: post
+  operationId: create_insurance_v2_user__user_id__insurance_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/insurance/latest
+  method: get
+  operationId: get_latest_insurance_v2_user__user_id__insurance_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/info
+  method: patch
+  operationId: create_user_demographics_v2_user__user_id__info_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/resolve/{client_user_id}
+  method: get
+  operationId: get_user_by_client_user_id_v2_user_resolve__client_user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/{provider}
+  method: delete
+  operationId: deregister_provider_v2_user__user_id___provider__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: patch
+  operationId: patch_user_v2_user__user_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: delete
+  operationId: delete_user_v2_user__user_id__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: get
+  operationId: get_user_v2_user__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/undo_delete
+  method: post
+  operationId: undo_user_delete_v2_user_undo_delete_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/refresh/{user_id}
+  method: post
+  operationId: refresh_user_id_v2_user_refresh__user_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/device
+  method: get
+  operationId: get_user_devices_v2_user__user_id__device_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/device/{device_id}
+  method: get
+  operationId: get_user_device_v2_user__user_id__device__device_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/{team_id}
+  method: get
+  operationId: get_team_v2_team__team_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/users/search
+  method: get
+  operationId: search_team_users_by_uuid_or_client_user_id_v2_team_users_search_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/svix/url
+  method: get
+  operationId: get_svix_webhook_url_v2_team_svix_url_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/source/priorities
+  method: get
+  operationId: get_source_priorities_v2_team_source_priorities_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/source/priorities
+  method: patch
+  operationId: update_source_priorities_v2_team_source_priorities_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/team/{team_id}/physicians
+  method: get
+  operationId: get_team_physicians_v2_team__team_id__physicians_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/providers
+  method: get
+  operationId: get_list_of_providers_v2_providers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/introspect/resources
+  method: get
+  operationId: introspect_resources_v2_introspect_resources_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/introspect/historical_pull
+  method: get
+  operationId: introspect_historical_pulls_v2_introspect_historical_pull_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests
+  method: get
+  operationId: get_lab_tests_for_team_v3_lab_tests_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests
+  method: post
+  operationId: create_lab_test_for_team_v3_lab_tests_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}
+  method: patch
+  operationId: update_lab_test_for_team_v3_lab_tests__lab_test_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}
+  method: get
+  operationId: get_lab_test_for_team_v3_lab_tests__lab_test_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/markers
+  method: get
+  operationId: get_markers_v3_lab_tests_markers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/list_order_set_markers
+  method: post
+  operationId: get_markers_for_order_set_v3_lab_tests_list_order_set_markers_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_tests/{lab_test_id}/markers
+  method: get
+  operationId: get_markers_for_test_v3_lab_tests__lab_test_id__markers_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/{lab_id}/markers/{provider_id}
+  method: get
+  operationId: get_markers_by_provider_id_v3_lab_tests__lab_id__markers__provider_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_tests/labs
+  method: get
+  operationId: get_labs_v3_lab_tests_labs_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/compendium/search
+  method: post
+  operationId: search_compendium_v3_compendium_search_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/compendium/convert
+  method: post
+  operationId: convert_compendium_v3_compendium_convert_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/lab_test/lab_account
+  method: get
+  operationId: get_team_lab_accounts_v3_lab_test_lab_account_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_test
+  method: get
+  operationId: get_paginated_lab_tests_for_team_v3_lab_test_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/lab_test/{lab_test_id}/collection_instruction_pdf
+  method: get
+  operationId: get_lab_test_collection_instructions_url_v3_lab_test__lab_test_id__collection_instruction_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}
+  method: get
+  operationId: get_order_transaction_v3_order_transaction__transaction_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}/result
+  method: get
+  operationId: get_order_transaction_result_v3_order_transaction__transaction_id__result_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order_transaction/{transaction_id}/result/pdf
+  method: get
+  operationId: get_order_transaction_result_pdf_v3_order_transaction__transaction_id__result_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/orders
+  method: get
+  operationId: get_orders_v3_orders_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/testkit/register
+  method: post
+  operationId: register_testkit_v3_order_testkit_register_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/testkit
+  method: post
+  operationId: create_testkit_order_v3_order_testkit_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/phlebotomy/appointment/availability
+  method: post
+  operationId: get_order_appointment_availability_v3_order_phlebotomy_appointment_availability_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/book
+  method: post
+  operationId: book_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_book_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/request
+  method: post
+  operationId: request_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_request_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/reschedule
+  method: patch
+  operationId: reschedule_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_reschedule_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/phlebotomy/appointment/cancel
+  method: patch
+  operationId: cancel_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_cancel_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/phlebotomy/appointment/cancellation-reasons
+  method: get
+  operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_phlebotomy_appointment_cancellation_reasons_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/phlebotomy/appointment
+  method: get
+  operationId: get_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/area/info
+  method: get
+  operationId: get_area_info_v3_order_area_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/psc/info
+  method: get
+  operationId: get_psc_info_v3_order_psc_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/psc/info
+  method: get
+  operationId: get_order_psc_info_v3_order__order_id__psc_info_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result/pdf
+  method: get
+  operationId: get_lab_test_result_v3_order__order_id__result_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result/metadata
+  method: get
+  operationId: get_lab_test_result_metadata_v3_order__order_id__result_metadata_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/result
+  method: get
+  operationId: get_lab_test_result_raw_v3_order__order_id__result_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/labels/pdf
+  method: get
+  operationId: get_order_labels_v3_order__order_id__labels_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/psc/appointment/availability
+  method: post
+  operationId: get_psc_appointment_availability_v3_order_psc_appointment_availability_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/book
+  method: post
+  operationId: book_phlebotomy_appointment_v3_order__order_id__psc_appointment_book_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/reschedule
+  method: patch
+  operationId: reschedule_phlebotomy_appointment_v3_order__order_id__psc_appointment_reschedule_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/psc/appointment/cancel
+  method: patch
+  operationId: cancel_phlebotomy_appointment_v3_order__order_id__psc_appointment_cancel_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/psc/appointment/cancellation-reasons
+  method: get
+  operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_psc_appointment_cancellation_reasons_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/psc/appointment
+  method: get
+  operationId: get_phlebotomy_appointment_v3_order__order_id__psc_appointment_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/resend_events
+  method: post
+  operationId: resend_order_webhook_v3_order_resend_events_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/collection_instruction_pdf
+  method: get
+  operationId: get_order_collection_instructions_url_v3_order__order_id__collection_instruction_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/requisition/pdf
+  method: get
+  operationId: get_order_requisition_url_v3_order__order_id__requisition_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}/abn_pdf
+  method: get
+  operationId: get_order_abn_v3_order__order_id__abn_pdf_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}
+  method: get
+  operationId: get_order_v3_order__order_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/order/{order_id}
+  method: patch
+  operationId: update_order_v3_order__order_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order
+  method: post
+  operationId: create_order_v3_order_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/import
+  method: post
+  operationId: import_order_v3_order_import_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/cancel
+  method: post
+  operationId: cancel_order_v3_order__order_id__cancel_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/test
+  method: post
+  operationId: order_process_simulate_v3_order__order_id__test_post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/order/{order_id}/draw_completed
+  method: patch
+  operationId: update_on_site_collection_order_draw_completed_v3_order__order_id__draw_completed_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/insurance/search/payor
+  method: post
+  operationId: post_insurance_payor_information_v3_insurance_search_payor_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/insurance/search/payor
+  method: get
+  operationId: search_insurance_payor_information_v3_insurance_search_payor_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/insurance/search/diagnosis
+  method: get
+  operationId: search_diagnosis_v3_insurance_search_diagnosis_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/insurance/validate_icd_codes
+  method: post
+  operationId: validate_icd_codes_v3_insurance_validate_icd_codes_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/payor
+  method: post
+  operationId: create_payor_v3_payor_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lab_report/v1/parser/job
+  method: post
+  operationId: CreateLabReportParserJob
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /lab_report/v1/parser/job/{job_id}
+  method: get
+  operationId: get_lab_report_parser_job_lab_report_v1_parser_job__job_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aggregate/v1/user/{user_id}/query
+  method: post
+  operationId: query_one_aggregate_v1_user__user_id__query_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /aggregate/v1/user/{user_id}/continuous_query/{query_id_or_slug}/result_table
+  method: get
+  operationId: get_result_table_for_query_aggregate_v1_user__user_id__continuous_query__query_id_or_slug__result_table_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aggregate/v1/user/{user_id}/continuous_query/{query_id_or_slug}/task_history
+  method: get
+  operationId: get_task_history_for_query_aggregate_v1_user__user_id__continuous_query__query_id_or_slug__task_history_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/sign_in_token
+  method: post
+  operationId: get_user_sign_in_token_v2_user__user_id__sign_in_token_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/create_portal_url
+  method: post
+  operationId: create_user_portal_url_v2_user__user_id__create_portal_url_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /aggregate/v1/user/{user_id}/query
+  method: post
+  operationId: query_one_aggregate_v1_user__user_id__query_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /aggregate/v1/user/{user_id}/continuous_query/{query_id_or_slug}/result_table
+  method: get
+  operationId: get_result_table_for_query_aggregate_v1_user__user_id__continuous_query__query_id_or_slug__result_table_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /aggregate/v1/user/{user_id}/continuous_query/{query_id_or_slug}/task_history
+  method: get
+  operationId: get_task_history_for_query_aggregate_v1_user__user_id__continuous_query__query_id_or_slug__task_history_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/{team_id}
+  method: get
+  operationId: get_team_v2_team__team_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/users/search
+  method: get
+  operationId: search_team_users_by_uuid_or_client_user_id_v2_team_users_search_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/svix/url
+  method: get
+  operationId: get_svix_webhook_url_v2_team_svix_url_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/source/priorities
+  method: get
+  operationId: get_source_priorities_v2_team_source_priorities_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/team/source/priorities
+  method: patch
+  operationId: update_source_priorities_v2_team_source_priorities_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/team/{team_id}/physicians
+  method: get
+  operationId: get_team_physicians_v2_team__team_id__physicians_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/introspect/resources
+  method: get
+  operationId: introspect_resources_v2_introspect_resources_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/introspect/historical_pull
+  method: get
+  operationId: introspect_historical_pulls_v2_introspect_historical_pull_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user
+  method: get
+  operationId: get_teams_users_v2_user_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user
+  method: post
+  operationId: create_user_v2_user_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/metrics
+  method: get
+  operationId: get_teams_metrics_v2_user_metrics_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/providers/{user_id}
+  method: get
+  operationId: get_connected_providers_v2_user_providers__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/info/latest
+  method: get
+  operationId: get_user_demographcis_v2_user__user_id__info_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/insurance
+  method: post
+  operationId: create_insurance_v2_user__user_id__insurance_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/insurance/latest
+  method: get
+  operationId: get_latest_insurance_v2_user__user_id__insurance_latest_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/info
+  method: patch
+  operationId: create_user_demographics_v2_user__user_id__info_patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/resolve/{client_user_id}
+  method: get
+  operationId: get_user_by_client_user_id_v2_user_resolve__client_user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/{provider}
+  method: delete
+  operationId: deregister_provider_v2_user__user_id___provider__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: patch
+  operationId: patch_user_v2_user__user_id__patch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: delete
+  operationId: delete_user_v2_user__user_id__delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}
+  method: get
+  operationId: get_user_v2_user__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/undo_delete
+  method: post
+  operationId: undo_user_delete_v2_user_undo_delete_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/refresh/{user_id}
+  method: post
+  operationId: refresh_user_id_v2_user_refresh__user_id__post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/device
+  method: get
+  operationId: get_user_devices_v2_user__user_id__device_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/device/{device_id}
+  method: get
+  operationId: get_user_device_v2_user__user_id__device__device_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/user/{user_id}/sign_in_token
+  method: post
+  operationId: get_user_sign_in_token_v2_user__user_id__sign_in_token_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/user/{user_id}/create_portal_url
+  method: post
+  operationId: create_user_portal_url_v2_user__user_id__create_portal_url_post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v2/summary/electrocardiogram/{user_id}
+  method: get
+  operationId: get_user_electrocardiogram_v2_summary_electrocardiogram__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep_cycle/{user_id}
+  method: get
+  operationId: get_user_sleep_cycle_v2_summary_sleep_cycle__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/profile/{user_id}
+  method: get
+  operationId: get_user_profile_v2_summary_profile__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/profile/{user_id}/raw
+  method: get
+  operationId: get_user_profile_raw_v2_summary_profile__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/devices/{user_id}/raw
+  method: get
+  operationId: get_user_devices_raw_v2_summary_devices__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/activity/{user_id}
+  method: get
+  operationId: get_user_activity_v2_summary_activity__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/activity/{user_id}/raw
+  method: get
+  operationId: get_user_activity_raw_v2_summary_activity__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/workouts/{user_id}
+  method: get
+  operationId: get_user_workouts_v2_summary_workouts__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/workouts/{user_id}/raw
+  method: get
+  operationId: get_user_workouts_raw_v2_summary_workouts__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep/{user_id}
+  method: get
+  operationId: get_user_sleep_v2_summary_sleep__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/sleep/{user_id}/raw
+  method: get
+  operationId: get_user_sleep_raw_v2_summary_sleep__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/body/{user_id}
+  method: get
+  operationId: get_user_body_v2_summary_body__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/body/{user_id}/raw
+  method: get
+  operationId: get_user_body_raw_v2_summary_body__user_id__raw_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/meal/{user_id}
+  method: get
+  operationId: get_meals_v2_summary_meal__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/summary/menstrual_cycle/{user_id}
+  method: get
+  operationId: get_user_menstrual_cycles_v2_summary_menstrual_cycle__user_id__get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/sleep/{sleep_id}/stream
+  method: get
+  operationId: get_user_sleep_stream_v2_timeseries_sleep__sleep_id__stream_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/workouts/{workout_id}/stream
+  method: get
+  operationId: get_user_workouts_v2_timeseries_workouts__workout_id__stream_get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_swimming_stroke/grouped
+  method: get
+  operationId: get_workout_swimming_stroke_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_distance/grouped
+  method: get
+  operationId: get_workout_distance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heart_rate_recovery_one_minute/grouped
+  method: get
+  operationId: get_heart_rate_recovery_one_minute_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/waist_circumference/grouped
+  method: get
+  operationId: get_waist_circumference_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/lean_body_mass/grouped
+  method: get
+  operationId: get_lean_body_mass_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_mass_index/grouped
+  method: get
+  operationId: get_body_mass_index_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/basal_body_temperature/grouped
+  method: get
+  operationId: get_basal_body_temperature_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/handwashing/grouped
+  method: get
+  operationId: get_handwashing_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/daylight_exposure/grouped
+  method: get
+  operationId: get_daylight_exposure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/uv_exposure/grouped
+  method: get
+  operationId: get_uv_exposure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/fall/grouped
+  method: get
+  operationId: get_fall_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/inhaler_usage/grouped
+  method: get
+  operationId: get_inhaler_usage_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/peak_expiratory_flow_rate/grouped
+  method: get
+  operationId: get_peak_expiratory_flow_rate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/forced_vital_capacity/grouped
+  method: get
+  operationId: get_forced_vital_capacity_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/forced_expiratory_volume_1/grouped
+  method: get
+  operationId: get_forced_expiratory_volume_1_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/wheelchair_push/grouped
+  method: get
+  operationId: get_wheelchair_push_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/sleep_breathing_disturbance/grouped
+  method: get
+  operationId: get_sleep_breathing_disturbance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/sleep_apnea_alert/grouped
+  method: get
+  operationId: get_sleep_apnea_alert_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stand_duration/grouped
+  method: get
+  operationId: get_stand_duration_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stand_hour/grouped
+  method: get
+  operationId: get_stand_hour_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heart_rate_alert/grouped
+  method: get
+  operationId: get_heart_rate_alert_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/afib_burden/grouped
+  method: get
+  operationId: get_afib_burden_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/workout_duration/grouped
+  method: get
+  operationId: get_workout_duration_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/vo2_max/grouped
+  method: get
+  operationId: get_vo2_max_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stress_level/grouped
+  method: get
+  operationId: get_stress_level_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/mindfulness_minutes/grouped
+  method: get
+  operationId: get_mindfulness_minutes_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/caffeine/grouped
+  method: get
+  operationId: get_caffeine_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/water/grouped
+  method: get
+  operationId: get_water_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/steps/grouped
+  method: get
+  operationId: get_steps_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/floors_climbed/grouped
+  method: get
+  operationId: get_floors_climbed_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/distance/grouped
+  method: get
+  operationId: get_distance_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_basal/grouped
+  method: get
+  operationId: get_calories_basal_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_active/grouped
+  method: get
+  operationId: get_calories_active_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/respiratory_rate/grouped
+  method: get
+  operationId: get_respiratory_rate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/note/grouped
+  method: get
+  operationId: get_note_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/insulin_injection/grouped
+  method: get
+  operationId: get_insulin_injection_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/ige/grouped
+  method: get
+  operationId: get_ige_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/igg/grouped
+  method: get
+  operationId: get_igg_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hypnogram/grouped
+  method: get
+  operationId: get_hypnogram_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hrv/grouped
+  method: get
+  operationId: get_hrv_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heartrate/grouped
+  method: get
+  operationId: get_heartrate_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/glucose/grouped
+  method: get
+  operationId: get_glucose_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/grouped
+  method: get
+  operationId: get_cholesterol_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/carbohydrates/grouped
+  method: get
+  operationId: get_carbohydrates_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_temperature_delta/grouped
+  method: get
+  operationId: get_body_temperature_delta_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_temperature/grouped
+  method: get
+  operationId: get_body_temperature_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_weight/grouped
+  method: get
+  operationId: get_body_weight_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_fat/grouped
+  method: get
+  operationId: get_body_fat_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_oxygen/grouped
+  method: get
+  operationId: get_blood_oxygen_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/electrocardiogram_voltage/grouped
+  method: get
+  operationId: get_electrocardiogram_voltage_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_pressure/grouped
+  method: get
+  operationId: get_blood_pressure_grouped
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/vo2_max
+  method: get
+  operationId: get_vo2_max
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/stress_level
+  method: get
+  operationId: get_stress_level
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/mindfulness_minutes
+  method: get
+  operationId: get_mindfulness_minutes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/caffeine
+  method: get
+  operationId: get_caffeine
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/water
+  method: get
+  operationId: get_water
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/steps
+  method: get
+  operationId: get_steps
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/floors_climbed
+  method: get
+  operationId: get_floors_climbed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/distance
+  method: get
+  operationId: get_distance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_basal
+  method: get
+  operationId: get_calories_basal
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/calories_active
+  method: get
+  operationId: get_calories_active
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/respiratory_rate
+  method: get
+  operationId: get_respiratory_rate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/ige
+  method: get
+  operationId: get_ige
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/igg
+  method: get
+  operationId: get_igg
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hypnogram
+  method: get
+  operationId: get_hypnogram
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/hrv
+  method: get
+  operationId: get_hrv
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/heartrate
+  method: get
+  operationId: get_heartrate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/glucose
+  method: get
+  operationId: get_glucose
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/triglycerides
+  method: get
+  operationId: get_cholesterol/triglycerides
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/total
+  method: get
+  operationId: get_cholesterol/total
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/ldl
+  method: get
+  operationId: get_cholesterol/ldl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol/hdl
+  method: get
+  operationId: get_cholesterol/hdl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/cholesterol
+  method: get
+  operationId: get_cholesterol
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_weight
+  method: get
+  operationId: get_body_weight
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/body_fat
+  method: get
+  operationId: get_body_fat
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_oxygen
+  method: get
+  operationId: get_blood_oxygen
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/electrocardiogram_voltage
+  method: get
+  operationId: get_electrocardiogram_voltage
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v2/timeseries/{user_id}/blood_pressure
+  method: get
+  operationId: get_blood_pressure
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
