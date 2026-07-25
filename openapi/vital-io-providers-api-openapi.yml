@@ -1,0 +1,207 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate providers API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: providers
+paths:
+  /v2/providers:
+    get:
+      tags:
+      - providers
+      summary: Get List Of Providers
+      description: Get Provider list
+      operationId: get_list_of_providers_v2_providers_get
+      parameters:
+      - name: source_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Type
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingProviderDetailed'
+                title: Response Get List Of Providers V2 Providers Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: providers
+      x-fern-sdk-method-name: get_all
+components:
+  schemas:
+    ClientFacingProviderDetailed:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        description:
+          type: string
+          title: Description
+          description: Description of source of information
+        logo:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Logo
+          description: URL for source logo
+        auth_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceAuthType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        supported_resources:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+          title: Supported Resources
+          default: []
+      type: object
+      required:
+      - name
+      - slug
+      - description
+      - logo
+      title: Provider
+      example:
+        auth_type: oauth
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+        supported_resources:
+        - workouts
+        - sleep
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Resource:
+      type: string
+      enum:
+      - profile
+      - activity
+      - sleep
+      - body
+      - workouts
+      - workout_stream
+      - connection
+      - order
+      - result
+      - match_review
+      - appointment
+      - glucose
+      - heartrate
+      - hrv
+      - hrv
+      - ige
+      - igg
+      - blood_oxygen
+      - blood_pressure
+      - cholesterol
+      - device
+      - device_legacy
+      - weight
+      - fat
+      - body_temperature
+      - body_temperature_delta
+      - meal
+      - water
+      - caffeine
+      - mindfulness_minutes
+      - steps
+      - calories_active
+      - distance
+      - floors_climbed
+      - respiratory_rate
+      - vo2_max
+      - calories_basal
+      - stress_level
+      - menstrual_cycle
+      - sleep_cycle
+      - electrocardiogram
+      - electrocardiogram_voltage
+      - afib_burden
+      - heart_rate_alert
+      - stand_hour
+      - stand_duration
+      - sleep_apnea_alert
+      - sleep_breathing_disturbance
+      - wheelchair_push
+      - forced_expiratory_volume_1
+      - forced_vital_capacity
+      - peak_expiratory_flow_rate
+      - inhaler_usage
+      - fall
+      - uv_exposure
+      - daylight_exposure
+      - handwashing
+      - basal_body_temperature
+      - heart_rate_recovery_one_minute
+      - body_mass_index
+      - lean_body_mass
+      - waist_circumference
+      - workout_distance
+      - workout_swimming_stroke
+      - workout_duration
+      - insulin_injection
+      - carbohydrates
+      - note
+      - sleep_stream
+      - hypnogram
+      title: ClientFacingResource
+      x-fern-type-name: ClientFacingResource
+      description: ℹ️ This enum is non-exhaustive.
+    SourceAuthType:
+      type: string
+      enum:
+      - oauth
+      - team_oauth
+      - sdk
+      - password
+      - email
+      - app
+      - ''
+      title: SourceAuthType
+      x-fern-enum:
+        ? ''
+        : name: Empty
+      description: ℹ️ This enum is non-exhaustive.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

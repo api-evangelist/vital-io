@@ -1,0 +1,1429 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate lab_tests API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: lab_tests
+paths:
+  /v3/lab_tests:
+    get:
+      tags:
+      - lab_tests
+      summary: Get Lab Tests For Team
+      description: GET all the lab tests the team has access to.
+      operationId: get_lab_tests_for_team_v3_lab_tests_get
+      deprecated: true
+      parameters:
+      - name: generation_method
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/LabTestGenerationMethodFilter'
+          description: Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned.
+          default: manual
+        description: Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned.
+      - name: lab_slug
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by the slug of the lab for these lab tests.
+          title: Lab Slug
+        description: Filter by the slug of the lab for these lab tests.
+      - name: collection_method
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/LabTestCollectionMethod'
+          - type: 'null'
+          description: Filter by the collection method for these lab tests.
+          title: Collection Method
+        description: Filter by the collection method for these lab tests.
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/LabTestStatus'
+          - type: 'null'
+          description: Filter by the status of these lab tests.
+          title: Status
+        description: Filter by the status of these lab tests.
+      - name: marker_ids
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: integer
+          - type: 'null'
+          description: Filter to only include lab tests containing these marker IDs.
+          title: Marker Ids
+        description: Filter to only include lab tests containing these marker IDs.
+      - name: provider_ids
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Filter to only include lab tests containing these provider IDs.
+          title: Provider Ids
+        description: Filter to only include lab tests containing these provider IDs.
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by the name of the lab test (a case-insensitive substring search).
+          title: Name
+        description: Filter by the name of the lab test (a case-insensitive substring search).
+      - name: order_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - price
+            - created_at
+            - updated_at
+            type: string
+          - type: 'null'
+          title: Order Key
+      - name: order_direction
+        in: query
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+          default: asc
+          title: Order Direction
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingLabTest'
+                title: Response Get Lab Tests For Team V3 Lab Tests Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get
+      x-fern-availability: deprecated
+    post:
+      tags:
+      - lab_tests
+      summary: Create Lab Test For Team
+      operationId: create_lab_test_for_team_v3_lab_tests_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLabTestRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingLabTest'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: create
+  /v3/lab_tests/{lab_test_id}:
+    patch:
+      tags:
+      - lab_tests
+      summary: Update Lab Test For Team
+      operationId: update_lab_test_for_team_v3_lab_tests__lab_test_id__patch
+      parameters:
+      - name: lab_test_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Lab Test Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLabTestRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingLabTest'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: update_lab_test
+    get:
+      tags:
+      - lab_tests
+      summary: Get Lab Test For Team
+      description: GET all the lab tests the team has access to.
+      operationId: get_lab_test_for_team_v3_lab_tests__lab_test_id__get
+      parameters:
+      - name: lab_test_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: The identifier Vital assigned to a lab test.
+      - name: lab_account_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          title: Lab Account Id
+        description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingLabTest'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_by_id
+  /v3/lab_tests/markers:
+    get:
+      tags:
+      - lab_tests
+      summary: Get Markers
+      description: List active and orderable markers for a given Lab. Note that reflex markers are not included.
+      operationId: get_markers_v3_lab_tests_markers_get
+      parameters:
+      - name: lab_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: integer
+          - type: 'null'
+          description: The identifier Vital assigned to a lab partner.
+          title: Lab Id
+        description: The identifier Vital assigned to a lab partner.
+      - name: lab_slug
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The slug of the lab for these markers. If both lab_id and lab_slug are provided, lab_slug will be used.
+          title: Lab Slug
+        description: The slug of the lab for these markers. If both lab_id and lab_slug are provided, lab_slug will be used.
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+          description: The name or test code of an individual biomarker or a panel.
+          default: ''
+          title: Name
+        description: The name or test code of an individual biomarker or a panel.
+      - name: a_la_carte_enabled
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: A La Carte Enabled
+      - name: lab_account_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          title: Lab Account Id
+        description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMarkersResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_markers
+  /v3/lab_tests/list_order_set_markers:
+    post:
+      tags:
+      - lab_tests
+      summary: Get Markers For Order Set
+      operationId: get_markers_for_order_set_v3_lab_tests_list_order_set_markers_post
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderSetRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMarkersResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_markers_for_order_set
+  /v3/lab_tests/{lab_test_id}/markers:
+    get:
+      tags:
+      - lab_tests
+      summary: Get Markers For Test
+      description: List all markers for a given Lab Test, as well as any associated reflex markers.
+      operationId: get_markers_for_test_v3_lab_tests__lab_test_id__markers_get
+      parameters:
+      - name: lab_test_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: The identifier Vital assigned to a lab test.
+      - name: lab_account_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          title: Lab Account Id
+        description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          title: Page
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 100
+          minimum: 1
+          default: 50
+          title: Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMarkersResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_markers_for_lab_test
+  /v3/lab_tests/{lab_id}/markers/{provider_id}:
+    get:
+      tags:
+      - lab_tests
+      summary: Get Markers By Provider Id
+      description: GET a specific marker for the given lab and provider_id
+      operationId: get_markers_by_provider_id_v3_lab_tests__lab_id__markers__provider_id__get
+      parameters:
+      - name: provider_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: The provider id assigned by a Lab.
+      - name: lab_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: The identifier Vital assigned to a lab partner.
+      - name: lab_account_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+          title: Lab Account Id
+        description: The lab account ID. This lab account is used to determine the availability of markers and lab tests.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingMarker'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_markers_by_lab_and_provider_id
+  /v3/lab_tests/labs:
+    get:
+      tags:
+      - lab_tests
+      summary: Get Labs
+      description: GET all the labs.
+      operationId: get_labs_v3_lab_tests_labs_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ClientFacingLab'
+                type: array
+                title: Response Get Labs V3 Lab Tests Labs Get
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_labs
+  /v3/lab_test:
+    get:
+      tags:
+      - lab_tests
+      summary: Get Paginated Lab Tests For Team
+      description: GET lab tests the team has access to as a paginated list.
+      operationId: get_paginated_lab_tests_for_team_v3_lab_test_get
+      parameters:
+      - name: lab_test_limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 50
+          title: Lab Test Limit
+      - name: next_cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          title: Next Cursor
+      - name: generation_method
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/LabTestGenerationMethodFilter'
+          description: Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned.
+          default: manual
+        description: Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned.
+      - name: lab_slug
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by the slug of the lab for these lab tests.
+          title: Lab Slug
+        description: Filter by the slug of the lab for these lab tests.
+      - name: collection_method
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/LabTestCollectionMethod'
+          - type: 'null'
+          description: Filter by the collection method for these lab tests.
+          title: Collection Method
+        description: Filter by the collection method for these lab tests.
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/LabTestStatus'
+          - type: 'null'
+          description: Filter by the status of these lab tests.
+          title: Status
+        description: Filter by the status of these lab tests.
+      - name: marker_ids
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: integer
+          - type: 'null'
+          description: Filter to only include lab tests containing these marker IDs.
+          title: Marker Ids
+        description: Filter to only include lab tests containing these marker IDs.
+      - name: provider_ids
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: Filter to only include lab tests containing these provider IDs.
+          title: Provider Ids
+        description: Filter to only include lab tests containing these provider IDs.
+      - name: name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Filter by the name of the lab test (a case-insensitive substring search).
+          title: Name
+        description: Filter by the name of the lab test (a case-insensitive substring search).
+      - name: order_key
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - enum:
+            - price
+            - created_at
+            - updated_at
+            type: string
+          - type: 'null'
+          title: Order Key
+      - name: order_direction
+        in: query
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+          default: asc
+          title: Order Direction
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabTestResourcesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_paginated
+  /v3/lab_test/{lab_test_id}/collection_instruction_pdf:
+    get:
+      tags:
+      - lab_tests
+      summary: Get Lab Test Collection Instructions Url
+      operationId: get_lab_test_collection_instructions_url_v3_lab_test__lab_test_id__collection_instruction_pdf_get
+      parameters:
+      - name: lab_test_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: The identifier Vital assigned to a lab test.
+      responses:
+        '200':
+          description: PDF with collection instructions
+          content:
+            application/json:
+              schema: {}
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_lab_test_collection_instruction_pdf
+      x-fern-streaming: true
+components:
+  schemas:
+    Question:
+      properties:
+        id:
+          type: integer
+          format: int64
+          title: Id
+        required:
+          type: boolean
+          title: Required
+        code:
+          type: string
+          title: Code
+        value:
+          type: string
+          title: Value
+        type:
+          $ref: '#/components/schemas/QuestionType'
+          description: ℹ️ This enum is non-exhaustive.
+        sequence:
+          type: integer
+          title: Sequence
+        answers:
+          items:
+            $ref: '#/components/schemas/Answer'
+          type: array
+          title: Answers
+        constraint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Constraint
+        default:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default
+      type: object
+      required:
+      - id
+      - required
+      - code
+      - value
+      - type
+      - sequence
+      - answers
+      title: Question
+    ClientFacingLoinc:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        code:
+          type: string
+          title: Code
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      - code
+      title: ClientFacingLoinc
+      example:
+        code: 1234-1
+        id: 1
+        name: Hemoglobin A1c
+        slug: hemoglobin-a1c
+        unit: '%'
+    GetMarkersResponse:
+      properties:
+        markers:
+          items:
+            $ref: '#/components/schemas/ClientFacingMarkerComplete'
+          type: array
+          title: Markers
+        total:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Total
+        page:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Page
+        size:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Size
+        pages:
+          anyOf:
+          - type: integer
+            minimum: 0
+          - type: 'null'
+          title: Pages
+      type: object
+      required:
+      - markers
+      - total
+      - page
+      - size
+      - pages
+      title: GetMarkersResponse
+    Labs:
+      type: string
+      enum:
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
+      description: ℹ️ This enum is non-exhaustive.
+    MarkerType:
+      type: string
+      enum:
+      - biomarker
+      - panel
+      title: MarkerType
+      description: ℹ️ This enum is non-exhaustive.
+    LabTestStatus:
+      type: string
+      enum:
+      - active
+      - pending_approval
+      - inactive
+      title: LabTestStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingLab:
+      properties:
+        id:
+          type: integer
+          title: Id
+        slug:
+          type: string
+          title: Slug
+        name:
+          type: string
+          title: Name
+        first_line_address:
+          type: string
+          title: First Line Address
+        city:
+          type: string
+          title: City
+        zipcode:
+          type: string
+          title: Zipcode
+        collection_methods:
+          items:
+            $ref: '#/components/schemas/LabTestCollectionMethod'
+          type: array
+          title: Collection Methods
+        sample_types:
+          items:
+            $ref: '#/components/schemas/LabTestSampleType'
+          type: array
+          title: Sample Types
+      type: object
+      required:
+      - id
+      - slug
+      - name
+      - first_line_address
+      - city
+      - zipcode
+      - collection_methods
+      - sample_types
+      title: ClientFacingLab
+      example:
+        city: San Francisco
+        collection_methods:
+        - testkit
+        first_line_address: 123 Main St
+        id: 1
+        name: LabCorp
+        sample_types:
+        - saliva
+        slug: labcorp
+        zipcode: '91789'
+    CreateLabTestRequest:
+      properties:
+        marker_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Marker Ids
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+        name:
+          type: string
+          title: Name
+        method:
+          $ref: '#/components/schemas/LabTestCollectionMethod'
+          description: ℹ️ This enum is non-exhaustive.
+        description:
+          type: string
+          title: Description
+        fasting:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Fasting
+          default: false
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+        lab_slug:
+          anyOf:
+          - $ref: '#/components/schemas/Labs'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - name
+      - method
+      - description
+      title: CreateLabTestRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ClientFacingMarkerComplete:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lab Id
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/MarkerType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        price:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price
+        aoe:
+          anyOf:
+          - $ref: '#/components/schemas/AoE'
+          - type: 'null'
+        a_la_carte_enabled:
+          type: boolean
+          title: A La Carte Enabled
+          default: false
+        common_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Common Tat Days
+        worst_case_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Worst Case Tat Days
+        is_orderable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Orderable
+          default: true
+        expected_results:
+          items:
+            $ref: '#/components/schemas/ClientFacingResult'
+          type: array
+          title: Expected Results
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      - expected_results
+      title: ClientFacingMarkerComplete
+      example:
+        description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+        expected_results:
+        - id: 1
+          lab_id: 1
+          loinc:
+            code: 4548-4
+            id: 1
+            name: HbA1c (Bld) [Mass fraction]
+            slug: hba1c-bld-mass-fraction
+            unit: '%'
+          name: Hemoglobin A1c
+          provider_id: '1234'
+          slug: hemoglobin-a1c
+        id: 1
+        lab_id: 1
+        name: Hemoglobin A1c
+        price: '10.00'
+        provider_id: '1234'
+        slug: hemoglobin-a1c
+        type: biomarker
+        unit: '%'
+    LabTestGenerationMethodFilter:
+      type: string
+      enum:
+      - auto
+      - manual
+      - all
+      title: LabTestGenerationMethodFilter
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingLabTest:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: ''
+        slug:
+          type: string
+          title: Slug
+          description: ''
+        name:
+          type: string
+          title: Name
+          description: ''
+        sample_type:
+          $ref: '#/components/schemas/LabTestSampleType'
+          description: ℹ️ This enum is non-exhaustive.
+        method:
+          $ref: '#/components/schemas/LabTestCollectionMethod'
+          description: ℹ️ This enum is non-exhaustive.
+        price:
+          type: number
+          title: Price
+          description: ''
+        is_active:
+          type: boolean
+          title: Is Active
+          description: Deprecated. Use status instead.
+        status:
+          $ref: '#/components/schemas/LabTestStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        fasting:
+          type: boolean
+          title: Fasting
+          description: Defines whether a lab test requires fasting.
+          default: false
+        lab:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingLab'
+          - type: 'null'
+          description: ''
+        markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClientFacingMarker'
+            type: array
+          - type: 'null'
+          title: Markers
+          description: ''
+        is_delegated:
+          type: boolean
+          title: Is Delegated
+          description: Deprecated and always false. Delegation is now at the lab account level. Used to denote whether a lab test requires using non-Vital physician networks.
+          default: false
+          deprecated: true
+        auto_generated:
+          type: boolean
+          title: Auto Generated
+          description: Whether the lab test was auto-generated by Vital
+          default: false
+        has_collection_instructions:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Collection Instructions
+          description: Whether or not the lab test has collection instructions.
+        common_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Common Tat Days
+          description: The common turnaround time in days for the lab test. This is the expected time for the lab to process the test and return results.
+        worst_case_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Worst Case Tat Days
+          description: The worst-case turnaround time in days for the lab test. This is the maximum time the lab may take to process the test and return results.
+      type: object
+      required:
+      - id
+      - slug
+      - name
+      - sample_type
+      - method
+      - price
+      - is_active
+      - status
+      - lab
+      - markers
+      title: ClientFacingLabTest
+      example:
+        lab_test:
+          description: Cholesterol test
+          fasting: false
+          has_collection_instructions: false
+          is_delegated: false
+          lab:
+            city: New York
+            first_line_address: 123 Main St
+            name: US Specialty Lab
+            slug: USSL
+            zipcode: '10001'
+          markers:
+          - description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+            id: 1
+            lab_id: 1
+            name: Hemoglobin A1c
+            price: '10.00'
+            provider_id: '1234'
+            slug: hemoglobin-a1c
+            type: biomarker
+            unit: '%'
+          method: testkit
+          name: Lipids Panel
+          price: 10
+          sample_type: dried blood spot
+          status: active
+    ClientFacingMarker:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lab Id
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/MarkerType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        price:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price
+        aoe:
+          anyOf:
+          - $ref: '#/components/schemas/AoE'
+          - type: 'null'
+        a_la_carte_enabled:
+          type: boolean
+          title: A La Carte Enabled
+          default: false
+        common_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Common Tat Days
+        worst_case_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Worst Case Tat Days
+        is_orderable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Orderable
+          default: true
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      title: ClientFacingMarker
+      example:
+        aoe:
+          questions:
+          - answers:
+            - code: answer_code
+              id: 1
+              value: answer_value
+            code: question_code
+            id: 1
+            value: question_value
+        common_tat_days: 3
+        description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+        id: 1
+        is_orderable: true
+        lab_id: 1
+        name: Hemoglobin A1c
+        price: '10.00'
+        provider_id: '1234'
+        slug: hemoglobin-a1c
+        type: biomarker
+        unit: '%'
+        worst_case_tat_days: 5
+    LabTestCollectionMethod:
+      type: string
+      enum:
+      - testkit
+      - walk_in_test
+      - at_home_phlebotomy
+      - on_site_collection
+      title: LabTestCollectionMethod
+      description: The method used to perform a lab test. ℹ️ This enum is non-exhaustive.
+    AoE:
+      properties:
+        questions:
+          items:
+            $ref: '#/components/schemas/Question'
+          type: array
+          title: Questions
+      type: object
+      required:
+      - questions
+      title: AoE
+    UpdateLabTestRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Active
+      type: object
+      title: UpdateLabTestRequest
+    LabTestSampleType:
+      type: string
+      enum:
+      - dried_blood_spot
+      - arm_collector
+      - serum
+      - saliva
+      - urine
+      - stool
+      title: LabTestSampleType
+      description: The type of sample used to perform a lab test. ℹ️ This enum is non-exhaustive.
+    Answer:
+      properties:
+        id:
+          type: integer
+          title: Id
+        code:
+          type: string
+          title: Code
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - id
+      - code
+      - value
+      title: Answer
+    OrderSetRequest:
+      properties:
+        lab_test_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: Lab Test Ids
+        add_on:
+          anyOf:
+          - $ref: '#/components/schemas/AddOnOrder'
+          - type: 'null'
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+      type: object
+      title: OrderSetRequest
+    AddOnOrder:
+      properties:
+        marker_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Marker Ids
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+      type: object
+      title: AddOnOrder
+    QuestionType:
+      type: string
+      enum:
+      - choice
+      - text
+      - numeric
+      - multi_choice
+      title: QuestionType
+      description: ℹ️ This enum is non-exhaustive.
+    LabTestResourcesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ClientFacingLabTest'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: LabTestResourcesResponse
+    ClientFacingResult:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lab Id
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        required:
+          type: boolean
+          title: Required
+        loinc:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingLoinc'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      - required
+      title: ClientFacingResult
+      example:
+        id: 1
+        lab_id: 1
+        loinc:
+          code: 1234-1
+          id: 1
+          name: Hemoglobin A1c
+          slug: hemoglobin-a1c
+          unit: '%'
+        name: Hemoglobin A1c
+        provider_id: '1234'
+        slug: hemoglobin-a1c
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

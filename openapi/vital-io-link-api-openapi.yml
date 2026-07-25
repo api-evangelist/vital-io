@@ -1,0 +1,1312 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate link API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: link
+paths:
+  /v2/link/bulk_op:
+    get:
+      tags:
+      - link
+      summary: List Bulk Ops
+      operationId: list_bulk_ops_v2_link_bulk_op_get
+      parameters:
+      - name: next_cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      - name: page_size
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 50
+          minimum: 0
+          default: 10
+          title: Page Size
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOpsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: list_bulk_ops
+      x-fern-availability: beta
+  /v2/link/bulk_import:
+    post:
+      tags:
+      - link
+      summary: Bulk Import Connections
+      operationId: bulk_import_connections_v2_link_bulk_import_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkImportConnectionsBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkImportConnectionsResponse'
+        '202':
+          description: Accepted
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: bulk_import
+      x-fern-availability: beta
+  /v2/link/bulk_trigger_historical_pull:
+    post:
+      tags:
+      - link
+      summary: Bulk Trigger Historical Pull
+      operationId: bulk_trigger_historical_pull_v2_link_bulk_trigger_historical_pull_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkTriggerHistoricalPullBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '202':
+          description: Accepted
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: bulk_trigger_historical_pull
+      x-fern-availability: beta
+  /v2/link/bulk_export:
+    post:
+      tags:
+      - link
+      summary: Bulk Export Connections
+      operationId: bulk_export_connections_v2_link_bulk_export_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkExportConnectionsBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkExportConnectionsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: bulk_export
+      x-fern-availability: beta
+  /v2/link/bulk_pause:
+    post:
+      tags:
+      - link
+      summary: Bulk Pause Connections
+      operationId: bulk_pause_connections_v2_link_bulk_pause_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkPauseConnectionsBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: bulk_pause
+      x-fern-availability: beta
+  /v2/link/token:
+    post:
+      tags:
+      - link
+      summary: Generate Vital Link Token
+      description: 'Endpoint to generate a user link token, to be used throughout the vital
+
+        link process. The vital link token is a one time use token, that
+
+        expires after 10 minutes. If you would like vital-link widget to launch
+
+        with a specific provider, pass in a provider in the body. If you would
+
+        like to redirect to a custom url after successful or error connection,
+
+        pass in your own custom redirect_url parameter.'
+      operationId: generate_vital_link_token_v2_link_token_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkTokenExchange'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkTokenExchangeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: token
+  /v2/link/code/create:
+    post:
+      tags:
+      - link
+      summary: Create Token
+      description: Generate a token to invite a user of Vital mobile app to your team
+      operationId: create_token_v2_link_code_create_post
+      parameters:
+      - name: user_id
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User Id
+      - name: expires_at
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          description: When the link code should expire. Defaults to server time plus 1 hour.
+          title: Expires At
+        description: When the link code should expire. Defaults to server time plus 1 hour.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VitalTokenCreatedResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: code_create
+  /v2/link/provider/oauth/{oauth_provider}:
+    get:
+      tags:
+      - link
+      summary: Generate Oauth Link Endpoint
+      description: This endpoint generates an OAuth link for oauth provider
+      operationId: generate_oauth_link
+      parameters:
+      - name: oauth_provider
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/OAuthProviders'
+      - name: x-vital-link-token
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Vital-Link-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: generate_oauth_link
+      security: []
+  /v2/link/provider/password/{provider}:
+    post:
+      tags:
+      - link
+      summary: Connect Password Provider
+      description: This connects auth providers that are password based.
+      operationId: connect_password_provider_v2_link_provider_password__provider__post
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/PasswordProviders'
+          title: Providers that require password auth
+      - name: x-vital-link-token
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Vital-Link-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IndividualProviderData'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderLinkResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: connect_password_provider
+      security: []
+  /v2/link/provider/password/{provider}/complete_mfa:
+    post:
+      tags:
+      - link
+      summary: Complete Password Provider Mfa
+      description: This connects auth providers that are password based.
+      operationId: complete_password_provider_mfa_v2_link_provider_password__provider__complete_mfa_post
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/PasswordProviders'
+          title: Providers that require password auth
+      - name: x-vital-link-token
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Vital-Link-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CompletePasswordProviderMFABody'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProviderLinkResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: complete_password_provider_mfa
+      security: []
+  /v2/link/provider/email/{provider}:
+    post:
+      tags:
+      - link
+      summary: Connect Email Auth Provider
+      description: This connects auth providers that are email based.
+      operationId: connect_email_auth_provider_v2_link_provider_email__provider__post
+      parameters:
+      - name: provider
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/EmailProviders'
+          title: Email providers that require emails freestyle_auth
+      - name: x-vital-link-token
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Vital-Link-Token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailProviderAuthLink'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: connect_email_auth_provider
+      security: []
+  /v2/link/providers:
+    get:
+      tags:
+      - link
+      summary: Get Providers
+      description: GET List of all available providers given the generated link token.
+      operationId: get_providers_v2_link_providers_get
+      parameters:
+      - name: x-vital-link-token
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Vital-Link-Token
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SourceLink'
+                title: Response Get Providers V2 Link Providers Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: get_all_providers
+      security: []
+  /v2/link/connect/demo:
+    post:
+      tags:
+      - link
+      summary: Create Demo Connection
+      description: POST Connect the given Vital user to a demo provider.
+      operationId: create_demo_connection_v2_link_connect_demo_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DemoConnectionCreationPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemoConnectionStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: link
+      x-fern-sdk-method-name: connect_demo_provider
+components:
+  schemas:
+    SourceType:
+      type: string
+      enum:
+      - app
+      - ble
+      - device
+      - lab
+      - provider
+      title: SourceType
+      description: ℹ️ This enum is non-exhaustive.
+    LinkTokenExchange:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        redirect_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Redirect Url
+        filter_on_providers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/Providers'
+            type: array
+            minItems: 1
+          - type: 'null'
+          title: Filter On Providers
+          description: 'An allowlist of providers dictating what Vital Link Widget should show to the end user.
+
+            If unspecified, all linkable providers are shown.
+
+
+            This has no effect on programmatic Vital Link API usage.'
+        on_error:
+          anyOf:
+          - type: string
+            const: redirect
+          - type: 'null'
+          title: On Error
+          description: 'By default, Vital Link Widget input forms for password and email providers have in-built error handling.
+
+
+            Specifying `on_error=redirect` disables this Vital Link Widget UI behaviour — it would
+
+            instead redirect to your `redirect_url`, with Link Error parameters injected.
+
+
+            This has no effect on OAuth providers — they always redirect to your `redirect_url`. This also has
+
+            no effect on programmatic Vital Link API usage.'
+        on_close:
+          anyOf:
+          - type: string
+            const: redirect
+          - type: 'null'
+          title: On Close
+          description: 'By default, Vital Link Widget closes the window or tab when the user taps the Close button.
+
+
+            Specifying `on_close=redirect` would change the Close button behaviour to redirect to your `redirect_url`
+
+            with the `user_cancelled` error specified.
+
+
+            This has no effect on programmatic Vital Link API usage.'
+      type: object
+      required:
+      - user_id
+      title: LinkTokenExchange
+    BulkOp:
+      properties:
+        type:
+          type: string
+          enum:
+          - link_bulk_import
+          - link_bulk_historical_trigger
+          title: Type
+          description: ℹ️ This enum is non-exhaustive.
+        status:
+          type: string
+          enum:
+          - in_progress
+          - success
+          - failure
+          - aborted
+          title: Status
+          description: ℹ️ This enum is non-exhaustive.
+        provider:
+          $ref: '#/components/schemas/Providers'
+          description: ℹ️ This enum is non-exhaustive.
+        pending:
+          type: integer
+          title: Pending
+        processed:
+          type: integer
+          title: Processed
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+      type: object
+      required:
+      - type
+      - status
+      - provider
+      - pending
+      - processed
+      - started_at
+      - ended_at
+      title: BulkOp
+    DemoProviders:
+      type: string
+      enum:
+      - apple_health_kit
+      - fitbit
+      - freestyle_libre
+      - oura
+      title: DemoProviders
+      description: ℹ️ This enum is non-exhaustive.
+    DemoConnectionCreationPayload:
+      properties:
+        user_id:
+          type: string
+          format: uuid4
+          title: User Id
+          description: Vital user ID
+        provider:
+          $ref: '#/components/schemas/DemoProviders'
+          description: Demo provider. For more information, please check out our docs (https://docs.tryvital.io/wearables/providers/test_data) ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - user_id
+      - provider
+      title: DemoConnectionCreationPayload
+    ProviderMFARequest:
+      properties:
+        method:
+          type: string
+          enum:
+          - sms
+          - email
+          title: Method
+          description: The MFA method requested by the password provider to complete authentication. ℹ️ This enum is non-exhaustive.
+        hint:
+          type: string
+          title: Hint
+          description: The MFA hint provided by the password provider, e.g., the redacted phone number.
+      type: object
+      required:
+      - method
+      - hint
+      title: ProviderMFARequest
+    VitalTokenCreatedResponse:
+      properties:
+        code:
+          type: string
+          pattern: ^(sk|pk)(eu|us)([\da-f]{8})
+          title: Code
+        exchange_url:
+          type: string
+          pattern: ^tryvital\:\/\/tryvital\?code\=(sk|pk)(eu|us)([\da-f]{8})$
+          title: Exchange Url
+        expires_at:
+          type: string
+          format: date-time
+          title: Expires At
+      type: object
+      required:
+      - code
+      - exchange_url
+      - expires_at
+      title: VitalTokenCreatedResponse
+    LinkTokenExchangeResponse:
+      properties:
+        link_token:
+          type: string
+          title: Link Token
+          description: A short-lived Vital Link token for your Custom Link Widget to communicate with the Vital API.
+        link_web_url:
+          type: string
+          title: Link Web Url
+          description: The web browser link to launch the default Vital Link experience. If you requested the token for one specific provider, the link would redirect directly to the provider authentication flow. Otherwise, the user would be presented with a list of providers based on your team and token configurations.
+      type: object
+      required:
+      - link_token
+      - link_web_url
+      title: LinkTokenExchangeResponse
+      example:
+        link_token: dGVzdCB0ZXN0IHRlc3Q=
+        link_web_url: https://link.tryvital.io/?token=dGVzdCB0ZXN0IHRlc3Q%3D&env=production&region=us
+    BulkOpsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BulkOp'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: BulkOpsResponse
+    Source:
+      properties:
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        description:
+          type: string
+          title: Description
+        logo:
+          type: string
+          title: Logo
+        group:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group
+        oauth_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Url
+        auth_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceAuthType'
+          - type: 'null'
+          default: oauth
+          description: ℹ️ This enum is non-exhaustive.
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceType'
+          - type: 'null'
+          default: device
+          description: ℹ️ This enum is non-exhaustive.
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+          default: true
+        backfill_num_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Backfill Num Days
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - name
+      - slug
+      - description
+      - logo
+      - id
+      title: Provider
+      example:
+        auth_type: oauth
+        description: Garmin Watches
+        id: 1
+        logo: https://garmin.com
+        name: Garmin
+        oauth_url: https://garmin_aouth_url.com
+        slug: garmin
+    BulkTriggerHistoricalPullBody:
+      properties:
+        user_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: User Ids
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+        wait_for_completion:
+          type: boolean
+          title: Wait For Completion
+          description: '
+
+            Whether or not the endpoint should wait for the Bulk Op to complete before responding.
+
+
+            When `wait_for_completion` is enabled, the endpoint may respond 200 OK if the Bulk Op takes less than 20 seconds to complete.
+
+
+            Otherwise, the endpoint always responds with 202 Created once the submitted data have been enqueued successfully. You can use
+
+            the [List Bulk Ops](https://docs.tryvital.io/api-reference/link/list-bulk-ops) endpoint to inspect the progress of the Bulk Op.
+
+            '
+          default: false
+      type: object
+      required:
+      - user_ids
+      - provider
+      title: BulkTriggerHistoricalPullBody
+    BulkImportConnectionsResponse:
+      properties:
+        user_ids_imported:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: User Ids Imported
+        user_ids_failed:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: User Ids Failed
+      type: object
+      required:
+      - user_ids_imported
+      - user_ids_failed
+      title: BulkImportConnectionsResponse
+    IndividualProviderData:
+      properties:
+        username:
+          type: string
+          title: Username
+          description: Username for provider
+        password:
+          type: string
+          title: Password
+          description: Password for provider
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/Region'
+          - type: 'null'
+          description: Provider region to authenticate against. Only applicable to specific providers. ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - username
+      - password
+      title: IndividualProviderData
+    BulkExportConnectionsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ConnectionRecipe'
+          type: array
+          title: Data
+        next_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Token
+      type: object
+      required:
+      - data
+      - next_token
+      title: BulkExportConnectionsResponse
+    SourceLink:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        description:
+          type: string
+          title: Description
+        logo:
+          type: string
+          title: Logo
+        oauth_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Url
+        auth_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceAuthType'
+          - type: 'null'
+          default: oauth
+          description: ℹ️ This enum is non-exhaustive.
+        form_components:
+          additionalProperties: true
+          type: object
+          title: Form Components
+          default: {}
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      - description
+      - logo
+      title: SourceLink
+    EmailProviders:
+      type: string
+      enum:
+      - freestyle_libre
+      title: EmailProviders
+      description: ℹ️ This enum is non-exhaustive.
+    ConnectionRecipe:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Vital User ID. The user must be created ahead of the bulk import operation.
+        access_token:
+          type: string
+          title: Access Token
+          description: '* OAuth 2.0 providers (Fitbit, etc): The latest Access Token.
+
+            * OAuth 1.0 providers (Garmin): The Access Token.'
+        refresh_token:
+          type: string
+          title: Refresh Token
+          description: '* OAuth 2.0 providers (Fitbit, etc): The latest Refresh Token.
+
+            * OAuth 1.0 providers (Garmin): The Token Secret.'
+        provider_id:
+          type: string
+          title: Provider Id
+          description: "User ID of the data provider.\n\n* Fitbit: 6-character Fitbit User ID \n* Garmin: 36-character Garmin User ID"
+        expires_at:
+          type: integer
+          title: Expires At
+          description: 'Access token expiry date, in terms of UNIX epoch seconds.
+
+
+            * OAuth 2.0 providers (Fitbit, etc): The latest expiry date on your record.
+
+            * OAuth 1.0 providers (Garmin): Use the constant value `2147483647`.'
+        oauth_scopes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Oauth Scopes
+          description: 'OAuth scopes of the data provider. Specify `null` if you do not
+
+            have any scopes on record.
+
+
+            * Fitbit: Has scopes
+
+            * Garmin: No scope'
+      type: object
+      required:
+      - user_id
+      - access_token
+      - refresh_token
+      - provider_id
+      - expires_at
+      title: ConnectionRecipe
+    BulkExportConnectionsBody:
+      properties:
+        user_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: User Ids
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+        next_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Token
+      type: object
+      required:
+      - provider
+      title: BulkExportConnectionsBody
+    OAuthProviders:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - strava
+      - wahoo
+      - ihealth
+      - withings
+      - google_fit
+      - dexcom_v3
+      - polar
+      - cronometer
+      - omron
+      - whoop_v2
+      - my_fitness_pal_v2
+      - ultrahuman
+      - runkeeper
+      title: OAuthProviders
+      description: ℹ️ This enum is non-exhaustive.
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SourceAuthType:
+      type: string
+      enum:
+      - oauth
+      - team_oauth
+      - sdk
+      - password
+      - email
+      - app
+      - ''
+      title: SourceAuthType
+      x-fern-enum:
+        ? ''
+        : name: Empty
+      description: ℹ️ This enum is non-exhaustive.
+    BulkPauseConnectionsBody:
+      properties:
+        user_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: User Ids
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - user_ids
+      - provider
+      title: BulkPauseConnectionsBody
+    EmailProviderAuthLink:
+      properties:
+        email:
+          type: string
+          title: Email
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - type: 'null'
+          deprecated: true
+          description: ℹ️ This enum is non-exhaustive.
+        region:
+          $ref: '#/components/schemas/Region'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - email
+      title: EmailProviderAuthLink
+    Region:
+      type: string
+      enum:
+      - us
+      - eu
+      - de
+      - fr
+      - ca
+      - br
+      - ar
+      - cl
+      - co
+      - mx
+      - gb
+      - ie
+      - au
+      - nz
+      - nl
+      - at
+      - be
+      - bh
+      - ch
+      - cz
+      - dk
+      - eg
+      - es
+      - fi
+      - gr
+      - hr
+      - il
+      - it
+      - jo
+      - kw
+      - lb
+      - lu
+      - 'no'
+      - om
+      - pl
+      - pt
+      - qa
+      - sa
+      - se
+      - si
+      - sk
+      - tr
+      - za
+      - in
+      - sg
+      - hk
+      - kr
+      - ph
+      - tw
+      title: Region
+      description: ℹ️ This enum is non-exhaustive.
+    BulkImportConnectionsBody:
+      properties:
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+        connections:
+          items:
+            $ref: '#/components/schemas/ConnectionRecipe'
+          type: array
+          title: Connections
+        wait_for_completion:
+          type: boolean
+          title: Wait For Completion
+          description: '
+
+            Whether or not the endpoint should wait for the Bulk Op to complete before responding.
+
+
+            When `wait_for_completion` is enabled, the endpoint may respond 200 OK if the Bulk Op takes less than 20 seconds to complete.
+
+
+            Otherwise, the endpoint always responds with 202 Created once the submitted data have been enqueued successfully. You can use
+
+            the [List Bulk Ops](https://docs.tryvital.io/api-reference/link/list-bulk-ops) endpoint to inspect the progress of the Bulk Op.
+
+            '
+          default: false
+      type: object
+      required:
+      - provider
+      - connections
+      title: BulkImportConnectionsBody
+    PasswordProviders:
+      type: string
+      enum:
+      - whoop
+      - renpho
+      - peloton
+      - zwift
+      - eight_sleep
+      - beurer_api
+      - dexcom
+      - hammerhead
+      - my_fitness_pal
+      - kardia
+      - abbott_libreview
+      - tandem_source
+      title: PasswordProviders
+      description: ℹ️ This enum is non-exhaustive.
+    CompletePasswordProviderMFABody:
+      properties:
+        mfa_code:
+          type: string
+          title: Mfa Code
+      type: object
+      required:
+      - mfa_code
+      title: CompletePasswordProviderMFABody
+    DemoConnectionStatus:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - success
+      - detail
+      title: DemoConnectionStatus
+      example:
+        detail: Connected user 37c9c3fa-49e8-4d60-8cc8-328cba420f30 to provider fitbit
+        success: true
+    ProviderLinkResponse:
+      properties:
+        state:
+          type: string
+          enum:
+          - success
+          - error
+          - pending_provider_mfa
+          title: State
+          description: ℹ️ This enum is non-exhaustive.
+        redirect_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Redirect Url
+          description: The redirect URL you supplied when creating the Link Token (via `POST /v2/link/token`).
+        error_type:
+          anyOf:
+          - type: string
+            enum:
+            - invalid_token
+            - token_expired
+            - token_not_validated
+            - token_consumed
+            - provider_credential_error
+            - provider_password_expired
+            - provider_api_error
+            - unsupported_region
+            - duplicate_connection
+            - required_scopes_not_granted
+            - incorrect_mfa_code
+            - user_cancelled
+          - type: 'null'
+          title: Error Type
+          description: The Link Error Type. This field is populated only when state is `error`. ℹ️ This enum is non-exhaustive.
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+          description: A developer-readable debug description of the Link Error. This field is populated only when state is `error`.
+        provider_mfa:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderMFARequest'
+          - type: 'null'
+          description: The provider MFA request. This field is populated only when state is `pending_provider_mfa`.
+        provider:
+          $ref: '#/components/schemas/PasswordProviders'
+          deprecated: true
+          description: ℹ️ This enum is non-exhaustive.
+        connected:
+          type: boolean
+          title: Connected
+          deprecated: true
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+          deprecated: true
+      type: object
+      required:
+      - state
+      - provider
+      - connected
+      - provider_id
+      title: ProviderLinkResponse
+      example:
+        state: success
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

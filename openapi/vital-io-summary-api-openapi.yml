@@ -1,0 +1,3944 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate summary API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: summary
+paths:
+  /v2/summary/electrocardiogram/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Electrocardiogram
+      description: Get electrocardiogram summary for user_id
+      operationId: get_user_electrocardiogram_v2_summary_electrocardiogram__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          description: Start date in YYYY-MM-DD
+          title: Start Date
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: End date (inclusive) in YYYY-MM-DD
+          title: End Date
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingElectrocardiogramResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: electrocardiogram
+      x-fern-sdk-method-name: get
+  /v2/summary/sleep_cycle/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Sleep Cycle
+      description: Get sleep cycle for user_id
+      operationId: get_user_sleep_cycle_v2_summary_sleep_cycle__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          description: Start date in YYYY-MM-DD
+          title: Start Date
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: End date (inclusive) in YYYY-MM-DD
+          title: End Date
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSleepCycleResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: sleep_cycle
+      x-fern-sdk-method-name: get
+  /v2/summary/profile/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Profile
+      description: Get profile for user_id
+      operationId: get_user_profile_v2_summary_profile__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingProfile'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: profile
+      x-fern-sdk-method-name: get
+  /v2/summary/profile/{user_id}/raw:
+    get:
+      tags:
+      - summary
+      summary: Get User Profile Raw
+      description: Get raw profile for user_id
+      operationId: get_user_profile_raw_v2_summary_profile__user_id__raw_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawProfile'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: profile
+      x-fern-sdk-method-name: get_raw
+  /v2/summary/devices/{user_id}/raw:
+    get:
+      tags:
+      - summary
+      summary: Get User Devices Raw
+      description: Get Devices for user_id
+      operationId: get_user_devices_raw_v2_summary_devices__user_id__raw_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawDevicesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: devices
+      x-fern-sdk-method-name: get_raw
+  /v2/summary/activity/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Activity
+      description: Get activity summary for user_id
+      operationId: get_user_activity_v2_summary_activity__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientActivityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: activity
+      x-fern-sdk-method-name: get
+  /v2/summary/activity/{user_id}/raw:
+    get:
+      tags:
+      - summary
+      summary: Get User Activity Raw
+      description: Get raw activity summary for user_id
+      operationId: get_user_activity_raw_v2_summary_activity__user_id__raw_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawActivityResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: activity
+      x-fern-sdk-method-name: get_raw
+  /v2/summary/workouts/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Workouts
+      description: Get workout summary for user_id
+      operationId: get_user_workouts_v2_summary_workouts__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientWorkoutResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: workouts
+      x-fern-sdk-method-name: get
+  /v2/summary/workouts/{user_id}/raw:
+    get:
+      tags:
+      - summary
+      summary: Get User Workouts Raw
+      description: Get raw workout summary for user_id
+      operationId: get_user_workouts_raw_v2_summary_workouts__user_id__raw_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawWorkoutResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: workouts
+      x-fern-sdk-method-name: get_raw
+  /v2/summary/sleep/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Sleep
+      description: Get sleep summary for user_id
+      operationId: get_user_sleep_v2_summary_sleep__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientSleepResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: sleep
+      x-fern-sdk-method-name: get
+  /v2/summary/sleep/{user_id}/raw:
+    get:
+      tags:
+      - summary
+      summary: Get User Sleep Raw
+      description: Get raw sleep summary for user_id
+      operationId: get_user_sleep_raw_v2_summary_sleep__user_id__raw_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawSleepResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: sleep
+      x-fern-sdk-method-name: get_raw
+  /v2/summary/body/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Body
+      description: Get Body summary for user_id
+      operationId: get_user_body_v2_summary_body__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientBodyResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: body
+      x-fern-sdk-method-name: get
+  /v2/summary/body/{user_id}/raw:
+    get:
+      tags:
+      - summary
+      summary: Get User Body Raw
+      description: Get raw Body summary for user_id
+      operationId: get_user_body_raw_v2_summary_body__user_id__raw_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RawBodyResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: body
+      x-fern-sdk-method-name: get_raw
+  /v2/summary/meal/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get Meals
+      description: Get user's meals
+      operationId: get_meals_v2_summary_meal__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+          title: Start Date
+        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          title: End Date
+        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingMealResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: meal
+      x-fern-sdk-method-name: get
+  /v2/summary/menstrual_cycle/{user_id}:
+    get:
+      tags:
+      - summary
+      summary: Get User Menstrual Cycles
+      operationId: get_user_menstrual_cycles_v2_summary_menstrual_cycle__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Provider oura/strava etc
+          default: ''
+          title: Provider
+        description: Provider oura/strava etc
+      - name: start_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date
+          description: Start date in YYYY-MM-DD
+          title: Start Date
+      - name: end_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: End date (inclusive) in YYYY-MM-DD
+          title: End Date
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenstrualCycleResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: menstrual_cycle
+      x-fern-sdk-method-name: get
+components:
+  schemas:
+    ClientFacingHeartRateTimeseries:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: Deprecated
+        timezone_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Timezone Offset
+          description: Time zone UTC offset in seconds. Positive offset indicates east of UTC; negative offset indicates west of UTC; and null indicates the time zone information is unavailable at source.
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          description: Type is always null for this resource.
+        unit:
+          type: string
+          title: Unit
+          description: Measured in bpm.
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: The timestamp of the measurement.
+        value:
+          type: number
+          title: Value
+          description: Heart rate in bpm
+      type: object
+      required:
+      - unit
+      - timestamp
+      - value
+      title: ClientFacingHeartRateTimeseries
+      example:
+        timestamp: '2023-02-13T14:30:52+00:00'
+        unit: bpm
+        value: 70
+    SleepSummaryState:
+      type: string
+      enum:
+      - tentative
+      - confirmed
+      title: SleepSummaryState
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingHRVTimeseries:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: Deprecated
+        timezone_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Timezone Offset
+          description: Time zone UTC offset in seconds. Positive offset indicates east of UTC; negative offset indicates west of UTC; and null indicates the time zone information is unavailable at source.
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          description: Type is always null for this resource.
+        unit:
+          type: string
+          title: Unit
+          description: Measured in rmssd.
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: The timestamp of the measurement.
+        value:
+          type: number
+          title: Value
+          description: HRV calculated using rmssd during sleep
+      type: object
+      required:
+      - unit
+      - timestamp
+      - value
+      title: ClientFacingHRVTimeseries
+      example:
+        timestamp: '2023-02-13T14:30:52+00:00'
+        unit: rmssd
+        value: 48
+    Gender:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Gender
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingSport:
+      properties:
+        id:
+          type: integer
+          title: Id
+          description: This ID is unstable across environments. Use the slug instead.
+          deprecated: true
+        name:
+          type: string
+          title: Name
+          description: Sport's name
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated sport
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      title: ClientFacingSport
+    ClientFacingElectrocardiogram:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        session_start:
+          type: string
+          format: date-time
+          title: Session Start
+        session_end:
+          type: string
+          format: date-time
+          title: Session End
+        voltage_sample_count:
+          type: integer
+          title: Voltage Sample Count
+        heart_rate_mean:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Heart Rate Mean
+        sampling_frequency_hz:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Sampling Frequency Hz
+        classification:
+          anyOf:
+          - type: string
+            enum:
+            - sinus_rhythm
+            - atrial_fibrillation
+            - inconclusive
+          - type: 'null'
+          title: Classification
+          description: ℹ️ This enum is non-exhaustive.
+        inconclusive_cause:
+          anyOf:
+          - type: string
+            enum:
+            - high_heart_rate
+            - low_heart_rate
+            - poor_reading
+          - type: 'null'
+          title: Inconclusive Cause
+          description: ℹ️ This enum is non-exhaustive.
+        algorithm_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Algorithm Version
+        time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time Zone
+        source_provider:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - $ref: '#/components/schemas/Labs'
+          title: Source Provider
+          description: ℹ️ This enum is non-exhaustive.
+        source_type:
+          type: string
+          enum:
+          - unknown
+          - phone
+          - watch
+          - app
+          - multiple_sources
+          - fingerprick
+          - cuff
+          - manual_scan
+          - automatic
+          - insulin_pump
+          - scale
+          - chest_strap
+          - ring
+          - lab
+          - exercise_machine
+          - earphone
+          title: Source Type
+          description: ℹ️ This enum is non-exhaustive.
+        source_app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source App Id
+        source_device_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Device Model
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+      type: object
+      required:
+      - id
+      - session_start
+      - session_end
+      - voltage_sample_count
+      - source_provider
+      - source_type
+      - user_id
+      - source
+      - created_at
+      - updated_at
+      title: Electrocardiogram
+      example:
+        classification: sinus_rhythm
+        created_at: '2023-02-27T20:31:24+00:00'
+        heart_rate_mean: 73
+        id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+        sampling_frequency_hz: 505
+        session_end: '2022-01-01T08:00:00'
+        session_start: '2022-01-01T00:00:00'
+        source:
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          provider: apple_health_kit
+          type: watch
+        source_provider: oura
+        source_type: ring
+        time_zone: America/Los_Angeles
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+        voltage_sample_count: 1600
+    Labs:
+      type: string
+      enum:
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
+      description: ℹ️ This enum is non-exhaustive.
+    RawBodyResponse:
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/RawBody'
+          type: array
+          title: Body
+      type: object
+      required:
+      - body
+      title: Body Data
+      example:
+        body:
+        - data:
+            data: '...provider_specific_data'
+          priority_id: 1
+          provider_id: 5e8271a3-e71b-4882-a94a-7e364694cd16
+          source_device_id: 550e8400-e29b-41d4-a716-446655440000
+          source_id: 1
+          timestamp: '2023-02-27T12:31:24+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    HomePregnancyTestEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        test_result:
+          type: string
+          enum:
+          - negative
+          - positive
+          - indeterminate
+          title: Test Result
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - date
+      - test_result
+      title: HomePregnancyTestEntry
+    ClientSleepCycleResponse:
+      properties:
+        sleep_cycle:
+          items:
+            $ref: '#/components/schemas/ClientFacingSleepCycle'
+          type: array
+          title: Sleep Cycle
+      type: object
+      required:
+      - sleep_cycle
+      title: Sleep Cycle Data
+      example:
+        sleep_cycle:
+        - created_at: '2023-02-27T20:31:24+00:00'
+          id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+          session_end: '2022-01-01T08:00:00'
+          session_start: '2022-01-01T00:00:00'
+          sleep_id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+          source:
+            device_id: 550e8400-e29b-41d4-a716-446655440000
+            provider: oura
+            type: ring
+          source_provider: oura
+          source_type: ring
+          stage_end_offset_second:
+          - 300
+          - 600
+          - 900
+          - 1200
+          stage_start_offset_second:
+          - 0
+          - 300
+          - 600
+          - 900
+          stage_type:
+          - 1
+          - 2
+          - 3
+          - 1
+          time_zone: America/Los_Angeles
+          updated_at: '2023-02-28T01:22:38+00:00'
+          user_id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+    MealInDBBase_ClientFacingSource_:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        priority_id:
+          type: integer
+          title: Priority Id
+          description: This value has no meaning.
+          deprecated: true
+        source_id:
+          type: integer
+          title: Source Id
+          description: This value has no meaning.
+          deprecated: true
+        provider_id:
+          type: string
+          title: Provider Id
+          description: This value is identical to `id`.
+          deprecated: true
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        calendar_date:
+          type: string
+          format: date
+          title: Calendar Date
+          description: Date of the meal in the YYYY-mm-dd format. For providers that only expose a date, this is the calendar date as recorded by the user.
+        name:
+          type: string
+          title: Name
+        energy:
+          anyOf:
+          - $ref: '#/components/schemas/Energy'
+          - type: 'null'
+        macros:
+          anyOf:
+          - $ref: '#/components/schemas/Macros'
+          - type: 'null'
+        micros:
+          anyOf:
+          - $ref: '#/components/schemas/Micros'
+          - type: 'null'
+        data:
+          additionalProperties:
+            $ref: '#/components/schemas/ClientFacingFood'
+          type: object
+          title: Data
+          default: {}
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        source_app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source App Id
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+      type: object
+      required:
+      - id
+      - user_id
+      - priority_id
+      - source_id
+      - provider_id
+      - timestamp
+      - calendar_date
+      - name
+      - energy
+      - macros
+      - micros
+      - source
+      - created_at
+      - updated_at
+      title: MealInDBBase[ClientFacingSource]
+      example:
+        calendar_date: '2019-08-24'
+        created_at: '2023-02-27T20:31:24+00:00'
+        data:
+          Chiken coquet starter:
+            energy:
+              unit: kcal
+              value: 400
+            macros:
+              carbs: 75
+              fats:
+                monounsaturated: 1
+                omega3: 0
+                omega6: 0
+                polyunsaturated: 1
+                saturated: 98
+                total: 100
+              protein: 10
+              sugar: 25
+            micros:
+              minerals:
+                sodium: 500
+          Coffee, black, 1 tbsp(s):
+            energy:
+              unit: kcal
+              value: 0
+            macros:
+              carbs: 0
+              fats:
+                total: 0
+              protein: 0
+              sugar: 0
+            micros:
+              minerals:
+                sodium: 0
+        id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        name: Dinner
+        priority_id: 42
+        provider_id: '123456'
+        source:
+          app_id: com.myfitnesspal.mfp
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          provider: apple_health_kit
+          type: unknown
+        source_app_id: com.myfitnesspal.mfp
+        source_id: 10
+        timestamp: '2019-08-24T00:00:00Z'
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: a169451c-8525-4352-b8ca-070dd449a1a5
+    Micros:
+      properties:
+        minerals:
+          anyOf:
+          - additionalProperties:
+              type: number
+            propertyNames:
+              $ref: '#/components/schemas/Minerals'
+            type: object
+          - type: 'null'
+          title: Minerals
+          description: Amount of each mineral in their respective units. Most minerals are measured in mg (milligrams), while sodium and potassium are in g (grams).
+        trace_elements:
+          anyOf:
+          - additionalProperties:
+              type: number
+            propertyNames:
+              $ref: '#/components/schemas/TraceElements'
+            type: object
+          - type: 'null'
+          title: Trace Elements
+          description: Amount of each trace element in their respective units, most measured in μg (micrograms), while copper and manganese are in mg (milligrams).
+        vitamins:
+          anyOf:
+          - additionalProperties:
+              type: number
+            propertyNames:
+              $ref: '#/components/schemas/Vitamins'
+            type: object
+          - type: 'null'
+          title: Vitamins
+          description: Amount of each vitamin in their respective units. A, B12, D and K in μg (micrograms), while B1, B2, B3, B5, B6, C and folic acid are in mg (milligrams).
+      type: object
+      title: Micros
+    BasalBodyTemperatureEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        value:
+          type: number
+          title: Value
+      type: object
+      required:
+      - date
+      - value
+      title: BasalBodyTemperatureEntry
+    VitalSleepStage:
+      type: integer
+      enum:
+      - -1
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      title: VitalSleepStage
+      description: ℹ️ This enum is non-exhaustive.
+    DetectedDeviationEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        deviation:
+          type: string
+          enum:
+          - persistent_intermenstrual_bleeding
+          - prolonged_menstrual_periods
+          - irregular_menstrual_cycles
+          - infrequent_menstrual_cycles
+          title: Deviation
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - date
+      - deviation
+      title: DetectedDeviationEntry
+    RawWorkout:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+        user_id:
+          type: string
+          format: uuid4
+          title: User Id
+        provider_id:
+          type: string
+          title: Provider Id
+          deprecated: true
+        source_id:
+          type: integer
+          title: Source Id
+          deprecated: true
+        priority_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Priority Id
+          deprecated: true
+        id:
+          type: string
+          format: uuid
+          title: Id
+        sport_id:
+          type: integer
+          title: Sport Id
+        sport:
+          $ref: '#/components/schemas/ClientFacingSport'
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          default: '0001-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          default: '0001-01-01T00:00:00Z'
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          deprecated: true
+      type: object
+      required:
+      - timestamp
+      - data
+      - user_id
+      - provider_id
+      - source_id
+      - priority_id
+      - id
+      - sport_id
+      - sport
+      - source
+      title: RawWorkout
+    ClientFacingActivity:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        date:
+          type: string
+          format: date-time
+          title: Date
+          description: Date of the specified record, formatted as ISO8601 datetime string in UTC 00:00. Deprecated in favour of calendar_date.
+          deprecated: true
+        calendar_date:
+          type: string
+          format: date
+          title: Calendar Date
+          description: Date of the summary in the YYYY-mm-dd format.
+        calories_total:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Calories Total
+          description: Total energy consumption during the day including Basal Metabolic Rate in kilocalories::kilocalories
+        calories_active:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Calories Active
+          description: Energy consumption caused by the physical activity of the day in kilocalories::kilocalories
+        steps:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Steps
+          description: Total number of steps registered during the day::steps
+        daily_movement:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Daily Movement
+          description: Deprecated. Daily physical activity as equal meters i.e. amount of walking needed to get the same amount of activity::meters
+          deprecated: true
+        distance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Distance
+          description: Distance traveled during activities throughout the day::meters
+        low:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Low
+          description: Number of minutes during the day with low intensity activity (e.g. household work)::minutes
+        medium:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Medium
+          description: Number of minutes during the day with medium intensity activity (e.g. walking)::minutes
+        high:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: High
+          description: Number of minutes during the day with high intensity activity (e.g. running)::minutes
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+          description: Source the data has come from.
+        floors_climbed:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Floors Climbed
+          description: Number of floors climbed by the user::count
+        time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time Zone
+          description: 'The IANA time zone identifier. Example: ''Europe/London''.'
+        timezone_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Timezone Offset
+          description: Timezone offset from UTC as seconds. For example, EEST (Eastern European Summer Time, +3h) is 10800. PST (Pacific Standard Time, -8h) is -28800::seconds
+        heart_rate:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingHeartRate'
+          - type: 'null'
+          description: Heart rate daily summary.
+        wheelchair_use:
+          anyOf:
+          - type: boolean
+            const: true
+          - type: 'null'
+          title: Wheelchair Use
+        wheelchair_push:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Wheelchair Push
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - user_id
+      - date
+      - calendar_date
+      - source
+      - created_at
+      - updated_at
+      title: Daily Activity
+      example:
+        calendar_date: '2023-03-22'
+        calories_active: 2000
+        calories_total: 100
+        created_at: '2023-02-27T20:31:24+00:00'
+        daily_movement: 200
+        date: '2023-03-22T00:00:00+00:00'
+        floors_climbed: 10
+        heart_rate:
+          avg_bpm: 80
+          avg_walking_bpm: 70
+          max_bpm: 100
+          min_bpm: 60
+          resting_bpm: 60
+        high: 6000
+        id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        low: 6400
+        medium: 6400
+        source:
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          logo: https://logo_url.com
+          name: Oura
+          slug: oura
+        steps: 10000
+        time_zone: Europe/London
+        timezone_offset: 3600
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    ClientFacingProfile:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        height:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Height
+        birth_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Birth Date
+        wheelchair_use:
+          anyOf:
+          - type: boolean
+            const: true
+          - type: 'null'
+          title: Wheelchair Use
+        gender:
+          anyOf:
+          - $ref: '#/components/schemas/Gender'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        sex:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - user_id
+      - source
+      - created_at
+      - updated_at
+      title: ClientFacingProfile
+      example:
+        created_at: '2023-02-27T20:31:24+00:00'
+        height: 183
+        id: ceb39d90-5ba6-472b-9cb8-b5c128da5038
+        source:
+          logo: https://logo_url.com
+          name: Oura
+          slug: oura
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    ClientFacingHypnogramTimeseries:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: Deprecated
+        timezone_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Timezone Offset
+          description: Time zone UTC offset in seconds. Positive offset indicates east of UTC; negative offset indicates west of UTC; and null indicates the time zone information is unavailable at source.
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          description: Type is always null for this resource.
+        unit:
+          type: string
+          title: Unit
+          description: 'enum: 1: deep, 2: light, 3: rem, 4: awake, -1: missing_data.'
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: Depracated. The start time (inclusive) of the interval.
+        start:
+          type: string
+          format: date-time
+          title: Start
+          description: The start time (inclusive) of the interval.
+        end:
+          type: string
+          format: date-time
+          title: End
+          description: The end time (exclusive) of the interval.
+        value:
+          type: number
+          title: Value
+          description: 'Hypnogram for sleep stages {"deep": 1, "light": 2, "rem": 3, "awake": 4, "manual": 5, "missing_data": -1}'
+      type: object
+      required:
+      - unit
+      - timestamp
+      - start
+      - end
+      - value
+      title: ClientFacingHypnogramTimeseries
+      deprecated: true
+      example:
+        end: '2023-02-13T14:57:24+00:00'
+        start: '2023-02-13T14:30:52+00:00'
+        unit: stage
+        value: 1
+    ClientFacingMenstrualCycle:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        period_start:
+          type: string
+          format: date
+          title: Period Start
+        period_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Period End
+        cycle_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Cycle End
+        is_predicted:
+          type: boolean
+          title: Is Predicted
+          default: false
+        menstrual_flow:
+          items:
+            $ref: '#/components/schemas/MenstrualFlowEntry'
+          type: array
+          title: Menstrual Flow
+        cervical_mucus:
+          items:
+            $ref: '#/components/schemas/CervicalMucusEntry'
+          type: array
+          title: Cervical Mucus
+        intermenstrual_bleeding:
+          items:
+            $ref: '#/components/schemas/IntermenstrualBleedingEntry'
+          type: array
+          title: Intermenstrual Bleeding
+        contraceptive:
+          items:
+            $ref: '#/components/schemas/ContraceptiveEntry'
+          type: array
+          title: Contraceptive
+        detected_deviations:
+          items:
+            $ref: '#/components/schemas/DetectedDeviationEntry'
+          type: array
+          title: Detected Deviations
+        ovulation_test:
+          items:
+            $ref: '#/components/schemas/OvulationTestEntry'
+          type: array
+          title: Ovulation Test
+        home_pregnancy_test:
+          items:
+            $ref: '#/components/schemas/HomePregnancyTestEntry'
+          type: array
+          title: Home Pregnancy Test
+        home_progesterone_test:
+          items:
+            $ref: '#/components/schemas/HomeProgesteroneTestEntry'
+          type: array
+          title: Home Progesterone Test
+        sexual_activity:
+          items:
+            $ref: '#/components/schemas/SexualActivityEntry'
+          type: array
+          title: Sexual Activity
+        basal_body_temperature:
+          items:
+            $ref: '#/components/schemas/BasalBodyTemperatureEntry'
+          type: array
+          title: Basal Body Temperature
+        source_provider:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - $ref: '#/components/schemas/Labs'
+          title: Source Provider
+          description: ℹ️ This enum is non-exhaustive.
+        source_type:
+          type: string
+          enum:
+          - unknown
+          - phone
+          - watch
+          - app
+          - multiple_sources
+          - fingerprick
+          - cuff
+          - manual_scan
+          - automatic
+          - insulin_pump
+          - scale
+          - chest_strap
+          - ring
+          - lab
+          - exercise_machine
+          - earphone
+          title: Source Type
+          description: ℹ️ This enum is non-exhaustive.
+        source_app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source App Id
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+      type: object
+      required:
+      - id
+      - period_start
+      - source_provider
+      - source_type
+      - user_id
+      - source
+      - created_at
+      - updated_at
+      title: MenstrualCycle
+      example:
+        basal_body_temperature: []
+        cervical_mucus: []
+        contraceptive: []
+        created_at: '2023-02-27T20:31:24+00:00'
+        cycle_end: '2024-05-01'
+        detected_deviations: []
+        home_pregnancy_test: []
+        home_progesterone_test: []
+        id: e1274c3e-c035-4bd7-86aa-2eb15d6d0137
+        intermenstrual_bleeding:
+        - date: '2024-04-17'
+        is_predicted: false
+        menstrual_flow:
+        - date: '2024-04-07'
+          flow: light
+        - date: '2024-04-10'
+          flow: medium
+        - date: '2024-04-11'
+          flow: heavy
+        ovulation_test: []
+        period_end: '2024-04-11'
+        period_start: '2024-04-07'
+        sexual_activity:
+        - date: '2024-04-13'
+          protection_used: true
+        source:
+          app_id: com.apple.Health
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          provider: apple_health_kit
+          type: app
+        source_app_id: com.apple.Health
+        source_provider: apple_health_kit
+        source_type: app
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: cbd8b986-4225-4d36-8e2c-046ff2702769
+    Vitamins:
+      type: string
+      enum:
+      - vitamin_a
+      - vitamin_b1
+      - riboflavin
+      - niacin
+      - pantothenic_acid
+      - vitamin_b6
+      - biotin
+      - vitamin_b12
+      - vitamin_c
+      - vitamin_d
+      - vitamin_e
+      - vitamin_k
+      - folic_acid
+      title: Vitamins
+      description: ℹ️ This enum is non-exhaustive.
+    CervicalMucusEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        quality:
+          type: string
+          enum:
+          - dry
+          - sticky
+          - creamy
+          - watery
+          - egg_white
+          title: Quality
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - date
+      - quality
+      title: CervicalMucusEntry
+    ClientFacingWorkoutMap:
+      properties:
+        polyline:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Polyline
+          description: Polyline of the map
+        summary_polyline:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary Polyline
+          description: A lower resolution summary of the polyline
+      type: object
+      title: ClientFacingWorkoutMap
+    TraceElements:
+      type: string
+      enum:
+      - chromium
+      - copper
+      - iodine
+      - manganese
+      - molybdenum
+      - selenium
+      title: TraceElements
+      description: ℹ️ This enum is non-exhaustive.
+    Sex:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      title: Sex
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingHeartRate:
+      properties:
+        avg_bpm:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Avg Bpm
+          description: Average heart rate::bpm
+        min_bpm:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Min Bpm
+          description: Minimum heart rate::bpm
+        max_bpm:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Bpm
+          description: Maximum heart rate::bpm
+        resting_bpm:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Resting Bpm
+          description: Resting heart rate::bpm
+        avg_walking_bpm:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Avg Walking Bpm
+      type: object
+      title: Heart Rate
+      example:
+        avg_bpm: 80
+        avg_walking_bpm: 70
+        max_bpm: 100
+        min_bpm: 60
+        resting_bpm: 60
+    ClientFacingElectrocardiogramResponse:
+      properties:
+        electrocardiogram:
+          items:
+            $ref: '#/components/schemas/ClientFacingElectrocardiogram'
+          type: array
+          title: Electrocardiogram
+      type: object
+      required:
+      - electrocardiogram
+      title: Electrocardiogram Data
+      example:
+        electrocardiogram:
+        - classification: sinus_rhythm
+          created_at: '2023-02-27T20:31:24+00:00'
+          heart_rate_mean: 73
+          id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+          sampling_frequency_hz: 505
+          session_end: '2022-01-01T08:00:00'
+          session_start: '2022-01-01T00:00:00'
+          source:
+            device_id: 550e8400-e29b-41d4-a716-446655440000
+            provider: apple_health_kit
+            type: watch
+          source_provider: oura
+          source_type: ring
+          time_zone: America/Los_Angeles
+          updated_at: '2023-02-28T01:22:38+00:00'
+          user_id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+          voltage_sample_count: 1600
+    RawDevicesResponse:
+      properties:
+        devices:
+          items:
+            $ref: '#/components/schemas/RawDevice'
+          type: array
+          title: Devices
+      type: object
+      required:
+      - devices
+      title: Raw Devices Data
+      example:
+        devices:
+        - data:
+            data: '...provider_specific_data'
+          provider_id: 5e8271a3-e71b-4882-a94a-7e364694cd16
+          source_id: 1
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    MenstrualCycleResponse:
+      properties:
+        menstrual_cycle:
+          items:
+            $ref: '#/components/schemas/ClientFacingMenstrualCycle'
+          type: array
+          title: Menstrual Cycle
+      type: object
+      required:
+      - menstrual_cycle
+      title: MenstrualCycleResponse
+    ClientFacingSource:
+      properties:
+        provider:
+          type: string
+          title: Provider
+          description: Provider slug. e.g., `oura`, `fitbit`, `garmin`.
+        type:
+          type: string
+          title: Type
+          description: The type of the data source (app or device) by which the summary or the timeseries data were recorded. This defaults to `unknown` when Vital cannot extract or infer that information
+          default: unknown
+        app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Id
+          description: The identifier of the app which recorded this summary. This is only applicable to multi-source providers like Apple Health and Android Health Connect.
+        device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Device Id
+          description: The identifier of the device which recorded this summary.
+        sport:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sport
+          description: '
+
+            For workout stream timeseries, this is the standard sport slug of the workout with which the timeseries data are associated.
+
+
+            For the `distance` timeseries, this is `wheelchair_pushing` if the user is a wheelchair user, or `null` otherwise.
+
+
+            For all summary types and non-workout timeseries, this is always `null`.
+
+            '
+        workout_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Workout Id
+          description: '
+
+            For workout stream timeseries, this is the workout ID with which the timeseries data are associated.
+
+
+            For all other types, this is always `null`.
+
+            '
+        name:
+          type: string
+          title: Name
+          description: Deprecated. Subject to removal after 1 Jan 2024.
+          default: ''
+          deprecated: true
+        slug:
+          type: string
+          title: Slug
+          description: Deprecated. Use `provider` instead. Subject to removal after 1 Jan 2024.
+          default: ''
+          deprecated: true
+        logo:
+          type: string
+          title: Logo
+          description: Deprecated. Subject to removal after 1 Jan 2024.
+          default: ''
+          deprecated: true
+      type: object
+      required:
+      - provider
+      title: Source
+      description: 'Source summarizes where a sample or a summary is sourced from.
+
+        At minimum, the source provider is always included.'
+      example:
+        provider: oura
+        type: ring
+    RawDevice:
+      properties:
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+        provider_id:
+          type: string
+          title: Provider Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        source_id:
+          type: integer
+          title: Source Id
+        id:
+          type: string
+          format: uuid
+          title: Id
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+      type: object
+      required:
+      - data
+      - provider_id
+      - user_id
+      - source_id
+      - id
+      - source
+      title: RawDevice
+    RawProfile:
+      properties:
+        profile:
+          $ref: '#/components/schemas/ProfileInDb'
+      type: object
+      required:
+      - profile
+      title: Profile Data
+      example:
+        profile:
+        - data:
+            data: '...provider_specific_data'
+          source_id: 1
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    Fats:
+      properties:
+        saturated:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Saturated
+          description: Amount of saturated fats in grams (g)
+        monounsaturated:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Monounsaturated
+          description: Amount of monounsaturated fats in grams (g)
+        polyunsaturated:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Polyunsaturated
+          description: Amount of polyunsaturated fats in grams (g)
+        omega3:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Omega3
+          description: Amount of Omega-3 fatty acids in grams (g)
+        omega6:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Omega6
+          description: Amount of Omega-6 fatty acids in grams (g)
+        total:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Total
+          description: Total amount of fats in grams (g)
+      type: object
+      title: Fats
+    ClientSleepResponse:
+      properties:
+        sleep:
+          items:
+            $ref: '#/components/schemas/ClientFacingSleep'
+          type: array
+          title: Sleep
+      type: object
+      required:
+      - sleep
+      title: Sleep Data
+      example:
+        sleep:
+        - average_hrv: 78
+          awake: 2400
+          bedtime_start: '2023-02-27T12:31:24+00:00'
+          bedtime_stop: '2023-02-27T12:31:24+00:00'
+          calendar_date: '2023-02-27'
+          created_at: '2023-02-27T20:31:24+00:00'
+          date: '2023-02-27T12:31:24+00:00'
+          deep: 2400
+          duration: 28800
+          efficiency: 0.97
+          hr_average: 50
+          hr_lowest: 43
+          id: e2e0eb04-6641-4858-9de5-649efb41b346
+          latency: 1000
+          light: 2400
+          recovery_readiness_score: 82
+          rem: 2400
+          respiratory_rate: 14
+          skin_temperature: 36.5
+          source:
+            device_id: 550e8400-e29b-41d4-a716-446655440000
+            provider: oura
+            type: unknown
+          temperature_delta: -0.2
+          timezone_offset: 2400
+          total: 28800
+          updated_at: '2023-02-28T01:22:38+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    RawActivityResponse:
+      properties:
+        activity:
+          items:
+            $ref: '#/components/schemas/RawActivity'
+          type: array
+          title: Activity
+      type: object
+      required:
+      - activity
+      title: Activity Data
+      example:
+        activity:
+        - data:
+            data: '...provider_specific_data'
+          priority_id: 1
+          provider_id: 5e8271a3-e71b-4882-a94a-7e364694cd16
+          source_device_id: 550e8400-e29b-41d4-a716-446655440000
+          source_id: 1
+          timestamp: '2023-03-22T00:00:00+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HomeProgesteroneTestEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        test_result:
+          type: string
+          enum:
+          - negative
+          - positive
+          - indeterminate
+          title: Test Result
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - date
+      - test_result
+      title: HomeProgesteroneTestEntry
+    ContraceptiveEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        type:
+          type: string
+          enum:
+          - unspecified
+          - implant
+          - injection
+          - iud
+          - intravaginal_ring
+          - oral
+          - patch
+          title: Type
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - date
+      - type
+      title: ContraceptiveEntry
+    ClientFacingSleepCycle:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        sleep_id:
+          type: string
+          format: uuid
+          title: Sleep Id
+        session_start:
+          type: string
+          format: date-time
+          title: Session Start
+        session_end:
+          type: string
+          format: date-time
+          title: Session End
+        stage_start_offset_second:
+          items:
+            type: integer
+          type: array
+          title: Stage Start Offset Second
+        stage_end_offset_second:
+          items:
+            type: integer
+          type: array
+          title: Stage End Offset Second
+        stage_type:
+          items:
+            $ref: '#/components/schemas/VitalSleepStage'
+          type: array
+          title: Stage Type
+          description: '
+
+            Sleep stage classification:
+
+            `-1`: Unknown or unclassified sleep stage;
+
+            `1`: Deep sleep;
+
+            `2`: Light/non-REM sleep;
+
+            `3`: Rapid Eye Movement sleep;
+
+            `4`: Awake period;
+
+            `5`: Manually classified stage.
+
+            '
+          examples:
+          - - 1
+            - 3
+        time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Time Zone
+        source_provider:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - $ref: '#/components/schemas/Labs'
+          title: Source Provider
+          description: ℹ️ This enum is non-exhaustive.
+        source_type:
+          type: string
+          enum:
+          - unknown
+          - phone
+          - watch
+          - app
+          - multiple_sources
+          - fingerprick
+          - cuff
+          - manual_scan
+          - automatic
+          - insulin_pump
+          - scale
+          - chest_strap
+          - ring
+          - lab
+          - exercise_machine
+          - earphone
+          title: Source Type
+          description: ℹ️ This enum is non-exhaustive.
+        source_app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source App Id
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+      type: object
+      required:
+      - id
+      - sleep_id
+      - session_start
+      - session_end
+      - stage_start_offset_second
+      - stage_end_offset_second
+      - stage_type
+      - source_provider
+      - source_type
+      - user_id
+      - source
+      - created_at
+      - updated_at
+      title: Sleep Cycle
+      example:
+        created_at: '2023-02-27T20:31:24+00:00'
+        id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+        session_end: '2022-01-01T08:00:00'
+        session_start: '2022-01-01T00:00:00'
+        sleep_id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+        source:
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          provider: oura
+          type: ring
+        source_provider: oura
+        source_type: ring
+        stage_end_offset_second:
+        - 300
+        - 600
+        - 900
+        - 1200
+        stage_start_offset_second:
+        - 0
+        - 300
+        - 600
+        - 900
+        stage_type:
+        - 1
+        - 2
+        - 3
+        - 1
+        time_zone: America/Los_Angeles
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: f1b3b3b3-1b3b-1b3b-1b3b-1b3b3b3b3b3b
+    RawSleepResponse:
+      properties:
+        sleep:
+          items:
+            $ref: '#/components/schemas/RawSleep'
+          type: array
+          title: Sleep
+      type: object
+      required:
+      - sleep
+      title: Raw Sleep data
+      example:
+        sleep:
+        - data:
+            data: '...provider_specific_data'
+          priority_id: 1
+          provider_id: 5e8271a3-e71b-4882-a94a-7e364694cd16
+          source_device_id: 550e8400-e29b-41d4-a716-446655440000
+          source_id: 1
+          timestamp: '2023-02-27T12:31:24+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    SexualActivityEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        protection_used:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Protection Used
+      type: object
+      required:
+      - date
+      title: SexualActivityEntry
+    RawActivity:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+        user_id:
+          type: string
+          format: uuid4
+          title: User Id
+        provider_id:
+          type: string
+          title: Provider Id
+          deprecated: true
+        source_id:
+          type: integer
+          title: Source Id
+          deprecated: true
+        priority_id:
+          type: integer
+          title: Priority Id
+          deprecated: true
+        id:
+          type: string
+          format: uuid
+          title: Id
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          default: '0001-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          default: '0001-01-01T00:00:00Z'
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          deprecated: true
+      type: object
+      required:
+      - timestamp
+      - data
+      - user_id
+      - provider_id
+      - source_id
+      - priority_id
+      - id
+      - source
+      title: RawActivity
+    RawBody:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider_id:
+          type: string
+          title: Provider Id
+          deprecated: true
+        source_id:
+          type: integer
+          title: Source Id
+          deprecated: true
+        priority_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Priority Id
+          deprecated: true
+        id:
+          type: string
+          format: uuid
+          title: Id
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          default: '0001-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          default: '0001-01-01T00:00:00Z'
+        priority:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Priority
+          deprecated: true
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          deprecated: true
+      type: object
+      required:
+      - timestamp
+      - data
+      - user_id
+      - provider_id
+      - source_id
+      - priority_id
+      - id
+      - source
+      title: RawBody
+    ClientWorkoutResponse:
+      properties:
+        workouts:
+          items:
+            $ref: '#/components/schemas/ClientFacingWorkout'
+          type: array
+          title: Workouts
+      type: object
+      required:
+      - workouts
+      title: ClientWorkoutResponse
+      example:
+        workouts:
+        - average_hr: 100
+          average_speed: 4.2
+          average_watts: 100
+          calendar_date: '2023-02-27'
+          calories: 300
+          created_at: '2023-02-27T20:31:24+00:00'
+          device_watts: 80
+          distance: 1700
+          elev_high: 20.2
+          elev_low: -10.2
+          hr_zones:
+          - 100
+          - 90
+          - 10
+          - 10
+          - 200
+          id: 185d0f34-dfc0-429f-84f9-b24030914bdd
+          map:
+            summary_polyline: agn~Ftb{uOvr@daBunBjdBkHwiD????~Ngn@ha@_N~Ql`@
+          max_hr: 190
+          max_speed: 7.8
+          max_watts: 200
+          moving_time: 100
+          source:
+            device_id: 550e8400-e29b-41d4-a716-446655440000
+            provider: strava
+            type: unknown
+          sport:
+            id: 1
+            name: football
+          time_end: '2023-02-27T12:31:24+00:00'
+          time_start: '2023-02-27T11:31:24+00:00'
+          total_elevation_gain: 10
+          updated_at: '2023-02-28T01:22:38+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+          weighted_average_watts: 250
+    OvulationTestEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        test_result:
+          type: string
+          enum:
+          - negative
+          - positive
+          - luteinizing_hormone_surge
+          - estrogen_surge
+          - indeterminate
+          title: Test Result
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - date
+      - test_result
+      title: OvulationTestEntry
+    ClientFacingSleepStream:
+      properties:
+        hrv:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClientFacingHRVTimeseries'
+            type: array
+          - type: 'null'
+          title: Hrv
+          default: []
+        heartrate:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClientFacingHeartRateTimeseries'
+            type: array
+          - type: 'null'
+          title: Heartrate
+          default: []
+        hypnogram:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClientFacingHypnogramTimeseries'
+            type: array
+          - type: 'null'
+          title: Hypnogram
+          default: []
+        respiratory_rate:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClientFacingRespiratoryRateTimeseries'
+            type: array
+          - type: 'null'
+          title: Respiratory Rate
+          default: []
+      type: object
+      title: Sleep stream data
+      example:
+        heartrate:
+        - id: 0
+          timestamp: '2026-05-20T13:43:41.731693+00:00'
+          unit: bpm
+          value: 16
+        - id: 1
+          timestamp: '2026-05-20T13:44:11.731712+00:00'
+          unit: bpm
+          value: 93
+        - id: 2
+          timestamp: '2026-05-20T13:44:41.731730+00:00'
+          unit: bpm
+          value: 187
+        - id: 3
+          timestamp: '2026-05-20T13:45:11.731772+00:00'
+          unit: bpm
+          value: 21
+        - id: 4
+          timestamp: '2026-05-20T13:45:41.731794+00:00'
+          unit: bpm
+          value: 148
+        hrv:
+        - id: 0
+          timestamp: '2026-05-20T13:43:41.731486+00:00'
+          unit: rmssd
+          value: 36
+        - id: 1
+          timestamp: '2026-05-20T13:44:11.731579+00:00'
+          unit: rmssd
+          value: 100
+        - id: 2
+          timestamp: '2026-05-20T13:44:41.731621+00:00'
+          unit: rmssd
+          value: 43
+        - id: 3
+          timestamp: '2026-05-20T13:45:11.731650+00:00'
+          unit: rmssd
+          value: 98
+        - id: 4
+          timestamp: '2026-05-20T13:45:41.731672+00:00'
+          unit: rmssd
+          value: 8
+        hypnogram:
+        - id: 0
+          timestamp: '2026-05-20T13:43:41.731815+00:00'
+          unit: stage
+          value: 4
+        - id: 1
+          timestamp: '2026-05-20T13:44:11.731833+00:00'
+          unit: stage
+          value: 4
+        - id: 2
+          timestamp: '2026-05-20T13:44:41.731851+00:00'
+          unit: stage
+          value: 3
+        - id: 3
+          timestamp: '2026-05-20T13:45:11.731868+00:00'
+          unit: stage
+          value: 1
+        - id: 4
+          timestamp: '2026-05-20T13:45:41.731884+00:00'
+          unit: stage
+          value: 0
+        respiratory_rate:
+        - id: 0
+          timestamp: '2026-05-20T13:43:41.731904+00:00'
+          unit: bpm
+          value: 15
+        - id: 1
+          timestamp: '2026-05-20T13:44:11.731921+00:00'
+          unit: bpm
+          value: 26
+        - id: 2
+          timestamp: '2026-05-20T13:44:41.731937+00:00'
+          unit: bpm
+          value: 23
+        - id: 3
+          timestamp: '2026-05-20T13:45:11.731951+00:00'
+          unit: bpm
+          value: 14
+        - id: 4
+          timestamp: '2026-05-20T13:45:41.731965+00:00'
+          unit: bpm
+          value: 24
+    Macros:
+      properties:
+        carbs:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Carbs
+          description: Amount of carbohydrates in grams (g)
+        protein:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Protein
+          description: Amount of protein in grams (g)
+        fats:
+          $ref: '#/components/schemas/Fats'
+          description: Details of fat content
+        alcohol:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Alcohol
+          description: Amount of alcohol in grams (g)
+        water:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Water
+          description: Amount of water in grams (g)
+        fibre:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Fibre
+          description: Amount of dietary fiber in grams (g)
+        sugar:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Sugar
+          description: Amount of sugar in grams (g)
+        cholesterol:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Cholesterol
+          description: Amount of cholesterol in grams (g)
+      type: object
+      title: Macros
+    IntermenstrualBleedingEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+      type: object
+      required:
+      - date
+      title: IntermenstrualBleedingEntry
+    RawSleep:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        data:
+          additionalProperties: true
+          type: object
+          title: Data
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider_id:
+          type: string
+          title: Provider Id
+          deprecated: true
+        source_id:
+          type: integer
+          title: Source Id
+          deprecated: true
+        priority_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Priority Id
+          deprecated: true
+        id:
+          type: string
+          format: uuid
+          title: Id
+        source_device_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Device Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          default: '0001-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          default: '0001-01-01T00:00:00Z'
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          deprecated: true
+        priority:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Priority
+          deprecated: true
+      type: object
+      required:
+      - timestamp
+      - data
+      - user_id
+      - provider_id
+      - source_id
+      - priority_id
+      - id
+      - source
+      title: RawSleep
+    ClientFacingBody:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        date:
+          type: string
+          format: date-time
+          title: Date
+          description: Date of the specified record, formatted as ISO8601 datetime string in UTC 00:00. Deprecated in favour of calendar_date.
+          deprecated: true
+        calendar_date:
+          type: string
+          format: date
+          title: Calendar Date
+          description: Date of the summary in the YYYY-mm-dd format.
+        weight:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Weight
+          description: Weight in kg::kg
+        fat:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Fat
+          description: Total body fat percentage::perc
+        water_percentage:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Water Percentage
+          description: Water percentage in the body::perc
+        muscle_mass_percentage:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Muscle Mass Percentage
+          description: Muscle mass percentage in the body::perc
+        visceral_fat_index:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Visceral Fat Index
+          description: Visceral fat index::scalar
+        bone_mass_percentage:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Bone Mass Percentage
+          description: Bone mass percentage in the body::perc
+        body_mass_index:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Body Mass Index
+        lean_body_mass_kilogram:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Lean Body Mass Kilogram
+        waist_circumference_centimeter:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Waist Circumference Centimeter
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - user_id
+      - date
+      - calendar_date
+      - source
+      - created_at
+      - updated_at
+      title: ClientFacingBody
+      example:
+        body_mass_index: 22.3
+        bone_mass_percentage: 4.3
+        calendar_date: '2023-02-27'
+        created_at: '2023-02-27T20:31:24+00:00'
+        date: '2023-02-27T12:31:24+00:00'
+        fat: 30
+        height: 183
+        id: 8be1306e-01fc-46b1-b5d1-a9e39052db09
+        lean_body_mass_kilogram: 40.1
+        muscle_mass_percentage: 40.2
+        source:
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          logo: https://logo_url.com
+          name: Withings
+          slug: withings
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+        visceral_fat_index: 4.5
+        waist_circumference_centimeter: 86.36
+        water_percentage: 55.4
+        weight: 80
+    ClientFacingMealResponse:
+      properties:
+        meals:
+          items:
+            $ref: '#/components/schemas/MealInDBBase_ClientFacingSource_'
+          type: array
+          title: Meals
+      type: object
+      required:
+      - meals
+      title: ClientFacingMealResponse
+      example:
+        meals:
+        - calendar_date: '2019-08-24'
+          created_at: '2023-02-27T20:31:24+00:00'
+          data:
+            Chiken coquet starter:
+              energy:
+                unit: kcal
+                value: 400
+              macros:
+                carbs: 75
+                fats:
+                  monounsaturated: 1
+                  omega3: 0
+                  omega6: 0
+                  polyunsaturated: 1
+                  saturated: 98
+                  total: 100
+                protein: 10
+                sugar: 25
+              micros:
+                minerals:
+                  sodium: 500
+            Coffee, black, 1 tbsp(s):
+              energy:
+                unit: kcal
+                value: 0
+              macros:
+                carbs: 0
+                fats:
+                  total: 0
+                protein: 0
+                sugar: 0
+              micros:
+                minerals:
+                  sodium: 0
+          id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          name: Dinner
+          priority_id: 42
+          provider_id: '123456'
+          source:
+            app_id: com.myfitnesspal.mfp
+            device_id: 550e8400-e29b-41d4-a716-446655440000
+            provider: apple_health_kit
+            type: unknown
+          source_app_id: com.myfitnesspal.mfp
+          source_id: 10
+          timestamp: '2019-08-24T00:00:00Z'
+          updated_at: '2023-02-28T01:22:38+00:00'
+          user_id: a169451c-8525-4352-b8ca-070dd449a1a5
+    MenstrualFlowEntry:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        flow:
+          type: string
+          enum:
+          - unspecified
+          - none
+          - light
+          - medium
+          - heavy
+          title: Flow
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - date
+      - flow
+      title: MenstrualFlowEntry
+    ClientFacingSleep:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        date:
+          type: string
+          format: date-time
+          title: Date
+          description: Date of the specified record, formatted as ISO8601 datetime string in UTC 00:00. Deprecated in favour of calendar_date.
+          deprecated: true
+        calendar_date:
+          type: string
+          format: date
+          title: Calendar Date
+          description: Date of the sleep summary in the YYYY-mm-dd format. This generally matches the sleep end date.
+        bedtime_start:
+          type: string
+          format: date-time
+          title: Bedtime Start
+          description: UTC Time when the sleep period started
+        bedtime_stop:
+          type: string
+          format: date-time
+          title: Bedtime Stop
+          description: UTC Time when the sleep period ended
+        type:
+          $ref: '#/components/schemas/SleepType'
+          description: "\n`long_sleep`: >=3 hours of sleep;\n`short_sleep`: <3 hours of sleep;\n`acknowledged_nap`: User-acknowledged naps, typically under 3 hours of sleep;\n`unknown`: The sleep session recording is ongoing.\n ℹ️ This enum is non-exhaustive."
+        timezone_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Timezone Offset
+          description: Timezone offset from UTC as seconds. For example, EEST (Eastern European Summer Time, +3h) is 10800. PST (Pacific Standard Time, -8h) is -28800::seconds
+        duration:
+          type: integer
+          title: Duration
+          description: Total duration of the sleep period (sleep.duration = sleep.bedtime_end - sleep.bedtime_start)::seconds
+        total:
+          type: integer
+          title: Total
+          description: Total amount of sleep registered during the sleep period (sleep.total = sleep.rem + sleep.light + sleep.deep)::seconds
+        awake:
+          type: integer
+          title: Awake
+          description: Total amount of awake time registered during the sleep period::seconds
+        light:
+          type: integer
+          title: Light
+          description: Total amount of light sleep registered during the sleep period::seconds
+        rem:
+          type: integer
+          title: Rem
+          description: Total amount of REM sleep registered during the sleep period, minutes::seconds
+        deep:
+          type: integer
+          title: Deep
+          description: Total amount of deep (N3) sleep registered during the sleep period::seconds
+        score:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Score
+          description: A value between 1 and 100 representing how well the user slept. Currently only available for Withings, Oura, Whoop and Garmin::scalar
+        recovery_readiness_score:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Recovery Readiness Score
+          description: A value between 0 and 100 representing the provider's recovery/readiness proxy. Currently sourced from Oura readiness score, Whoop recovery score, and Ultrahuman recovery::scalar
+        hr_lowest:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Hr Lowest
+          description: The lowest heart rate (5 minutes sliding average) registered during the sleep period::beats per minute
+        hr_average:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Hr Average
+          description: The average heart rate registered during the sleep period::beats per minute
+        hr_resting:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Hr Resting
+          description: Resting heart rate recorded during a sleep session::bpm
+        efficiency:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Efficiency
+          description: Sleep efficiency is the percentage of the sleep period spent asleep (100% * sleep.total / sleep.duration)::perc
+        latency:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Latency
+          description: Detected latency from bedtime_start to the beginning of the first five minutes of persistent sleep::seconds
+        temperature_delta:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Temperature Delta
+          description: Skin temperature deviation from the long-term temperature average::celcius
+        skin_temperature:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Skin Temperature
+          description: The skin temperature::celcius
+        hr_dip:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Hr Dip
+          description: Sleeping Heart Rate Dip is the percentage difference between your average waking heart rate and your average sleeping heart rate. In health studies, a greater "dip" is typically seen as a positive indicator of overall health. Currently only available for Garmin::perc
+        state:
+          anyOf:
+          - $ref: '#/components/schemas/SleepSummaryState'
+          - type: 'null'
+          description: Some providers can provide updates to the sleep summary hours after the sleep period has ended. This field indicates the state of the sleep summary. For example, TENTATIVE means the summary is an intial prediction from the provider and can be subject to change. Currently only available for Garmin and EightSleep::str ℹ️ This enum is non-exhaustive.
+        average_hrv:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Average Hrv
+          description: The average heart rate variability registered during the sleep period::rmssd
+        respiratory_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Respiratory Rate
+          description: Average respiratory rate::breaths per minute
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+          description: Source the data has come from.
+        sleep_stream:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingSleepStream'
+          - type: 'null'
+          deprecated: true
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - user_id
+      - date
+      - calendar_date
+      - bedtime_start
+      - bedtime_stop
+      - type
+      - duration
+      - total
+      - awake
+      - light
+      - rem
+      - deep
+      - source
+      - created_at
+      - updated_at
+      title: Sleep Data
+      example:
+        average_hrv: 78
+        awake: 2400
+        bedtime_start: '2023-02-27T12:31:24+00:00'
+        bedtime_stop: '2023-02-27T12:31:24+00:00'
+        calendar_date: '2023-02-27'
+        created_at: '2023-02-27T20:31:24+00:00'
+        date: '2023-02-27T12:31:24+00:00'
+        deep: 2400
+        duration: 28800
+        efficiency: 0.97
+        hr_average: 50
+        hr_lowest: 43
+        id: e2e0eb04-6641-4858-9de5-649efb41b346
+        latency: 1000
+        light: 2400
+        recovery_readiness_score: 82
+        rem: 2400
+        respiratory_rate: 14
+        skin_temperature: 36.5
+        source:
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          provider: oura
+          type: unknown
+        temperature_delta: -0.2
+        timezone_offset: 2400
+        total: 28800
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    RawWorkoutResponse:
+      properties:
+        workouts:
+          items:
+            $ref: '#/components/schemas/RawWorkout'
+          type: array
+          title: Workouts
+      type: object
+      required:
+      - workouts
+      title: Workouts Data
+      example:
+        workouts:
+        - data:
+            provider_specific: '..._data'
+          priority_id: 1
+          provider_id: 5e8271a3-e71b-4882-a94a-7e364694cd16
+          source_device_id: 550e8400-e29b-41d4-a716-446655440000
+          source_id: 1
+          sport_id: 3
+          timestamp: '2023-02-27T12:31:24+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    ProfileInDb:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        data:
+          title: Data
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        source_id:
+          type: integer
+          title: Source Id
+          deprecated: true
+        priority_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Priority Id
+          deprecated: true
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          default: '0001-01-01T00:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          default: '0001-01-01T00:00:00Z'
+      type: object
+      required:
+      - id
+      - data
+      - user_id
+      - source_id
+      - source
+      title: ProfileInDb
+    Minerals:
+      type: string
+      enum:
+      - sodium
+      - potassium
+      - calcium
+      - phosphorus
+      - magnesium
+      - iron
+      - zinc
+      - fluoride
+      - chloride
+      title: Minerals
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingProvider:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        logo:
+          type: string
+          title: Logo
+          description: URL for source logo
+      type: object
+      required:
+      - name
+      - slug
+      - logo
+      title: Provider
+      description: A vendor, a service, or a platform which Vital can connect with.
+      example:
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+    ClientBodyResponse:
+      properties:
+        body:
+          items:
+            $ref: '#/components/schemas/ClientFacingBody'
+          type: array
+          title: Body
+      type: object
+      required:
+      - body
+      title: ClientBodyResponse
+      example:
+        body:
+        - body_mass_index: 22.3
+          bone_mass_percentage: 4.3
+          calendar_date: '2023-02-27'
+          created_at: '2023-02-27T20:31:24+00:00'
+          date: '2023-02-27T12:31:24+00:00'
+          fat: 30
+          height: 183
+          id: 8be1306e-01fc-46b1-b5d1-a9e39052db09
+          lean_body_mass_kilogram: 40.1
+          muscle_mass_percentage: 40.2
+          source:
+            device_id: 550e8400-e29b-41d4-a716-446655440000
+            logo: https://logo_url.com
+            name: Withings
+            slug: withings
+          updated_at: '2023-02-28T01:22:38+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+          visceral_fat_index: 4.5
+          waist_circumference_centimeter: 86.36
+          water_percentage: 55.4
+          weight: 80
+    ClientActivityResponse:
+      properties:
+        activity:
+          items:
+            $ref: '#/components/schemas/ClientFacingActivity'
+          type: array
+          title: Activity
+      type: object
+      required:
+      - activity
+      title: Daily Activity
+      example:
+        activity:
+        - calendar_date: '2023-03-22'
+          calories_active: 2000
+          calories_total: 100
+          created_at: '2023-02-27T20:31:24+00:00'
+          daily_movement: 200
+          date: '2023-03-22T00:00:00+00:00'
+          floors_climbed: 10
+          heart_rate:
+            avg_bpm: 80
+            avg_walking_bpm: 70
+            max_bpm: 100
+            min_bpm: 60
+            resting_bpm: 60
+          high: 6000
+          id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          low: 6400
+          medium: 6400
+          source:
+            device_id: 550e8400-e29b-41d4-a716-446655440000
+            logo: https://logo_url.com
+            name: Oura
+            slug: oura
+          steps: 10000
+          time_zone: Europe/London
+          timezone_offset: 3600
+          updated_at: '2023-02-28T01:22:38+00:00'
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    ClientFacingFood:
+      properties:
+        energy:
+          anyOf:
+          - $ref: '#/components/schemas/Energy'
+          - type: 'null'
+        macros:
+          anyOf:
+          - $ref: '#/components/schemas/Macros'
+          - type: 'null'
+        micros:
+          anyOf:
+          - $ref: '#/components/schemas/Micros'
+          - type: 'null'
+      type: object
+      title: ClientFacingFood
+    SleepType:
+      type: string
+      enum:
+      - long_sleep
+      - short_sleep
+      - acknowledged_nap
+      - unknown
+      title: SleepType
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingRespiratoryRateTimeseries:
+      properties:
+        id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Id
+          description: Deprecated
+        timezone_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Timezone Offset
+          description: Time zone UTC offset in seconds. Positive offset indicates east of UTC; negative offset indicates west of UTC; and null indicates the time zone information is unavailable at source.
+        type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Type
+          description: Type is always null for this resource.
+        unit:
+          type: string
+          title: Unit
+          description: Measured in bpm.
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+          description: The timestamp of the measurement.
+        value:
+          type: number
+          title: Value
+          description: Average respiratory rate::breaths per minute
+      type: object
+      required:
+      - unit
+      - timestamp
+      - value
+      title: ClientFacingRespiratoryRateTimeseries
+      example:
+        timestamp: '2023-02-13T14:30:52+00:00'
+        unit: bpm
+        value: 15.5
+    Energy:
+      properties:
+        unit:
+          type: string
+          const: kcal
+          title: Unit
+        value:
+          type: number
+          title: Value
+      type: object
+      required:
+      - unit
+      - value
+      title: Energy
+    ClientFacingWorkout:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+          description: Title given for the workout
+        timezone_offset:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Timezone Offset
+          description: Timezone offset from UTC as seconds. For example, EEST (Eastern European Summer Time, +3h) is 10800. PST (Pacific Standard Time, -8h) is -28800::seconds
+        average_hr:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Average Hr
+          description: Average heart rate during workout::bpm
+        max_hr:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Max Hr
+          description: Max heart rate during workout::bpm
+        distance:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Distance
+          description: Distance travelled during workout::meters
+        calendar_date:
+          type: string
+          format: date
+          title: Calendar Date
+          description: Date of the workout summary in the YYYY-mm-dd format. This generally matches the workout start date.
+        time_start:
+          type: string
+          format: date-time
+          title: Time Start
+          description: Start time of the workout::time
+        time_end:
+          type: string
+          format: date-time
+          title: Time End
+          description: End time of the workout::time
+        calories:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Calories
+          description: Calories burned during the workout::kCal
+        sport:
+          $ref: '#/components/schemas/ClientFacingSport'
+          description: Sport's name
+          default: ''
+        hr_zones:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Hr Zones
+          description: Time in seconds spent in different heart rate zones <50%, 50-60%, 60-70%, 70-80%, 80-90%, 90%+. Due to rounding errors, it's possible that summing all values is different than the total time of the workout. Not available for all providers::seconds
+        moving_time:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Moving Time
+          description: Time spent active during the workout::seconds
+        total_elevation_gain:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Total Elevation Gain
+          description: Elevation gain during the workout::meters
+        elev_high:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Elev High
+          description: Highest point of elevation::meters
+        elev_low:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Elev Low
+          description: Lowest point of elevation::meters
+        average_speed:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Average Speed
+          description: Average speed during workout in m/s::meters/sec
+        max_speed:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Speed
+          description: Max speed during workout in m/s::meters/sec
+        average_watts:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Average Watts
+          description: Average watts burned during exercise::watts
+        device_watts:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Device Watts
+          description: Watts burned during exercise::watts
+        max_watts:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Watts
+          description: Max watts burned during exercise::watts
+        weighted_average_watts:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Weighted Average Watts
+          description: Weighted average watts burned during exercise::watts
+        steps:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Steps
+          description: Number of steps accumulated during this workout::count
+        map:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingWorkoutMap'
+          - type: 'null'
+          description: Map of the workout
+        provider_id:
+          type: string
+          title: Provider Id
+          description: Provider ID given for that specific workout
+        source:
+          $ref: '#/components/schemas/ClientFacingSource'
+          description: Source the data has come from.
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - user_id
+      - calendar_date
+      - time_start
+      - time_end
+      - provider_id
+      - source
+      - created_at
+      - updated_at
+      title: Workout Data
+      example:
+        average_hr: 100
+        average_speed: 4.2
+        average_watts: 100
+        calendar_date: '2023-02-27'
+        calories: 300
+        created_at: '2023-02-27T20:31:24+00:00'
+        device_watts: 80
+        distance: 1700
+        elev_high: 20.2
+        elev_low: -10.2
+        hr_zones:
+        - 100
+        - 90
+        - 10
+        - 10
+        - 200
+        id: 185d0f34-dfc0-429f-84f9-b24030914bdd
+        map:
+          summary_polyline: agn~Ftb{uOvr@daBunBjdBkHwiD????~Ngn@ha@_N~Ql`@
+        max_hr: 190
+        max_speed: 7.8
+        max_watts: 200
+        moving_time: 100
+        source:
+          device_id: 550e8400-e29b-41d4-a716-446655440000
+          provider: strava
+          type: unknown
+        sport:
+          id: 1
+          name: football
+        time_end: '2023-02-27T12:31:24+00:00'
+        time_start: '2023-02-27T11:31:24+00:00'
+        total_elevation_gain: 10
+        updated_at: '2023-02-28T01:22:38+00:00'
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+        weighted_average_watts: 250
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

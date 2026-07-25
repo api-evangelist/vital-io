@@ -1,0 +1,260 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate lab_account API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: lab_account
+paths:
+  /v3/lab_test/lab_account:
+    get:
+      tags:
+      - lab_account
+      summary: Get Team Lab Accounts
+      operationId: get_team_lab_accounts_v3_lab_test_lab_account_get
+      parameters:
+      - name: lab_account_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+      - name: status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/LabAccountStatus'
+          - type: 'null'
+          title: Status
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTeamLabAccountsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_account
+      x-fern-sdk-method-name: get_team_lab_accounts
+components:
+  schemas:
+    GetTeamLabAccountsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ClientFacingLabAccount'
+          type: array
+          title: Data
+      type: object
+      title: GetTeamLabAccountsResponse
+    LabAccountStatus:
+      type: string
+      enum:
+      - active
+      - pending
+      - suspended
+      - ready_to_launch
+      title: LabAccountStatus
+      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Billing:
+      type: string
+      enum:
+      - client_bill
+      - commercial_insurance
+      - patient_bill_passthrough
+      - patient_bill
+      title: Billing
+      description: ℹ️ This enum is non-exhaustive.
+    LabAccountDelegatedFlow:
+      type: string
+      enum:
+      - order_delegated
+      - result_delegated
+      - fully_delegated
+      - not_delegated
+      title: LabAccountDelegatedFlow
+      description: 'Describes which parts of the lab testing flow are delegated to the customer.
+
+
+        - ORDER_DELEGATED: Ordering using client''s physicians, critical result follow up via Junction
+
+        - RESULT_DELEGATED: Ordering using Junction''s Physician Network, critical results handled by client
+
+        - FULLY_DELEGATED: Order and critical results handled by client
+
+        - NOT_DELEGATED: Junction handles both ordering and results ℹ️ This enum is non-exhaustive.'
+    Labs:
+      type: string
+      enum:
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
+      description: ℹ️ This enum is non-exhaustive.
+    USState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: USState
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingLabAccount:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        lab:
+          $ref: '#/components/schemas/Labs'
+          description: ℹ️ This enum is non-exhaustive.
+        org_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Org Id
+        status:
+          $ref: '#/components/schemas/LabAccountStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        delegated_flow:
+          $ref: '#/components/schemas/LabAccountDelegatedFlow'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_account_id:
+          type: string
+          title: Provider Account Id
+        account_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Name
+        default_clinical_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default Clinical Notes
+        business_units:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Business Units
+        allowed_billing:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/USState'
+            type: array
+          propertyNames:
+            $ref: '#/components/schemas/Billing'
+          type: object
+          title: Allowed Billing
+        team_id_allowlist:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Team Id Allowlist
+      type: object
+      required:
+      - id
+      - lab
+      - status
+      - delegated_flow
+      - provider_account_id
+      - allowed_billing
+      - team_id_allowlist
+      title: ClientFacingLabAccount
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

@@ -1,0 +1,404 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate compendium API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: compendium
+paths:
+  /v3/compendium/search:
+    post:
+      tags:
+      - compendium
+      summary: Search Compendium
+      operationId: search_compendium_v3_compendium_search_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCompendiumBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchCompendiumResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: compendium
+      x-fern-sdk-method-name: search
+  /v3/compendium/convert:
+    post:
+      tags:
+      - compendium
+      summary: Convert Compendium
+      operationId: convert_compendium_v3_compendium_convert_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConvertCompendiumBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertCompendiumResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: compendium
+      x-fern-sdk-method-name: convert
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SearchMode:
+      type: string
+      enum:
+      - canonical
+      - crosswalk
+      title: SearchMode
+      description: ℹ️ This enum is non-exhaustive.
+    ConvertCompendiumBody:
+      properties:
+        lab_test_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Test Id
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+        target_lab:
+          $ref: '#/components/schemas/CompendiumSearchLabs'
+          description: ℹ️ This enum is non-exhaustive.
+        limit:
+          type: integer
+          title: Limit
+          default: 3
+      type: object
+      required:
+      - target_lab
+      title: ConvertCompendiumBody
+    PerLabCandidate:
+      properties:
+        marker_id:
+          type: integer
+          title: Marker Id
+        lab_id:
+          type: integer
+          title: Lab Id
+        lab_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lab Slug
+        name:
+          type: string
+          title: Name
+        result_names:
+          items:
+            type: string
+          type: array
+          title: Result Names
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        loinc_set_hash:
+          type: string
+          title: Loinc Set Hash
+        loinc_codes:
+          items:
+            type: string
+          type: array
+          title: Loinc Codes
+        loinc_components:
+          items:
+            type: string
+          type: array
+          title: Loinc Components
+        loinc_groups:
+          items:
+            type: string
+          type: array
+          title: Loinc Groups
+        cpt_codes:
+          items:
+            type: string
+          type: array
+          title: Cpt Codes
+        relation:
+          type: string
+          title: Relation
+        confidence:
+          type: number
+          title: Confidence
+        reason_codes:
+          items:
+            type: string
+          type: array
+          title: Reason Codes
+        marker_popularity_score:
+          type: number
+          title: Marker Popularity Score
+      type: object
+      required:
+      - marker_id
+      - lab_id
+      - name
+      - loinc_set_hash
+      - relation
+      - confidence
+      - marker_popularity_score
+      title: PerLabCandidate
+    CompendiumSearchLabs:
+      type: string
+      enum:
+      - labcorp
+      - quest
+      - bioreference
+      - sonora_quest
+      title: CompendiumSearchLabs
+      description: ℹ️ This enum is non-exhaustive.
+    ConvertCompendiumResponse:
+      properties:
+        source_lab_test_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Lab Test Id
+        source_lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Source Lab Id
+        target_lab_id:
+          type: integer
+          title: Target Lab Id
+        target_lab_slug:
+          type: string
+          title: Target Lab Slug
+        source_provider_ids:
+          items:
+            type: string
+          type: array
+          title: Source Provider Ids
+        converted_provider_ids:
+          items:
+            type: string
+          type: array
+          title: Converted Provider Ids
+        unresolved_provider_ids:
+          items:
+            type: string
+          type: array
+          title: Unresolved Provider Ids
+        by_source_provider_id:
+          additionalProperties:
+            $ref: '#/components/schemas/ProviderIdConversionResponse'
+          type: object
+          title: By Source Provider Id
+      type: object
+      required:
+      - target_lab_id
+      - target_lab_slug
+      title: ConvertCompendiumResponse
+    SearchCompendiumBody:
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchMode'
+          description: ℹ️ This enum is non-exhaustive.
+        query:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query
+        cpt_codes:
+          items:
+            type: string
+          type: array
+          title: Cpt Codes
+        loinc_set_hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Set Hash
+        labs:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/CompendiumSearchLabs'
+            type: array
+          - type: 'null'
+          title: Labs
+        include_related:
+          type: boolean
+          title: Include Related
+          default: true
+        limit:
+          type: integer
+          title: Limit
+          default: 3
+      type: object
+      required:
+      - mode
+      title: SearchCompendiumBody
+    CanonicalCandidate:
+      properties:
+        loinc_set_hash:
+          type: string
+          title: Loinc Set Hash
+        display_name:
+          type: string
+          title: Display Name
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+        loinc_codes:
+          items:
+            type: string
+          type: array
+          title: Loinc Codes
+        provider_ids:
+          items:
+            type: string
+          type: array
+          title: Provider Ids
+        loinc_components:
+          items:
+            type: string
+          type: array
+          title: Loinc Components
+        loinc_groups:
+          items:
+            type: string
+          type: array
+          title: Loinc Groups
+        cpt_codes:
+          items:
+            type: string
+          type: array
+          title: Cpt Codes
+        popularity_score:
+          type: number
+          title: Popularity Score
+        confidence:
+          type: number
+          title: Confidence
+      type: object
+      required:
+      - loinc_set_hash
+      - display_name
+      - popularity_score
+      - confidence
+      title: CanonicalCandidate
+    SearchCompendiumResponse:
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchMode'
+          description: ℹ️ This enum is non-exhaustive.
+        selected_canonical:
+          anyOf:
+          - $ref: '#/components/schemas/CanonicalCandidate'
+          - type: 'null'
+        canonical_candidates:
+          items:
+            $ref: '#/components/schemas/CanonicalCandidate'
+          type: array
+          title: Canonical Candidates
+        per_lab:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/PerLabCandidate'
+            type: array
+          type: object
+          title: Per Lab
+        related:
+          items:
+            $ref: '#/components/schemas/RelatedCandidate'
+          type: array
+          title: Related
+      type: object
+      required:
+      - mode
+      title: SearchCompendiumResponse
+    ProviderIdConversionResponse:
+      properties:
+        source_provider_id:
+          type: string
+          title: Source Provider Id
+        candidates:
+          items:
+            $ref: '#/components/schemas/PerLabCandidate'
+          type: array
+          title: Candidates
+      type: object
+      required:
+      - source_provider_id
+      title: ProviderIdConversionResponse
+    RelatedCandidate:
+      properties:
+        canonical:
+          $ref: '#/components/schemas/CanonicalCandidate'
+        relation:
+          type: string
+          title: Relation
+        confidence:
+          type: number
+          title: Confidence
+        reason_codes:
+          items:
+            type: string
+          type: array
+          title: Reason Codes
+      type: object
+      required:
+      - canonical
+      - relation
+      - confidence
+      title: RelatedCandidate
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

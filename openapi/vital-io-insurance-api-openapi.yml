@@ -1,0 +1,399 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate insurance API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: insurance
+paths:
+  /v3/insurance/search/payor:
+    post:
+      tags:
+      - insurance
+      summary: Post Insurance Payor Information
+      operationId: post_insurance_payor_information_v3_insurance_search_payor_post
+      deprecated: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayorSearchRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingPayorSearchResponseDeprecated'
+                title: Response Post Insurance Payor Information V3 Insurance Search Payor Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: insurance
+      x-fern-sdk-method-name: search_payor_info
+    get:
+      tags:
+      - insurance
+      summary: Search Insurance Payor Information
+      operationId: search_insurance_payor_information_v3_insurance_search_payor_get
+      parameters:
+      - name: insurance_name
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Insurance Name
+      - name: provider
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/PayorCodeExternalProvider'
+          - type: 'null'
+          title: Provider
+      - name: provider_payor_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Payor Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingPayorSearchResponse'
+                title: Response Search Insurance Payor Information V3 Insurance Search Payor Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: insurance
+      x-fern-sdk-method-name: search_get_payor_info
+  /v3/insurance/search/diagnosis:
+    get:
+      tags:
+      - insurance
+      summary: Search Diagnosis
+      operationId: search_diagnosis_v3_insurance_search_diagnosis_get
+      parameters:
+      - name: diagnosis_query
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Diagnosis Query
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingDiagnosisInformation'
+                title: Response Search Diagnosis V3 Insurance Search Diagnosis Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: insurance
+      x-fern-sdk-method-name: search_diagnosis
+  /v3/insurance/validate_icd_codes:
+    post:
+      tags:
+      - insurance
+      summary: Validate Icd Codes
+      operationId: validate_icd_codes_v3_insurance_validate_icd_codes_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateICDCodesBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateICDCodesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: validate_icd_codes
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PayorSearchRequest:
+      properties:
+        insurance_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Insurance Name
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/PayorCodeExternalProvider'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+      type: object
+      title: PayorSearchRequest
+    ClientFacingDiagnosisInformation:
+      properties:
+        diagnosis_code:
+          type: string
+          title: Diagnosis Code
+          description: Diagnosis code for insurance information.
+        description:
+          type: string
+          title: Description
+          description: Diagnosis description insurance information.
+        is_secondary:
+          type: boolean
+          title: Is Secondary
+          default: false
+      type: object
+      required:
+      - diagnosis_code
+      - description
+      title: ClientFacingDiagnosisInformation
+    ValidateICDCodesResponse:
+      properties:
+        valid:
+          type: boolean
+          title: Valid
+        errors:
+          items:
+            type: string
+          type: array
+          title: Errors
+        violations:
+          items:
+            $ref: '#/components/schemas/ICDExcludesViolation'
+          type: array
+          title: Violations
+        warnings:
+          items:
+            $ref: '#/components/schemas/ICDExcludesWarning'
+          type: array
+          title: Warnings
+      type: object
+      required:
+      - valid
+      - errors
+      - violations
+      - warnings
+      title: ValidateICDCodesResponse
+    Address:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
+    ClientFacingPayorSearchResponseDeprecated:
+      properties:
+        code:
+          type: string
+          title: Code
+          description: Payor code returned for the insurance information.
+        name:
+          type: string
+          title: Name
+          description: Insurance name returned for the insurance information.
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          description: Insurance name aliases returned for the insurance information.
+        org_address:
+          $ref: '#/components/schemas/Address'
+          description: Insurance business address returned for the insurance information.
+        source:
+          $ref: '#/components/schemas/ClientFacingPayorCodeSource'
+          description: The source of the payor, can be one of (platform, team). ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - code
+      - name
+      - aliases
+      - org_address
+      - source
+      title: ClientFacingPayorSearchResponseDeprecated
+    ICDExcludesWarning:
+      properties:
+        code:
+          type: string
+          title: Code
+        overlaps_with:
+          type: string
+          title: Overlaps With
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+      - code
+      - overlaps_with
+      - type
+      title: ICDExcludesWarning
+    ValidateICDCodesBody:
+      properties:
+        codes:
+          items:
+            type: string
+          type: array
+          title: Codes
+      type: object
+      required:
+      - codes
+      title: ValidateICDCodesBody
+    ICDExcludesViolation:
+      properties:
+        code:
+          type: string
+          title: Code
+        conflicts_with:
+          type: string
+          title: Conflicts With
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+      - code
+      - conflicts_with
+      - type
+      title: ICDExcludesViolation
+    PayorCodeExternalProvider:
+      type: string
+      enum:
+      - change_healthcare
+      - availity
+      - stedi
+      - waystar
+      - claim_md
+      - apero
+      - pverify
+      title: PayorCodeExternalProvider
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingPayorCodeSource:
+      type: string
+      enum:
+      - platform
+      - team
+      title: ClientFacingPayorCodeSource
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingPayorSearchResponse:
+      properties:
+        payor_code:
+          type: string
+          title: Payor Code
+          description: Payor code returned for the insurance information.
+        name:
+          type: string
+          title: Name
+          description: Insurance name returned for the insurance information.
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          description: Insurance name aliases returned for the insurance information.
+        org_address:
+          $ref: '#/components/schemas/Address'
+          description: Insurance business address returned for the insurance information.
+        source:
+          $ref: '#/components/schemas/ClientFacingPayorCodeSource'
+          description: The source of the payor, can be one of (platform, team). ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - payor_code
+      - name
+      - aliases
+      - org_address
+      - source
+      title: ClientFacingPayorSearchResponse
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

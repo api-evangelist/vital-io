@@ -1,0 +1,171 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate payor API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: payor
+paths:
+  /v3/payor:
+    post:
+      tags:
+      - payor
+      summary: Create Payor
+      operationId: create_payor_v3_payor_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePayorBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingPayor'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: payor
+      x-fern-sdk-method-name: create_payor
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Address:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
+    CreatePayorBody:
+      properties:
+        name:
+          type: string
+          title: Name
+        address:
+          $ref: '#/components/schemas/Address'
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/PayorCodeExternalProvider'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_payor_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Payor Id
+      type: object
+      required:
+      - name
+      - address
+      title: CreatePayorBody
+    PayorCodeExternalProvider:
+      type: string
+      enum:
+      - change_healthcare
+      - availity
+      - stedi
+      - waystar
+      - claim_md
+      - apero
+      - pverify
+      title: PayorCodeExternalProvider
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingPayor:
+      properties:
+        payor_code:
+          type: string
+          title: Payor Code
+          description: Payor code returned for the insurance information.
+        name:
+          type: string
+          title: Name
+          description: Insurance name returned for the insurance information.
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          description: Insurance name aliases returned for the insurance information.
+        org_address:
+          $ref: '#/components/schemas/Address'
+          description: Insurance business address returned for the insurance information.
+        source:
+          $ref: '#/components/schemas/ClientFacingPayorCodeSource'
+          description: The source of the payor, can be one of (platform, team). ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - payor_code
+      - name
+      - aliases
+      - org_address
+      - source
+      title: ClientFacingPayor
+    ClientFacingPayorCodeSource:
+      type: string
+      enum:
+      - platform
+      - team
+      title: ClientFacingPayorCodeSource
+      description: ℹ️ This enum is non-exhaustive.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

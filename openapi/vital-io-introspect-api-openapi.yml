@@ -1,0 +1,605 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate introspect API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: introspect
+paths:
+  /v2/introspect/resources:
+    get:
+      tags:
+      - introspect
+      summary: Introspect Resources
+      operationId: introspect_resources_v2_introspect_resources_get
+      parameters:
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: Filter by user ID.
+          title: User Id
+        description: Filter by user ID.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - type: 'null'
+          title: Provider
+      - name: user_limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 50
+          title: User Limit
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          deprecated: true
+          title: Cursor
+        deprecated: true
+      - name: next_cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          title: Next Cursor
+        description: The cursor for fetching the next page, or `null` to fetch the first page.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResourcesResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: introspect
+      x-fern-sdk-method-name: get_user_resources
+  /v2/introspect/historical_pull:
+    get:
+      tags:
+      - introspect
+      summary: Introspect Historical Pulls
+      operationId: introspect_historical_pulls_v2_introspect_historical_pull_get
+      parameters:
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: Filter by user ID.
+          title: User Id
+        description: Filter by user ID.
+      - name: provider
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - $ref: '#/components/schemas/Labs'
+          - type: 'null'
+          title: Provider
+      - name: user_limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 50
+          title: User Limit
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          deprecated: true
+          title: Cursor
+        deprecated: true
+      - name: next_cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+          title: Next Cursor
+        description: The cursor for fetching the next page, or `null` to fetch the first page.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserHistoricalPullsResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: introspect
+      x-fern-sdk-method-name: get_user_historical_pulls
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SingleProviderHistoricalPullResponse:
+      properties:
+        pulled:
+          additionalProperties:
+            $ref: '#/components/schemas/SingleHistoricalPullStatistics'
+          propertyNames:
+            $ref: '#/components/schemas/Resource'
+          type: object
+          title: Pulled
+        not_pulled:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+          title: Not Pulled
+      type: object
+      required:
+      - pulled
+      - not_pulled
+      title: SingleProviderHistoricalPullResponse
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    LastAttempt:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        status:
+          $ref: '#/components/schemas/AttemptStatus'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - timestamp
+      - status
+      title: LastAttempt
+    HistoricalPullTimeline:
+      properties:
+        scheduled_at:
+          type: string
+          format: date-time
+          title: Scheduled At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+      type: object
+      required:
+      - scheduled_at
+      title: HistoricalPullTimeline
+    HistoricalPullRetriableErrorDetails:
+      type: string
+      enum:
+      - provider_rate_limit_exceeded
+      - provider_unavailable
+      - transport_failure
+      - resource_contention
+      title: HistoricalPullRetriableErrorDetails
+      description: ℹ️ This enum is non-exhaustive.
+    UserResourcesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SingleUserResourceResponse'
+          type: array
+          title: Data
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+          deprecated: true
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+      type: object
+      required:
+      - data
+      - next
+      - next_cursor
+      title: UserResourcesResponse
+      example:
+        data:
+        - provider:
+            fitbit:
+              activity:
+                last_attempt:
+                  status: success
+                  timestamp: '2023-10-24T13:13:27+00:00'
+                newest_data: '2023-10-24T00:00:00+00:00'
+                oldest_data: '2023-06-21T00:00:00+00:00'
+                sent_count: 231
+          user_id: ''
+    SingleHistoricalPullStatistics:
+      properties:
+        status:
+          $ref: '#/components/schemas/HistoricalPullStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        range_start:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Range Start
+        range_end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Range End
+        timeline:
+          $ref: '#/components/schemas/HistoricalPullTimeline'
+        days_with_data:
+          type: integer
+          title: Days With Data
+          default: 0
+        release:
+          type: string
+          title: Release
+        trace_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Trace Id
+        error_details:
+          anyOf:
+          - $ref: '#/components/schemas/HistoricalPullRetriableErrorDetails'
+          - $ref: '#/components/schemas/HistoricalPullNonRetriableErrorDetails'
+          - type: 'null'
+          title: Error Details
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - status
+      - timeline
+      - release
+      title: SingleHistoricalPullStatistics
+    SingleUserResourceResponse:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider:
+          additionalProperties:
+            additionalProperties:
+              $ref: '#/components/schemas/SingleResourceStatistics'
+            propertyNames:
+              $ref: '#/components/schemas/Resource'
+            type: object
+          propertyNames:
+            $ref: '#/components/schemas/Providers'
+          type: object
+          title: Provider
+      type: object
+      required:
+      - user_id
+      - provider
+      title: SingleUserResourceResponse
+    UserHistoricalPullsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SingleUserHistoricalPullResponse'
+          type: array
+          title: Data
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+          deprecated: true
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+      type: object
+      required:
+      - data
+      - next
+      - next_cursor
+      title: UserHistoricalPullsResponse
+      example:
+        data:
+        - provider:
+            fitbit:
+              not_pulled:
+              - blood_oxygen
+              pulled:
+                activity:
+                  days_with_data: 70
+                  range_end: '2023-10-24T00:00:00+00:00'
+                  range_start: '2023-07-24T00:00:00+00:00'
+                  release: 0.0.0-dev.cd0e262
+                  status: success
+                  timeline:
+                    ended_at: '2023-10-24T13:53:59+00:00'
+                    scheduled_at: '2023-10-24T13:52:51+00:00'
+                    started_at: '2023-10-24T13:52:54+00:00'
+                  trace_id: 51cc7d2d72e98ed4eb63e2b0864b39e3
+                sleep:
+                  days_with_data: 70
+                  error_details: provider_rate_limit_exceeded
+                  range_end: '2023-10-24T00:00:00+00:00'
+                  range_start: '2023-07-24T00:00:00+00:00'
+                  release: 0.0.0-dev.cd0e262
+                  status: retrying
+                  timeline:
+                    ended_at: '2023-10-24T13:53:04+00:00'
+                    scheduled_at: '2023-10-24T13:52:51+00:00'
+                    started_at: '2023-10-24T13:53:01+00:00'
+                  trace_id: 51cc7d2d72e98ed4eb63e2b0864b39e3
+          user_id: ''
+        next_cursor: None
+    SingleUserHistoricalPullResponse:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider:
+          additionalProperties:
+            $ref: '#/components/schemas/SingleProviderHistoricalPullResponse'
+          propertyNames:
+            $ref: '#/components/schemas/Providers'
+          type: object
+          title: Provider
+      type: object
+      required:
+      - user_id
+      - provider
+      title: SingleUserHistoricalPullResponse
+    Labs:
+      type: string
+      enum:
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
+      description: ℹ️ This enum is non-exhaustive.
+    Resource:
+      type: string
+      enum:
+      - profile
+      - activity
+      - sleep
+      - body
+      - workouts
+      - workout_stream
+      - connection
+      - order
+      - result
+      - match_review
+      - appointment
+      - glucose
+      - heartrate
+      - hrv
+      - hrv
+      - ige
+      - igg
+      - blood_oxygen
+      - blood_pressure
+      - cholesterol
+      - device
+      - device_legacy
+      - weight
+      - fat
+      - body_temperature
+      - body_temperature_delta
+      - meal
+      - water
+      - caffeine
+      - mindfulness_minutes
+      - steps
+      - calories_active
+      - distance
+      - floors_climbed
+      - respiratory_rate
+      - vo2_max
+      - calories_basal
+      - stress_level
+      - menstrual_cycle
+      - sleep_cycle
+      - electrocardiogram
+      - electrocardiogram_voltage
+      - afib_burden
+      - heart_rate_alert
+      - stand_hour
+      - stand_duration
+      - sleep_apnea_alert
+      - sleep_breathing_disturbance
+      - wheelchair_push
+      - forced_expiratory_volume_1
+      - forced_vital_capacity
+      - peak_expiratory_flow_rate
+      - inhaler_usage
+      - fall
+      - uv_exposure
+      - daylight_exposure
+      - handwashing
+      - basal_body_temperature
+      - heart_rate_recovery_one_minute
+      - body_mass_index
+      - lean_body_mass
+      - waist_circumference
+      - workout_distance
+      - workout_swimming_stroke
+      - workout_duration
+      - insulin_injection
+      - carbohydrates
+      - note
+      - sleep_stream
+      - hypnogram
+      title: ClientFacingResource
+      x-fern-type-name: ClientFacingResource
+      description: ℹ️ This enum is non-exhaustive.
+    HistoricalPullNonRetriableErrorDetails:
+      type: string
+      enum:
+      - non_retriable_error
+      - unexpected_error
+      - retry_quota_exhausted
+      title: HistoricalPullNonRetriableErrorDetails
+      description: ℹ️ This enum is non-exhaustive.
+    HistoricalPullStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      - in_progress
+      - scheduled
+      - retrying
+      title: HistoricalPullStatus
+      description: ℹ️ This enum is non-exhaustive.
+    AttemptStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      title: AttemptStatus
+      description: ℹ️ This enum is non-exhaustive.
+    SingleResourceStatistics:
+      properties:
+        last_attempt:
+          anyOf:
+          - $ref: '#/components/schemas/LastAttempt'
+          - type: 'null'
+        oldest_data:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Oldest Data
+        newest_data:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Newest Data
+        sent_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sent Count
+      type: object
+      title: SingleResourceStatistics
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

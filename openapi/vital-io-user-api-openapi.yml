@@ -1,0 +1,1922 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate user API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: user
+paths:
+  /v2/user:
+    get:
+      tags:
+      - user
+      summary: Get Teams Users
+      description: GET All users for team.
+      operationId: get_teams_users_v2_user_get
+      parameters:
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          title: Offset
+          default: 0
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 500
+          title: Limit
+          default: 100
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedUsersResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_all
+    post:
+      tags:
+      - user
+      summary: Create User
+      description: POST Create a Vital user given a client_user_id and returns the user_id.
+      operationId: create_user_v2_user_post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateBody'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingUser'
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientUserIDConflictResponse'
+          description: Bad Request
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: create
+  /v2/user/metrics:
+    get:
+      tags:
+      - user
+      summary: Get Teams Metrics
+      description: GET metrics for team.
+      operationId: get_teams_metrics_v2_user_metrics_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricsResult'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_team_metrics
+  /v2/user/providers/{user_id}:
+    get:
+      tags:
+      - user
+      summary: Get Connected Providers
+      description: GET Users connected providers
+      operationId: get_connected_providers_v2_user_providers__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ClientFacingProviderWithStatus'
+                propertyNames:
+                  const: providers
+                title: Response Get Connected Providers V2 User Providers  User Id  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_connected_providers
+  /v2/user/{user_id}/info/latest:
+    get:
+      tags:
+      - user
+      summary: Get User Demographcis
+      operationId: get_user_demographcis_v2_user__user_id__info_latest_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_latest_user_info
+  /v2/user/{user_id}/insurance:
+    post:
+      tags:
+      - user
+      summary: Create Insurance
+      operationId: create_insurance_v2_user__user_id__insurance_post
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInsuranceRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingInsurance'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: create_insurance
+  /v2/user/{user_id}/insurance/latest:
+    get:
+      tags:
+      - user
+      summary: Get Latest Insurance
+      operationId: get_latest_insurance_v2_user__user_id__insurance_latest_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: is_primary
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+          title: Is Primary
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingInsurance'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_latest_insurance
+  /v2/user/{user_id}/info:
+    patch:
+      tags:
+      - user
+      summary: Create User Demographics
+      operationId: create_user_demographics_v2_user__user_id__info_patch
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInfoCreateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: upsert_user_info
+  /v2/user/resolve/{client_user_id}:
+    get:
+      tags:
+      - user
+      summary: Get User By Client User Id
+      description: GET user_id from client_user_id.
+      operationId: get_user_by_client_user_id_v2_user_resolve__client_user_id__get
+      parameters:
+      - name: client_user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          description: A unique ID representing the end user. Typically this will be a user ID number from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+          title: Client User Id
+        description: A unique ID representing the end user. Typically this will be a user ID number from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingUser'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_by_client_user_id
+  /v2/user/{user_id}/{provider}:
+    delete:
+      tags:
+      - user
+      summary: Deregister Provider
+      operationId: deregister_provider_v2_user__user_id___provider__delete
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: provider
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Providers'
+          description: Provider slug. e.g., `oura`, `fitbit`, `garmin`.
+        description: Provider slug. e.g., `oura`, `fitbit`, `garmin`.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSuccessResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: deregister_provider
+  /v2/user/{user_id}:
+    patch:
+      tags:
+      - user
+      summary: Patch User
+      operationId: patch_user_v2_user__user_id__patch
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPatchBody'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: patch
+    delete:
+      tags:
+      - user
+      summary: Delete User
+      operationId: delete_user_v2_user__user_id__delete
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSuccessResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: delete
+    get:
+      tags:
+      - user
+      summary: Get User
+      operationId: get_user_v2_user__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingUser'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get
+  /v2/user/undo_delete:
+    post:
+      tags:
+      - user
+      summary: Undo User Delete
+      operationId: undo_user_delete_v2_user_undo_delete_post
+      parameters:
+      - name: user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: User ID to undo deletion. Mutually exclusive with `client_user_id`.
+          title: User Id
+        description: User ID to undo deletion. Mutually exclusive with `client_user_id`.
+      - name: client_user_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Client User ID to undo deletion. Mutually exclusive with `user_id`.
+          title: Client User Id
+        description: Client User ID to undo deletion. Mutually exclusive with `user_id`.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSuccessResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: undo_delete
+  /v2/user/refresh/{user_id}:
+    post:
+      tags:
+      - user
+      summary: Refresh User Id
+      description: Trigger a manual refresh for a specific user
+      operationId: refresh_user_id_v2_user_refresh__user_id__post
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User Id
+      - name: timeout
+        in: query
+        required: false
+        schema:
+          type: number
+          maximum: 60
+          minimum: 5
+          default: 10
+          title: Timeout
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Refresh User Id V2 User Refresh  User Id  Post
+                $ref: '#/components/schemas/UserRefreshSuccessResponse'
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRefreshSuccessResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRefreshErrorResponse'
+          description: Bad Request
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: refresh
+  /v2/user/{user_id}/device:
+    get:
+      tags:
+      - user
+      summary: Get User Devices
+      operationId: get_user_devices_v2_user__user_id__device_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingDevice'
+                title: Response Get User Devices V2 User  User Id  Device Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_devices
+  /v2/user/{user_id}/device/{device_id}:
+    get:
+      tags:
+      - user
+      summary: Get User Device
+      operationId: get_user_device_v2_user__user_id__device__device_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User id returned by vital create user id request. This id should be stored in your database against the user and used for all interactions with the vital api.
+      - name: device_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Device Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingDevice'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_device
+  /v2/user/{user_id}/sign_in_token:
+    post:
+      tags:
+      - user
+      summary: Get User Sign In Token
+      operationId: get_user_sign_in_token_v2_user__user_id__sign_in_token_post
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSignInTokenResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: get_user_sign_in_token
+  /v2/user/{user_id}/create_portal_url:
+    post:
+      tags:
+      - user
+      summary: Create User Portal Url
+      operationId: create_user_portal_url_v2_user__user_id__create_portal_url_post
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: User Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserPortalURLBody'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserPortalURLResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: user
+      x-fern-sdk-method-name: create_portal_url
+components:
+  schemas:
+    GuarantorDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone_number:
+          type: string
+          title: Phone Number
+        household_income:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Income
+        household_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Size
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+      type: object
+      required:
+      - first_name
+      - last_name
+      - address
+      - phone_number
+      title: GuarantorDetails
+    Gender:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Gender
+      description: ℹ️ This enum is non-exhaustive.
+    UserAddress:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: UserAddress
+    Address:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
+    ConnectedSourceClientFacing:
+      properties:
+        provider:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          description: The provider of this connected source.
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+          description: When your item is created
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          description: Deprecated. Use `provider` instead. Subject to removal after 1 Jan 2024.
+          deprecated: true
+      type: object
+      required:
+      - provider
+      - created_on
+      - source
+      title: ConnectedSourceClientFacing
+    Resource:
+      type: string
+      enum:
+      - profile
+      - activity
+      - sleep
+      - body
+      - workouts
+      - workout_stream
+      - connection
+      - order
+      - result
+      - match_review
+      - appointment
+      - glucose
+      - heartrate
+      - hrv
+      - hrv
+      - ige
+      - igg
+      - blood_oxygen
+      - blood_pressure
+      - cholesterol
+      - device
+      - device_legacy
+      - weight
+      - fat
+      - body_temperature
+      - body_temperature_delta
+      - meal
+      - water
+      - caffeine
+      - mindfulness_minutes
+      - steps
+      - calories_active
+      - distance
+      - floors_climbed
+      - respiratory_rate
+      - vo2_max
+      - calories_basal
+      - stress_level
+      - menstrual_cycle
+      - sleep_cycle
+      - electrocardiogram
+      - electrocardiogram_voltage
+      - afib_burden
+      - heart_rate_alert
+      - stand_hour
+      - stand_duration
+      - sleep_apnea_alert
+      - sleep_breathing_disturbance
+      - wheelchair_push
+      - forced_expiratory_volume_1
+      - forced_vital_capacity
+      - peak_expiratory_flow_rate
+      - inhaler_usage
+      - fall
+      - uv_exposure
+      - daylight_exposure
+      - handwashing
+      - basal_body_temperature
+      - heart_rate_recovery_one_minute
+      - body_mass_index
+      - lean_body_mass
+      - waist_circumference
+      - workout_distance
+      - workout_swimming_stroke
+      - workout_duration
+      - insulin_injection
+      - carbohydrates
+      - note
+      - sleep_stream
+      - hypnogram
+      title: ClientFacingResource
+      x-fern-type-name: ClientFacingResource
+      description: ℹ️ This enum is non-exhaustive.
+    TimeseriesMetricPoint:
+      properties:
+        date:
+          type: string
+          format: date-time
+          title: Date
+        value:
+          type: number
+          title: Value
+        all:
+          type: number
+          title: All
+      type: object
+      required:
+      - date
+      - value
+      - all
+      title: TimeseriesMetricPoint
+    SexualOrientation:
+      type: string
+      enum:
+      - lesbian_gay_or_homosexual
+      - heterosexual_or_straight
+      - bisexual
+      - dont_know
+      - other
+      title: SexualOrientation
+      description: ℹ️ This enum is non-exhaustive.
+    FallbackTimeZone:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        source_slug:
+          type: string
+          title: Source Slug
+          description: Slug for designated source
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - source_slug
+      - updated_at
+      title: FallbackTimeZone
+    ClientFacingProviderWithStatus:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        logo:
+          type: string
+          title: Logo
+          description: URL for source logo
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+        status:
+          type: string
+          title: Status
+          description: Status of source, either error or connected
+        external_user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External User Id
+          description: '
+
+            The unique identifier of the associated external data provider user.
+
+
+            * OAuth Providers: User unique identifier; provider-specific formats
+
+            * Password Providers: Username
+
+            * Email Providers: Email
+
+            * Junction Mobile SDK Providers: `null` (not available)
+
+            '
+        error_details:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingConnectionErrorDetails'
+          - type: 'null'
+          description: Details of the terminal connection error — populated only when the status is `error`.
+        resource_availability:
+          additionalProperties:
+            $ref: '#/components/schemas/ResourceAvailability'
+          propertyNames:
+            $ref: '#/components/schemas/Resource'
+          type: object
+          title: Resource Availability
+      type: object
+      required:
+      - name
+      - slug
+      - logo
+      - created_on
+      - status
+      - resource_availability
+      title: Provider
+      example:
+        created_on: '2010-01-23T12:34:56+00:00'
+        error_details:
+          error_message: The user has deregistered the connection per notification from Garmin.
+          error_type: deregistered_per_provider
+          errored_at: '2010-01-24T23:45:32+00:00'
+        logo: https://logo_url.com
+        name: Garmin
+        resource_availability:
+          sleep:
+            scope_requirements:
+              user_denied:
+                optional:
+                - spo2Daily
+                required: []
+              user_granted:
+                optional: []
+                required:
+                - daily
+            status: available
+        slug: garmin
+        status: error
+    Availability:
+      type: string
+      enum:
+      - available
+      - unavailable
+      title: Availability
+      description: ℹ️ This enum is non-exhaustive.
+    UserRefreshSuccessResponse:
+      properties:
+        success:
+          type: boolean
+          const: true
+          title: Success
+          description: Whether operation was successful or not
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        refreshed_sources:
+          items:
+            type: string
+          type: array
+          title: Refreshed Sources
+        in_progress_sources:
+          items:
+            type: string
+          type: array
+          title: In Progress Sources
+        failed_sources:
+          items:
+            type: string
+          type: array
+          title: Failed Sources
+      type: object
+      required:
+      - success
+      - user_id
+      - refreshed_sources
+      - in_progress_sources
+      - failed_sources
+      title: UserRefreshSuccessResponse
+      example:
+        failed_sources:
+        - oura/sleep
+        in_progress_sources: []
+        refreshed_sources:
+        - withings/workouts
+        - withings/sleep
+        - withings/body
+        - withings/vitals/blood_pressure
+        - withings/activity
+        success: true
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    FallbackBirthDate:
+      properties:
+        value:
+          type: string
+          format: date
+          title: Value
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        source_slug:
+          type: string
+          title: Source Slug
+          description: Slug for designated source
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - value
+      - source_slug
+      - updated_at
+      title: FallbackBirthDate
+    vital_core__schemas__db_schemas__lab_test__insurance__PersonDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        gender:
+          $ref: '#/components/schemas/Gender'
+          description: ℹ️ This enum is non-exhaustive.
+        address:
+          $ref: '#/components/schemas/Address'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        email:
+          type: string
+          title: Email
+        phone_number:
+          type: string
+          title: Phone Number
+      type: object
+      required:
+      - first_name
+      - last_name
+      - gender
+      - address
+      - dob
+      - email
+      - phone_number
+      title: PersonDetails
+    UserRefreshErrorResponse:
+      properties:
+        success:
+          type: boolean
+          const: false
+          title: Success
+          description: Whether operation was successful or not
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        error:
+          type: string
+          title: Error
+        failed_sources:
+          items:
+            type: string
+          type: array
+          title: Failed Sources
+      type: object
+      required:
+      - success
+      - user_id
+      - error
+      title: UserRefreshErrorResponse
+      example:
+        error: user has no connected sources
+        failed_sources: []
+        success: false
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    CompanyDetails:
+      properties:
+        name:
+          type: string
+          title: Name
+        address:
+          $ref: '#/components/schemas/Address'
+      type: object
+      required:
+      - name
+      - address
+      title: CompanyDetails
+    UserPatchBody:
+      properties:
+        fallback_time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fallback Time Zone
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        fallback_birth_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Fallback Birth Date
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        ingestion_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion Start
+          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        ingestion_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion End
+          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        client_user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+      type: object
+      title: UserPatchBody
+    UserInfoCreateRequest:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        phone_number:
+          type: string
+          title: Phone Number
+        gender:
+          type: string
+          title: Gender
+        dob:
+          type: string
+          format: date
+          title: Dob
+        address:
+          $ref: '#/components/schemas/UserAddress'
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      - phone_number
+      - gender
+      - dob
+      - address
+      title: UserInfoCreateRequest
+    UserCreateBody:
+      properties:
+        client_user_id:
+          type: string
+          title: Client User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        fallback_time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fallback Time Zone
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        fallback_birth_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Fallback Birth Date
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        ingestion_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion Start
+          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        ingestion_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion End
+          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+      type: object
+      required:
+      - client_user_id
+      title: UserCreateBody
+    CreateUserPortalURLResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        expires_in:
+          type: integer
+          title: Expires In
+      type: object
+      required:
+      - url
+      - expires_in
+      title: CreateUserPortalURLResponse
+    ClientFacingInsurance:
+      properties:
+        member_id:
+          type: string
+          title: Member Id
+        payor_code:
+          type: string
+          title: Payor Code
+        relationship:
+          $ref: '#/components/schemas/ResponsibleRelationship'
+          description: ℹ️ This enum is non-exhaustive.
+        insured:
+          $ref: '#/components/schemas/vital_core__schemas__db_schemas__lab_test__insurance__PersonDetails'
+        company:
+          $ref: '#/components/schemas/CompanyDetails'
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        guarantor:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+        is_primary:
+          type: boolean
+          title: Is Primary
+          default: true
+      type: object
+      required:
+      - member_id
+      - payor_code
+      - relationship
+      - insured
+      - company
+      title: ClientFacingInsurance
+    ClientFacingConnectionErrorDetails:
+      properties:
+        error_type:
+          type: string
+          enum:
+          - token_refresh_failed
+          - webhook_registration_failed
+          - user_not_found
+          - deregistered_per_provider
+          - required_scopes_not_granted
+          - provider_credential_error
+          - provider_password_expired
+          - unknown
+          title: Error Type
+          description: ℹ️ This enum is non-exhaustive.
+        error_message:
+          type: string
+          title: Error Message
+        errored_at:
+          type: string
+          format: date-time
+          title: Errored At
+      type: object
+      required:
+      - error_type
+      - error_message
+      - errored_at
+      title: ConnectionErrorDetails
+    Race:
+      type: string
+      enum:
+      - african_american_or_black
+      - asian
+      - indigenous_native_american_alaska_native
+      - other
+      - pacific_islander_or_hawaiian
+      - white_caucasian
+      title: Race
+      description: ℹ️ This enum is non-exhaustive.
+    Ethnicity:
+      type: string
+      enum:
+      - hispanic
+      - non_hispanic
+      - ashkenazi_jewish
+      - other
+      title: Ethnicity
+      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    UserSignInTokenResponse:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        sign_in_token:
+          type: string
+          title: Sign In Token
+      type: object
+      required:
+      - user_id
+      - sign_in_token
+      title: UserSignInTokenResponse
+    GenderIdentity:
+      type: string
+      enum:
+      - male
+      - female
+      - female_to_male_ftm_transgender_male_trans_man
+      - male_to_female_mtf_transgender_female_trans_woman
+      - genderqueer
+      - other
+      title: GenderIdentity
+      description: ℹ️ This enum is non-exhaustive.
+    CreateInsuranceRequest:
+      properties:
+        payor_code:
+          type: string
+          title: Payor Code
+        member_id:
+          type: string
+          title: Member Id
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        relationship:
+          $ref: '#/components/schemas/ResponsibleRelationship'
+          description: ℹ️ This enum is non-exhaustive.
+        insured:
+          $ref: '#/components/schemas/vital_core__schemas__db_schemas__lab_test__insurance__PersonDetails'
+        guarantor:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+        is_primary:
+          type: boolean
+          title: Is Primary
+          default: true
+      type: object
+      required:
+      - payor_code
+      - member_id
+      - relationship
+      - insured
+      title: CreateInsuranceRequest
+    ScopeRequirementsGrants:
+      properties:
+        user_granted:
+          $ref: '#/components/schemas/ScopeRequirements_str_'
+        user_denied:
+          $ref: '#/components/schemas/ScopeRequirements_str_'
+      type: object
+      required:
+      - user_granted
+      - user_denied
+      title: ScopeRequirementsGrants
+    ResourceAvailability:
+      properties:
+        status:
+          $ref: '#/components/schemas/Availability'
+          description: ℹ️ This enum is non-exhaustive.
+        scope_requirements:
+          anyOf:
+          - $ref: '#/components/schemas/ScopeRequirementsGrants'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ResourceAvailability
+    ScopeRequirements_str_:
+      properties:
+        required:
+          items:
+            type: string
+          type: array
+          title: Required
+        optional:
+          items:
+            type: string
+          type: array
+          title: Optional
+      type: object
+      required:
+      - required
+      - optional
+      title: ScopeRequirements[str]
+    MetricsResult:
+      properties:
+        team_id:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          title: Team Id
+        number_of_connected_sources:
+          type: integer
+          title: Number Of Connected Sources
+          default: 0
+        number_of_users:
+          type: integer
+          title: Number Of Users
+          default: 0
+        number_of_errored_connected_sources:
+          type: integer
+          title: Number Of Errored Connected Sources
+          default: 0
+        number_of_connected_sources_by_week:
+          items:
+            $ref: '#/components/schemas/TimeseriesMetricPoint'
+          type: array
+          title: Number Of Connected Sources By Week
+          default: []
+        number_of_ordered_tests:
+          type: integer
+          title: Number Of Ordered Tests
+          default: 0
+      type: object
+      required:
+      - team_id
+      title: MetricsResult
+    UserInfo:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          title: Email
+        phone_number:
+          type: string
+          title: Phone Number
+        gender:
+          type: string
+          title: Gender
+        dob:
+          type: string
+          format: date
+          title: Dob
+        address:
+          $ref: '#/components/schemas/UserAddress'
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      - phone_number
+      - gender
+      - dob
+      - address
+      title: UserInfo
+    ClientFacingUser:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Your team id.
+        client_user_id:
+          type: string
+          title: Client User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+          description: When your item is created
+        connected_sources:
+          items:
+            $ref: '#/components/schemas/ConnectedSourceClientFacing'
+          type: array
+          title: Connected Sources
+          description: A list of the users connected sources.
+        fallback_time_zone:
+          anyOf:
+          - $ref: '#/components/schemas/FallbackTimeZone'
+          - type: 'null'
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        fallback_birth_date:
+          anyOf:
+          - $ref: '#/components/schemas/FallbackBirthDate'
+          - type: 'null'
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        ingestion_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion Start
+          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        ingestion_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion End
+          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+      type: object
+      required:
+      - user_id
+      - team_id
+      - client_user_id
+      - created_on
+      - connected_sources
+      - fallback_time_zone
+      title: User
+      example:
+        client_user_id: ZTEwZjNjMjctOTI2ZS00M2Vm
+        connected_sources:
+        - created_on: '2026-05-20T13:43:42+00:00'
+          source:
+            logo: logo_url
+            name: Oura
+            slug: oura
+        created_on: '2026-05-20T13:43:42+00:00'
+        fallback_birth_date:
+          source_slug: manual
+          updated_at: '2026-05-20T13:43:42+00:00'
+          value: '1989-09-12'
+        fallback_time_zone:
+          id: Europe/London
+          source_slug: manual
+          updated_at: '2026-05-20T13:43:42+00:00'
+        team_id: 56bd81c9-6219-4000-a775-ae85526eba18
+        user_id: 56bd81c9-6219-4000-a775-ae85526eba18
+    CreateUserPortalURLBody:
+      properties:
+        context:
+          type: string
+          enum:
+          - launch
+          - communications
+          title: Context
+          description: '`launch`: Generates a short-lived (minutes) portal URL that is intended for launching a user from your
+
+            authenticated web context directly into the Junction User Portal. This URL is not suitable for asynchronous
+
+            communications due to its verbosity as well as short-lived nature.
+
+
+            `communications`: Generates a long-lived (weeks) but shortened portal URL that is suitable for Emails, SMS
+
+            messages and other communication channels. Users may be asked to verify their identity with Email and SMS
+
+            authentication, e.g., when they open a short link on a new device. ℹ️ This enum is non-exhaustive.'
+        order_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Order Id
+          description: If specified, the generated URL will deeplink to the specified Order.
+      type: object
+      required:
+      - context
+      title: CreateUserPortalURLBody
+    PaginatedUsersResponse:
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/ClientFacingUser'
+          type: array
+          title: Users
+        total:
+          type: integer
+          title: Total
+        offset:
+          type: integer
+          title: Offset
+        limit:
+          type: integer
+          title: Limit
+      type: object
+      required:
+      - users
+      - total
+      - offset
+      - limit
+      title: PaginatedUsersResponse
+    UserSuccessResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether operation was successful or not
+      type: object
+      required:
+      - success
+      title: UserSuccessResponse
+      example:
+        success: true
+    ClientFacingProvider:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        logo:
+          type: string
+          title: Logo
+          description: URL for source logo
+      type: object
+      required:
+      - name
+      - slug
+      - logo
+      title: Provider
+      description: A vendor, a service, or a platform which Vital can connect with.
+      example:
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+    ClientFacingDevice:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider:
+          type: string
+          title: Provider
+        source_type:
+          type: string
+          enum:
+          - unknown
+          - phone
+          - watch
+          - app
+          - multiple_sources
+          - fingerprick
+          - cuff
+          - manual_scan
+          - automatic
+          - insulin_pump
+          - scale
+          - chest_strap
+          - ring
+          - lab
+          - exercise_machine
+          - earphone
+          title: Source Type
+          description: ℹ️ This enum is non-exhaustive.
+        app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Id
+        device_manufacturer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Manufacturer
+        device_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Model
+        device_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Version
+        device_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Id
+      type: object
+      required:
+      - id
+      - user_id
+      - provider
+      - source_type
+      title: Device Data
+      example:
+        device_id: F-31-A4C138BB9EF5
+        device_manufacturer: Fitbit
+        device_model: Aria Air
+        device_version: '1.0'
+        id: 00000000-0000-0000-0000-000000000000
+        provider: fitbit
+        source_type: scale
+        user_id: 00000000-0000-0000-0000-000000000000
+    ClientUserIDConflict:
+      properties:
+        error_type:
+          type: string
+          title: Error Type
+        error_message:
+          type: string
+          title: Error Message
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+      type: object
+      required:
+      - error_type
+      - error_message
+      - user_id
+      - created_on
+      title: ClientUserIDConflict
+    ResponsibleRelationship:
+      type: string
+      enum:
+      - Self
+      - Spouse
+      - Other
+      title: ResponsibleRelationship
+      description: ℹ️ This enum is non-exhaustive.
+    ClientUserIDConflictResponse:
+      properties:
+        detail:
+          $ref: '#/components/schemas/ClientUserIDConflict'
+      type: object
+      required:
+      - detail
+      title: ClientUserIDConflictResponse
+      example:
+        detail:
+          created_on: '2023-02-27T12:31:24+00:00'
+          error_message: Client user id already exists.
+          error_type: INVALID_REQUEST
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

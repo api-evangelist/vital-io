@@ -1,0 +1,633 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate team API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: team
+paths:
+  /v2/team/{team_id}:
+    get:
+      tags:
+      - team
+      summary: Get Team
+      description: Get team.
+      operationId: get_team_v2_team__team_id__get
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Team Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingTeam'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: team
+      x-fern-sdk-method-name: get
+      x-fern-availability: deprecated
+  /v2/team/users/search:
+    get:
+      tags:
+      - team
+      summary: Search Team Users By Uuid Or Client User Id
+      description: Search team users by user_id
+      operationId: search_team_users_by_uuid_or_client_user_id_v2_team_users_search_get
+      parameters:
+      - name: query_id
+        in: query
+        required: false
+        schema:
+          type: string
+          minLength: 2
+          title: Query Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingUser'
+                title: Response Search Team Users By Uuid Or Client User Id V2 Team Users Search Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: team
+      x-fern-sdk-method-name: get_user_by_id
+      x-fern-availability: deprecated
+  /v2/team/svix/url:
+    get:
+      tags:
+      - team
+      summary: Get Svix Webhook Url
+      operationId: get_svix_webhook_url_v2_team_svix_url_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Svix Webhook Url V2 Team Svix Url Get
+      x-fern-sdk-group-name: team
+      x-fern-sdk-method-name: get_svix_url
+      x-fern-availability: deprecated
+  /v2/team/source/priorities:
+    get:
+      tags:
+      - team
+      summary: Get Source Priorities
+      description: GET source priorities.
+      operationId: get_source_priorities_v2_team_source_priorities_get
+      parameters:
+      - name: data_type
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/PriorityResource'
+          - type: 'null'
+          title: Data Type
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+                title: Response Get Source Priorities V2 Team Source Priorities Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: team
+      x-fern-sdk-method-name: get_source_priorities
+    patch:
+      tags:
+      - team
+      summary: Update Source Priorities
+      description: Patch source priorities.
+      operationId: update_source_priorities_v2_team_source_priorities_patch
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+                title: Response Update Source Priorities V2 Team Source Priorities Patch
+      x-fern-sdk-group-name: team
+      x-fern-sdk-method-name: update_source_priorities
+  /v2/team/{team_id}/physicians:
+    get:
+      tags:
+      - team
+      summary: Get Team Physicians
+      operationId: get_team_physicians_v2_team__team_id__physicians_get
+      parameters:
+      - name: team_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Team Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientFacingPhysician'
+                title: Response Get Team Physicians V2 Team  Team Id  Physicians Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: team
+      x-fern-sdk-method-name: get_physicians
+components:
+  schemas:
+    ClientFacingUser:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Your team id.
+        client_user_id:
+          type: string
+          title: Client User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+          description: When your item is created
+        connected_sources:
+          items:
+            $ref: '#/components/schemas/ConnectedSourceClientFacing'
+          type: array
+          title: Connected Sources
+          description: A list of the users connected sources.
+        fallback_time_zone:
+          anyOf:
+          - $ref: '#/components/schemas/FallbackTimeZone'
+          - type: 'null'
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        fallback_birth_date:
+          anyOf:
+          - $ref: '#/components/schemas/FallbackBirthDate'
+          - type: 'null'
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        ingestion_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion Start
+          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        ingestion_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion End
+          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+      type: object
+      required:
+      - user_id
+      - team_id
+      - client_user_id
+      - created_on
+      - connected_sources
+      - fallback_time_zone
+      title: User
+      example:
+        client_user_id: ZTEwZjNjMjctOTI2ZS00M2Vm
+        connected_sources:
+        - created_on: '2026-05-20T13:43:42+00:00'
+          source:
+            logo: logo_url
+            name: Oura
+            slug: oura
+        created_on: '2026-05-20T13:43:42+00:00'
+        fallback_birth_date:
+          source_slug: manual
+          updated_at: '2026-05-20T13:43:42+00:00'
+          value: '1989-09-12'
+        fallback_time_zone:
+          id: Europe/London
+          source_slug: manual
+          updated_at: '2026-05-20T13:43:42+00:00'
+        team_id: 56bd81c9-6219-4000-a775-ae85526eba18
+        user_id: 56bd81c9-6219-4000-a775-ae85526eba18
+    ClientFacingPhysician:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        npi:
+          type: string
+          title: Npi
+      type: object
+      required:
+      - first_name
+      - last_name
+      - npi
+      title: ClientFacingPhysician
+    FallbackTimeZone:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        source_slug:
+          type: string
+          title: Source Slug
+          description: Slug for designated source
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - source_slug
+      - updated_at
+      title: FallbackTimeZone
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LibreConfig:
+      properties:
+        practice_id:
+          additionalProperties: true
+          type: object
+          title: Practice Id
+        strip_tz:
+          type: boolean
+          title: Strip Tz
+          default: false
+      type: object
+      required:
+      - practice_id
+      title: LibreConfig
+    FallbackBirthDate:
+      properties:
+        value:
+          type: string
+          format: date
+          title: Value
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        source_slug:
+          type: string
+          title: Source Slug
+          description: Slug for designated source
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - value
+      - source_slug
+      - updated_at
+      title: FallbackBirthDate
+    ClientFacingTeam:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        org_id:
+          type: string
+          format: uuid
+          title: Org Id
+        name:
+          type: string
+          title: Name
+        svix_app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Svix App Id
+        client_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Id
+          default: ''
+        client_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client Secret
+          default: ''
+        airtable_api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Airtable Api Key
+          default: ''
+        airtable_base_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Airtable Base Id
+          default: ''
+        webhook_secret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Webhook Secret
+          default: ''
+        api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Api Key
+          default: ''
+        api_keys:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClientFacingApiKey'
+            type: array
+          - type: 'null'
+          title: Api Keys
+        configuration:
+          anyOf:
+          - $ref: '#/components/schemas/TeamConfig'
+          - type: 'null'
+        testkits_texts_enabled:
+          type: boolean
+          title: Testkits Texts Enabled
+          deprecated: true
+        lab_tests_patient_communication_enabled:
+          type: boolean
+          title: Lab Tests Patient Communication Enabled
+        lab_tests_patient_sms_communication_enabled:
+          type: boolean
+          title: Lab Tests Patient Sms Communication Enabled
+        lab_tests_patient_email_communication_enabled:
+          type: boolean
+          title: Lab Tests Patient Email Communication Enabled
+        logo_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Logo Url
+        delegated_flow:
+          $ref: '#/components/schemas/DelegatedFlowType'
+          description: ℹ️ This enum is non-exhaustive.
+        critical_result_notification_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Critical Result Notification Email
+      type: object
+      required:
+      - id
+      - org_id
+      - name
+      - testkits_texts_enabled
+      - lab_tests_patient_communication_enabled
+      - lab_tests_patient_sms_communication_enabled
+      - lab_tests_patient_email_communication_enabled
+      - delegated_flow
+      title: ClientFacingTeam
+      description: '[Deprecated] GET /v2/team is in the process of being removed.
+
+        Neither customers nor Dashboard should retrieve team settings and metadata directly.
+
+
+        All must migrate to the Team endpoints of the Org Management API.'
+    EventDestinationPreferences:
+      properties:
+        preferred:
+          type: string
+          enum:
+          - cloud_pubsub
+          - rabbitmq
+          - svix
+          - azure_amqp
+          title: Preferred
+          description: ℹ️ This enum is non-exhaustive.
+        enabled:
+          items:
+            type: string
+            enum:
+            - cloud_pubsub
+            - rabbitmq
+            - svix
+            - azure_amqp
+          type: array
+          title: Enabled
+      type: object
+      required:
+      - preferred
+      - enabled
+      title: EventDestinationPreferences
+    ConnectedSourceClientFacing:
+      properties:
+        provider:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          description: The provider of this connected source.
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+          description: When your item is created
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          description: Deprecated. Use `provider` instead. Subject to removal after 1 Jan 2024.
+          deprecated: true
+      type: object
+      required:
+      - provider
+      - created_on
+      - source
+      title: ConnectedSourceClientFacing
+    ClientFacingProvider:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        logo:
+          type: string
+          title: Logo
+          description: URL for source logo
+      type: object
+      required:
+      - name
+      - slug
+      - logo
+      title: Provider
+      description: A vendor, a service, or a platform which Vital can connect with.
+      example:
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+    ClientFacingApiKey:
+      properties:
+        label:
+          type: string
+          title: Label
+        value:
+          type: string
+          title: Value
+        team_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Team Id
+        id:
+          type: string
+          format: uuid
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        deleted_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Deleted At
+      type: object
+      required:
+      - label
+      - value
+      - id
+      - created_at
+      title: ClientFacingApiKey
+    PriorityResource:
+      type: string
+      enum:
+      - workouts
+      - activity
+      - sleep
+      - body
+      - timeseries
+      title: PriorityResource
+      description: ℹ️ This enum is non-exhaustive.
+    DelegatedFlowType:
+      type: string
+      enum:
+      - order_and_results_with_customer_physician_network
+      - order_with_vital_physician_network
+      - order_and_results_with_vital_physician_network
+      title: DelegatedFlowType
+      description: ℹ️ This enum is non-exhaustive.
+    TeamConfig:
+      properties:
+        libreview:
+          $ref: '#/components/schemas/LibreConfig'
+        texts_enabled:
+          type: boolean
+          title: Texts Enabled
+          default: false
+        push_historical_data:
+          type: boolean
+          title: Push Historical Data
+          default: false
+        provider_raw_data:
+          type: boolean
+          title: Provider Raw Data
+          default: false
+        reject_duplicate_connection:
+          type: boolean
+          title: Reject Duplicate Connection
+          default: false
+        sdk_per_device_activity_timeseries:
+          type: boolean
+          title: Sdk Per Device Activity Timeseries
+          default: false
+        partial_webhooks_enabled:
+          type: boolean
+          title: Partial Webhooks Enabled
+          default: false
+        minor_ordering_enabled:
+          type: boolean
+          title: Minor Ordering Enabled
+          default: false
+        eds_preferences:
+          $ref: '#/components/schemas/EventDestinationPreferences'
+        event_type_prefixes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Event Type Prefixes
+      type: object
+      required:
+      - libreview
+      title: TeamConfig
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

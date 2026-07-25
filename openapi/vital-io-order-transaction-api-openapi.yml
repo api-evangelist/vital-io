@@ -1,0 +1,797 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate order_transaction API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: order_transaction
+paths:
+  /v3/order_transaction/{transaction_id}:
+    get:
+      tags:
+      - order_transaction
+      summary: Get Order Transaction
+      operationId: get_order_transaction_v3_order_transaction__transaction_id__get
+      parameters:
+      - name: transaction_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Transaction Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOrderTransactionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: order_transaction
+      x-fern-sdk-method-name: get_transaction
+  /v3/order_transaction/{transaction_id}/result:
+    get:
+      tags:
+      - order_transaction
+      summary: Get Order Transaction Result
+      operationId: get_order_transaction_result_v3_order_transaction__transaction_id__result_get
+      parameters:
+      - name: transaction_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Transaction Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabResultsRaw'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: order_transaction
+      x-fern-sdk-method-name: get_transaction_result
+  /v3/order_transaction/{transaction_id}/result/pdf:
+    get:
+      tags:
+      - order_transaction
+      summary: Get Order Transaction Result Pdf
+      operationId: get_order_transaction_result_pdf_v3_order_transaction__transaction_id__result_pdf_get
+      parameters:
+      - name: transaction_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Transaction Id
+      responses:
+        '200':
+          description: PDF with results
+          content:
+            application/json:
+              schema:
+                title: Response Get Order Transaction Result Pdf V3 Order Transaction  Transaction Id  Result Pdf Get
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: order_transaction
+      x-fern-sdk-method-name: get_transaction_result_pdf
+      x-fern-streaming: true
+components:
+  schemas:
+    OrderOrigin:
+      type: string
+      enum:
+      - initial
+      - redraw
+      - recreation
+      title: OrderOrigin
+      description: ℹ️ This enum is non-exhaustive.
+    ParentBiomarkerData:
+      properties:
+        marker_id:
+          type: integer
+          title: Marker Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+      type: object
+      required:
+      - marker_id
+      - name
+      - slug
+      title: ParentBiomarkerData
+    SampleData:
+      properties:
+        sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sample Id
+        control_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Control Number
+        date_collected:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Collected
+        date_received:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Received
+        date_reported:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Reported
+        performing_laboratories:
+          anyOf:
+          - additionalProperties:
+              $ref: '#/components/schemas/PerformingLaboratory'
+            type: object
+          - type: 'null'
+          title: Performing Laboratories
+        clinical_information:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalInformation'
+          - type: 'null'
+      type: object
+      title: SampleData
+    FailureType:
+      type: string
+      enum:
+      - quantity_not_sufficient_failure
+      - collection_process_failure
+      - drop_off_failure
+      - internal_lab_failure
+      - order_entry_failure
+      - non_failure
+      - unknown_failure
+      - patient_condition_failure
+      - missing_result_calc_failure
+      - missing_demo_aoe_calc_failure
+      - insufficient_volume
+      title: FailureType
+      description: ℹ️ This enum is non-exhaustive.
+    BiomarkerResult:
+      properties:
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+          default: ''
+        value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Value
+          description: 'Deprecated: Use ''result'' (string) and `type` (enum) instead. '
+          deprecated: true
+          x-fern-ignore: true
+        result:
+          type: string
+          title: Result
+        type:
+          $ref: '#/components/schemas/ResultType'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        timestamp:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Timestamp
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        reference_range:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reference Range
+        min_range_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Min Range Value
+        max_range_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Range Value
+        is_above_max_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Above Max Range
+        is_below_min_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Below Min Range
+        interpretation:
+          type: string
+          title: Interpretation
+          default: normal
+        loinc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc
+        loinc_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        source_markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ParentBiomarkerData'
+            type: array
+          - type: 'null'
+          title: Source Markers
+        performing_laboratory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Performing Laboratory
+        source_sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Sample Id
+      type: object
+      required:
+      - name
+      - result
+      - type
+      title: BiomarkerResult
+      description: Represent the schema for an individual biomarker result.
+      example:
+        interpretation: normal
+        is_above_max_range: false
+        is_below_min_range: false
+        loinc: 742-7
+        loinc_slug: monocytes-auto-bld-vol
+        max_range_value: 0.9
+        min_range_value: 0.1
+        name: Monocytes(Absolute)
+        notes: Final
+        result: '0.4'
+        slug: monocytes-absolute
+        timestamp: '2023-11-01T08:28:00+00:00'
+        type: numeric
+        unit: x10E3/uL
+        value: 0.4
+    LabResultsRaw:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/LabResultsMetadata'
+        results:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/BiomarkerResult'
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Results
+        missing_results:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/MissingBiomarkerResult'
+            type: array
+          - type: 'null'
+          title: Missing Results
+        sample_information:
+          anyOf:
+          - additionalProperties:
+              $ref: '#/components/schemas/SampleData'
+            type: object
+          - type: 'null'
+          title: Sample Information
+        order_transaction:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingOrderTransaction'
+          - type: 'null'
+      type: object
+      required:
+      - metadata
+      - results
+      title: LabResultsRaw
+      example:
+        metadata:
+          age: 19
+          clia_number: '12331231'
+          date_collected: '2022-02-02'
+          date_received: '2022-01-01'
+          date_reported: '2020-01-01'
+          dob: 18/08/1993
+          interpretation: normal
+          laboratory: Quest Diagnostics
+          patient: Bob Smith
+          provider: Dr. Jack Smith
+          specimen_number: '123131'
+          status: final
+        results:
+          '[marker]': {}
+          fsh: {}
+          ige: {}
+    Address:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
+    UTCTimestampWithTimezoneOffset:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        timezone_offset:
+          type: integer
+          title: Timezone Offset
+      type: object
+      required:
+      - timestamp
+      - timezone_offset
+      title: UTCTimestampWithTimezoneOffset
+    ClientFacingOrderTransaction:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        status:
+          $ref: '#/components/schemas/OrderTransactionStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        orders:
+          items:
+            $ref: '#/components/schemas/ClientFacingOrderInTransaction'
+          type: array
+          title: Orders
+      type: object
+      required:
+      - id
+      - status
+      - orders
+      title: ClientFacingOrderTransaction
+      description: Order transaction info.
+    ClinicalInformation:
+      properties:
+        fasting:
+          type: boolean
+          title: Fasting
+          default: false
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        information:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Information
+        total_volume:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Volume
+      type: object
+      title: ClinicalInformation
+    ClientFacingOrderInTransaction:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        low_level_status:
+          anyOf:
+          - $ref: '#/components/schemas/OrderLowLevelStatus'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        low_level_status_created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Low Level Status Created At
+        origin:
+          anyOf:
+          - $ref: '#/components/schemas/OrderOrigin'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        parent_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Parent Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingOrderInTransaction
+      description: Minimal order info for embedding in order_transaction payload.
+    GetOrderTransactionResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        status:
+          $ref: '#/components/schemas/OrderTransactionStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        orders:
+          items:
+            $ref: '#/components/schemas/OrderSummary'
+          type: array
+          title: Orders
+      type: object
+      required:
+      - id
+      - team_id
+      - status
+      title: GetOrderTransactionResponse
+    LabResultsMetadata:
+      properties:
+        age:
+          type: string
+          title: Age
+        dob:
+          type: string
+          title: Dob
+        clia_#:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: 'Clia #'
+        patient:
+          type: string
+          title: Patient
+        provider:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider
+        laboratory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Laboratory
+        date_reported:
+          type: string
+          title: Date Reported
+          deprecated: true
+        date_collected:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Collected
+          deprecated: true
+        specimen_number:
+          type: string
+          title: Specimen Number
+        date_received:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Received
+          deprecated: true
+        status:
+          type: string
+          title: Status
+          default: final
+        interpretation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Interpretation
+        patient_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Patient Id
+        account_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Id
+      type: object
+      required:
+      - age
+      - dob
+      - patient
+      - date_reported
+      - specimen_number
+      title: LabResultsMetadata
+      example:
+        age: 19
+        clia_number: '12331231'
+        date_collected: '2022-02-02'
+        date_received: '2022-01-01'
+        date_reported: '2020-01-01'
+        dob: 18/08/1993
+        interpretation: normal
+        laboratory: Quest Diagnostics
+        patient: Bob Smith
+        provider: Dr. Jack Smith
+        specimen_number: '123131'
+        status: final
+    OrderLowLevelStatus:
+      type: string
+      enum:
+      - ordered
+      - requisition_created
+      - requisition_bypassed
+      - transit_customer
+      - out_for_delivery
+      - with_customer
+      - transit_lab
+      - delivered_to_lab
+      - completed
+      - failure_to_deliver_to_lab
+      - failure_to_deliver_to_customer
+      - problem_in_transit_lab
+      - problem_in_transit_customer
+      - sample_error
+      - appointment_scheduled
+      - appointment_cancelled
+      - appointment_pending
+      - draw_completed
+      - cancelled
+      - lost
+      - do_not_process
+      - partial_results
+      - awaiting_registration
+      - registered
+      - redraw_available
+      - corrected
+      - lab_processing_blocked
+      title: OrderLowLevelStatus
+      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ResultType:
+      type: string
+      enum:
+      - numeric
+      - range
+      - comment
+      - coded_value
+      title: ResultType
+      description: ℹ️ This enum is non-exhaustive.
+    MissingBiomarkerResult:
+      properties:
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        inferred_failure_type:
+          $ref: '#/components/schemas/FailureType'
+          description: ℹ️ This enum is non-exhaustive.
+        note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Note
+        loinc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc
+        loinc_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        source_markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ParentBiomarkerData'
+            type: array
+          - type: 'null'
+          title: Source Markers
+      type: object
+      required:
+      - name
+      - slug
+      - inferred_failure_type
+      title: MissingBiomarkerResult
+    PerformingLaboratory:
+      properties:
+        name:
+          type: string
+          title: Name
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        medical_director:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medical Director
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+      type: object
+      required:
+      - name
+      title: PerformingLaboratory
+    OrderSummary:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        origin:
+          anyOf:
+          - $ref: '#/components/schemas/OrderOrigin'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        parent_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Parent Id
+        last_status:
+          $ref: '#/components/schemas/OrderLowLevelStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        last_status_created_at:
+          type: string
+          format: date-time
+          title: Last Status Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+      type: object
+      required:
+      - id
+      - last_status
+      - last_status_created_at
+      - updated_at
+      - created_at
+      title: OrderSummary
+      description: Lightweight order summary.
+    OrderTransactionStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - cancelled
+      title: OrderTransactionStatus
+      description: ℹ️ This enum is non-exhaustive.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key

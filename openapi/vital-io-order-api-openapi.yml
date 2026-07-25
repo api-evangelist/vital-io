@@ -1,0 +1,4772 @@
+openapi: 3.1.0
+info:
+  title: Vital Lab Report Parser Aggregate order API
+  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  version: 0.4.497
+  contact:
+    name: Junction (Vital) Support
+    url: https://docs.junction.com
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: order
+paths:
+  /v3/order/testkit/register:
+    post:
+      tags:
+      - order
+      summary: Register Testkit
+      operationId: register_testkit_v3_order_testkit_register_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterTestkitRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: testkit
+      x-fern-sdk-method-name: register
+  /v3/order/testkit:
+    post:
+      tags:
+      - order
+      summary: Create Testkit Order
+      description: Creates an order for an unregistered testkit
+      operationId: create_testkit_order_v3_order_testkit_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRegistrableTestkitOrderRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: testkit
+      x-fern-sdk-method-name: create_order
+  /v3/order/phlebotomy/appointment/availability:
+    post:
+      tags:
+      - order
+      summary: Get Order Appointment Availability
+      description: 'Return the available time slots to book an appointment with a phlebotomist
+
+        for the given address and order.'
+      operationId: get_order_appointment_availability_v3_order_phlebotomy_appointment_availability_post
+      parameters:
+      - name: start_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: Start date for appointment availability
+          title: Start Date
+        description: Start date for appointment availability
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/USAddress'
+              description: At-home phlebotomy appointment address.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentAvailabilitySlots'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_phlebotomy_appointment_availability
+  /v3/order/{order_id}/phlebotomy/appointment/book:
+    post:
+      tags:
+      - order
+      summary: Book Phlebotomy Appointment
+      description: Book an at-home phlebotomy appointment.
+      operationId: book_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_book_post
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentBookingRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: book_phlebotomy_appointment
+  /v3/order/{order_id}/phlebotomy/appointment/request:
+    post:
+      tags:
+      - order
+      summary: Request Phlebotomy Appointment
+      description: Request an at-home phlebotomy appointment.
+      operationId: request_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_request_post
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestAppointmentRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+              example:
+                id: f4b2ef81-364a-4d3e-a69c-998753458df6
+                user_id: c7a73565-81bb-4716-9662-b5c6d66ac90a
+                order_id: 4d1a25fb-01f5-43ce-9e61-003b38edd07b
+                order_transaction_id: 545c5901-a2d0-4697-9874-3d6901b9dcd2
+                address:
+                  first_line: 123 Main St.
+                  second_line: Apt. 208
+                  city: San Francisco
+                  state: CA
+                  zip_code: '91189'
+                  country: United States
+                  access_notes: 'Gate code #1234, use side entrance'
+                location:
+                  lng: -122.4194155
+                  lat: 37.7749295
+                type: phlebotomy
+                provider: phlebfinders
+                status: pending
+                event_status: pending
+                provider_id: '123'
+                can_reschedule: false
+                event_data:
+                  description: Metadata field containing provider specific data, like cancellation reason or origin
+                events:
+                - created_at: '2022-01-01T00:00:00Z'
+                  status: pending
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: request_phlebotomy_appointment
+  /v3/order/{order_id}/phlebotomy/appointment/reschedule:
+    patch:
+      tags:
+      - order
+      summary: Reschedule Phlebotomy Appointment
+      description: Reschedule a previously booked at-home phlebotomy appointment.
+      operationId: reschedule_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_reschedule_patch
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentRescheduleRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: reschedule_phlebotomy_appointment
+  /v3/order/{order_id}/phlebotomy/appointment/cancel:
+    patch:
+      tags:
+      - order
+      summary: Cancel Phlebotomy Appointment
+      description: Cancel a previously booked at-home phlebotomy appointment.
+      operationId: cancel_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_cancel_patch
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api__api_v1__endpoints__vital_api__lab_testing__orders__helpers__AppointmentCancelRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: cancel_phlebotomy_appointment
+  /v3/order/phlebotomy/appointment/cancellation-reasons:
+    get:
+      tags:
+      - order
+      summary: Get Phlebotomy Appointment Cancellation Reasons
+      description: Get the list of reasons for cancelling an at-home phlebotomy appointment.
+      operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_phlebotomy_appointment_cancellation_reasons_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ClientFacingAppointmentCancellationReason'
+                type: array
+                title: Response Get Phlebotomy Appointment Cancellation Reasons V3 Order Phlebotomy Appointment Cancellation Reasons Get
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_phlebotomy_appointment_cancellation_reason
+  /v3/order/{order_id}/phlebotomy/appointment:
+    get:
+      tags:
+      - order
+      summary: Get Phlebotomy Appointment
+      description: Get the appointment associated with an order.
+      operationId: get_phlebotomy_appointment_v3_order__order_id__phlebotomy_appointment_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_phlebotomy_appointment
+  /v3/order/area/info:
+    get:
+      tags:
+      - order
+      summary: Get Area Info
+      description: 'GET information about an area with respect to lab-testing.
+
+
+        Information returned:
+
+        * Whether a given zip code is served by our Phlebotomy network.
+
+        * List of Lab locations in the area.'
+      operationId: get_area_info_v3_order_area_info_get
+      parameters:
+      - name: zip_code
+        in: query
+        required: true
+        schema:
+          type: string
+          pattern: ^\d{5}$
+          description: Zip code of the area to check
+          title: Zip Code
+        description: Zip code of the area to check
+      - name: radius
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AllowedRadius'
+          description: Radius in which to search in miles
+          default: '25'
+        description: Radius in which to search in miles
+      - name: lab
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingLabs'
+          - type: 'null'
+          description: Lab to check for PSCs
+          deprecated: true
+          title: Lab
+        description: Lab to check for PSCs
+        deprecated: true
+      - name: labs
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/ClientFacingLabs'
+          - type: 'null'
+          description: List of labs to check for PSCs
+          title: Labs
+        description: List of labs to check for PSCs
+      - name: lab_account_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: Lab Account ID to use for availability checks
+          title: Lab Account Id
+        description: Lab Account ID to use for availability checks
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AreaInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_area_info
+  /v3/order/psc/info:
+    get:
+      tags:
+      - order
+      summary: Get Psc Info
+      operationId: get_psc_info_v3_order_psc_info_get
+      parameters:
+      - name: zip_code
+        in: query
+        required: true
+        schema:
+          type: string
+          pattern: ^\d{5}$
+          description: Zip code of the area to check
+          title: Zip Code
+        description: Zip code of the area to check
+      - name: lab_id
+        in: query
+        required: true
+        schema:
+          type: integer
+          description: Lab ID to check for PSCs
+          title: Lab Id
+        description: Lab ID to check for PSCs
+      - name: radius
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AllowedRadius'
+          description: Radius in which to search in miles. Note that we limit to 30 PSCs.
+          default: '25'
+        description: Radius in which to search in miles. Note that we limit to 30 PSCs.
+      - name: capabilities
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/LabLocationCapability'
+          - type: 'null'
+          description: Filter for only locations with certain capabilities
+          title: Capabilities
+        description: Filter for only locations with certain capabilities
+      - name: lab_account_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          description: Lab Account ID to use for availability checks
+          title: Lab Account Id
+        description: Lab Account ID to use for availability checks
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PSCInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_psc_info
+  /v3/order/{order_id}/psc/info:
+    get:
+      tags:
+      - order
+      summary: Get Order Psc Info
+      operationId: get_order_psc_info_v3_order__order_id__psc_info_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      - name: radius
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/AllowedRadius'
+          description: Radius in which to search in miles
+          default: '25'
+        description: Radius in which to search in miles
+      - name: capabilities
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/LabLocationCapability'
+          - type: 'null'
+          description: Filter for only locations with certain capabilities
+          title: Capabilities
+        description: Filter for only locations with certain capabilities
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PSCInfo'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_order_psc_info
+  /v3/order/{order_id}/result/pdf:
+    get:
+      tags:
+      - order
+      summary: Get Lab Test Result
+      description: This endpoint returns the lab results for the order.
+      operationId: get_lab_test_result_v3_order__order_id__result_pdf_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Order Id
+      responses:
+        '200':
+          description: PDF with results
+          content:
+            application/json:
+              schema:
+                title: Response Get Lab Test Result V3 Order  Order Id  Result Pdf Get
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_result_pdf
+      x-fern-streaming: true
+  /v3/order/{order_id}/result/metadata:
+    get:
+      tags:
+      - order
+      summary: Get Lab Test Result Metadata
+      description: 'Return metadata related to order results, such as lab metadata,
+
+        provider and sample dates.'
+      operationId: get_lab_test_result_metadata_v3_order__order_id__result_metadata_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Order Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabResultsMetadata'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_result_metadata
+  /v3/order/{order_id}/result:
+    get:
+      tags:
+      - order
+      summary: Get Lab Test Result Raw
+      description: Return both metadata and raw json test data
+      operationId: get_lab_test_result_raw_v3_order__order_id__result_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Order Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabResultsRaw'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_result_raw
+  /v3/order/{order_id}/labels/pdf:
+    get:
+      tags:
+      - order
+      summary: Get Order Labels
+      description: This endpoint returns the printed labels for the order.
+      operationId: get_order_labels_v3_order__order_id__labels_pdf_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Order Id
+      - name: number_of_labels
+        in: query
+        required: false
+        schema:
+          type: integer
+          description: Number of labels to generate
+          default: 3
+          title: Number Of Labels
+        description: Number of labels to generate
+      - name: collection_date
+        in: query
+        required: true
+        schema:
+          type: string
+          format: date-time
+          description: Collection date
+          title: Collection Date
+        description: Collection date
+      responses:
+        '200':
+          description: PDF with labels
+          content:
+            application/json:
+              schema:
+                title: Response Get Order Labels V3 Order  Order Id  Labels Pdf Get
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_labels_pdf
+      x-fern-streaming: true
+  /v3/order/psc/appointment/availability:
+    post:
+      tags:
+      - order
+      summary: Get Psc Appointment Availability
+      operationId: get_psc_appointment_availability_v3_order_psc_appointment_availability_post
+      parameters:
+      - name: lab
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/AppointmentPSCLabs'
+          description: Lab to check for availability
+        description: Lab to check for availability
+      - name: start_date
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          description: Start date for appointment availability
+          title: Start Date
+        description: Start date for appointment availability
+      - name: site_codes
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+          description: List of site codes to fetch availability for
+          title: Site Codes
+        description: List of site codes to fetch availability for
+      - name: zip_code
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            pattern: ^\d{5}$
+          - type: 'null'
+          description: Zip code of the area to check
+          title: Zip Code
+        description: Zip code of the area to check
+      - name: radius
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/AllowedRadius'
+          - type: 'null'
+          description: Radius in which to search in miles
+          default: '25'
+          title: Radius
+        description: Radius in which to search in miles
+      - name: allow_stale
+        in: query
+        required: false
+        schema:
+          type: boolean
+          description: If true, allows cached availability data to be returned.
+          default: false
+          title: Allow Stale
+        description: If true, allows cached availability data to be returned.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentAvailabilitySlots'
+        '404':
+          description: No slots found. Not all PSCs support scheduling appointments and some included in your query were filtered out because of this.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: No slots found. Not all PSCs support scheduling appointments and some included in your query were filtered out because of this. Please try again with different site codes or a different zip code, or see the PSC info endpoints to see which locations support scheduling.
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_psc_appointment_availability
+  /v3/order/{order_id}/psc/appointment/book:
+    post:
+      tags:
+      - order
+      summary: Book Phlebotomy Appointment
+      operationId: book_phlebotomy_appointment_v3_order__order_id__psc_appointment_book_post
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      - name: x-idempotency-key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: '[!] This feature (Idempotency Key) is under closed beta. Idempotency Key support for booking PSC appointment.'
+          title: X-Idempotency-Key
+        description: '[!] This feature (Idempotency Key) is under closed beta. Idempotency Key support for booking PSC appointment.'
+      - name: x-idempotency-error
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - const: no-cache
+            type: string
+          - type: 'null'
+          description: If `no-cache`, applies idempotency only to successful outcomes.
+          title: X-Idempotency-Error
+        description: If `no-cache`, applies idempotency only to successful outcomes.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentBookingRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: book_psc_appointment
+  /v3/order/{order_id}/psc/appointment/reschedule:
+    patch:
+      tags:
+      - order
+      summary: Reschedule Phlebotomy Appointment
+      operationId: reschedule_phlebotomy_appointment_v3_order__order_id__psc_appointment_reschedule_patch
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentRescheduleRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: reschedule_psc_appointment
+  /v3/order/{order_id}/psc/appointment/cancel:
+    patch:
+      tags:
+      - order
+      summary: Cancel Phlebotomy Appointment
+      operationId: cancel_phlebotomy_appointment_v3_order__order_id__psc_appointment_cancel_patch
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vital_core__clients__lab_test__getlabs__schema__AppointmentCancelRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: cancel_psc_appointment
+  /v3/order/psc/appointment/cancellation-reasons:
+    get:
+      tags:
+      - order
+      summary: Get Phlebotomy Appointment Cancellation Reasons
+      operationId: get_phlebotomy_appointment_cancellation_reasons_v3_order_psc_appointment_cancellation_reasons_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ClientFacingAppointmentCancellationReason'
+                type: array
+                title: Response Get Phlebotomy Appointment Cancellation Reasons V3 Order Psc Appointment Cancellation Reasons Get
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_psc_appointment_cancellation_reason
+  /v3/order/{order_id}/psc/appointment:
+    get:
+      tags:
+      - order
+      summary: Get Phlebotomy Appointment
+      description: Get the appointment associated with an order.
+      operationId: get_phlebotomy_appointment_v3_order__order_id__psc_appointment_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingAppointment'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_psc_appointment
+  /v3/order/resend_events:
+    post:
+      tags:
+      - order
+      summary: Resend Order Webhook
+      description: Replay a webhook for a given set of orders
+      operationId: resend_order_webhook_v3_order_resend_events_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResendWebhookBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResendWebhookResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: order
+      x-fern-sdk-method-name: resend_events
+  /v3/order/{order_id}/collection_instruction_pdf:
+    get:
+      tags:
+      - order
+      summary: Get Order Collection Instructions Url
+      description: GET collection instructions for an order
+      operationId: get_order_collection_instructions_url_v3_order__order_id__collection_instruction_pdf_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: PDF with collection instructions
+          content:
+            application/json:
+              schema: {}
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_order_collection_instruction_pdf
+      x-fern-streaming: true
+  /v3/order/{order_id}/requisition/pdf:
+    get:
+      tags:
+      - order
+      summary: Get Order Requisition Url
+      description: GET requisition pdf for an order
+      operationId: get_order_requisition_url_v3_order__order_id__requisition_pdf_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: PDF with requisition form
+          content:
+            application/json:
+              schema: {}
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_order_requistion_pdf
+      x-fern-streaming: true
+  /v3/order/{order_id}/abn_pdf:
+    get:
+      tags:
+      - order
+      summary: Get Order Abn
+      description: GET ABN pdf for an order
+      operationId: get_order_abn_v3_order__order_id__abn_pdf_get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: PDF with ABN form
+          content:
+            application/json:
+              schema: {}
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_order_abn_pdf
+      x-fern-streaming: true
+  /v3/order/{order_id}:
+    get:
+      tags:
+      - order
+      summary: Get Order
+      description: GET individual order by ID.
+      operationId: get_order_v3_order__order_id__get
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientFacingOrder'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: get_order
+    patch:
+      tags:
+      - order
+      summary: Update Order
+      description: "Update a modifiable order's scheduled activation date.\n\nThe order must be in `ordered` or `awaiting_registration` status. Setting\n`activate_by` to a future date reschedules dispatch; setting it to `null`\nclears the schedule and enqueues immediate dispatch for `ordered` orders.\n\nReturns 400 when:\n- the order is not in a modifiable status,\n- the order was created for immediate processing (cannot be scheduled\n  after the fact),\n- `activate_by` is in the past."
+      operationId: update_order_v3_order__order_id__patch
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderBody'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: update_order
+  /v3/order:
+    post:
+      tags:
+      - order
+      summary: Create Order
+      operationId: create_order_v3_order_post
+      parameters:
+      - name: X-Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Idempotency-Key
+      - name: X-Idempotency-Error
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - const: no-cache
+            type: string
+          - type: 'null'
+          title: X-Idempotency-Error
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequestCompatible'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: create_order
+  /v3/order/import:
+    post:
+      tags:
+      - order
+      summary: Import Order
+      operationId: import_order_v3_order_import_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportOrderBody'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: import_order
+  /v3/order/{order_id}/cancel:
+    post:
+      tags:
+      - order
+      summary: Cancel Order
+      description: POST cancel order
+      operationId: cancel_order_v3_order__order_id__cancel_post
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: cancel_order
+  /v3/order/{order_id}/test:
+    post:
+      tags:
+      - order
+      summary: Order Process Simulate
+      description: Get available test kits.
+      operationId: order_process_simulate_v3_order__order_id__test_post
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Order Id
+      - name: final_status
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/OrderStatus'
+          - type: 'null'
+          title: Final Status
+      - name: delay
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Delay
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: '#/components/schemas/SimulationFlags'
+              - type: 'null'
+              title: Flags
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Order Process Simulate V3 Order  Order Id  Test Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: simulate_order_process
+  /v3/order/{order_id}/draw_completed:
+    patch:
+      tags:
+      - order
+      summary: Update On Site Collection Order Draw Completed
+      description: PATCH update on site collection order when draw is completed
+      operationId: update_on_site_collection_order_draw_completed_v3_order__order_id__draw_completed_patch
+      parameters:
+      - name: order_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          description: Your Order ID.
+          title: Order Id
+        description: Your Order ID.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostOrderResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      x-fern-sdk-group-name: lab_tests
+      x-fern-sdk-method-name: update_on_site_collection_order_draw_completed
+components:
+  schemas:
+    OrderOrigin:
+      type: string
+      enum:
+      - initial
+      - redraw
+      - recreation
+      title: OrderOrigin
+      description: ℹ️ This enum is non-exhaustive.
+    GuarantorDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone_number:
+          type: string
+          title: Phone Number
+        household_income:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Income
+        household_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Size
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+      type: object
+      required:
+      - first_name
+      - last_name
+      - address
+      - phone_number
+      title: GuarantorDetails
+    FailureType:
+      type: string
+      enum:
+      - quantity_not_sufficient_failure
+      - collection_process_failure
+      - drop_off_failure
+      - internal_lab_failure
+      - order_entry_failure
+      - non_failure
+      - unknown_failure
+      - patient_condition_failure
+      - missing_result_calc_failure
+      - missing_demo_aoe_calc_failure
+      - insufficient_volume
+      title: FailureType
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingWalkInOrderDetails:
+      properties:
+        type:
+          type: string
+          const: walk_in_test
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingWalkInTestOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingWalkInOrderDetails
+    ConsentType:
+      type: string
+      enum:
+      - terms-of-use
+      - telehealth-informed-consent
+      - mobile-terms-and-conditions
+      - notice-of-privacy-practices
+      - privacy-policy
+      - hipaa-authorization
+      title: ConsentType
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingLabs:
+      type: string
+      enum:
+      - quest
+      - labcorp
+      - bioreference
+      - sonora_quest
+      title: ClientFacingLabs
+      description: ℹ️ This enum is non-exhaustive.
+    MarkerType:
+      type: string
+      enum:
+      - biomarker
+      - panel
+      title: MarkerType
+      description: ℹ️ This enum is non-exhaustive.
+    PatientAddressCompatible:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+          default: ''
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          title: Zip
+        country:
+          type: string
+          title: Country
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+      type: object
+      required:
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      title: PatientAddressCompatible
+    ClientFacingOrderTransaction:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        status:
+          $ref: '#/components/schemas/OrderTransactionStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        orders:
+          items:
+            $ref: '#/components/schemas/ClientFacingOrderInTransaction'
+          type: array
+          title: Orders
+      type: object
+      required:
+      - id
+      - status
+      - orders
+      title: ClientFacingOrderTransaction
+      description: Order transaction info.
+    Billing:
+      type: string
+      enum:
+      - client_bill
+      - commercial_insurance
+      - patient_bill_passthrough
+      - patient_bill
+      title: Billing
+      description: ℹ️ This enum is non-exhaustive.
+    AllowedRadius:
+      type: string
+      enum:
+      - '10'
+      - '20'
+      - '25'
+      - '50'
+      - '100'
+      title: AllowedRadius
+      description: ℹ️ This enum is non-exhaustive.
+    api__api_v1__endpoints__vital_api__lab_testing__orders__helpers__AppointmentCancelRequest:
+      properties:
+        cancellation_reason_id:
+          type: string
+          format: uuid4
+          title: Cancellation Reason Id
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+      type: object
+      required:
+      - cancellation_reason_id
+      title: AppointmentCancelRequest
+    OrderStatus:
+      type: string
+      enum:
+      - received.walk_in_test.ordered
+      - received.walk_in_test.requisition_created
+      - received.walk_in_test.requisition_bypassed
+      - completed.walk_in_test.completed
+      - sample_with_lab.walk_in_test.partial_results
+      - failed.walk_in_test.sample_error
+      - cancelled.walk_in_test.cancelled
+      - collecting_sample.walk_in_test.appointment_pending
+      - collecting_sample.walk_in_test.appointment_scheduled
+      - collecting_sample.walk_in_test.appointment_cancelled
+      - collecting_sample.walk_in_test.redraw_available
+      - received.at_home_phlebotomy.ordered
+      - received.at_home_phlebotomy.requisition_created
+      - received.at_home_phlebotomy.requisition_bypassed
+      - collecting_sample.at_home_phlebotomy.appointment_pending
+      - collecting_sample.at_home_phlebotomy.appointment_scheduled
+      - collecting_sample.at_home_phlebotomy.draw_completed
+      - collecting_sample.at_home_phlebotomy.appointment_cancelled
+      - completed.at_home_phlebotomy.completed
+      - sample_with_lab.at_home_phlebotomy.partial_results
+      - cancelled.at_home_phlebotomy.cancelled
+      - failed.at_home_phlebotomy.sample_error
+      - received.testkit.ordered
+      - received.testkit.awaiting_registration
+      - received.testkit.requisition_created
+      - received.testkit.requisition_bypassed
+      - received.testkit.registered
+      - collecting_sample.testkit.transit_customer
+      - collecting_sample.testkit.out_for_delivery
+      - collecting_sample.testkit.with_customer
+      - collecting_sample.testkit.transit_lab
+      - sample_with_lab.testkit.delivered_to_lab
+      - sample_with_lab.testkit.lab_processing_blocked
+      - completed.testkit.completed
+      - failed.testkit.failure_to_deliver_to_customer
+      - failed.testkit.failure_to_deliver_to_lab
+      - failed.testkit.sample_error
+      - failed.testkit.lost
+      - cancelled.testkit.cancelled
+      - cancelled.testkit.do_not_process
+      - collecting_sample.testkit.problem_in_transit_customer
+      - collecting_sample.testkit.problem_in_transit_lab
+      - received.on_site_collection.ordered
+      - received.on_site_collection.requisition_created
+      - received.on_site_collection.requisition_bypassed
+      - sample_with_lab.on_site_collection.draw_completed
+      - completed.on_site_collection.completed
+      - cancelled.on_site_collection.cancelled
+      - sample_with_lab.on_site_collection.partial_results
+      - failed.on_site_collection.sample_error
+      - completed.walk_in_test.corrected
+      - completed.at_home_phlebotomy.corrected
+      - completed.on_site_collection.corrected
+      - completed.testkit.corrected
+      title: OrderStatus
+      description: 'Used in combination with OrderStatusDetail to represent the current order state.
+
+        OrderStatus is driven by a FSM whereas OrderStatusDetail is descriptive only. ℹ️ This enum is non-exhaustive.'
+    ClientFacingOrderEvent:
+      properties:
+        id:
+          type: integer
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        status_detail:
+          anyOf:
+          - $ref: '#/components/schemas/OrderStatusDetail'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - id
+      - created_at
+      - status
+      title: ClientFacingOrderEvent
+    Ethnicity:
+      type: string
+      enum:
+      - hispanic
+      - non_hispanic
+      - ashkenazi_jewish
+      - other
+      title: Ethnicity
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingWalkInTestOrder:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Vital walk-in test Order ID
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        appointment_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Appointment Id
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingWalkInTestOrder
+      description: 'Schema for a walk-in test order in the client facing API.
+
+
+        To be used as part of a ClientFacingOrder.'
+      example:
+        appointment_id: 961495c2-aa74-43ac-bd7d-4284b46499bf
+        created_at: '2020-01-01T00:00:00Z'
+        id: 757df2fd-8ff1-4399-bc48-c37527d9d73a
+        updated_at: '2020-01-01T00:00:00Z'
+    ClientFacingOrder:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Vital Order ID
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Your team id.
+        patient_details:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingPatientDetailsCompatible'
+          - type: 'null'
+          description: Patient Details
+        patient_address:
+          anyOf:
+          - $ref: '#/components/schemas/PatientAddressCompatible'
+          - type: 'null'
+          description: Patient Address
+        lab_test:
+          $ref: '#/components/schemas/ClientFacingLabTest'
+          description: The Vital Test associated with the order
+        details:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingWalkInOrderDetails'
+          - $ref: '#/components/schemas/ClientFacingTestKitOrderDetails'
+          - $ref: '#/components/schemas/ClientFacingAtHomePhlebotomyOrderDetails'
+          - $ref: '#/components/schemas/ClientFacingOnSiteCollectionOrderDetails'
+          title: Details
+        sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sample Id
+          description: Sample ID
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+          description: Notes associated with the order
+        clinical_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Notes
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: When your order was created
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: When your order was last updated.
+        events:
+          items:
+            $ref: '#/components/schemas/ClientFacingOrderEvent'
+          type: array
+          title: Events
+        status:
+          anyOf:
+          - $ref: '#/components/schemas/OrderTopLevelStatus'
+          - type: 'null'
+          description: The top-level status of the latest event for this order. This field is deprecated. Please use `last_event` instead. ℹ️ This enum is non-exhaustive.
+          deprecated: true
+        last_event:
+          $ref: '#/components/schemas/ClientFacingOrderEvent'
+          description: The latest event in the order's lifecycle.
+        physician:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingPhysician'
+          - type: 'null'
+        health_insurance_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Health Insurance Id
+          description: Vital ID of the health insurance.
+        requisition_form_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Requisition Form Url
+          description: DEPRECATED. Requistion form url.
+        priority:
+          type: boolean
+          title: Priority
+          description: Defines whether order is priority or not. For some labs, this refers to a STAT order.
+          default: false
+        shipping_details:
+          anyOf:
+          - $ref: '#/components/schemas/ShippingAddress'
+          - type: 'null'
+          description: Shipping Details. For unregistered testkit orders.
+        activate_by:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Activate By
+          description: Schedule an Order to be processed in a future date.
+        passthrough:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Passthrough
+        billing_type:
+          $ref: '#/components/schemas/Billing'
+          default: client_bill
+          description: ℹ️ This enum is non-exhaustive.
+        icd_codes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Icd Codes
+        has_abn:
+          type: boolean
+          title: Has Abn
+          description: Defines whether the order has an Advanced Beneficiary Notice (ABN) form or not.
+        interpretation:
+          anyOf:
+          - $ref: '#/components/schemas/Interpretation'
+          - type: 'null'
+          description: Interpretation of the order result. Can be one of (normal, abnormal, critical). ℹ️ This enum is non-exhaustive.
+        has_missing_results:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Missing Results
+          description: Defines whether the order result has missing biomarkers.
+        expected_result_by_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Expected Result By Date
+          description: The common-case date by which the order result is expected to be available.
+        worst_case_result_by_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Worst Case Result By Date
+          description: The latest date by which the order result is expected to be available.
+        origin:
+          anyOf:
+          - $ref: '#/components/schemas/OrderOrigin'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        order_transaction:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingOrderTransaction'
+          - type: 'null'
+      type: object
+      required:
+      - user_id
+      - id
+      - team_id
+      - patient_details
+      - patient_address
+      - lab_test
+      - details
+      - sample_id
+      - notes
+      - created_at
+      - updated_at
+      - events
+      - last_event
+      - health_insurance_id
+      - requisition_form_url
+      - shipping_details
+      - has_abn
+      title: ClientFacingOrder
+      example:
+        activate_by: '2020-01-01'
+        created_at: '2020-01-01T00:00:00Z'
+        details:
+          data:
+            created_at: '2020-01-01T00:00:00Z'
+            id: a655f0e4-6405-4a1d-80b7-66f06c2108a7
+            shipment:
+              created_at: '2020-01-01T00:00:00.000Z'
+              id: d55210cc-3d9f-4115-8262-5013f700c7be
+              inbound_courier: usps
+              inbound_tracking_number: <inbound_tracking_number>
+              inbound_tracking_url: <inbound_tracking_url>
+              notes: <notes>
+              outbound_courier: usps
+              outbound_tracking_number: <outbound_tracking_number>
+              outbound_tracking_url: <outbound_tracking_url>
+              updated_at: '2020-01-01T00:00:00.000Z'
+            updated_at: '2020-01-01T00:00:00Z'
+          type: testkit
+        events:
+        - created_at: '2022-01-01T00:00:00Z'
+          id: 1
+          status: received.testkit.ordered
+        - created_at: '2022-01-02T00:00:00Z'
+          id: 2
+          status: received.testkit.requisition_created
+        - created_at: '2022-01-03T00:00:00Z'
+          id: 3
+          status: collecting_sample.testkit.transit_customer
+        has_abn: false
+        health_insurace_id: 1b0518f4-02cd-4b5f-a009-8015da6e9654
+        id: 304bdcdb-3ab5-41f3-ba97-de1a6702bd39
+        lab_test:
+          description: Cholesterol test
+          method: testkit
+          name: Lipids Panel
+        last_event:
+          created_at: '2022-01-03T00:00:00Z'
+          id: 3
+          status: collecting_sample.testkit.transit_customer
+        notes: This is a note
+        order_transaction:
+          id: a655f0e4-6405-4a1d-80b7-66f06c2108a7
+          orders:
+          - created_at: '2020-01-01T00:00:00Z'
+            id: d55210cc-3d9f-4115-8262-5013f700c7be
+            low_level_status: transit_customer
+            low_level_status_created_at: '2020-01-05T00:00:00Z'
+            origin: initial
+            updated_at: '2020-01-05T00:00:00Z'
+          - created_at: '2020-01-05T01:00:00Z'
+            id: e66321dd-4e0g-5226-9373-6124g811d8cf
+            low_level_status: requisition_created
+            low_level_status_created_at: '2020-01-05T01:00:00Z'
+            origin: redraw
+            updated_at: '2020-01-05T01:00:00Z'
+          status: active
+        origin: initial
+        patient_address:
+          city: San Francisco
+          country: United States
+          first_line: 123 Main St.
+          phone_number: '+11234567890'
+          receiver_name: John Doe
+          second_line: Apt. 208
+          state: CA
+          zip: '91189'
+        patient_details:
+          dob: '2020-01-01'
+          gender: male
+        requisition_form_url: https://www.example.com
+        sample_id: '123456789'
+        status: collecting_sample
+        team_id: 8b394366-3502-48e9-a07a-f9503091fd9c
+        updated_at: '2020-01-01T00:00:00Z'
+        user_id: 1fb6c1b6-9572-4596-8cfd-930e45ea9d01
+    LngLat:
+      properties:
+        lng:
+          type: number
+          maximum: 180
+          minimum: -180
+          title: Lng
+        lat:
+          type: number
+          maximum: 90
+          minimum: -90
+          title: Lat
+      type: object
+      required:
+      - lng
+      - lat
+      title: LngLat
+    OrderStatusDetail:
+      type: string
+      enum:
+      - fulfillment_error
+      - date_of_collection_unspecified
+      - demographic_information_unspecified
+      - demographic_information_mismatch
+      - sample_quantity_not_sufficient
+      - sample_contaminated
+      - sample_stability_exceeded
+      - sample_hemolyzed
+      - sample_improper_collection
+      title: OrderStatusDetail
+      description: A descriptive-only additional field to be used in combination with OrderStatus. Exposed in the API. ℹ️ This enum is non-exhaustive.
+    PostOrderResponse:
+      properties:
+        order:
+          $ref: '#/components/schemas/ClientFacingOrder'
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - order
+      - status
+      - message
+      title: PostOrderResponse
+    ClientFacingMarker:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lab Id
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/MarkerType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        price:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price
+        aoe:
+          anyOf:
+          - $ref: '#/components/schemas/AoE'
+          - type: 'null'
+        a_la_carte_enabled:
+          type: boolean
+          title: A La Carte Enabled
+          default: false
+        common_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Common Tat Days
+        worst_case_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Worst Case Tat Days
+        is_orderable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Orderable
+          default: true
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      title: ClientFacingMarker
+      example:
+        aoe:
+          questions:
+          - answers:
+            - code: answer_code
+              id: 1
+              value: answer_value
+            code: question_code
+            id: 1
+            value: question_value
+        common_tat_days: 3
+        description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+        id: 1
+        is_orderable: true
+        lab_id: 1
+        name: Hemoglobin A1c
+        price: '10.00'
+        provider_id: '1234'
+        slug: hemoglobin-a1c
+        type: biomarker
+        unit: '%'
+        worst_case_tat_days: 5
+    USAddress:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip_code:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip Code
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+          description: Deprecated. Use `second_line` instead to provide the unit number. Subject to removal after 20 Nov 2023.
+          deprecated: true
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - city
+      - state
+      - zip_code
+      title: USAddress
+    AppointmentProvider:
+      type: string
+      enum:
+      - getlabs
+      - phlebfinders
+      - quest
+      - sonora_quest
+      title: AppointmentProvider
+      description: ℹ️ This enum is non-exhaustive.
+    MissingBiomarkerResult:
+      properties:
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        inferred_failure_type:
+          $ref: '#/components/schemas/FailureType'
+          description: ℹ️ This enum is non-exhaustive.
+        note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Note
+        loinc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc
+        loinc_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        source_markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ParentBiomarkerData'
+            type: array
+          - type: 'null'
+          title: Source Markers
+      type: object
+      required:
+      - name
+      - slug
+      - inferred_failure_type
+      title: MissingBiomarkerResult
+    ResponsibleRelationship:
+      type: string
+      enum:
+      - Self
+      - Spouse
+      - Other
+      title: ResponsibleRelationship
+      description: ℹ️ This enum is non-exhaustive.
+    QuestionType:
+      type: string
+      enum:
+      - choice
+      - text
+      - numeric
+      - multi_choice
+      title: QuestionType
+      description: ℹ️ This enum is non-exhaustive.
+    PatientAddressWithValidation:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+          default: ''
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip
+        country:
+          type: string
+          title: Country
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+      type: object
+      required:
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      title: PatientAddressWithValidation
+    ClientFacingAppointment:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        user_id:
+          type: string
+          format: uuid4
+          title: User Id
+        order_id:
+          type: string
+          format: uuid4
+          title: Order Id
+        order_transaction_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Order Transaction Id
+        address:
+          $ref: '#/components/schemas/USAddress'
+        location:
+          $ref: '#/components/schemas/LngLat'
+        start_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start At
+          description: Time is in UTC
+        end_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End At
+          description: Time is in UTC
+        iana_timezone:
+          anyOf:
+          - type: string
+            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
+          - type: 'null'
+          title: Iana Timezone
+        type:
+          $ref: '#/components/schemas/AppointmentType'
+          description: ℹ️ This enum is non-exhaustive.
+        provider:
+          $ref: '#/components/schemas/AppointmentProvider'
+          description: ℹ️ This enum is non-exhaustive.
+        status:
+          $ref: '#/components/schemas/AppointmentStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_id:
+          type: string
+          title: Provider Id
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+        can_reschedule:
+          type: boolean
+          title: Can Reschedule
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+        event_status:
+          $ref: '#/components/schemas/AppointmentEventStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        event_data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Event Data
+        events:
+          items:
+            $ref: '#/components/schemas/ClientFacingAppointmentEvent'
+          type: array
+          title: Events
+      type: object
+      required:
+      - id
+      - user_id
+      - order_id
+      - address
+      - location
+      - start_at
+      - end_at
+      - type
+      - provider
+      - status
+      - provider_id
+      - can_reschedule
+      - event_status
+      - events
+      title: ClientFacingAppointment
+      example:
+        address:
+          access_notes: 'Gate code #1234, use side entrance'
+          city: San Francisco
+          country: United States
+          first_line: 123 Main St.
+          second_line: Apt. 208
+          state: CA
+          zip_code: '91189'
+        appointment_notes: Please bring photo ID
+        can_reschedule: true
+        end_at: '2022-01-01T00:00:00'
+        event_data:
+          description: Metadata field containing provider specific data, like cancellation reason or origin
+        event_status: scheduled
+        events:
+        - created_at: '2022-01-01T00:00:00Z'
+          status: scheduled
+        - created_at: '2022-01-02T00:00:00Z'
+          status: completed
+        external_id: ext-123
+        iana_timezone: America/New_York
+        id: 1614a22c-4322-43a0-96bc-8ff01e5401c8
+        location:
+          lat: 37.7749295
+          lng: -122.4194155
+        order_id: 6b6b38ef-d312-48b4-95d4-731fc2ce7a6f
+        order_transaction_id: cc089173-7db8-428e-a233-c58472226917
+        provider: getlabs
+        provider_id: '123'
+        start_at: '2022-01-01T00:00:00'
+        status: confirmed
+        type: phlebotomy
+        user_id: 61fac3ce-a2c9-4218-b404-941ca948776f
+    ClientFacingAppointmentCancellationReason:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        name:
+          type: string
+          title: Name
+        is_refundable:
+          type: boolean
+          title: Is Refundable
+      type: object
+      required:
+      - id
+      - name
+      - is_refundable
+      title: ClientFacingAppointmentCancellationReason
+      example:
+        id: 04e00ffd-f053-4732-9be8-72913ea1981d
+        is_refundable: true
+        name: I'm feeling sick
+    SimulationFlags:
+      properties:
+        interpretation:
+          $ref: '#/components/schemas/Interpretation'
+          default: normal
+          description: ℹ️ This enum is non-exhaustive.
+        result_types:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ResultType'
+            type: array
+          - type: 'null'
+          title: Result Types
+        has_missing_results:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Missing Results
+      type: object
+      title: SimulationFlags
+    ResendWebhookBody:
+      properties:
+        order_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: Order Ids
+        start_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start At
+        end_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End At
+      type: object
+      title: ResendWebhookBody
+    SampleData:
+      properties:
+        sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sample Id
+        control_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Control Number
+        date_collected:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Collected
+        date_received:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Received
+        date_reported:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Reported
+        performing_laboratories:
+          anyOf:
+          - additionalProperties:
+              $ref: '#/components/schemas/PerformingLaboratory'
+            type: object
+          - type: 'null'
+          title: Performing Laboratories
+        clinical_information:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalInformation'
+          - type: 'null'
+      type: object
+      title: SampleData
+    ClientFacingOrderInTransaction:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        low_level_status:
+          anyOf:
+          - $ref: '#/components/schemas/OrderLowLevelStatus'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        low_level_status_created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Low Level Status Created At
+        origin:
+          anyOf:
+          - $ref: '#/components/schemas/OrderOrigin'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        parent_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Parent Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingOrderInTransaction
+      description: Minimal order info for embedding in order_transaction payload.
+    ClinicalInformation:
+      properties:
+        fasting:
+          type: boolean
+          title: Fasting
+          default: false
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        information:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Information
+        total_volume:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Volume
+      type: object
+      title: ClinicalInformation
+    PSCInfo:
+      properties:
+        lab_id:
+          type: integer
+          title: Lab Id
+        slug:
+          $ref: '#/components/schemas/Labs'
+          description: ℹ️ This enum is non-exhaustive.
+        patient_service_centers:
+          items:
+            $ref: '#/components/schemas/ClientFacingLabLocation'
+          type: array
+          title: Patient Service Centers
+      type: object
+      required:
+      - lab_id
+      - slug
+      - patient_service_centers
+      title: PSCInfo
+    LabResultsMetadata:
+      properties:
+        age:
+          type: string
+          title: Age
+        dob:
+          type: string
+          title: Dob
+        clia_#:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: 'Clia #'
+        patient:
+          type: string
+          title: Patient
+        provider:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider
+        laboratory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Laboratory
+        date_reported:
+          type: string
+          title: Date Reported
+          deprecated: true
+        date_collected:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Collected
+          deprecated: true
+        specimen_number:
+          type: string
+          title: Specimen Number
+        date_received:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Received
+          deprecated: true
+        status:
+          type: string
+          title: Status
+          default: final
+        interpretation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Interpretation
+        patient_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Patient Id
+        account_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Id
+      type: object
+      required:
+      - age
+      - dob
+      - patient
+      - date_reported
+      - specimen_number
+      title: LabResultsMetadata
+      example:
+        age: 19
+        clia_number: '12331231'
+        date_collected: '2022-02-02'
+        date_received: '2022-01-01'
+        date_reported: '2020-01-01'
+        dob: 18/08/1993
+        interpretation: normal
+        laboratory: Quest Diagnostics
+        patient: Bob Smith
+        provider: Dr. Jack Smith
+        specimen_number: '123131'
+        status: final
+    OrderLowLevelStatus:
+      type: string
+      enum:
+      - ordered
+      - requisition_created
+      - requisition_bypassed
+      - transit_customer
+      - out_for_delivery
+      - with_customer
+      - transit_lab
+      - delivered_to_lab
+      - completed
+      - failure_to_deliver_to_lab
+      - failure_to_deliver_to_customer
+      - problem_in_transit_lab
+      - problem_in_transit_customer
+      - sample_error
+      - appointment_scheduled
+      - appointment_cancelled
+      - appointment_pending
+      - draw_completed
+      - cancelled
+      - lost
+      - do_not_process
+      - partial_results
+      - awaiting_registration
+      - registered
+      - redraw_available
+      - corrected
+      - lab_processing_blocked
+      title: OrderLowLevelStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingPatientDetailsCompatible:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        dob:
+          type: string
+          format: date-time
+          title: Dob
+        gender:
+          type: string
+          title: Gender
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+          description: Parent/medical_proxy details. Required if patient is a minor.
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - dob
+      - gender
+      title: ClientFacingPatientDetailsCompatible
+    Race:
+      type: string
+      enum:
+      - african_american_or_black
+      - asian
+      - indigenous_native_american_alaska_native
+      - other
+      - pacific_islander_or_hawaiian
+      - white_caucasian
+      title: Race
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingPhysician:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        npi:
+          type: string
+          title: Npi
+      type: object
+      required:
+      - first_name
+      - last_name
+      - npi
+      title: ClientFacingPhysician
+    HealthInsuranceCreateRequest:
+      properties:
+        front_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Front Image
+          description: An image of the front of the patient insurance card.
+        back_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Back Image
+          description: An image of the back of the patient insurance card.
+        patient_signature_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Patient Signature Image
+          description: An image of the patient signature for health insurance billing.
+        subjective:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subjective
+          description: Textual description of what are the patient symptoms and attempted treatments.
+        assessment_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Assessment Plan
+          description: Textual description of what are the physician assessments and testing plans.
+        payor_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payor Code
+          description: Unique identifier representing a specific Health Insurance.
+        insurance_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Insurance Id
+          description: Insurance unique number assigned to a patient, usually present on the insurance card.
+        responsible_relationship:
+          anyOf:
+          - $ref: '#/components/schemas/ResponsibleRelationship'
+          - type: 'null'
+          description: Relationship between the patient and the insurance contractor. Values can be (Self, Spouse, Other Relationship). ℹ️ This enum is non-exhaustive.
+        responsible_details:
+          anyOf:
+          - $ref: '#/components/schemas/vital_core__schemas__db_schemas__lab_test__health_insurance__PersonDetails'
+          - type: 'null'
+          description: Responsible details when the value of responsible_relationship is not 'Self'.
+        diagnosis_codes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Diagnosis Codes
+          description: Diagnosis codes for insurance billing.
+      type: object
+      title: HealthInsuranceCreateRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AppointmentEventStatus:
+      type: string
+      enum:
+      - pending
+      - reserved
+      - scheduled
+      - completed
+      - cancelled
+      - in_progress
+      title: AppointmentEventStatus
+      description: ℹ️ This enum is non-exhaustive.
+    OrderTopLevelStatus:
+      type: string
+      enum:
+      - received
+      - collecting_sample
+      - sample_with_lab
+      - completed
+      - cancelled
+      - failed
+      title: OrderTopLevelStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingLabTest:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: ''
+        slug:
+          type: string
+          title: Slug
+          description: ''
+        name:
+          type: string
+          title: Name
+          description: ''
+        sample_type:
+          $ref: '#/components/schemas/LabTestSampleType'
+          description: ℹ️ This enum is non-exhaustive.
+        method:
+          $ref: '#/components/schemas/LabTestCollectionMethod'
+          description: ℹ️ This enum is non-exhaustive.
+        price:
+          type: number
+          title: Price
+          description: ''
+        is_active:
+          type: boolean
+          title: Is Active
+          description: Deprecated. Use status instead.
+        status:
+          $ref: '#/components/schemas/LabTestStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        fasting:
+          type: boolean
+          title: Fasting
+          description: Defines whether a lab test requires fasting.
+          default: false
+        lab:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingLab'
+          - type: 'null'
+          description: ''
+        markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ClientFacingMarker'
+            type: array
+          - type: 'null'
+          title: Markers
+          description: ''
+        is_delegated:
+          type: boolean
+          title: Is Delegated
+          description: Deprecated and always false. Delegation is now at the lab account level. Used to denote whether a lab test requires using non-Vital physician networks.
+          default: false
+          deprecated: true
+        auto_generated:
+          type: boolean
+          title: Auto Generated
+          description: Whether the lab test was auto-generated by Vital
+          default: false
+        has_collection_instructions:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Collection Instructions
+          description: Whether or not the lab test has collection instructions.
+        common_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Common Tat Days
+          description: The common turnaround time in days for the lab test. This is the expected time for the lab to process the test and return results.
+        worst_case_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Worst Case Tat Days
+          description: The worst-case turnaround time in days for the lab test. This is the maximum time the lab may take to process the test and return results.
+      type: object
+      required:
+      - id
+      - slug
+      - name
+      - sample_type
+      - method
+      - price
+      - is_active
+      - status
+      - lab
+      - markers
+      title: ClientFacingLabTest
+      example:
+        lab_test:
+          description: Cholesterol test
+          fasting: false
+          has_collection_instructions: false
+          is_delegated: false
+          lab:
+            city: New York
+            first_line_address: 123 Main St
+            name: US Specialty Lab
+            slug: USSL
+            zipcode: '10001'
+          markers:
+          - description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+            id: 1
+            lab_id: 1
+            name: Hemoglobin A1c
+            price: '10.00'
+            provider_id: '1234'
+            slug: hemoglobin-a1c
+            type: biomarker
+            unit: '%'
+          method: testkit
+          name: Lipids Panel
+          price: 10
+          sample_type: dried blood spot
+          status: active
+    CreateRegistrableTestkitOrderRequest:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        lab_test_id:
+          type: string
+          format: uuid
+          title: Lab Test Id
+        shipping_details:
+          $ref: '#/components/schemas/ShippingAddressWithValidation'
+        passthrough:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Passthrough
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+      type: object
+      required:
+      - user_id
+      - lab_test_id
+      - shipping_details
+      title: CreateRegistrableTestkitOrderRequest
+    TimeSlot:
+      properties:
+        booking_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Booking Key
+        start:
+          type: string
+          format: date-time
+          title: Start
+          description: Time is in UTC
+        end:
+          type: string
+          format: date-time
+          title: End
+          description: Time is in UTC
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+        price:
+          type: number
+          title: Price
+        is_priority:
+          type: boolean
+          title: Is Priority
+        num_appointments_available:
+          type: integer
+          title: Num Appointments Available
+      type: object
+      required:
+      - start
+      - end
+      - price
+      - is_priority
+      - num_appointments_available
+      title: TimeSlot
+    PatientAddress:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          title: Zip
+        country:
+          type: string
+          title: Country
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - receiver_name
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      title: PatientAddress
+    AoEAnswer:
+      properties:
+        marker_id:
+          type: integer
+          title: Marker Id
+        question_id:
+          type: integer
+          title: Question Id
+        answer:
+          type: string
+          title: Answer
+      type: object
+      required:
+      - marker_id
+      - question_id
+      - answer
+      title: AoEAnswer
+    AoE:
+      properties:
+        questions:
+          items:
+            $ref: '#/components/schemas/Question'
+          type: array
+          title: Questions
+      type: object
+      required:
+      - questions
+      title: AoE
+    DaySlots:
+      properties:
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/AppointmentLocation'
+          - type: 'null'
+        date:
+          type: string
+          format: date
+          title: Date
+        slots:
+          items:
+            $ref: '#/components/schemas/TimeSlot'
+          type: array
+          title: Slots
+      type: object
+      required:
+      - date
+      - slots
+      title: DaySlots
+    LabTestSampleType:
+      type: string
+      enum:
+      - dried_blood_spot
+      - arm_collector
+      - serum
+      - saliva
+      - urine
+      - stool
+      title: LabTestSampleType
+      description: The type of sample used to perform a lab test. ℹ️ This enum is non-exhaustive.
+    AppointmentLocation:
+      properties:
+        location:
+          $ref: '#/components/schemas/LngLat'
+        distance:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Distance
+        address:
+          $ref: '#/components/schemas/USAddress'
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+        iana_timezone:
+          anyOf:
+          - type: string
+            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
+          - type: 'null'
+          title: Iana Timezone
+      type: object
+      required:
+      - location
+      - address
+      - code
+      - name
+      title: AppointmentLocation
+    ClientFacingLabLocation:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/LabLocationMetadata'
+        distance:
+          type: integer
+          title: Distance
+        site_code:
+          type: string
+          title: Site Code
+        supported_bill_types:
+          items:
+            $ref: '#/components/schemas/Billing'
+          type: array
+          title: Supported Bill Types
+        location:
+          $ref: '#/components/schemas/LngLat'
+        capabilities:
+          items:
+            $ref: '#/components/schemas/LabLocationCapability'
+          type: array
+          title: Capabilities
+      type: object
+      required:
+      - metadata
+      - distance
+      - site_code
+      - supported_bill_types
+      - location
+      - capabilities
+      title: ClientFacingLabLocation
+    AddOnOrder:
+      properties:
+        marker_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Marker Ids
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+      type: object
+      title: AddOnOrder
+    AppointmentStatus:
+      type: string
+      enum:
+      - confirmed
+      - pending
+      - reserved
+      - in_progress
+      - completed
+      - cancelled
+      title: AppointmentStatus
+      description: ℹ️ This enum is non-exhaustive.
+    AppointmentRescheduleRequest:
+      properties:
+        booking_key:
+          type: string
+          title: Booking Key
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+      type: object
+      required:
+      - booking_key
+      title: AppointmentRescheduleRequest
+    Interpretation:
+      type: string
+      enum:
+      - normal
+      - abnormal
+      - critical
+      - unknown
+      title: Interpretation
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingAtHomePhlebotomyOrderDetails:
+      properties:
+        type:
+          type: string
+          const: at_home_phlebotomy
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingAtHomePhlebotomyOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingAtHomePhlebotomyOrderDetails
+    Question:
+      properties:
+        id:
+          type: integer
+          format: int64
+          title: Id
+        required:
+          type: boolean
+          title: Required
+        code:
+          type: string
+          title: Code
+        value:
+          type: string
+          title: Value
+        type:
+          $ref: '#/components/schemas/QuestionType'
+          description: ℹ️ This enum is non-exhaustive.
+        sequence:
+          type: integer
+          title: Sequence
+        answers:
+          items:
+            $ref: '#/components/schemas/Answer'
+          type: array
+          title: Answers
+        constraint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Constraint
+        default:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default
+      type: object
+      required:
+      - id
+      - required
+      - code
+      - value
+      - type
+      - sequence
+      - answers
+      title: Question
+    UpdateOrderBody:
+      properties:
+        activate_by:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Activate By
+          description: 'The date on which the order should be activated (dispatched to the lab). Must be today or a future date. Set to `null` to clear an existing scheduled date and dispatch the order immediately. Note: an order originally created for immediate processing (no `activate_by` at creation time) cannot be rescheduled — only orders that were created with an `activate_by` can have it changed or cleared.'
+      type: object
+      required:
+      - activate_by
+      title: UpdateOrderBody
+      description: Patch body for updating a modifiable order's scheduled activation date.
+    Gender:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Gender
+      description: ℹ️ This enum is non-exhaustive.
+    Address:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
+    Labs:
+      type: string
+      enum:
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
+      description: ℹ️ This enum is non-exhaustive.
+    ShippingAddress:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          title: Zip
+        country:
+          type: string
+          title: Country
+        phone_number:
+          type: string
+          title: Phone Number
+      type: object
+      required:
+      - receiver_name
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      - phone_number
+      title: ShippingAddress
+    UTCTimestampWithTimezoneOffset:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        timezone_offset:
+          type: integer
+          title: Timezone Offset
+      type: object
+      required:
+      - timestamp
+      - timezone_offset
+      title: UTCTimestampWithTimezoneOffset
+    SexualOrientation:
+      type: string
+      enum:
+      - lesbian_gay_or_homosexual
+      - heterosexual_or_straight
+      - bisexual
+      - dont_know
+      - other
+      title: SexualOrientation
+      description: ℹ️ This enum is non-exhaustive.
+    Consent:
+      properties:
+        consentType:
+          $ref: '#/components/schemas/ConsentType'
+          description: ℹ️ This enum is non-exhaustive.
+        version:
+          type: string
+          title: Version
+          default: '1.0'
+        timeOfConsent:
+          type: string
+          format: date-time
+          title: Timeofconsent
+      type: object
+      required:
+      - consentType
+      title: Consent
+    PSCAreaInfo:
+      properties:
+        patient_service_centers:
+          $ref: '#/components/schemas/PSCAreaInfoDetails'
+        supported_bill_types:
+          items:
+            $ref: '#/components/schemas/Billing'
+          type: array
+          title: Supported Bill Types
+        lab_id:
+          type: integer
+          title: Lab Id
+      type: object
+      required:
+      - patient_service_centers
+      - supported_bill_types
+      - lab_id
+      title: PSCAreaInfo
+    LabLocationMetadata:
+      properties:
+        name:
+          type: string
+          title: Name
+        state:
+          type: string
+          title: State
+        city:
+          type: string
+          title: City
+        zip_code:
+          type: string
+          title: Zip Code
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        fax_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fax Number
+        hours:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Hours
+      type: object
+      required:
+      - name
+      - state
+      - city
+      - zip_code
+      - first_line
+      title: LabLocationMetadata
+    RequestAppointmentRequest:
+      properties:
+        address:
+          $ref: '#/components/schemas/USAddress'
+          description: At-home phlebotomy appointment address.
+        provider:
+          $ref: '#/components/schemas/AppointmentProvider'
+          description: ℹ️ This enum is non-exhaustive.
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+      type: object
+      required:
+      - address
+      - provider
+      title: RequestAppointmentRequest
+    ClientFacingOnSiteCollectionOrderDetails:
+      properties:
+        type:
+          type: string
+          const: on_site_collection
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingOnSiteCollectionOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingOnSiteCollectionOrderDetails
+    AppointmentBookingRequest:
+      properties:
+        booking_key:
+          type: string
+          title: Booking Key
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+        async_confirmation:
+          type: boolean
+          title: Async Confirmation
+          description: If true, the endpoint attempts to confirm the booking within the `sync_confirmation_timeout_millisecond` window. If confirmation is not received in time, a pending appointment is returned and booking continues asynchronously. If false (default), the endpoint waits for confirmation or returns a 500 error on failure.
+          default: false
+        sync_confirmation_timeout_millisecond:
+          anyOf:
+          - type: integer
+            maximum: 10000
+            minimum: 1000
+          - type: 'null'
+          title: Sync Confirmation Timeout Millisecond
+          description: 'Maximum time (in milliseconds) to wait for booking confirmation before returning a pending appointment. Only applies when `async_confirmation` is true. Defaults to 2500ms. Range: 1000-10000ms.'
+        async_confirmation_timeout_millisecond:
+          anyOf:
+          - type: integer
+            maximum: 172800000
+            minimum: 60000
+          - type: 'null'
+          title: Async Confirmation Timeout Millisecond
+          description: 'Maximum time (in milliseconds) to attempt asynchronous booking before cancelling the pending appointment. Only applies when `async_confirmation` is true. Defaults to 15 minutes. Range: 60000-172800000ms.'
+      type: object
+      required:
+      - booking_key
+      title: AppointmentBookingRequest
+    CreateOrderRequestCompatible:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        lab_test_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Test Id
+          deprecated: true
+        order_set:
+          anyOf:
+          - $ref: '#/components/schemas/OrderSetRequest'
+          - type: 'null'
+        collection_method:
+          anyOf:
+          - $ref: '#/components/schemas/LabTestCollectionMethod'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        physician:
+          anyOf:
+          - $ref: '#/components/schemas/PhysicianCreateRequest'
+          - type: 'null'
+        health_insurance:
+          anyOf:
+          - $ref: '#/components/schemas/HealthInsuranceCreateRequest'
+          - type: 'null'
+          deprecated: true
+        priority:
+          type: boolean
+          title: Priority
+          description: Defines whether order is priority or not. For some labs, this refers to a STAT order.
+          default: false
+        billing_type:
+          $ref: '#/components/schemas/Billing'
+          default: client_bill
+          description: ℹ️ This enum is non-exhaustive.
+        icd_codes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Icd Codes
+        consents:
+          items:
+            $ref: '#/components/schemas/Consent'
+          type: array
+          title: Consents
+        activate_by:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Activate By
+          description: Schedule an Order to be processed in a future date.
+        aoe_answers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/AoEAnswer'
+            type: array
+          - type: 'null'
+          title: Aoe Answers
+        passthrough:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Passthrough
+        clinical_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Clinical Notes
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+        creator_member_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Creator Member Id
+        patient_details:
+          $ref: '#/components/schemas/PatientDetailsWithValidation'
+        patient_address:
+          $ref: '#/components/schemas/PatientAddressWithValidation'
+      type: object
+      required:
+      - user_id
+      - patient_details
+      - patient_address
+      title: CreateOrderRequestCompatible
+      description: Schema for the create Order endpoint.
+    ClientFacingAppointmentEvent:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        status:
+          $ref: '#/components/schemas/AppointmentEventStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+      type: object
+      required:
+      - created_at
+      - status
+      title: ClientFacingAppointmentEvent
+    GenderIdentity:
+      type: string
+      enum:
+      - male
+      - female
+      - female_to_male_ftm_transgender_male_trans_man
+      - male_to_female_mtf_transgender_female_trans_woman
+      - genderqueer
+      - other
+      title: GenderIdentity
+      description: ℹ️ This enum is non-exhaustive.
+    Jpeg:
+      properties:
+        content:
+          type: string
+          title: Content
+          format: binary
+        content_type:
+          type: string
+          const: image/jpeg
+          title: Content Type
+      type: object
+      required:
+      - content
+      - content_type
+      title: Jpeg
+    ImportOrderBody:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        billing_type:
+          $ref: '#/components/schemas/Billing'
+          description: ℹ️ This enum is non-exhaustive.
+        order_set:
+          $ref: '#/components/schemas/OrderSetRequest'
+        collection_method:
+          $ref: '#/components/schemas/LabTestCollectionMethod'
+          description: ℹ️ This enum is non-exhaustive.
+        physician:
+          anyOf:
+          - $ref: '#/components/schemas/PhysicianCreateRequest'
+          - type: 'null'
+        patient_details:
+          $ref: '#/components/schemas/PatientDetailsWithValidation'
+        patient_address:
+          $ref: '#/components/schemas/PatientAddress'
+        sample_id:
+          type: string
+          title: Sample Id
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+      type: object
+      required:
+      - user_id
+      - billing_type
+      - order_set
+      - collection_method
+      - patient_details
+      - patient_address
+      - sample_id
+      title: ImportOrderBody
+    AppointmentServiceType:
+      type: string
+      enum:
+      - appointment-ready
+      - appointment-request
+      title: AppointmentServiceType
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingShipment:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Vital Shipment ID
+        outbound_tracking_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Outbound Tracking Number
+          description: Tracking number for delivery to customer
+        outbound_tracking_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Outbound Tracking Url
+          description: Tracking url for delivery to customer
+        inbound_tracking_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inbound Tracking Number
+          description: Tracking number for delivery to lab
+        inbound_tracking_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inbound Tracking Url
+          description: Tracking url for delivery to lab
+        outbound_courier:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Outbound Courier
+          description: Courier used for delivery to customer
+        inbound_courier:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inbound Courier
+          description: Courier used for delivery to lab
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+          description: Notes associated to the Vital shipment
+      type: object
+      required:
+      - id
+      - outbound_tracking_number
+      - outbound_tracking_url
+      - inbound_tracking_number
+      - inbound_tracking_url
+      - outbound_courier
+      - inbound_courier
+      - notes
+      title: ClientFacingShipment
+      description: 'Schema for a Shipment in the client facing API.
+
+
+        To be used as part of a ClientFacingTestkitOrder.'
+      example:
+        id: 6d249293-7ee9-4c7f-8889-113ccbf5f89b
+        inbound_courier: usps
+        inbound_tracking_number: <inbound_tracking_number>
+        inbound_tracking_url: <inbound_tracking_url>
+        notes: <notes>
+        outbound_courier: usps
+        outbound_tracking_number: <outbound_tracking_number>
+        outbound_tracking_url: <outbound_tracking_url>
+    PSCAreaInfoDetails:
+      properties:
+        appointment_with_vital:
+          type: boolean
+          title: Appointment With Vital
+        within_radius:
+          type: integer
+          title: Within Radius
+        radius:
+          type: string
+          title: Radius
+        capabilities:
+          items:
+            $ref: '#/components/schemas/LabLocationCapability'
+          type: array
+          title: Capabilities
+      type: object
+      required:
+      - appointment_with_vital
+      - within_radius
+      - radius
+      title: PSCAreaInfoDetails
+    LabTestCollectionMethod:
+      type: string
+      enum:
+      - testkit
+      - walk_in_test
+      - at_home_phlebotomy
+      - on_site_collection
+      title: LabTestCollectionMethod
+      description: The method used to perform a lab test. ℹ️ This enum is non-exhaustive.
+    PhysicianCreateRequestBase:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        npi:
+          type: string
+          title: Npi
+        licensed_states:
+          items:
+            type: string
+          type: array
+          title: Licensed States
+      type: object
+      required:
+      - first_name
+      - last_name
+      - npi
+      title: PhysicianCreateRequestBase
+    PerformingLaboratory:
+      properties:
+        name:
+          type: string
+          title: Name
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        medical_director:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medical Director
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+      type: object
+      required:
+      - name
+      title: PerformingLaboratory
+    Answer:
+      properties:
+        id:
+          type: integer
+          title: Id
+        code:
+          type: string
+          title: Code
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - id
+      - code
+      - value
+      title: Answer
+    ClientFacingTestKitOrderDetails:
+      properties:
+        type:
+          type: string
+          const: testkit
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingTestkitOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingTestKitOrderDetails
+    AppointmentType:
+      type: string
+      enum:
+      - phlebotomy
+      - patient_service_center
+      title: AppointmentType
+      description: ℹ️ This enum is non-exhaustive.
+    ParentBiomarkerData:
+      properties:
+        marker_id:
+          type: integer
+          title: Marker Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+      type: object
+      required:
+      - marker_id
+      - name
+      - slug
+      title: ParentBiomarkerData
+    ClientFacingAtHomePhlebotomyOrder:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Vital at-home phlebotomy Order ID
+        appointment_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Appointment Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingAtHomePhlebotomyOrder
+      description: 'Schema for a at-home-phlebotomy test order in the client facing API.
+
+
+        To be used as part of a ClientFacingOrder.'
+      example:
+        appointment_id: 10d7a598-5a7d-4743-9045-6038c73eeace
+        created_at: '2020-01-01T00:00:00Z'
+        id: 81d0f268-303b-486a-b8c9-1d2e4466e50b
+        updated_at: '2020-01-01T00:00:00Z'
+    LabResultsRaw:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/LabResultsMetadata'
+        results:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/BiomarkerResult'
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Results
+        missing_results:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/MissingBiomarkerResult'
+            type: array
+          - type: 'null'
+          title: Missing Results
+        sample_information:
+          anyOf:
+          - additionalProperties:
+              $ref: '#/components/schemas/SampleData'
+            type: object
+          - type: 'null'
+          title: Sample Information
+        order_transaction:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingOrderTransaction'
+          - type: 'null'
+      type: object
+      required:
+      - metadata
+      - results
+      title: LabResultsRaw
+      example:
+        metadata:
+          age: 19
+          clia_number: '12331231'
+          date_collected: '2022-02-02'
+          date_received: '2022-01-01'
+          date_reported: '2020-01-01'
+          dob: 18/08/1993
+          interpretation: normal
+          laboratory: Quest Diagnostics
+          patient: Bob Smith
+          provider: Dr. Jack Smith
+          specimen_number: '123131'
+          status: final
+        results:
+          '[marker]': {}
+          fsh: {}
+          ige: {}
+    BiomarkerResult:
+      properties:
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+          default: ''
+        value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Value
+          description: 'Deprecated: Use ''result'' (string) and `type` (enum) instead. '
+          deprecated: true
+          x-fern-ignore: true
+        result:
+          type: string
+          title: Result
+        type:
+          $ref: '#/components/schemas/ResultType'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        timestamp:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Timestamp
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        reference_range:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reference Range
+        min_range_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Min Range Value
+        max_range_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Range Value
+        is_above_max_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Above Max Range
+        is_below_min_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Below Min Range
+        interpretation:
+          type: string
+          title: Interpretation
+          default: normal
+        loinc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc
+        loinc_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        source_markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ParentBiomarkerData'
+            type: array
+          - type: 'null'
+          title: Source Markers
+        performing_laboratory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Performing Laboratory
+        source_sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Sample Id
+      type: object
+      required:
+      - name
+      - result
+      - type
+      title: BiomarkerResult
+      description: Represent the schema for an individual biomarker result.
+      example:
+        interpretation: normal
+        is_above_max_range: false
+        is_below_min_range: false
+        loinc: 742-7
+        loinc_slug: monocytes-auto-bld-vol
+        max_range_value: 0.9
+        min_range_value: 0.1
+        name: Monocytes(Absolute)
+        notes: Final
+        result: '0.4'
+        slug: monocytes-absolute
+        timestamp: '2023-11-01T08:28:00+00:00'
+        type: numeric
+        unit: x10E3/uL
+        value: 0.4
+    ClientFacingOnSiteCollectionOrder:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Junction on-site collection Order ID
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingOnSiteCollectionOrder
+      description: 'Schema for an on-site collection order in the client facing API.
+
+        To be used as part of a ClientFacingOrder.'
+      example:
+        created_at: '2020-01-01T00:00:00Z'
+        id: 64d787c3-825d-462b-bf0c-5b895f7a9bf5
+        updated_at: '2020-01-01T00:00:00Z'
+    PatientDetailsWithValidation:
+      properties:
+        first_name:
+          type: string
+          maxLength: 50
+          minLength: 1
+          title: First Name
+        last_name:
+          type: string
+          maxLength: 50
+          minLength: 1
+          title: Last Name
+        dob:
+          type: string
+          format: date
+          title: Dob
+        gender:
+          $ref: '#/components/schemas/Gender'
+          description: ℹ️ This enum is non-exhaustive.
+        phone_number:
+          type: string
+          title: Phone Number
+        email:
+          type: string
+          format: email
+          title: Email
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+          description: Parent/medical_proxy details. Required if patient is a minor.
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        household_income:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Income
+          description: Household income in USD. If not provided, will be set to None
+        household_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Size
+          description: Household size. If not provided, will be set to None
+      type: object
+      required:
+      - first_name
+      - last_name
+      - dob
+      - gender
+      - phone_number
+      - email
+      title: PatientDetailsWithValidation
+      description: Patient details with validation for first_name, last_name, email, and dob.
+    LabTestStatus:
+      type: string
+      enum:
+      - active
+      - pending_approval
+      - inactive
+      title: LabTestStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ResendWebhookResponse:
+      properties:
+        order_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Order Ids
+      type: object
+      required:
+      - order_ids
+      title: ResendWebhookResponse
+    PhlebotomyProviderInfo:
+      properties:
+        name:
+          $ref: '#/components/schemas/AppointmentProvider'
+          description: ℹ️ This enum is non-exhaustive.
+        service_types:
+          items:
+            $ref: '#/components/schemas/AppointmentServiceType'
+          type: array
+          title: Service Types
+      type: object
+      required:
+      - name
+      - service_types
+      title: PhlebotomyProviderInfo
+    vital_core__clients__lab_test__getlabs__schema__AppointmentCancelRequest:
+      properties:
+        cancellationReasonId:
+          type: string
+          format: uuid4
+          title: Cancellationreasonid
+        note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Note
+      type: object
+      required:
+      - cancellationReasonId
+      title: AppointmentCancelRequest
+    PhysicianCreateRequest:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        npi:
+          type: string
+          title: Npi
+        licensed_states:
+          items:
+            type: string
+          type: array
+          title: Licensed States
+        signature_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Signature Image
+          description: An image of the physician signature for health insurance billing
+      type: object
+      required:
+      - first_name
+      - last_name
+      - npi
+      title: PhysicianCreateRequest
+    AppointmentAvailabilitySlots:
+      properties:
+        slots:
+          items:
+            $ref: '#/components/schemas/DaySlots'
+          type: array
+          title: Slots
+        timezone:
+          anyOf:
+          - type: string
+            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
+          - type: 'null'
+          title: Timezone
+      type: object
+      required:
+      - slots
+      title: AppointmentAvailabilitySlots
+    ClientFacingLab:
+      properties:
+        id:
+          type: integer
+          title: Id
+        slug:
+          type: string
+          title: Slug
+        name:
+          type: string
+          title: Name
+        first_line_address:
+          type: string
+          title: First Line Address
+        city:
+          type: string
+          title: City
+        zipcode:
+          type: string
+          title: Zipcode
+        collection_methods:
+          items:
+            $ref: '#/components/schemas/LabTestCollectionMethod'
+          type: array
+          title: Collection Methods
+        sample_types:
+          items:
+            $ref: '#/components/schemas/LabTestSampleType'
+          type: array
+          title: Sample Types
+      type: object
+      required:
+      - id
+      - slug
+      - name
+      - first_line_address
+      - city
+      - zipcode
+      - collection_methods
+      - sample_types
+      title: ClientFacingLab
+      example:
+        city: San Francisco
+        collection_methods:
+        - testkit
+        first_line_address: 123 Main St
+        id: 1
+        name: LabCorp
+        sample_types:
+        - saliva
+        slug: labcorp
+        zipcode: '91789'
+    vital_core__schemas__db_schemas__lab_test__health_insurance__PersonDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone_number:
+          type: string
+          title: Phone Number
+        phone_type:
+          type: string
+          title: Phone Type
+          default: Mobile
+      type: object
+      required:
+      - first_name
+      - last_name
+      - address
+      - phone_number
+      title: PersonDetails
+    AreaInfo:
+      properties:
+        zip_code:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip Code
+        phlebotomy:
+          $ref: '#/components/schemas/PhlebotomyAreaInfo'
+        central_labs:
+          additionalProperties:
+            $ref: '#/components/schemas/PSCAreaInfo'
+          propertyNames:
+            $ref: '#/components/schemas/ClientFacingLabs'
+          type: object
+          title: Central Labs
+      type: object
+      required:
+      - zip_code
+      - phlebotomy
+      - central_labs
+      title: AreaInfo
+    LabLocationCapability:
+      type: string
+      enum:
+      - stat
+      - appointment_scheduling_via_junction
+      - appointment_scheduling_with_lab
+      title: LabLocationCapability
+      description: ℹ️ This enum is non-exhaustive.
+    RegisterTestkitRequest:
+      properties:
+        user_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: User Id
+          description: The user ID of the patient.
+          deprecated: true
+        sample_id:
+          type: string
+          title: Sample Id
+        patient_details:
+          $ref: '#/components/schemas/PatientDetailsWithValidation'
+        patient_address:
+          $ref: '#/components/schemas/PatientAddressWithValidation'
+        physician:
+          anyOf:
+          - $ref: '#/components/schemas/PhysicianCreateRequestBase'
+          - type: 'null'
+        health_insurance:
+          anyOf:
+          - $ref: '#/components/schemas/HealthInsuranceCreateRequest'
+          - type: 'null'
+        consents:
+          items:
+            $ref: '#/components/schemas/Consent'
+          type: array
+          title: Consents
+      type: object
+      required:
+      - sample_id
+      - patient_details
+      - patient_address
+      title: RegisterTestkitRequest
+    Png:
+      properties:
+        content:
+          type: string
+          title: Content
+          format: binary
+        content_type:
+          type: string
+          const: image/png
+          title: Content Type
+      type: object
+      required:
+      - content
+      - content_type
+      title: Png
+    ResultType:
+      type: string
+      enum:
+      - numeric
+      - range
+      - comment
+      - coded_value
+      title: ResultType
+      description: ℹ️ This enum is non-exhaustive.
+    ShippingAddressWithValidation:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip
+        country:
+          type: string
+          title: Country
+        phone_number:
+          type: string
+          title: Phone Number
+      type: object
+      required:
+      - receiver_name
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      - phone_number
+      title: ShippingAddressWithValidation
+    OrderSetRequest:
+      properties:
+        lab_test_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: Lab Test Ids
+        add_on:
+          anyOf:
+          - $ref: '#/components/schemas/AddOnOrder'
+          - type: 'null'
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+      type: object
+      title: OrderSetRequest
+    PhlebotomyAreaInfo:
+      properties:
+        is_served:
+          type: boolean
+          title: Is Served
+        providers:
+          items:
+            $ref: '#/components/schemas/PhlebotomyProviderInfo'
+          type: array
+          title: Providers
+      type: object
+      required:
+      - is_served
+      - providers
+      title: PhlebotomyAreaInfo
+    ClientFacingTestkitOrder:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Vital TestKit Order ID
+        shipment:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingShipment'
+          - type: 'null'
+          description: Shipment object
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - shipment
+      - created_at
+      - updated_at
+      title: ClientFacingTestkitOrder
+      description: 'Schema for a testkit order in the client facing API.
+
+
+        To be used as part of a ClientFacingOrder.'
+      example:
+        created_at: '2020-01-01T00:00:00Z'
+        id: b31c2663-88de-44b7-977d-c37ef107254f
+        shipment:
+          created_at: '2020-01-01T00:00:00.000Z'
+          id: e56c84fb-f8fa-4d74-bed0-a129b04cb3bc
+          inbound_courier: usps
+          inbound_tracking_number: <inbound_tracking_number>
+          inbound_tracking_url: <inbound_tracking_url>
+          notes: <notes>
+          outbound_courier: usps
+          outbound_tracking_number: <outbound_tracking_number>
+          outbound_tracking_url: <outbound_tracking_url>
+          updated_at: '2020-01-01T00:00:00.000Z'
+        updated_at: '2020-01-01T00:00:00Z'
+    AppointmentPSCLabs:
+      type: string
+      enum:
+      - quest
+      - sonora_quest
+      title: AppointmentPSCLabs
+      description: ℹ️ This enum is non-exhaustive.
+    OrderTransactionStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - cancelled
+      title: OrderTransactionStatus
+      description: ℹ️ This enum is non-exhaustive.
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key
