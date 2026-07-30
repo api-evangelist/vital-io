@@ -11,9 +11,22 @@ description: >-
   run Junction Sense continuous queries to turn raw data into clinically actionable insights. Backed by SOC 2 Type 2,
   ISO 27001, GDPR-ready, and HIPAA-compliant infrastructure with both US and EU regional deployments.
 type: Index
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vital-io.png
 tags:
   - Health Data
   - Wearables
@@ -41,208 +54,741 @@ url: https://raw.githubusercontent.com/api-evangelist/vital-io/refs/heads/main/a
 specificationVersion: '0.19'
 kind: company
 apis:
-  - aid: vital-io:vital-users-api
-    name: Vital Users API
-    tags:
-      - Users
-      - User Management
-      - Demographics
-      - Insurance
-      - Sign-In Tokens
-    humanURL: https://docs.junction.com/api-details/junction-api
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/api-details/junction-api
-        type: Documentation
-      - url: openapi/vital-users-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/vital-user-schema.json
-        type: JSONSchema
-      - url: examples/vital-create-user-example.json
-        type: Examples
-    description: >-
-      Create, list, get, update, and delete end users on the Junction (Vital) platform. Each user represents a person
-      whose wearable, device, and lab data is ingested under your team. Manage user demographics, user insurance
-      details, sign-in tokens for the Junction app, portal URLs, user-resolve by client_user_id, refresh of all
-      connected providers for a user, listing of a user's connections, and soft-delete / undo-delete flows.
-  - aid: vital-io:vital-link-api
-    name: Vital Link API
-    tags:
-      - Link
-      - Provider Connections
-      - OAuth
-      - Wearables
-      - Bulk Operations
-    humanURL: https://docs.junction.com/wearables/providers/introduction
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/wearables/providers/introduction
-        type: Documentation
-      - url: openapi/vital-link-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/vital-provider-schema.json
-        type: JSONSchema
-      - url: examples/vital-link-token-example.json
-        type: Examples
-    description: >-
-      Connect end users to their wearable and health-data providers. Generate Link tokens that drive the Vital Link
-      Widget, complete OAuth / email / password / demo provider flows, deregister a connection, complete MFA for
-      password providers, run bulk operations (export, import, pause, historical-pull trigger), and retrieve the catalog
-      of 300+ supported providers — Fitbit, Garmin, Oura, Whoop, Withings, Polar, Strava, Dexcom, Freestyle Libre, Apple
-      HealthKit, Android Health Connect, Samsung Health, and the rest.
-  - aid: vital-io:vital-wearables-api
-    name: Vital Wearables Data API
-    tags:
-      - Wearables
-      - Timeseries
-      - Summary
-      - Sleep
-      - Activity
-      - Body
-      - Workouts
-      - Heart Rate
-      - HRV
-      - Glucose
-      - Blood Pressure
-      - SpO2
-      - ECG
-    humanURL: https://docs.junction.com/api-details/junction-api
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/api-details/junction-api
-        type: Documentation
-      - url: openapi/vital-wearables-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/vital-sleep-summary-schema.json
-        type: JSONSchema
-      - url: json-schema/vital-activity-summary-schema.json
-        type: JSONSchema
-      - url: json-schema/vital-heart-rate-timeseries-schema.json
-        type: JSONSchema
-      - url: examples/vital-sleep-summary-example.json
-        type: Examples
-      - url: examples/vital-heart-rate-timeseries-example.json
-        type: Examples
-    description: >-
-      Read normalized wearable-device data across 300+ supported devices. Daily summary endpoints cover sleep, sleep
-      cycles, activity, body composition, workouts, menstrual cycle, ECG, meals, and the user profile. Per-sample
-      timeseries endpoints cover heart rate, heart-rate variability, blood pressure, blood oxygen, glucose (including
-      continuous-glucose monitoring), respiratory rate, body temperature, basal body temperature, distance, steps,
-      floors climbed, active and basal calories, stress level, sleep stream, workout stream, and workout-specific
-      metrics (swimming stroke, distance, duration). All data is normalized to a single schema regardless of source
-      provider.
-  - aid: vital-io:vital-lab-testing-api
-    name: Vital Lab Testing API
-    tags:
-      - Lab Testing
-      - Lab Orders
-      - Biomarkers
-      - Phlebotomy
-      - Testkits
-      - PSC
-      - Insurance
-      - Diagnosis
-      - Compendium
-    humanURL: https://docs.junction.com/api-details/junction-api
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/api-details/junction-api
-        type: Documentation
-      - url: openapi/vital-lab-testing-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/vital-lab-order-schema.json
-        type: JSONSchema
-      - url: json-schema/vital-lab-result-schema.json
-        type: JSONSchema
-      - url: examples/vital-create-order-example.json
-        type: Examples
-      - url: examples/vital-lab-result-example.json
-        type: Examples
-    description: >-
-      Order, fulfill, and retrieve lab tests across a nationwide US lab network spanning all 50 states including NY, NJ,
-      and RI. Covers at-home testkits, at-home phlebotomy, walk-in / Patient Service Center collection, and on-site
-      collection. Endpoints handle order creation and lifecycle (create, get, update, cancel, import, register,
-      simulate), appointment management (availability, booking, cancellation, rescheduling for both phlebotomy and PSC),
-      order transactions, results (JSON and PDF), the lab-test compendium (search + convert), payor and
-      insurance/diagnosis search, ABN forms, requisition and label PDFs, collection instructions, and team lab accounts.
-  - aid: vital-io:vital-lab-report-parser-api
-    name: Vital Lab Report Parser API
-    tags:
-      - Lab Reports
-      - PDF Parsing
-      - Biomarkers
-      - Document AI
-    humanURL: https://docs.junction.com/api-details/junction-api
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/api-details/junction-api
-        type: Documentation
-      - url: openapi/vital-lab-report-parser-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create a lab-report
-      parser job, then poll for status and the parsed result set — useful for back-loading historical patient records or
-      for normalizing results from external labs into the Junction biomarker schema.
-  - aid: vital-io:vital-sense-api
-    name: Vital Sense API
-    tags:
-      - Sense
-      - Continuous Queries
-      - Aggregation
-      - Analytics
-      - Insights
-    humanURL: https://docs.junction.com/api-details/junction-api
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/api-details/junction-api
-        type: Documentation
-      - url: openapi/vital-sense-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Junction Sense — query and aggregation API for per-user health data. Run on-demand aggregate queries across a
-      user's ingested wearable and lab data, fetch the result table for a defined continuous query, and read
-      continuous-query task-execution history. Sense turns raw ingest into clinically meaningful metrics (sleep debt,
-      HRV trends, glucose variability, etc.) without you owning the aggregation infrastructure.
-  - aid: vital-io:vital-team-api
-    name: Vital Team API
-    tags:
-      - Team
-      - Administration
-      - Webhooks
-      - Introspection
-      - Configuration
-    humanURL: https://docs.junction.com/api-details/junction-management-api
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/api-details/junction-management-api
-        type: Documentation
-      - url: openapi/vital-team-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      Read and administer team-level resources on the Junction (Vital) platform. Get team metadata, search team users by
-      uuid or client_user_id, fetch the Svix webhook portal URL for managing webhook subscriptions, and introspect
-      team-level historical pulls and per-resource availability for your team's users.
-  - aid: vital-io:vital-management-api
-    name: Vital Management API
-    tags:
-      - Management
-      - Organizations
-      - Teams
-      - API Keys
-      - ETL Pipelines
-      - Webhooks
-    humanURL: https://docs.junction.com/api-details/junction-management-api
-    baseURL: https://api.us.junction.com
-    properties:
-      - url: https://docs.junction.com/api-details/junction-management-api
-        type: Documentation
-    description: >-
-      Programmatically manage all Junction regional and global resources for your organization. Authenticated with a
-      separate x-vital-management-api-key, this API governs organizations, teams (create, update, delete, list), team
-      and management API keys, team members and invitations, custom OAuth credentials, data-pull preferences, ETL
-      pipeline configuration (Azure Event Hubs, Google Cloud Pub/Sub, RabbitMQ), webhook subscriptions (create, list,
-      rotate secret, update headers, patch, delete), scope requirements, physician assignments, and lab-account team
-      assignments.
+- aid: vital-io:vital-management-api
+  name: Vital Management API
+  tags:
+  - Management
+  - Organizations
+  - Teams
+  - API Keys
+  - ETL Pipelines
+  - Webhooks
+  humanURL: https://docs.junction.com/api-details/junction-management-api
+  baseURL: https://api.us.junction.com
+  properties:
+  - url: https://docs.junction.com/api-details/junction-management-api
+    type: Documentation
+  description: >-
+    Programmatically manage all Junction regional and global resources for your organization. Authenticated
+    with a separate x-vital-management-api-key, this API governs organizations, teams (create, update,
+    delete, list), team and management API keys, team members and invitations, custom OAuth credentials,
+    data-pull preferences, ETL pipeline configuration (Azure Event Hubs, Google Cloud Pub/Sub, RabbitMQ),
+    webhook subscriptions (create, list, rotate secret, update headers, patch, delete), scope requirements,
+    physician assignments, and lab-account team assignments.
+- aid: vital-io:vital-io-aggregate-api
+  name: Vital Aggregate API
+  description: The Aggregate API from Vital — 3 operation(s) for aggregate.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - Aggregate
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-aggregate-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-compendium-api
+  name: Vital compendium API
+  description: The compendium API from Vital — 2 operation(s) for compendium.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - compendium
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-compendium-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-insurance-api
+  name: Vital insurance API
+  description: The insurance API from Vital — 3 operation(s) for insurance.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - insurance
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-insurance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-introspect-api
+  name: Vital introspect API
+  description: The introspect API from Vital — 2 operation(s) for introspect.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - introspect
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-introspect-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-lab-account-api
+  name: Vital lab_account API
+  description: The lab_account API from Vital — 1 operation(s) for lab_account.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - lab_account
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-lab-account-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-lab-report-api
+  name: Vital lab_report API
+  description: The lab_report API from Vital — 2 operation(s) for lab_report.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - lab_report
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-lab-report-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-lab-tests-api
+  name: Vital lab_tests API
+  description: The lab_tests API from Vital — 9 operation(s) for lab_tests.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - lab_tests
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-lab-tests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-link-api
+  name: Vital link API
+  description: The link API from Vital — 13 operation(s) for link.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - link
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-link-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-order-api
+  name: Vital order API
+  description: The order API from Vital — 32 operation(s) for order.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - order
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-order-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-order-transaction-api
+  name: Vital order_transaction API
+  description: The order_transaction API from Vital — 3 operation(s) for order_transaction.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - order_transaction
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-order-transaction-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-orders-api
+  name: Vital orders API
+  description: The orders API from Vital — 1 operation(s) for orders.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - orders
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-payor-api
+  name: Vital payor API
+  description: The payor API from Vital — 1 operation(s) for payor.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - payor
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-payor-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-providers-api
+  name: Vital providers API
+  description: The providers API from Vital — 1 operation(s) for providers.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - providers
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-providers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-summary-api
+  name: Vital summary API
+  description: The summary API from Vital — 15 operation(s) for summary.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - summary
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-summary-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-team-api
+  name: Vital team API
+  description: The team API from Vital — 5 operation(s) for team.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - team
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-team-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-timeseries-api
+  name: Vital timeseries API
+  description: The timeseries API from Vital — 80 operation(s) for timeseries.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - timeseries
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-timeseries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-user-api
+  name: Vital user API
+  description: The user API from Vital — 16 operation(s) for user.
+  humanURL: https://docs.junction.com/api-details/junction-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-api
+  - type: JSONSchema
+    url: json-schema/vital-user-schema.json
+  - type: Examples
+    url: examples/vital-create-user-example.json
+  - type: Documentation
+    url: https://docs.junction.com/wearables/providers/introduction
+  - type: JSONSchema
+    url: json-schema/vital-provider-schema.json
+  - type: Examples
+    url: examples/vital-link-token-example.json
+  - type: JSONSchema
+    url: json-schema/vital-sleep-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-activity-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-heart-rate-timeseries-schema.json
+  - type: Examples
+    url: examples/vital-sleep-summary-example.json
+  - type: Examples
+    url: examples/vital-heart-rate-timeseries-example.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-order-schema.json
+  - type: JSONSchema
+    url: json-schema/vital-lab-result-schema.json
+  - type: Examples
+    url: examples/vital-create-order-example.json
+  - type: Examples
+    url: examples/vital-lab-result-example.json
+  - type: Documentation
+    url: https://docs.junction.com/api-details/junction-management-api
 common:
   - type: AgenticAccess
     url: agentic-access/vital-io-agentic-access.yml
