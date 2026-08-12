@@ -894,10 +894,10 @@ common:
   - url: https://raw.githubusercontent.com/tryVital/vital-fern-api/main/fern/openapi/openapi.json
     name: Junction OpenAPI (upstream)
     type: OpenAPI
-  - url: openapi/vital-openapi-original.json
+  - url: openapi/_original/vital-openapi-original.json
     name: Junction Platform OpenAPI (mirror, JSON)
     type: OpenAPI
-  - url: openapi/vital-openapi-original.yml
+  - url: openapi/_original/vital-openapi-original.yml
     name: Junction Platform OpenAPI (mirror, YAML)
     type: OpenAPI
   - url: https://www.npmjs.com/package/@tryvital/vital-node
