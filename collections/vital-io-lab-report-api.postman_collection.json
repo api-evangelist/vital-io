@@ -1,0 +1,425 @@
+{
+  "item": [
+    {
+      "id": "5eb9e02f-2705-4294-b4ac-7ace0dc3d776",
+      "name": "lab_report",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43374023-d3a5-458c-9e0f-7dd60201b8f4",
+          "name": "Create Lab Report Parser Job",
+          "request": {
+            "name": "Create Lab Report Parser Job",
+            "description": {
+              "content": "Creates a parse job, uploads the file(s) to provider, persists the job row,\nand starts the ParseLabReport. Returns a generated job_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lab_report",
+                "v1",
+                "parser",
+                "job"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "user_id",
+                  "value": "<uuid>",
+                  "type": "text",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "needs_human_review",
+                  "value": "false",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b6f677c1-aeac-48f9-994e-8fbe31194eb5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lab_report",
+                    "v1",
+                    "parser",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "user_id",
+                      "value": "<uuid>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "needs_human_review",
+                      "value": "false",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5583b68f-d734-9dc3-a9f1-28af3ff816d8\",\n  \"status\": \"started\",\n  \"needs_human_review\": false,\n  \"is_reviewed\": true,\n  \"failure_reason\": \"low_quality\",\n  \"data\": {\n    \"metadata\": {\n      \"patient_first_name\": \"string\",\n      \"patient_last_name\": \"string\",\n      \"dob\": \"string\",\n      \"gender\": \"other\",\n      \"lab_name\": \"string\",\n      \"date_reported\": \"string\",\n      \"date_collected\": \"string\",\n      \"specimen_number\": \"string\"\n    },\n    \"results\": [\n      {\n        \"test_name\": \"string\",\n        \"value\": \"string\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"ratio\",\n        \"units\": \"string\",\n        \"max_reference_range\": 8663.005517706037,\n        \"min_reference_range\": 9137.038838051172,\n        \"source_panel_name\": \"string\",\n        \"loinc_matches\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"loinc_match_status\": \"auto_match\",\n        \"interpretation\": \"normal\",\n        \"is_above_max_range\": false,\n        \"is_below_min_range\": false\n      },\n      {\n        \"test_name\": \"string\",\n        \"value\": \"string\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"ratio\",\n        \"units\": \"string\",\n        \"max_reference_range\": 9389.208460677963,\n        \"min_reference_range\": 7639.405037719936,\n        \"source_panel_name\": \"string\",\n        \"loinc_matches\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"loinc_match_status\": \"auto_match\",\n        \"interpretation\": \"unknown\",\n        \"is_above_max_range\": true,\n        \"is_below_min_range\": false\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5b59040-65dd-4104-abdd-65a09ae8d0bf",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lab_report",
+                    "v1",
+                    "parser",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "user_id",
+                      "value": "<uuid>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "needs_human_review",
+                      "value": "false",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d789d510-c679-4bd5-a672-f7e20720a370",
+          "name": "Get Lab Report Parser Job",
+          "request": {
+            "name": "Get Lab Report Parser Job",
+            "description": {
+              "content": "Retrieves the parse job status and stored result if completed.\n\nReturns:\n    ParseLabResultJobResponse with job status and parsed data (if complete)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "lab_report",
+                "v1",
+                "parser",
+                "job",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b239a628-b217-4598-a4b0-71a18b3e9178",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lab_report",
+                    "v1",
+                    "parser",
+                    "job",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5583b68f-d734-9dc3-a9f1-28af3ff816d8\",\n  \"status\": \"started\",\n  \"needs_human_review\": false,\n  \"is_reviewed\": true,\n  \"failure_reason\": \"low_quality\",\n  \"data\": {\n    \"metadata\": {\n      \"patient_first_name\": \"string\",\n      \"patient_last_name\": \"string\",\n      \"dob\": \"string\",\n      \"gender\": \"other\",\n      \"lab_name\": \"string\",\n      \"date_reported\": \"string\",\n      \"date_collected\": \"string\",\n      \"specimen_number\": \"string\"\n    },\n    \"results\": [\n      {\n        \"test_name\": \"string\",\n        \"value\": \"string\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"ratio\",\n        \"units\": \"string\",\n        \"max_reference_range\": 8663.005517706037,\n        \"min_reference_range\": 9137.038838051172,\n        \"source_panel_name\": \"string\",\n        \"loinc_matches\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"loinc_match_status\": \"auto_match\",\n        \"interpretation\": \"normal\",\n        \"is_above_max_range\": false,\n        \"is_below_min_range\": false\n      },\n      {\n        \"test_name\": \"string\",\n        \"value\": \"string\",\n        \"sample_type\": \"unknown\",\n        \"measurement_kind\": \"unknown\",\n        \"type\": \"ratio\",\n        \"units\": \"string\",\n        \"max_reference_range\": 9389.208460677963,\n        \"min_reference_range\": 7639.405037719936,\n        \"source_panel_name\": \"string\",\n        \"loinc_matches\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"loinc_match_status\": \"auto_match\",\n        \"interpretation\": \"unknown\",\n        \"is_above_max_range\": true,\n        \"is_below_min_range\": false\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b7382e0-6683-4268-9cb0-191d6e767f60",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "lab_report",
+                    "v1",
+                    "parser",
+                    "job",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b0171cf5-d117-4f82-9368-178076650642",
+    "name": "Vital Lab Report Parser Aggregate lab_report API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

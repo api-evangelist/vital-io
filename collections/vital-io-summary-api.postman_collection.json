@@ -1,0 +1,2962 @@
+{
+  "item": [
+    {
+      "id": "0b9b2c5c-d0ec-497e-a40d-d6108c5d8ed6",
+      "name": "summary",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "baf87a73-d520-476a-af16-fd85ad903219",
+          "name": "Get User Electrocardiogram",
+          "request": {
+            "name": "Get User Electrocardiogram",
+            "description": {
+              "content": "Get electrocardiogram summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "electrocardiogram",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67160b82-c7fa-475b-bdbe-b3545b52b7b5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "electrocardiogram",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"electrocardiogram\": [\n    {\n      \"id\": \"2af94726-3b1c-ca8b-84e2-eafd006d0324\",\n      \"session_start\": \"1973-09-16T18:45:18.167Z\",\n      \"session_end\": \"1953-07-05T00:10:36.609Z\",\n      \"voltage_sample_count\": 3901,\n      \"source_provider\": \"strava\",\n      \"source_type\": \"cuff\",\n      \"user_id\": \"e803afda-8dd9-d8a5-7744-1610793e2313\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1976-09-17T02:54:11.495Z\",\n      \"updated_at\": \"1976-07-26T06:24:45.334Z\",\n      \"heart_rate_mean\": 7433,\n      \"sampling_frequency_hz\": 3827.2723721897105,\n      \"classification\": \"atrial_fibrillation\",\n      \"inconclusive_cause\": \"low_heart_rate\",\n      \"algorithm_version\": \"string\",\n      \"time_zone\": \"string\",\n      \"source_app_id\": \"string\",\n      \"source_device_model\": \"string\",\n      \"source_device_id\": \"bf15c7c4-28de-e5ea-ab11-70c02a4c9a14\"\n    },\n    {\n      \"id\": \"25ad1777-1764-08d7-f167-8d93c871deba\",\n      \"session_start\": \"1976-03-18T06:18:34.735Z\",\n      \"session_end\": \"1984-04-24T14:58:34.581Z\",\n      \"voltage_sample_count\": 2052,\n      \"source_provider\": \"ultrahuman\",\n      \"source_type\": \"ring\",\n      \"user_id\": \"c58633ba-bfe6-8777-75a3-0c02363c4da0\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1986-01-02T06:24:26.606Z\",\n      \"updated_at\": \"1955-11-13T07:37:15.019Z\",\n      \"heart_rate_mean\": 9437,\n      \"sampling_frequency_hz\": 1620.898303762237,\n      \"classification\": \"atrial_fibrillation\",\n      \"inconclusive_cause\": \"poor_reading\",\n      \"algorithm_version\": \"string\",\n      \"time_zone\": \"string\",\n      \"source_app_id\": \"string\",\n      \"source_device_model\": \"string\",\n      \"source_device_id\": \"7dc7de39-5278-611f-18d0-d94e8bbe4701\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b192fe9-7ac4-4f05-8e9d-ce78a7c6c8de",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "electrocardiogram",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9d18ef7-610e-4882-99a4-65809995e45a",
+          "name": "Get User Sleep Cycle",
+          "request": {
+            "name": "Get User Sleep Cycle",
+            "description": {
+              "content": "Get sleep cycle for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "sleep_cycle",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14b28e2f-7354-419b-86b7-ebe6fe81eb1c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "sleep_cycle",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sleep_cycle\": [\n    {\n      \"id\": \"7b7cb9ed-25be-485e-381c-11c58cfdf608\",\n      \"sleep_id\": \"8179026c-f224-07da-bafd-ceae282ed234\",\n      \"session_start\": \"1984-12-23T11:46:27.970Z\",\n      \"session_end\": \"1954-11-06T13:29:43.593Z\",\n      \"stage_start_offset_second\": [\n        7555,\n        681\n      ],\n      \"stage_end_offset_second\": [\n        9784,\n        8737\n      ],\n      \"stage_type\": [\n        1,\n        3\n      ],\n      \"source_provider\": \"polar\",\n      \"source_type\": \"exercise_machine\",\n      \"user_id\": \"6b5b3898-67a0-3d07-245d-f563a190a3e4\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"2018-03-13T08:13:04.719Z\",\n      \"updated_at\": \"1955-09-27T07:27:05.617Z\",\n      \"time_zone\": \"string\",\n      \"source_app_id\": \"string\",\n      \"source_device_id\": \"5bbe394a-37f3-b04b-0440-066ab4e03cd4\"\n    },\n    {\n      \"id\": \"c08657bb-465d-8a36-cdbb-e7cae10b1836\",\n      \"sleep_id\": \"3d3d1c79-4d7f-b8c9-2c07-07f308ad0346\",\n      \"session_start\": \"1947-02-25T20:21:35.886Z\",\n      \"session_end\": \"1985-03-09T06:40:02.411Z\",\n      \"stage_start_offset_second\": [\n        7926,\n        9426\n      ],\n      \"stage_end_offset_second\": [\n        1595,\n        607\n      ],\n      \"stage_type\": [\n        1,\n        3\n      ],\n      \"source_provider\": \"accuchek_ble\",\n      \"source_type\": \"manual_scan\",\n      \"user_id\": \"a676a98d-0a8b-5bd1-57a7-1f7403fe698a\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1993-12-16T09:20:41.943Z\",\n      \"updated_at\": \"2025-03-22T03:41:46.378Z\",\n      \"time_zone\": \"string\",\n      \"source_app_id\": \"string\",\n      \"source_device_id\": \"6c1018c0-c36b-4af7-f2fc-eb48e342d5b9\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "253f1144-b021-46b2-8471-131ccb59cd3c",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "sleep_cycle",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "781870da-85ba-44e3-8c08-8ac7d510ed83",
+          "name": "Get User Profile",
+          "request": {
+            "name": "Get User Profile",
+            "description": {
+              "content": "Get profile for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "profile",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1108392-991f-4847-9bbc-f78ba222cbfd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "profile",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e26e99a3-788f-a406-0710-f14628eb6110\",\n  \"user_id\": \"d616f0e7-d79a-c120-dc67-03630b3b43eb\",\n  \"source\": {\n    \"provider\": \"oura\",\n    \"type\": \"ring\"\n  },\n  \"created_at\": \"1966-02-10T17:44:40.145Z\",\n  \"updated_at\": \"1977-05-31T19:46:30.758Z\",\n  \"height\": 9795,\n  \"birth_date\": \"2023-05-20\",\n  \"wheelchair_use\": true,\n  \"gender\": \"unknown\",\n  \"sex\": \"other\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4489d8d-f2cc-428a-a6a3-4482bbdb6a2f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "profile",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2192079-67ba-479b-aef8-3b2a8932065a",
+          "name": "Get User Profile Raw",
+          "request": {
+            "name": "Get User Profile Raw",
+            "description": {
+              "content": "Get raw profile for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "profile",
+                ":user_id",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1776638-ced1-4163-99c2-6152c074a936",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "profile",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"profile\": {\n    \"id\": \"bc5899ab-f457-bca9-2ff6-fc7062767f5d\",\n    \"data\": {},\n    \"user_id\": \"7099717a-43ad-2b86-0a46-22fa48d8b54d\",\n    \"source_id\": 5721,\n    \"source\": {\n      \"logo\": \"https://logo_url.com\",\n      \"name\": \"Oura\",\n      \"slug\": \"oura\"\n    },\n    \"priority_id\": 8875,\n    \"created_at\": \"0001-01-01T00:00:00Z\",\n    \"updated_at\": \"0001-01-01T00:00:00Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75aef0cf-cc51-40b3-bd3d-b420461cbb06",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "profile",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16ced621-64e1-46f4-87b3-f1ff27a9f6fa",
+          "name": "Get User Devices Raw",
+          "request": {
+            "name": "Get User Devices Raw",
+            "description": {
+              "content": "Get Devices for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "devices",
+                ":user_id",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b39fe2f-bdf3-49f8-b95c-998b35c73e68",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "devices",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devices\": [\n    {\n      \"data\": {\n        \"key_0\": 763,\n        \"key_1\": \"string\"\n      },\n      \"provider_id\": \"string\",\n      \"user_id\": \"86f92a5e-b0e4-67df-c61f-fa4a7fb7679b\",\n      \"source_id\": 5366,\n      \"id\": \"21f00ee3-7bd7-fb65-ae3e-1d2e70707200\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      }\n    },\n    {\n      \"data\": {\n        \"key_0\": 4877\n      },\n      \"provider_id\": \"string\",\n      \"user_id\": \"d3c26835-bd91-cf09-2391-c4b87396feac\",\n      \"source_id\": 1195,\n      \"id\": \"ae843edb-3fc0-11a6-4141-ad2f2018d353\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2c3ae01-3e84-433c-b831-a10a44ca29fc",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "devices",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6cc6a28-a9ee-48bc-9f90-cd100d79ba00",
+          "name": "Get User Activity",
+          "request": {
+            "name": "Get User Activity",
+            "description": {
+              "content": "Get activity summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "activity",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "925509c1-126f-4b29-b71a-b7d110346e5c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "activity",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activity\": [\n    {\n      \"id\": \"8223a55d-4a62-c28b-6265-b268c1a08a78\",\n      \"user_id\": \"48b824f5-c8e5-7457-e807-559f2a4ae8cc\",\n      \"date\": \"1978-12-02T13:18:36.431Z\",\n      \"calendar_date\": \"1985-11-03\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"2007-01-05T15:38:30.538Z\",\n      \"updated_at\": \"1975-03-18T04:15:26.626Z\",\n      \"calories_total\": 1048.891452710472,\n      \"calories_active\": 6890.876133812244,\n      \"steps\": 8240,\n      \"daily_movement\": 8809.142612107074,\n      \"distance\": 9574.572826468719,\n      \"low\": 5583.680554606059,\n      \"medium\": 1488.5977506784732,\n      \"high\": 3332.9997557534907,\n      \"floors_climbed\": 9211,\n      \"time_zone\": \"string\",\n      \"timezone_offset\": 566,\n      \"heart_rate\": {\n        \"avg_bpm\": 80,\n        \"avg_walking_bpm\": 70,\n        \"max_bpm\": 100,\n        \"min_bpm\": 60,\n        \"resting_bpm\": 60\n      },\n      \"wheelchair_use\": false,\n      \"wheelchair_push\": 2721\n    },\n    {\n      \"id\": \"0a7646f7-eb8c-3d7e-1577-ef845e9a96e2\",\n      \"user_id\": \"a0ace696-cf44-a215-b782-9f79952778a3\",\n      \"date\": \"2013-10-17T04:39:19.950Z\",\n      \"calendar_date\": \"1953-01-09\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"2007-09-02T15:41:25.417Z\",\n      \"updated_at\": \"1990-06-09T14:22:36.591Z\",\n      \"calories_total\": 7047.6584053090355,\n      \"calories_active\": 3515.8177608137207,\n      \"steps\": 1903,\n      \"daily_movement\": 2354.583708962826,\n      \"distance\": 9055.663236679127,\n      \"low\": 7188.9762084657905,\n      \"medium\": 16.44219024087956,\n      \"high\": 3189.4610693754353,\n      \"floors_climbed\": 5988,\n      \"time_zone\": \"string\",\n      \"timezone_offset\": 6503,\n      \"heart_rate\": {\n        \"avg_bpm\": 80,\n        \"avg_walking_bpm\": 70,\n        \"max_bpm\": 100,\n        \"min_bpm\": 60,\n        \"resting_bpm\": 60\n      },\n      \"wheelchair_use\": true,\n      \"wheelchair_push\": 2427\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fdcc2c9-3e54-4cc1-b0d4-dbbac702661e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "activity",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2df5ee50-c39c-4658-b613-b6302de12e53",
+          "name": "Get User Activity Raw",
+          "request": {
+            "name": "Get User Activity Raw",
+            "description": {
+              "content": "Get raw activity summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "activity",
+                ":user_id",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d0027be-d7c3-4bea-a83c-c353eba39ed1",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "activity",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"activity\": [\n    {\n      \"timestamp\": \"2010-11-05T06:46:34.951Z\",\n      \"data\": {\n        \"key_0\": 1457,\n        \"key_1\": true,\n        \"key_2\": 3245.341267804396\n      },\n      \"user_id\": \"string\",\n      \"provider_id\": \"string\",\n      \"source_id\": 453,\n      \"priority_id\": 1902,\n      \"id\": \"90eab6d1-b41d-2ab1-29c7-983e2f801fb4\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"6d4e346f-a4ec-2b4f-945c-953a0455531f\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\"\n    },\n    {\n      \"timestamp\": \"2026-05-05T09:34:01.470Z\",\n      \"data\": {\n        \"key_0\": \"string\",\n        \"key_1\": 678.5373587999666,\n        \"key_2\": 636.3700043450638\n      },\n      \"user_id\": \"string\",\n      \"provider_id\": \"string\",\n      \"source_id\": 566,\n      \"priority_id\": 1949,\n      \"id\": \"ab1854b2-b1aa-a188-020f-ec975b25d6f9\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"37498a4d-dabd-9b3f-bcc8-853e62ce3582\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85d4628c-ab93-4ae3-af64-6aa7049443b0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "activity",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9dc5b5ab-6d61-478a-85f1-2308306f53ac",
+          "name": "Get User Workouts",
+          "request": {
+            "name": "Get User Workouts",
+            "description": {
+              "content": "Get workout summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "workouts",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "222a374d-1352-458b-b000-87bacf5132f2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "workouts",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"workouts\": [\n    {\n      \"id\": \"6163b79a-a596-3052-57f2-cebcc8530db0\",\n      \"user_id\": \"87154148-57fb-1267-534c-bba5ee06a210\",\n      \"calendar_date\": \"2005-08-25\",\n      \"time_start\": \"1958-09-01T07:39:16.362Z\",\n      \"time_end\": \"1975-11-01T19:41:17.285Z\",\n      \"provider_id\": \"string\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1947-01-03T15:30:31.942Z\",\n      \"updated_at\": \"1964-04-10T07:25:38.510Z\",\n      \"title\": \"string\",\n      \"timezone_offset\": 8307,\n      \"average_hr\": 7883,\n      \"max_hr\": 9294,\n      \"distance\": 3890.3935297484218,\n      \"calories\": 3993.02671847521,\n      \"sport\": \"\",\n      \"hr_zones\": [\n        5676,\n        7137\n      ],\n      \"moving_time\": 6587,\n      \"total_elevation_gain\": 7409.8192175132435,\n      \"elev_high\": 517.9395919892138,\n      \"elev_low\": 572.2482319460198,\n      \"average_speed\": 1289.6366950982497,\n      \"max_speed\": 4784.384650112556,\n      \"average_watts\": 3040.782917064643,\n      \"device_watts\": 748.9295198480183,\n      \"max_watts\": 582.8393309330304,\n      \"weighted_average_watts\": 3662.678087799902,\n      \"steps\": 7834,\n      \"map\": {\n        \"polyline\": \"string\",\n        \"summary_polyline\": \"string\"\n      }\n    },\n    {\n      \"id\": \"3dcfcad5-5f10-7290-7dc3-6fee5aaf5727\",\n      \"user_id\": \"3807f813-f6dd-5450-15f6-c2b4ca730b68\",\n      \"calendar_date\": \"1988-04-19\",\n      \"time_start\": \"1958-03-13T17:27:12.664Z\",\n      \"time_end\": \"1951-05-02T09:03:42.275Z\",\n      \"provider_id\": \"string\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1988-03-23T09:56:31.097Z\",\n      \"updated_at\": \"2016-05-06T15:25:03.844Z\",\n      \"title\": \"string\",\n      \"timezone_offset\": 3583,\n      \"average_hr\": 4351,\n      \"max_hr\": 330,\n      \"distance\": 365.1192025105576,\n      \"calories\": 2593.643371340588,\n      \"sport\": \"\",\n      \"hr_zones\": [\n        7008,\n        9022\n      ],\n      \"moving_time\": 3462,\n      \"total_elevation_gain\": 856.0809204734787,\n      \"elev_high\": 7593.353011489891,\n      \"elev_low\": 780.3548154487349,\n      \"average_speed\": 8630.231879104971,\n      \"max_speed\": 1529.1061425582818,\n      \"average_watts\": 5568.565922494936,\n      \"device_watts\": 9410.106543707469,\n      \"max_watts\": 1491.1671572889363,\n      \"weighted_average_watts\": 8670.658374000272,\n      \"steps\": 4946,\n      \"map\": {\n        \"polyline\": \"string\",\n        \"summary_polyline\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d39271fd-831f-462d-a44d-9b3fa69e8983",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "workouts",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c1e6eef-491a-4079-8870-d2dd72f3d334",
+          "name": "Get User Workouts Raw",
+          "request": {
+            "name": "Get User Workouts Raw",
+            "description": {
+              "content": "Get raw workout summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "workouts",
+                ":user_id",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6f99e36-36a0-4ba2-a7f8-a305bd04fc8a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "workouts",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"workouts\": [\n    {\n      \"timestamp\": \"1954-11-05T16:59:07.728Z\",\n      \"data\": {\n        \"key_0\": \"string\"\n      },\n      \"user_id\": \"string\",\n      \"provider_id\": \"string\",\n      \"source_id\": 9092,\n      \"priority_id\": 8719,\n      \"id\": \"43e93c5b-a331-56a3-3c3f-857946c6f07e\",\n      \"sport_id\": 114,\n      \"sport\": {\n        \"id\": 3934,\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"a6324ae3-2704-c145-92cf-444fb0a22a8a\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\"\n    },\n    {\n      \"timestamp\": \"1952-12-07T18:53:09.113Z\",\n      \"data\": {\n        \"key_0\": true\n      },\n      \"user_id\": \"string\",\n      \"provider_id\": \"string\",\n      \"source_id\": 103,\n      \"priority_id\": 3083,\n      \"id\": \"ed509728-7b2e-81f5-703c-1fad2714d435\",\n      \"sport_id\": 4699,\n      \"sport\": {\n        \"id\": 4977,\n        \"name\": \"string\",\n        \"slug\": \"string\"\n      },\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"03daba5c-a4ae-3333-7bee-1c3501d73ac3\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "648b0261-4114-440e-a189-d9da41a945ce",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "workouts",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b95f87c8-43b5-4fee-a5f6-354ed18f33e4",
+          "name": "Get User Sleep",
+          "request": {
+            "name": "Get User Sleep",
+            "description": {
+              "content": "Get sleep summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "sleep",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f841cca-7947-45e5-8a1b-12a6947a7fa6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "sleep",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sleep\": [\n    {\n      \"id\": \"8a253469-e2b9-4ae9-2232-29f390a7099a\",\n      \"user_id\": \"95d2d3cb-9556-823d-ebb2-bf06cc6e2741\",\n      \"date\": \"2012-08-20T00:23:19.287Z\",\n      \"calendar_date\": \"1997-03-13\",\n      \"bedtime_start\": \"1985-10-28T01:42:55.431Z\",\n      \"bedtime_stop\": \"2013-05-02T13:52:04.483Z\",\n      \"type\": \"unknown\",\n      \"duration\": 4669,\n      \"total\": 6390,\n      \"awake\": 4744,\n      \"light\": 2400,\n      \"rem\": 411,\n      \"deep\": 3500,\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"2021-12-09T20:58:17.608Z\",\n      \"updated_at\": \"1976-05-10T08:01:21.171Z\",\n      \"timezone_offset\": 2150,\n      \"score\": 3872,\n      \"recovery_readiness_score\": 3619,\n      \"hr_lowest\": 7042,\n      \"hr_average\": 9593,\n      \"hr_resting\": 3235,\n      \"efficiency\": 1564.096160988493,\n      \"latency\": 9818,\n      \"temperature_delta\": 5221.207118606361,\n      \"skin_temperature\": 4509.93058648896,\n      \"hr_dip\": 5277.11112359435,\n      \"state\": \"confirmed\",\n      \"average_hrv\": 2331.010135837206,\n      \"respiratory_rate\": 2865.797657452104,\n      \"sleep_stream\": {\n        \"hrv\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"heartrate\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"hypnogram\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"respiratory_rate\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"c37d9c71-9761-3f46-42ac-c2f4ed35e4a4\",\n      \"user_id\": \"0b14288f-536f-024d-4f35-37b6c4c3ebb5\",\n      \"date\": \"2020-04-22T23:34:20.151Z\",\n      \"calendar_date\": \"2009-02-03\",\n      \"bedtime_start\": \"1965-06-23T14:37:11.316Z\",\n      \"bedtime_stop\": \"1976-02-09T11:13:03.144Z\",\n      \"type\": \"short_sleep\",\n      \"duration\": 920,\n      \"total\": 3177,\n      \"awake\": 4439,\n      \"light\": 8104,\n      \"rem\": 6737,\n      \"deep\": 5171,\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1999-09-08T00:49:14.194Z\",\n      \"updated_at\": \"1977-10-15T23:08:41.695Z\",\n      \"timezone_offset\": 5764,\n      \"score\": 6299,\n      \"recovery_readiness_score\": 9123,\n      \"hr_lowest\": 5744,\n      \"hr_average\": 2568,\n      \"hr_resting\": 2871,\n      \"efficiency\": 7244.120094965297,\n      \"latency\": 6379,\n      \"temperature_delta\": 2831.375248632847,\n      \"skin_temperature\": 7419.512301643134,\n      \"hr_dip\": 8997.744777145292,\n      \"state\": \"confirmed\",\n      \"average_hrv\": 9873.929114417337,\n      \"respiratory_rate\": 6370.142686720211,\n      \"sleep_stream\": {\n        \"hrv\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"heartrate\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"hypnogram\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"respiratory_rate\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9888a6c4-cab6-4754-ad86-c3442e7d3247",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "sleep",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d335fddf-fbb1-45a9-9ca1-487e105ce2f5",
+          "name": "Get User Sleep Raw",
+          "request": {
+            "name": "Get User Sleep Raw",
+            "description": {
+              "content": "Get raw sleep summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "sleep",
+                ":user_id",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b19828d-11a4-42f1-910b-6151e8e72006",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "sleep",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sleep\": [\n    {\n      \"timestamp\": \"1967-03-26T22:31:43.329Z\",\n      \"data\": {\n        \"key_0\": false,\n        \"key_1\": true,\n        \"key_2\": 4151\n      },\n      \"user_id\": \"322959c9-64ed-1689-d8d5-372da59d4ed0\",\n      \"provider_id\": \"string\",\n      \"source_id\": 9150,\n      \"priority_id\": 4932,\n      \"id\": \"9f813362-cdea-5dd9-3ef7-9b1776600129\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"b7114a2a-386b-12c3-c9a1-f7b9a57ef31c\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\",\n      \"priority\": 2869\n    },\n    {\n      \"timestamp\": \"1947-07-13T01:30:43.458Z\",\n      \"data\": {\n        \"key_0\": 2826,\n        \"key_1\": false\n      },\n      \"user_id\": \"e0b34f18-4c41-ad95-89be-d1469bcc38cb\",\n      \"provider_id\": \"string\",\n      \"source_id\": 7619,\n      \"priority_id\": 7928,\n      \"id\": \"e59030ea-2c96-18ab-6b52-e448f02f68a6\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"66c1268c-4f94-db22-e28e-d7c90abd8d69\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\",\n      \"priority\": 3421\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bbf07ab-7cef-4282-b90a-9606dd8ba760",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "sleep",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38091db9-ff8e-435f-b257-d71f66c2979f",
+          "name": "Get User Body",
+          "request": {
+            "name": "Get User Body",
+            "description": {
+              "content": "Get Body summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "body",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "679f84e2-fdba-4328-8e9c-5c71fea1f1db",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "body",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": [\n    {\n      \"id\": \"abc4df1a-8cf3-97a8-09a6-54312971e2db\",\n      \"user_id\": \"cf13f21a-bf42-2f55-11c1-e0aa56bcfc0f\",\n      \"date\": \"1969-02-03T03:16:52.784Z\",\n      \"calendar_date\": \"2016-10-06\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1953-10-30T05:22:17.642Z\",\n      \"updated_at\": \"2024-07-29T06:42:41.284Z\",\n      \"weight\": 6022.11339544054,\n      \"fat\": 8996.179659756675,\n      \"water_percentage\": 5320.491818698591,\n      \"muscle_mass_percentage\": 1794.68327442031,\n      \"visceral_fat_index\": 8530.237617370489,\n      \"bone_mass_percentage\": 5190.533833641243,\n      \"body_mass_index\": 3355.047881788371,\n      \"lean_body_mass_kilogram\": 9322.73670219105,\n      \"waist_circumference_centimeter\": 2550.250308501254\n    },\n    {\n      \"id\": \"fa33d8b5-dec5-ec64-676d-00a01f7fd3ce\",\n      \"user_id\": \"b00a5099-1e76-ff29-41c8-045c98e2c767\",\n      \"date\": \"2002-12-05T22:39:23.227Z\",\n      \"calendar_date\": \"1967-06-07\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1972-11-13T15:53:46.332Z\",\n      \"updated_at\": \"1957-09-05T02:22:56.258Z\",\n      \"weight\": 6864.580143616767,\n      \"fat\": 5910.855176785336,\n      \"water_percentage\": 5933.1814928726635,\n      \"muscle_mass_percentage\": 3990.8098196832752,\n      \"visceral_fat_index\": 140.20825956443272,\n      \"bone_mass_percentage\": 1654.5954753094315,\n      \"body_mass_index\": 4137.9814523907935,\n      \"lean_body_mass_kilogram\": 7712.757731331614,\n      \"waist_circumference_centimeter\": 8320.844310132206\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09e4e66f-a9a3-47a9-b2a8-4d59950b7461",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "body",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83fbac72-a1cd-4382-8708-d9b949be1786",
+          "name": "Get User Body Raw",
+          "request": {
+            "name": "Get User Body Raw",
+            "description": {
+              "content": "Get raw Body summary for user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "body",
+                ":user_id",
+                "raw"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "16d3e85a-cce8-421e-9c36-747e2ec72910",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "body",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"body\": [\n    {\n      \"timestamp\": \"2025-04-09T07:03:36.187Z\",\n      \"data\": {\n        \"key_0\": \"string\"\n      },\n      \"user_id\": \"d4053809-9a9c-48bf-a93d-1bb9bd21fcd4\",\n      \"provider_id\": \"string\",\n      \"source_id\": 7463,\n      \"priority_id\": 3312,\n      \"id\": \"a17e7dab-c6c5-6278-4250-c8504d703f7f\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"9df84cb0-fc45-c5f2-084f-171fa6203af6\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\",\n      \"priority\": 5912\n    },\n    {\n      \"timestamp\": \"1966-02-08T06:25:27.958Z\",\n      \"data\": {\n        \"key_0\": 5449.022422267918,\n        \"key_1\": true,\n        \"key_2\": true\n      },\n      \"user_id\": \"bf11349d-282a-8988-cc69-ff176ce46d74\",\n      \"provider_id\": \"string\",\n      \"source_id\": 891,\n      \"priority_id\": 238,\n      \"id\": \"57017788-6c3d-92f2-b713-d13232c1b068\",\n      \"source\": {\n        \"logo\": \"https://logo_url.com\",\n        \"name\": \"Oura\",\n        \"slug\": \"oura\"\n      },\n      \"source_device_id\": \"0bd7a7ce-9bf0-f1db-e245-e264628f715c\",\n      \"created_at\": \"0001-01-01T00:00:00Z\",\n      \"updated_at\": \"0001-01-01T00:00:00Z\",\n      \"priority\": 8768\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbb7c70f-b09b-4783-a3c5-f4ecc657f2d3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "body",
+                    ":user_id",
+                    "raw"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f82a539d-fed5-46ef-9b01-6c644ec14796",
+          "name": "Get Meals",
+          "request": {
+            "name": "Get Meals",
+            "description": {
+              "content": "Get user's meals",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "meal",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4115aa2-1f3c-4bb8-a03e-9abf3725d5ef",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "meal",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meals\": [\n    {\n      \"id\": \"30f0f551-6333-0e99-cce2-8dd61f9f2c45\",\n      \"user_id\": \"31c8bdf6-48b5-24fb-2d2f-16e26b4afa4f\",\n      \"priority_id\": 6406,\n      \"source_id\": 4460,\n      \"provider_id\": \"string\",\n      \"timestamp\": \"1965-07-19T19:58:15.185Z\",\n      \"calendar_date\": \"1963-04-11\",\n      \"name\": \"string\",\n      \"energy\": {\n        \"unit\": \"string\",\n        \"value\": 5842.823629891375\n      },\n      \"macros\": {\n        \"carbs\": 9445.441828817085,\n        \"protein\": 2101.4545499322335,\n        \"fats\": {\n          \"saturated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"monounsaturated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"polyunsaturated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"omega3\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"omega6\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"alcohol\": 6906.845865397913,\n        \"water\": 2583.0199499671703,\n        \"fibre\": 1789.7366950412518,\n        \"sugar\": 2545.372432744061,\n        \"cholesterol\": 9645.041442319769\n      },\n      \"micros\": {\n        \"minerals\": {\n          \"key_0\": 3603.617671650674,\n          \"key_1\": 1649.1634338582062\n        },\n        \"trace_elements\": {\n          \"key_0\": 5376.509926430616\n        },\n        \"vitamins\": {\n          \"key_0\": 5354.821613830655\n        }\n      },\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"1999-09-12T20:15:53.491Z\",\n      \"updated_at\": \"1954-01-25T20:32:07.849Z\",\n      \"data\": {},\n      \"source_app_id\": \"string\",\n      \"source_device_id\": \"33f0f0fc-1af6-2eca-48d3-e39f4569bd65\"\n    },\n    {\n      \"id\": \"29c22ef6-0270-14b5-e9c0-3a36bdbdf254\",\n      \"user_id\": \"6faf27ab-0190-0ee0-916c-964d25b85402\",\n      \"priority_id\": 716,\n      \"source_id\": 5531,\n      \"provider_id\": \"string\",\n      \"timestamp\": \"1986-07-30T17:28:18.112Z\",\n      \"calendar_date\": \"1952-07-28\",\n      \"name\": \"string\",\n      \"energy\": {\n        \"unit\": \"string\",\n        \"value\": 3405.434656974168\n      },\n      \"macros\": {\n        \"carbs\": 1744.0961146077493,\n        \"protein\": 9984.818890668557,\n        \"fats\": {\n          \"saturated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"monounsaturated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"polyunsaturated\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"omega3\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"omega6\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"total\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"alcohol\": 9754.785693842472,\n        \"water\": 8479.213272559566,\n        \"fibre\": 8214.920417041445,\n        \"sugar\": 1851.7437043091102,\n        \"cholesterol\": 5969.296308245492\n      },\n      \"micros\": {\n        \"minerals\": {\n          \"key_0\": 8508.719023301905,\n          \"key_1\": 3556.6550780471375,\n          \"key_2\": 370.19047077624714\n        },\n        \"trace_elements\": {\n          \"key_0\": 1724.0468064640247,\n          \"key_1\": 2397.911855580385\n        },\n        \"vitamins\": {\n          \"key_0\": 3233.229999530577,\n          \"key_1\": 4680.638134166404\n        }\n      },\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"2013-03-23T04:14:02.062Z\",\n      \"updated_at\": \"1992-09-09T03:27:03.285Z\",\n      \"data\": {},\n      \"source_app_id\": \"string\",\n      \"source_device_id\": \"be932d38-23aa-b8b4-13e8-c0dba610029c\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd6308f3-dd5e-4f06-bcd1-41afccf5d107",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "meal",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c7e2ad6-795e-4425-98e3-13ede3524317",
+          "name": "Get User Menstrual Cycles",
+          "request": {
+            "name": "Get User Menstrual Cycles",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "summary",
+                "menstrual_cycle",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "",
+                  "description": "Provider oura/strava etc"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "user_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74869b92-1165-46cd-9475-ee34eac3ce37",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "menstrual_cycle",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"menstrual_cycle\": [\n    {\n      \"id\": \"2fe6ef5b-a1b2-3c5f-14e1-2810baa3ec7b\",\n      \"period_start\": \"1962-05-09\",\n      \"source_provider\": \"my_fitness_pal\",\n      \"source_type\": \"ring\",\n      \"user_id\": \"9caea134-d28d-117b-116e-56fdfe5e182f\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"2016-10-29T04:59:50.976Z\",\n      \"updated_at\": \"1955-12-09T12:03:39.181Z\",\n      \"period_end\": \"1949-07-17\",\n      \"cycle_end\": \"2016-03-08\",\n      \"is_predicted\": false,\n      \"menstrual_flow\": [\n        {\n          \"date\": \"1993-05-26\",\n          \"flow\": \"none\"\n        },\n        {\n          \"date\": \"1949-04-17\",\n          \"flow\": \"heavy\"\n        }\n      ],\n      \"cervical_mucus\": [\n        {\n          \"date\": \"2005-05-14\",\n          \"quality\": \"dry\"\n        },\n        {\n          \"date\": \"1986-05-28\",\n          \"quality\": \"dry\"\n        }\n      ],\n      \"intermenstrual_bleeding\": [\n        {\n          \"date\": \"1993-07-17\"\n        },\n        {\n          \"date\": \"1949-04-06\"\n        }\n      ],\n      \"contraceptive\": [\n        {\n          \"date\": \"1948-09-27\",\n          \"type\": \"oral\"\n        },\n        {\n          \"date\": \"1959-07-07\",\n          \"type\": \"injection\"\n        }\n      ],\n      \"detected_deviations\": [\n        {\n          \"date\": \"1975-09-05\",\n          \"deviation\": \"irregular_menstrual_cycles\"\n        },\n        {\n          \"date\": \"2019-10-13\",\n          \"deviation\": \"persistent_intermenstrual_bleeding\"\n        }\n      ],\n      \"ovulation_test\": [\n        {\n          \"date\": \"1986-07-23\",\n          \"test_result\": \"indeterminate\"\n        },\n        {\n          \"date\": \"1955-06-01\",\n          \"test_result\": \"negative\"\n        }\n      ],\n      \"home_pregnancy_test\": [\n        {\n          \"date\": \"1976-07-28\",\n          \"test_result\": \"indeterminate\"\n        },\n        {\n          \"date\": \"1995-09-07\",\n          \"test_result\": \"positive\"\n        }\n      ],\n      \"home_progesterone_test\": [\n        {\n          \"date\": \"2000-08-18\",\n          \"test_result\": \"positive\"\n        },\n        {\n          \"date\": \"1991-01-30\",\n          \"test_result\": \"negative\"\n        }\n      ],\n      \"sexual_activity\": [\n        {\n          \"date\": \"1961-03-05\",\n          \"protection_used\": true\n        },\n        {\n          \"date\": \"1966-07-13\",\n          \"protection_used\": true\n        }\n      ],\n      \"basal_body_temperature\": [\n        {\n          \"date\": \"1971-12-06\",\n          \"value\": 2534.364327180817\n        },\n        {\n          \"date\": \"2010-04-07\",\n          \"value\": 5340.095468233884\n        }\n      ],\n      \"source_app_id\": \"string\",\n      \"source_device_id\": \"dd13e74c-64a4-1d38-97fd-d4a4351b1e0d\"\n    },\n    {\n      \"id\": \"1f62ff24-85b8-ac15-7959-b3071ec74a4e\",\n      \"period_start\": \"1989-02-21\",\n      \"source_provider\": \"withings\",\n      \"source_type\": \"ring\",\n      \"user_id\": \"e7dbf357-3ed5-942a-2d01-0f24f3e04b3a\",\n      \"source\": {\n        \"provider\": \"oura\",\n        \"type\": \"ring\"\n      },\n      \"created_at\": \"2008-11-25T09:05:47.820Z\",\n      \"updated_at\": \"2020-10-24T21:17:08.273Z\",\n      \"period_end\": \"1960-02-27\",\n      \"cycle_end\": \"1989-02-15\",\n      \"is_predicted\": false,\n      \"menstrual_flow\": [\n        {\n          \"date\": \"2007-12-13\",\n          \"flow\": \"none\"\n        },\n        {\n          \"date\": \"2025-01-30\",\n          \"flow\": \"light\"\n        }\n      ],\n      \"cervical_mucus\": [\n        {\n          \"date\": \"2024-07-08\",\n          \"quality\": \"egg_white\"\n        },\n        {\n          \"date\": \"1958-10-17\",\n          \"quality\": \"egg_white\"\n        }\n      ],\n      \"intermenstrual_bleeding\": [\n        {\n          \"date\": \"2000-05-29\"\n        },\n        {\n          \"date\": \"1954-03-06\"\n        }\n      ],\n      \"contraceptive\": [\n        {\n          \"date\": \"1992-04-23\",\n          \"type\": \"injection\"\n        },\n        {\n          \"date\": \"2022-04-05\",\n          \"type\": \"iud\"\n        }\n      ],\n      \"detected_deviations\": [\n        {\n          \"date\": \"1953-05-09\",\n          \"deviation\": \"irregular_menstrual_cycles\"\n        },\n        {\n          \"date\": \"1992-07-04\",\n          \"deviation\": \"infrequent_menstrual_cycles\"\n        }\n      ],\n      \"ovulation_test\": [\n        {\n          \"date\": \"2011-12-05\",\n          \"test_result\": \"luteinizing_hormone_surge\"\n        },\n        {\n          \"date\": \"1999-12-27\",\n          \"test_result\": \"negative\"\n        }\n      ],\n      \"home_pregnancy_test\": [\n        {\n          \"date\": \"1987-10-09\",\n          \"test_result\": \"indeterminate\"\n        },\n        {\n          \"date\": \"2012-08-21\",\n          \"test_result\": \"indeterminate\"\n        }\n      ],\n      \"home_progesterone_test\": [\n        {\n          \"date\": \"2012-03-31\",\n          \"test_result\": \"negative\"\n        },\n        {\n          \"date\": \"1953-06-16\",\n          \"test_result\": \"negative\"\n        }\n      ],\n      \"sexual_activity\": [\n        {\n          \"date\": \"1947-05-04\",\n          \"protection_used\": false\n        },\n        {\n          \"date\": \"2015-10-08\",\n          \"protection_used\": false\n        }\n      ],\n      \"basal_body_temperature\": [\n        {\n          \"date\": \"1960-04-28\",\n          \"value\": 4297.022248009373\n        },\n        {\n          \"date\": \"1946-12-08\",\n          \"value\": 6865.06851596857\n        }\n      ],\n      \"source_app_id\": \"string\",\n      \"source_device_id\": \"18dcb708-d899-1081-a97a-edff1bd0d0b7\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c696ea4f-7baa-4f72-97d5-1ffd474ebe05",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "summary",
+                    "menstrual_cycle",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "provider",
+                      "value": ""
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "user_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "43fe5fcd-5fb5-45c5-b06b-0b715a730d14",
+    "name": "Vital Lab Report Parser Aggregate summary API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

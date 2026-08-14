@@ -1,0 +1,808 @@
+{
+  "item": [
+    {
+      "id": "a170b4af-0d1e-4373-b797-30e83207f394",
+      "name": "team",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7770c88-7a44-4186-bb8b-749a2f2568cc",
+          "name": "Get Team",
+          "request": {
+            "name": "Get Team",
+            "description": {
+              "content": "Get team.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "team",
+                ":team_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "team_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "acb591a6-4098-47e8-b063-2ba9f9d8631b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    ":team_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "team_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"aa1ac45c-99fa-8715-a0e3-a5fe61611d7f\",\n  \"org_id\": \"e42d0e80-3785-f476-1cf4-5d1e75bbef1a\",\n  \"name\": \"string\",\n  \"testkits_texts_enabled\": true,\n  \"lab_tests_patient_communication_enabled\": true,\n  \"lab_tests_patient_sms_communication_enabled\": true,\n  \"lab_tests_patient_email_communication_enabled\": false,\n  \"delegated_flow\": \"order_and_results_with_customer_physician_network\",\n  \"svix_app_id\": \"string\",\n  \"client_id\": \"string\",\n  \"client_secret\": \"string\",\n  \"airtable_api_key\": \"string\",\n  \"airtable_base_id\": \"string\",\n  \"webhook_secret\": \"string\",\n  \"api_key\": \"string\",\n  \"api_keys\": [\n    {\n      \"label\": \"string\",\n      \"value\": \"string\",\n      \"id\": \"afaf228a-4e7f-635a-dccb-ae7d2aef637b\",\n      \"created_at\": \"1966-05-28T00:25:17.472Z\",\n      \"team_id\": \"efd7e36b-b06c-674d-2c2d-42dea009e089\",\n      \"deleted_at\": \"1995-09-13T21:46:55.933Z\"\n    },\n    {\n      \"label\": \"string\",\n      \"value\": \"string\",\n      \"id\": \"9f33cdbc-a384-a3d1-adb2-d89e35c15344\",\n      \"created_at\": \"1999-04-04T13:24:41.676Z\",\n      \"team_id\": \"99586efd-2ef4-b097-87a3-dfa7c33b1587\",\n      \"deleted_at\": \"1994-10-19T06:23:12.820Z\"\n    }\n  ],\n  \"configuration\": {\n    \"libreview\": {\n      \"practice_id\": {\n        \"key_0\": \"string\",\n        \"key_1\": 5299.900799830696\n      },\n      \"strip_tz\": false\n    },\n    \"texts_enabled\": false,\n    \"push_historical_data\": false,\n    \"provider_raw_data\": false,\n    \"reject_duplicate_connection\": false,\n    \"sdk_per_device_activity_timeseries\": false,\n    \"partial_webhooks_enabled\": false,\n    \"minor_ordering_enabled\": false,\n    \"eds_preferences\": {\n      \"preferred\": \"rabbitmq\",\n      \"enabled\": [\n        \"svix\",\n        \"cloud_pubsub\"\n      ]\n    },\n    \"event_type_prefixes\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"logo_url\": \"string\",\n  \"critical_result_notification_email\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7161ab5-597b-42d5-be5a-02b2acdc89ff",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    ":team_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "team_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f3b31cb-6d95-4006-9155-5d220e721f5c",
+          "name": "Search Team Users By Uuid Or Client User Id",
+          "request": {
+            "name": "Search Team Users By Uuid Or Client User Id",
+            "description": {
+              "content": "Search team users by user_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "team",
+                "users",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e56432d1-fc20-48c5-a23d-5d27f2a3f2f3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"user_id\": \"74aeb68f-92d4-c116-bfc2-068f6de3e439\",\n    \"team_id\": \"b1ce6050-03d3-c574-eb30-e7e51a9b6b78\",\n    \"client_user_id\": \"string\",\n    \"created_on\": \"1979-01-26T02:17:53.677Z\",\n    \"connected_sources\": [\n      {\n        \"provider\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        },\n        \"created_on\": \"2004-10-29T03:03:09.196Z\",\n        \"source\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        }\n      },\n      {\n        \"provider\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        },\n        \"created_on\": \"1951-07-24T01:30:55.818Z\",\n        \"source\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        }\n      }\n    ],\n    \"fallback_time_zone\": {\n      \"id\": \"string\",\n      \"source_slug\": \"string\",\n      \"updated_at\": \"1960-10-17T12:28:59.079Z\"\n    },\n    \"fallback_birth_date\": {\n      \"value\": \"1963-05-23\",\n      \"source_slug\": \"string\",\n      \"updated_at\": \"1976-11-27T15:31:00.666Z\"\n    },\n    \"ingestion_start\": \"1987-10-12\",\n    \"ingestion_end\": \"1979-07-15\"\n  },\n  {\n    \"user_id\": \"769e8152-806f-ca52-1ace-d6d9160a0203\",\n    \"team_id\": \"7686ed1e-015a-80c6-6702-7e7c07196a51\",\n    \"client_user_id\": \"string\",\n    \"created_on\": \"1975-10-24T04:51:34.022Z\",\n    \"connected_sources\": [\n      {\n        \"provider\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        },\n        \"created_on\": \"2021-07-06T07:16:49.679Z\",\n        \"source\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        }\n      },\n      {\n        \"provider\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        },\n        \"created_on\": \"2009-04-21T01:28:27.038Z\",\n        \"source\": {\n          \"logo\": \"https://logo_url.com\",\n          \"name\": \"Oura\",\n          \"slug\": \"oura\"\n        }\n      }\n    ],\n    \"fallback_time_zone\": {\n      \"id\": \"string\",\n      \"source_slug\": \"string\",\n      \"updated_at\": \"1996-08-10T16:32:33.116Z\"\n    },\n    \"fallback_birth_date\": {\n      \"value\": \"1983-01-01\",\n      \"source_slug\": \"string\",\n      \"updated_at\": \"1956-10-18T08:43:44.017Z\"\n    },\n    \"ingestion_start\": \"1981-02-17\",\n    \"ingestion_end\": \"1984-10-18\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "630f5da7-ca8a-4415-a87e-53b656774bdc",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    "users",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23a05658-4c00-40b5-878d-ac3190665f60",
+          "name": "Get Svix Webhook Url",
+          "request": {
+            "name": "Get Svix Webhook Url",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "team",
+                "svix",
+                "url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2cdcabcc-6908-4e7d-bc07-70f6d38dd1db",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    "svix",
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 9969.373489334312\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21a3a34e-e509-43be-b1c9-a484982bfe24",
+          "name": "Get Source Priorities",
+          "request": {
+            "name": "Get Source Priorities",
+            "description": {
+              "content": "GET source priorities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "team",
+                "source",
+                "priorities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a55526cd-6705-4a70-ac2e-a9d895e76aec",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    "source",
+                    "priorities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_type",
+                      "value": "timeseries"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"key_0\": 7641.1792815522585\n  },\n  {\n    \"key_0\": 1576\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0d74618-6581-41f1-9824-98c36c1a9886",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    "source",
+                    "priorities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_type",
+                      "value": "timeseries"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc817053-248d-4e20-868f-73c32490a1fb",
+          "name": "Update Source Priorities",
+          "request": {
+            "name": "Update Source Priorities",
+            "description": {
+              "content": "Patch source priorities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "team",
+                "source",
+                "priorities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8e87b9c-5deb-4730-a477-d7dfe8d8ca2a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    "source",
+                    "priorities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"key_0\": \"string\"\n  },\n  {\n    \"key_0\": 5974\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de2fec98-baee-4648-a66b-595818cb8066",
+          "name": "Get Team Physicians",
+          "request": {
+            "name": "Get Team Physicians",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "team",
+                ":team_id",
+                "physicians"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "team_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ef45c39-828b-4855-ac2c-1581dc4d1d56",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    ":team_id",
+                    "physicians"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "team_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"npi\": \"string\"\n  },\n  {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"npi\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ff9d017-4420-4139-a0e0-93b9f66bbf94",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "team",
+                    ":team_id",
+                    "physicians"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "team_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "271236d0-eec1-4b62-8237-5f7b14516e1f",
+    "name": "Vital Lab Report Parser Aggregate team API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

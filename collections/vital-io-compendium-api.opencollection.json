@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Lab Report Parser Aggregate compendium API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "compendium",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Compendium",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/compendium/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search Compendium"
+        },
+        {
+          "info": {
+            "name": "Convert Compendium",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/compendium/convert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Convert Compendium"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

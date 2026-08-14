@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "36310179-61a0-484c-91f0-6d89aba1fbae",
+      "name": "lab_account",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f0b909c3-6483-4239-8fbc-f5dc5626259f",
+          "name": "Get Team Lab Accounts",
+          "request": {
+            "name": "Get Team Lab Accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "lab_test",
+                "lab_account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_account_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3e2cae4-3cfc-4cf9-a798-f53c86a045d9",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_test",
+                    "lab_account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"7bbaea74-d320-0026-9849-1e6c1d007df0\",\n      \"lab\": \"sanocardio\",\n      \"status\": \"suspended\",\n      \"delegated_flow\": \"fully_delegated\",\n      \"provider_account_id\": \"string\",\n      \"allowed_billing\": {\n        \"key_0\": [\n          \"NV\",\n          \"AR\"\n        ],\n        \"key_1\": [\n          \"MI\",\n          \"SD\"\n        ]\n      },\n      \"team_id_allowlist\": [\n        \"a4ced163-9f92-40f9-1b9d-2a0b571f6226\",\n        \"20756ead-b7aa-fd56-56b4-c0c21d1a0249\"\n      ],\n      \"org_id\": \"0a29fa9c-c6c6-d450-4fac-147fd3f3492e\",\n      \"account_name\": \"string\",\n      \"default_clinical_notes\": \"string\",\n      \"business_units\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"7abd27b2-bd9c-c1cf-9293-f00287264b89\",\n      \"lab\": \"labcorp\",\n      \"status\": \"suspended\",\n      \"delegated_flow\": \"order_delegated\",\n      \"provider_account_id\": \"string\",\n      \"allowed_billing\": {\n        \"key_0\": [\n          \"FL\",\n          \"NJ\"\n        ],\n        \"key_1\": [\n          \"LA\",\n          \"UT\"\n        ]\n      },\n      \"team_id_allowlist\": [\n        \"858b405c-36fb-5b98-aaf1-f7990ab8a1b9\",\n        \"772616d7-0dd1-1c3d-bbb1-9ec026d56135\"\n      ],\n      \"org_id\": \"45aacb09-b12b-4502-6603-53795b2dd625\",\n      \"account_name\": \"string\",\n      \"default_clinical_notes\": \"string\",\n      \"business_units\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "607432e5-5854-404c-884e-990c288f1038",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_test",
+                    "lab_account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8ec476cc-5d03-4b40-a4fd-7c8f7f6017fa",
+    "name": "Vital Lab Report Parser Aggregate lab_account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

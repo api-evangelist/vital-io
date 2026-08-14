@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Lab Report Parser Aggregate insurance API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "insurance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Insurance Payor Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/insurance/search/payor",
+            "params": [
+              {
+                "name": "insurance_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "provider_payor_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Insurance Payor Information"
+        },
+        {
+          "info": {
+            "name": "Post Insurance Payor Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/insurance/search/payor",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post Insurance Payor Information"
+        },
+        {
+          "info": {
+            "name": "Search Diagnosis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/insurance/search/diagnosis",
+            "params": [
+              {
+                "name": "diagnosis_query",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Diagnosis"
+        },
+        {
+          "info": {
+            "name": "Validate Icd Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/insurance/validate_icd_codes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate Icd Codes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

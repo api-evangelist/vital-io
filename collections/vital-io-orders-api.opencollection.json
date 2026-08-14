@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Lab Report Parser Aggregate orders API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/orders",
+            "params": [
+              {
+                "name": "search_input",
+                "value": "",
+                "type": "query",
+                "description": "Search by order id, user id, patient name, shipping dob, or shipping recipient name."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+              },
+              {
+                "name": "updated_start_date",
+                "value": "",
+                "type": "query",
+                "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "updated_end_date",
+                "value": "",
+                "type": "query",
+                "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by low level status."
+              },
+              {
+                "name": "order_key",
+                "value": "",
+                "type": "query",
+                "description": "Order key to sort by."
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query",
+                "description": "Order direction to sort by."
+              },
+              {
+                "name": "order_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by method used to perform the lab test."
+              },
+              {
+                "name": "is_critical",
+                "value": "",
+                "type": "query",
+                "description": "Filter by critical order status."
+              },
+              {
+                "name": "interpretation",
+                "value": "",
+                "type": "query",
+                "description": "Filter by result interpretation of the lab test."
+              },
+              {
+                "name": "order_activation_types",
+                "value": "",
+                "type": "query",
+                "description": "Filter by activation type."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID."
+              },
+              {
+                "name": "patient_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by patient name."
+              },
+              {
+                "name": "shipping_recipient_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by shipping recipient name."
+              },
+              {
+                "name": "order_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order ids."
+              },
+              {
+                "name": "order_transaction_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order transaction ID"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET many orders with filters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

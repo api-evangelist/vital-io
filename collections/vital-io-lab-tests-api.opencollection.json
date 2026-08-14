@@ -1,0 +1,398 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Lab Report Parser Aggregate lab_tests API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "lab_tests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Lab Tests For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests",
+            "params": [
+              {
+                "name": "generation_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned."
+              },
+              {
+                "name": "lab_slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the slug of the lab for these lab tests."
+              },
+              {
+                "name": "collection_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the collection method for these lab tests."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the status of these lab tests."
+              },
+              {
+                "name": "marker_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these marker IDs."
+              },
+              {
+                "name": "provider_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these provider IDs."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of the lab test (a case-insensitive substring search)."
+              },
+              {
+                "name": "order_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET all the lab tests the team has access to."
+        },
+        {
+          "info": {
+            "name": "Create Lab Test For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/lab_tests",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Lab Test For Team"
+        },
+        {
+          "info": {
+            "name": "Get Lab Test For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_test_id",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              }
+            ]
+          },
+          "docs": "GET all the lab tests the team has access to."
+        },
+        {
+          "info": {
+            "name": "Update Lab Test For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_test_id",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Lab Test For Team"
+        },
+        {
+          "info": {
+            "name": "Get Markers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/markers",
+            "params": [
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "query",
+                "description": "The identifier Vital assigned to a lab partner."
+              },
+              {
+                "name": "lab_slug",
+                "value": "",
+                "type": "query",
+                "description": "The slug of the lab for these markers. If both lab_id and lab_slug are provided, lab_slug will be used."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name or test code of an individual biomarker or a panel."
+              },
+              {
+                "name": "a_la_carte_enabled",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List active and orderable markers for a given Lab. Note that reflex markers are not included."
+        },
+        {
+          "info": {
+            "name": "Get Markers For Order Set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.us.junction.com/v3/lab_tests/list_order_set_markers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Markers For Order Set"
+        },
+        {
+          "info": {
+            "name": "Get Markers For Test",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_test_id/markers",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all markers for a given Lab Test, as well as any associated reflex markers."
+        },
+        {
+          "info": {
+            "name": "Get Markers By Provider Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/:lab_id/markers/:provider_id",
+            "params": [
+              {
+                "name": "provider_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "lab_account_id",
+                "value": "",
+                "type": "query",
+                "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+              }
+            ]
+          },
+          "docs": "GET a specific marker for the given lab and provider_id"
+        },
+        {
+          "info": {
+            "name": "Get Labs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_tests/labs"
+          },
+          "docs": "GET all the labs."
+        },
+        {
+          "info": {
+            "name": "Get Paginated Lab Tests For Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_test",
+            "params": [
+              {
+                "name": "lab_test_limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "generation_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned."
+              },
+              {
+                "name": "lab_slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the slug of the lab for these lab tests."
+              },
+              {
+                "name": "collection_method",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the collection method for these lab tests."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the status of these lab tests."
+              },
+              {
+                "name": "marker_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these marker IDs."
+              },
+              {
+                "name": "provider_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include lab tests containing these provider IDs."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of the lab test (a case-insensitive substring search)."
+              },
+              {
+                "name": "order_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_direction",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET lab tests the team has access to as a paginated list."
+        },
+        {
+          "info": {
+            "name": "Get Lab Test Collection Instructions Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v3/lab_test/:lab_test_id/collection_instruction_pdf",
+            "params": [
+              {
+                "name": "lab_test_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Lab Test Collection Instructions Url"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,437 @@
+{
+  "item": [
+    {
+      "id": "707d6526-b3dc-486e-b5e0-fdb4961b12ef",
+      "name": "introspect",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c3e196c-26ce-4705-95a3-a53440df84fc",
+          "name": "Introspect Resources",
+          "request": {
+            "name": "Introspect Resources",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "introspect",
+                "resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<uuid>",
+                  "description": "Filter by user ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_cursor",
+                  "value": "<string>",
+                  "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fdd4816-a190-4cc6-a92f-06be39a46a3c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "introspect",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "beurer_api"
+                    },
+                    {
+                      "key": "user_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"user_id\": \"56877f92-8554-3345-a461-16ce8ad63656\",\n      \"provider\": {\n        \"key_0\": {\n          \"key_0\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1985-11-29T14:35:51.232Z\",\n            \"newest_data\": \"1986-01-27T06:22:45.261Z\",\n            \"sent_count\": 9684\n          }\n        },\n        \"key_1\": {\n          \"key_0\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1948-05-24T09:28:01.258Z\",\n            \"newest_data\": \"1990-03-25T20:48:53.763Z\",\n            \"sent_count\": 3632\n          },\n          \"key_1\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1991-02-16T02:46:31.421Z\",\n            \"newest_data\": \"1970-05-10T23:56:24.710Z\",\n            \"sent_count\": 4897\n          },\n          \"key_2\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"2004-04-27T07:22:31.997Z\",\n            \"newest_data\": \"1961-04-21T18:02:51.848Z\",\n            \"sent_count\": 8907\n          }\n        }\n      }\n    },\n    {\n      \"user_id\": \"8130173c-2662-8c07-b8f3-e8ea93aa8914\",\n      \"provider\": {\n        \"key_0\": {\n          \"key_0\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1972-11-03T06:46:31.704Z\",\n            \"newest_data\": \"1987-06-19T08:24:23.890Z\",\n            \"sent_count\": 1853\n          },\n          \"key_1\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"2024-11-03T02:41:28.722Z\",\n            \"newest_data\": \"1980-07-31T04:06:27.179Z\",\n            \"sent_count\": 7942\n          },\n          \"key_2\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1977-05-16T10:25:15.893Z\",\n            \"newest_data\": \"1991-10-22T00:38:02.737Z\",\n            \"sent_count\": 1360\n          },\n          \"key_3\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1967-12-22T00:38:29.700Z\",\n            \"newest_data\": \"1974-07-05T20:43:03.830Z\",\n            \"sent_count\": 5480\n          },\n          \"key_4\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1964-09-08T22:16:17.231Z\",\n            \"newest_data\": \"1993-01-13T12:56:37.919Z\",\n            \"sent_count\": 3567\n          }\n        },\n        \"key_1\": {\n          \"key_0\": {\n            \"last_attempt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"oldest_data\": \"1987-08-23T23:49:41.549Z\",\n            \"newest_data\": \"2013-01-01T19:55:34.280Z\",\n            \"sent_count\": 1940\n          }\n        }\n      }\n    }\n  ],\n  \"next\": \"string\",\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbb1f539-bed8-4d4f-9e34-1cc5cab5bf89",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "introspect",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "beurer_api"
+                    },
+                    {
+                      "key": "user_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b748464e-6892-410d-a8da-703563cee554",
+          "name": "Introspect Historical Pulls",
+          "request": {
+            "name": "Introspect Historical Pulls",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "introspect",
+                "historical_pull"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<uuid>",
+                  "description": "Filter by user ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_cursor",
+                  "value": "<string>",
+                  "description": "The cursor for fetching the next page, or `null` to fetch the first page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb311df8-4e2a-4bb5-b509-0eadcaa55b3c",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "introspect",
+                    "historical_pull"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "beurer_api"
+                    },
+                    {
+                      "key": "user_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"provider\": {\n        \"fitbit\": {\n          \"not_pulled\": [\n            \"blood_oxygen\"\n          ],\n          \"pulled\": {\n            \"activity\": {\n              \"days_with_data\": 70,\n              \"range_end\": \"2023-10-24T00:00:00+00:00\",\n              \"range_start\": \"2023-07-24T00:00:00+00:00\",\n              \"release\": \"0.0.0-dev.cd0e262\",\n              \"status\": \"success\",\n              \"timeline\": {\n                \"ended_at\": \"2023-10-24T13:53:59+00:00\",\n                \"scheduled_at\": \"2023-10-24T13:52:51+00:00\",\n                \"started_at\": \"2023-10-24T13:52:54+00:00\"\n              },\n              \"trace_id\": \"51cc7d2d72e98ed4eb63e2b0864b39e3\"\n            },\n            \"sleep\": {\n              \"days_with_data\": 70,\n              \"error_details\": \"provider_rate_limit_exceeded\",\n              \"range_end\": \"2023-10-24T00:00:00+00:00\",\n              \"range_start\": \"2023-07-24T00:00:00+00:00\",\n              \"release\": \"0.0.0-dev.cd0e262\",\n              \"status\": \"retrying\",\n              \"timeline\": {\n                \"ended_at\": \"2023-10-24T13:53:04+00:00\",\n                \"scheduled_at\": \"2023-10-24T13:52:51+00:00\",\n                \"started_at\": \"2023-10-24T13:53:01+00:00\"\n              },\n              \"trace_id\": \"51cc7d2d72e98ed4eb63e2b0864b39e3\"\n            }\n          }\n        }\n      },\n      \"user_id\": \"\"\n    }\n  ],\n  \"next_cursor\": \"None\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50a33df4-0a1e-4db9-adf9-7c9bebed8311",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "introspect",
+                    "historical_pull"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "provider",
+                      "value": "beurer_api"
+                    },
+                    {
+                      "key": "user_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "adb1fa01-d9f0-4406-9f04-bc4bc6d714e2",
+    "name": "Vital Lab Report Parser Aggregate introspect API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,502 @@
+{
+  "item": [
+    {
+      "id": "0d9f2a25-35c2-46de-8217-52c78ce0a5d9",
+      "name": "order_transaction",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6fc1f5c1-dd5f-413b-a917-0bb41d7c53fb",
+          "name": "Get Order Transaction",
+          "request": {
+            "name": "Get Order Transaction",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "order_transaction",
+                ":transaction_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6ac0a2f-3f6d-46f8-81bb-0046a2c8ae2f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "order_transaction",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"783e9679-d6aa-a6aa-5cb0-8507ad1d1b0d\",\n  \"team_id\": \"feb83452-65e3-99ef-c1aa-092a74336cbd\",\n  \"status\": \"active\",\n  \"orders\": [\n    {\n      \"id\": \"1f4e7d61-1d84-a625-eccd-e766b52741d6\",\n      \"last_status\": \"corrected\",\n      \"last_status_created_at\": \"1952-04-30T11:44:19.098Z\",\n      \"updated_at\": \"2016-07-29T01:08:52.524Z\",\n      \"created_at\": \"2008-06-06T06:58:41.170Z\",\n      \"origin\": \"redraw\",\n      \"parent_id\": \"f37f1c14-41da-654c-31cf-bc788f9ea620\"\n    },\n    {\n      \"id\": \"5bc1a2bb-309f-9581-f13b-02d18596d761\",\n      \"last_status\": \"awaiting_registration\",\n      \"last_status_created_at\": \"1952-05-17T17:58:21.973Z\",\n      \"updated_at\": \"1948-12-20T01:00:49.390Z\",\n      \"created_at\": \"1980-09-19T04:10:53.730Z\",\n      \"origin\": \"recreation\",\n      \"parent_id\": \"3a0a84af-4bd4-69cc-873b-d31b94985ba4\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fd1efb3-f00f-4b8f-a17e-ebe01903b90b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "order_transaction",
+                    ":transaction_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3ecb359-b7e7-4e24-8afd-a4b4fa293e20",
+          "name": "Get Order Transaction Result",
+          "request": {
+            "name": "Get Order Transaction Result",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "order_transaction",
+                ":transaction_id",
+                "result"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb791beb-02dd-4dc5-9d23-5a152114e488",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "order_transaction",
+                    ":transaction_id",
+                    "result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"age\": \"string\",\n    \"dob\": \"string\",\n    \"patient\": \"string\",\n    \"date_reported\": \"string\",\n    \"specimen_number\": \"string\",\n    \"clia_#\": \"string\",\n    \"provider\": \"string\",\n    \"laboratory\": \"string\",\n    \"date_collected\": \"string\",\n    \"date_received\": \"string\",\n    \"status\": \"final\",\n    \"interpretation\": \"string\",\n    \"patient_id\": \"string\",\n    \"account_id\": \"string\"\n  },\n  \"results\": [\n    {\n      \"interpretation\": \"normal\",\n      \"is_above_max_range\": false,\n      \"is_below_min_range\": false,\n      \"loinc\": \"742-7\",\n      \"loinc_slug\": \"monocytes-auto-bld-vol\",\n      \"max_range_value\": 0.9,\n      \"min_range_value\": 0.1,\n      \"name\": \"Monocytes(Absolute)\",\n      \"notes\": \"Final\",\n      \"result\": \"0.4\",\n      \"slug\": \"monocytes-absolute\",\n      \"timestamp\": \"2023-11-01T08:28:00+00:00\",\n      \"type\": \"numeric\",\n      \"unit\": \"x10E3/uL\",\n      \"value\": 0.4\n    },\n    {\n      \"interpretation\": \"normal\",\n      \"is_above_max_range\": false,\n      \"is_below_min_range\": false,\n      \"loinc\": \"742-7\",\n      \"loinc_slug\": \"monocytes-auto-bld-vol\",\n      \"max_range_value\": 0.9,\n      \"min_range_value\": 0.1,\n      \"name\": \"Monocytes(Absolute)\",\n      \"notes\": \"Final\",\n      \"result\": \"0.4\",\n      \"slug\": \"monocytes-absolute\",\n      \"timestamp\": \"2023-11-01T08:28:00+00:00\",\n      \"type\": \"numeric\",\n      \"unit\": \"x10E3/uL\",\n      \"value\": 0.4\n    }\n  ],\n  \"missing_results\": [\n    {\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"inferred_failure_type\": \"collection_process_failure\",\n      \"note\": \"string\",\n      \"loinc\": \"string\",\n      \"loinc_slug\": \"string\",\n      \"provider_id\": \"string\",\n      \"source_markers\": [\n        {\n          \"marker_id\": 4758,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"provider_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"marker_id\": 5796,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"provider_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"inferred_failure_type\": \"drop_off_failure\",\n      \"note\": \"string\",\n      \"loinc\": \"string\",\n      \"loinc_slug\": \"string\",\n      \"provider_id\": \"string\",\n      \"source_markers\": [\n        {\n          \"marker_id\": 402,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"provider_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"marker_id\": 6148,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"provider_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"sample_information\": {\n    \"key_0\": {\n      \"sample_id\": \"string\",\n      \"control_number\": \"string\",\n      \"date_collected\": {\n        \"timestamp\": \"1975-11-11T18:24:46.630Z\",\n        \"timezone_offset\": 4138\n      },\n      \"date_received\": {\n        \"timestamp\": \"2013-10-17T13:36:50.674Z\",\n        \"timezone_offset\": 3631\n      },\n      \"date_reported\": {\n        \"timestamp\": \"1954-08-28T19:15:57.461Z\",\n        \"timezone_offset\": 5332\n      },\n      \"performing_laboratories\": {\n        \"key_0\": {\n          \"name\": \"string\",\n          \"phone_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"medical_director\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"clinical_information\": {\n        \"fasting\": false,\n        \"notes\": \"string\",\n        \"information\": \"string\",\n        \"total_volume\": \"string\"\n      }\n    },\n    \"key_1\": {\n      \"sample_id\": \"string\",\n      \"control_number\": \"string\",\n      \"date_collected\": {\n        \"timestamp\": \"1971-06-29T09:04:31.544Z\",\n        \"timezone_offset\": 4163\n      },\n      \"date_received\": {\n        \"timestamp\": \"1993-06-09T05:50:56.705Z\",\n        \"timezone_offset\": 7813\n      },\n      \"date_reported\": {\n        \"timestamp\": \"1952-09-26T01:07:26.463Z\",\n        \"timezone_offset\": 8190\n      },\n      \"performing_laboratories\": {\n        \"key_0\": {\n          \"name\": \"string\",\n          \"phone_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"medical_director\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"clinical_information\": {\n        \"fasting\": false,\n        \"notes\": \"string\",\n        \"information\": \"string\",\n        \"total_volume\": \"string\"\n      }\n    }\n  },\n  \"order_transaction\": {\n    \"id\": \"e5621a64-9e9b-4c6d-5e83-c77180759948\",\n    \"status\": \"completed\",\n    \"orders\": [\n      {\n        \"id\": \"46d4e606-f4bc-198b-8020-7e9f7417127d\",\n        \"created_at\": \"1988-10-30T15:32:39.819Z\",\n        \"updated_at\": \"2018-12-14T11:56:57.469Z\",\n        \"low_level_status\": \"partial_results\",\n        \"low_level_status_created_at\": \"1957-09-04T04:42:48.176Z\",\n        \"origin\": \"redraw\",\n        \"parent_id\": \"8cb472be-8528-f6fe-b6f0-8ef27b95aead\"\n      },\n      {\n        \"id\": \"3d018d12-dd14-adab-2b52-6f01d58be5a9\",\n        \"created_at\": \"1990-03-23T10:30:03.933Z\",\n        \"updated_at\": \"1966-07-31T10:46:12.112Z\",\n        \"low_level_status\": \"redraw_available\",\n        \"low_level_status_created_at\": \"1971-02-05T22:12:05.815Z\",\n        \"origin\": \"redraw\",\n        \"parent_id\": \"69462d7b-293f-e665-9a7c-c0026965135e\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3437fcf-8cd2-491f-971b-5c3f82edfdc9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "order_transaction",
+                    ":transaction_id",
+                    "result"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8ccd574-d0db-4caf-9302-0e8c2fe6d91c",
+          "name": "Get Order Transaction Result Pdf",
+          "request": {
+            "name": "Get Order Transaction Result Pdf",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "order_transaction",
+                ":transaction_id",
+                "result",
+                "pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "transaction_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1ef88e8-0c9c-44f9-a4aa-0a891be00e61",
+              "name": "PDF with results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "order_transaction",
+                    ":transaction_id",
+                    "result",
+                    "pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f62cf90f-50af-46f9-bfc2-e35fe5fe125f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "order_transaction",
+                    ":transaction_id",
+                    "result",
+                    "pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "transaction_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2b1abe2a-b145-4ae7-9d33-618653f6c1de",
+    "name": "Vital Lab Report Parser Aggregate order_transaction API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

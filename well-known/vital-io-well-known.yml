@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: probed
+host: https://vital.io
+notes: >-
+  Probed the standard /.well-known/ discovery surface on the primary host. No discovery documents
+  are published (expected — Vital exposes no public API or OAuth server). Absence is valid data.
+documents:
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/openid-configuration
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404

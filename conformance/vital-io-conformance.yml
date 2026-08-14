@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://vital.io/help/en/collections/19470958-integration-guide
+notes: >-
+  Vital is a healthcare patient-experience platform, not a public API provider. It has no public
+  OpenAPI/REST developer surface; conformance here reflects the healthcare interoperability and
+  compliance standards it documents for its hospital/EHR integrations.
+standards:
+- id: fhir-r4
+  conforms: true
+  evidence: integration guide documents FHIR R4 integrations with Epic and Oracle Health (Cerner)
+- id: hl7v2
+  conforms: true
+  evidence: integration guide documents HL7v2 feeds (ADT, clinical flowsheets, notes, diagnostic data)
+- id: hipaa
+  conforms: true
+  evidence: trust center (security.vital.io) states HIPAA compliance
+- id: hitrust-csf
+  conforms: true
+  evidence: trust center lists HITRUST CSF certification
+- id: soc2
+  conforms: true
+  evidence: trust center lists SOC 2 (AICPA)
+- id: nist-csf
+  conforms: true
+  evidence: trust center lists NIST Cybersecurity Framework alignment
+- id: oauth2
+  conforms: false
+  evidence: no public OAuth2 surface documented (clinician access uses SSO)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: no public API / error contract published

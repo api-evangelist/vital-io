@@ -1,0 +1,496 @@
+{
+  "item": [
+    {
+      "id": "a6724865-07c0-4857-9f62-5fbcc49509e1",
+      "name": "orders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "278d09d5-27a7-4efe-9559-238feaf8ba5e",
+          "name": "Get Orders",
+          "request": {
+            "name": "Get Orders",
+            "description": {
+              "content": "GET many orders with filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_input",
+                  "value": "<string>",
+                  "description": "Search by order id, user id, patient name, shipping dob, or shipping recipient name."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<dateTime>",
+                  "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<dateTime>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_start_date",
+                  "value": "<dateTime>",
+                  "description": "Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_end_date",
+                  "value": "<dateTime>",
+                  "description": "Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by low level status."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by low level status."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_key",
+                  "value": "<string>",
+                  "description": "Order key to sort by."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_direction",
+                  "value": "<string>",
+                  "description": "Order direction to sort by."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_type",
+                  "value": "<string>",
+                  "description": "Filter by method used to perform the lab test."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_type",
+                  "value": "<string>",
+                  "description": "Filter by method used to perform the lab test."
+                },
+                {
+                  "disabled": false,
+                  "key": "is_critical",
+                  "value": "<boolean>",
+                  "description": "Filter by critical order status."
+                },
+                {
+                  "disabled": false,
+                  "key": "interpretation",
+                  "value": "<string>",
+                  "description": "Filter by result interpretation of the lab test."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_activation_types",
+                  "value": "<string>",
+                  "description": "Filter by activation type."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_activation_types",
+                  "value": "<string>",
+                  "description": "Filter by activation type."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<uuid>",
+                  "description": "Filter by user ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "patient_name",
+                  "value": "<string>",
+                  "description": "Filter by patient name."
+                },
+                {
+                  "disabled": false,
+                  "key": "shipping_recipient_name",
+                  "value": "<string>",
+                  "description": "Filter by shipping recipient name."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_ids",
+                  "value": "<uuid>",
+                  "description": "Filter by order ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_ids",
+                  "value": "<uuid>",
+                  "description": "Filter by order ids."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_transaction_id",
+                  "value": "<uuid>",
+                  "description": "Filter by order transaction ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e59f2f3d-2cec-42a3-9ce8-90355fdfe4d0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_input",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "requisition_bypassed"
+                    },
+                    {
+                      "key": "status",
+                      "value": "appointment_pending"
+                    },
+                    {
+                      "key": "order_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "walk_in_test"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "at_home_phlebotomy"
+                    },
+                    {
+                      "key": "is_critical",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interpretation",
+                      "value": "critical"
+                    },
+                    {
+                      "key": "order_activation_types",
+                      "value": "current"
+                    },
+                    {
+                      "key": "order_activation_types",
+                      "value": "current"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "patient_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipping_recipient_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "order_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "order_transaction_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"user_id\": \"cd9e1ae8-644e-0e8c-6b08-af30f3db0a0a\",\n      \"id\": \"28c4de9a-831c-0737-8217-1967f28c9dbc\",\n      \"team_id\": \"9a914e70-230e-4920-585f-3f1ddca33ad4\",\n      \"patient_details\": {\n        \"dob\": \"1987-03-20T14:08:23.639Z\",\n        \"gender\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone_number\": \"string\",\n        \"email\": \"string\",\n        \"medical_proxy\": {\n          \"first_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phone_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"household_income\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"household_size\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"race\": \"asian\",\n        \"ethnicity\": \"ashkenazi_jewish\",\n        \"sexual_orientation\": \"lesbian_gay_or_homosexual\",\n        \"gender_identity\": \"female\"\n      },\n      \"patient_address\": {\n        \"first_line\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\",\n        \"receiver_name\": \"\",\n        \"second_line\": \"string\",\n        \"access_notes\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"lab_test\": {\n        \"id\": \"d83e1a70-d000-8a44-37b0-dece81f9a7ac\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"sample_type\": \"saliva\",\n        \"method\": \"testkit\",\n        \"price\": 6590.500496118219,\n        \"is_active\": false,\n        \"status\": \"inactive\",\n        \"lab\": {\n          \"city\": \"San Francisco\",\n          \"collection_methods\": [\n            \"testkit\"\n          ],\n          \"first_line_address\": \"123 Main St\",\n          \"id\": 1,\n          \"name\": \"LabCorp\",\n          \"sample_types\": [\n            \"saliva\"\n          ],\n          \"slug\": \"labcorp\",\n          \"zipcode\": \"91789\"\n        },\n        \"markers\": [\n          {\n            \"aoe\": {\n              \"questions\": [\n                {\n                  \"answers\": [\n                    {\n                      \"code\": \"answer_code\",\n                      \"id\": 1,\n                      \"value\": \"answer_value\"\n                    }\n                  ],\n                  \"code\": \"question_code\",\n                  \"id\": 1,\n                  \"value\": \"question_value\"\n                }\n              ]\n            },\n            \"common_tat_days\": 3,\n            \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n            \"id\": 1,\n            \"is_orderable\": true,\n            \"lab_id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"price\": \"10.00\",\n            \"provider_id\": \"1234\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"type\": \"biomarker\",\n            \"unit\": \"%\",\n            \"worst_case_tat_days\": 5\n          },\n          {\n            \"aoe\": {\n              \"questions\": [\n                {\n                  \"answers\": [\n                    {\n                      \"code\": \"answer_code\",\n                      \"id\": 1,\n                      \"value\": \"answer_value\"\n                    }\n                  ],\n                  \"code\": \"question_code\",\n                  \"id\": 1,\n                  \"value\": \"question_value\"\n                }\n              ]\n            },\n            \"common_tat_days\": 3,\n            \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n            \"id\": 1,\n            \"is_orderable\": true,\n            \"lab_id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"price\": \"10.00\",\n            \"provider_id\": \"1234\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"type\": \"biomarker\",\n            \"unit\": \"%\",\n            \"worst_case_tat_days\": 5\n          }\n        ],\n        \"fasting\": false,\n        \"is_delegated\": false,\n        \"auto_generated\": false,\n        \"has_collection_instructions\": false,\n        \"common_tat_days\": 2165,\n        \"worst_case_tat_days\": 6352\n      },\n      \"details\": {\n        \"type\": \"string\",\n        \"data\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"appointment_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"sample_id\": \"string\",\n      \"notes\": \"string\",\n      \"created_at\": \"1976-12-16T05:14:41.152Z\",\n      \"updated_at\": \"1976-06-24T19:57:37.506Z\",\n      \"events\": [\n        {\n          \"id\": 736,\n          \"created_at\": \"2022-12-25T09:42:26.252Z\",\n          \"status\": \"completed.walk_in_test.corrected\",\n          \"status_detail\": \"date_of_collection_unspecified\"\n        },\n        {\n          \"id\": 5129,\n          \"created_at\": \"1957-06-21T16:08:20.422Z\",\n          \"status\": \"completed.at_home_phlebotomy.corrected\",\n          \"status_detail\": \"sample_improper_collection\"\n        }\n      ],\n      \"last_event\": {\n        \"id\": 1209,\n        \"created_at\": \"2025-05-24T20:21:28.590Z\",\n        \"status\": \"collecting_sample.testkit.problem_in_transit_customer\",\n        \"status_detail\": \"sample_contaminated\"\n      },\n      \"health_insurance_id\": \"6f64fffe-4b9e-ade6-6354-2aa02948f8a7\",\n      \"requisition_form_url\": \"string\",\n      \"shipping_details\": {\n        \"receiver_name\": \"string\",\n        \"first_line\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\",\n        \"phone_number\": \"string\",\n        \"second_line\": \"string\"\n      },\n      \"has_abn\": false,\n      \"clinical_notes\": \"string\",\n      \"status\": \"failed\",\n      \"physician\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"npi\": \"string\"\n      },\n      \"priority\": false,\n      \"activate_by\": \"1977-01-26\",\n      \"passthrough\": \"string\",\n      \"billing_type\": \"client_bill\",\n      \"icd_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"interpretation\": \"normal\",\n      \"has_missing_results\": true,\n      \"expected_result_by_date\": \"2025-07-06\",\n      \"worst_case_result_by_date\": \"1949-09-07\",\n      \"origin\": \"redraw\",\n      \"order_transaction\": {\n        \"id\": \"2585549c-9c3f-1270-ac28-c9ebd17369e1\",\n        \"status\": \"cancelled\",\n        \"orders\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status_created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"origin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parent_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status_created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"origin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parent_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"user_id\": \"496fb28c-ad93-8dea-34c3-855de2a83b2a\",\n      \"id\": \"2e9b4f1b-5079-d533-4d5b-74c40c10089d\",\n      \"team_id\": \"6e594563-2db4-85b3-5b11-808d719cf881\",\n      \"patient_details\": {\n        \"dob\": \"2006-12-06T16:43:26.295Z\",\n        \"gender\": \"string\",\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"phone_number\": \"string\",\n        \"email\": \"string\",\n        \"medical_proxy\": {\n          \"first_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"address\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"phone_number\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"household_income\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"household_size\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"race\": \"asian\",\n        \"ethnicity\": \"non_hispanic\",\n        \"sexual_orientation\": \"lesbian_gay_or_homosexual\",\n        \"gender_identity\": \"male\"\n      },\n      \"patient_address\": {\n        \"first_line\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\",\n        \"receiver_name\": \"\",\n        \"second_line\": \"string\",\n        \"access_notes\": \"string\",\n        \"phone_number\": \"string\"\n      },\n      \"lab_test\": {\n        \"id\": \"de2706b6-f5bc-c62b-2fed-a524fef98470\",\n        \"slug\": \"string\",\n        \"name\": \"string\",\n        \"sample_type\": \"serum\",\n        \"method\": \"walk_in_test\",\n        \"price\": 4164.954773175829,\n        \"is_active\": true,\n        \"status\": \"pending_approval\",\n        \"lab\": {\n          \"city\": \"San Francisco\",\n          \"collection_methods\": [\n            \"testkit\"\n          ],\n          \"first_line_address\": \"123 Main St\",\n          \"id\": 1,\n          \"name\": \"LabCorp\",\n          \"sample_types\": [\n            \"saliva\"\n          ],\n          \"slug\": \"labcorp\",\n          \"zipcode\": \"91789\"\n        },\n        \"markers\": [\n          {\n            \"aoe\": {\n              \"questions\": [\n                {\n                  \"answers\": [\n                    {\n                      \"code\": \"answer_code\",\n                      \"id\": 1,\n                      \"value\": \"answer_value\"\n                    }\n                  ],\n                  \"code\": \"question_code\",\n                  \"id\": 1,\n                  \"value\": \"question_value\"\n                }\n              ]\n            },\n            \"common_tat_days\": 3,\n            \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n            \"id\": 1,\n            \"is_orderable\": true,\n            \"lab_id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"price\": \"10.00\",\n            \"provider_id\": \"1234\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"type\": \"biomarker\",\n            \"unit\": \"%\",\n            \"worst_case_tat_days\": 5\n          },\n          {\n            \"aoe\": {\n              \"questions\": [\n                {\n                  \"answers\": [\n                    {\n                      \"code\": \"answer_code\",\n                      \"id\": 1,\n                      \"value\": \"answer_value\"\n                    }\n                  ],\n                  \"code\": \"question_code\",\n                  \"id\": 1,\n                  \"value\": \"question_value\"\n                }\n              ]\n            },\n            \"common_tat_days\": 3,\n            \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n            \"id\": 1,\n            \"is_orderable\": true,\n            \"lab_id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"price\": \"10.00\",\n            \"provider_id\": \"1234\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"type\": \"biomarker\",\n            \"unit\": \"%\",\n            \"worst_case_tat_days\": 5\n          }\n        ],\n        \"fasting\": false,\n        \"is_delegated\": false,\n        \"auto_generated\": false,\n        \"has_collection_instructions\": true,\n        \"common_tat_days\": 4654,\n        \"worst_case_tat_days\": 7558\n      },\n      \"details\": {\n        \"type\": \"string\",\n        \"data\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"appointment_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"sample_id\": \"string\",\n      \"notes\": \"string\",\n      \"created_at\": \"1961-04-19T00:13:14.089Z\",\n      \"updated_at\": \"2019-07-03T02:49:46.467Z\",\n      \"events\": [\n        {\n          \"id\": 863,\n          \"created_at\": \"2024-08-09T09:45:19.955Z\",\n          \"status\": \"failed.testkit.lost\",\n          \"status_detail\": \"demographic_information_mismatch\"\n        },\n        {\n          \"id\": 6787,\n          \"created_at\": \"1976-12-25T13:23:20.517Z\",\n          \"status\": \"sample_with_lab.testkit.delivered_to_lab\",\n          \"status_detail\": \"date_of_collection_unspecified\"\n        }\n      ],\n      \"last_event\": {\n        \"id\": 7342,\n        \"created_at\": \"2005-04-13T02:05:03.427Z\",\n        \"status\": \"failed.testkit.failure_to_deliver_to_lab\",\n        \"status_detail\": \"date_of_collection_unspecified\"\n      },\n      \"health_insurance_id\": \"18331fb5-a264-ce01-c389-2abd202e3dec\",\n      \"requisition_form_url\": \"string\",\n      \"shipping_details\": {\n        \"receiver_name\": \"string\",\n        \"first_line\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zip\": \"string\",\n        \"country\": \"string\",\n        \"phone_number\": \"string\",\n        \"second_line\": \"string\"\n      },\n      \"has_abn\": false,\n      \"clinical_notes\": \"string\",\n      \"status\": \"collecting_sample\",\n      \"physician\": {\n        \"first_name\": \"string\",\n        \"last_name\": \"string\",\n        \"npi\": \"string\"\n      },\n      \"priority\": false,\n      \"activate_by\": \"2003-05-14\",\n      \"passthrough\": \"string\",\n      \"billing_type\": \"client_bill\",\n      \"icd_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"interpretation\": \"abnormal\",\n      \"has_missing_results\": true,\n      \"expected_result_by_date\": \"2003-11-09\",\n      \"worst_case_result_by_date\": \"1955-03-22\",\n      \"origin\": \"recreation\",\n      \"order_transaction\": {\n        \"id\": \"59dcf606-8d11-c3ea-10e2-fefbbc30b53c\",\n        \"status\": \"active\",\n        \"orders\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status_created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"origin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parent_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"low_level_status_created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"origin\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"parent_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"total\": 5268,\n  \"page\": 6449,\n  \"size\": 4650\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46070f86-176b-41d2-a87c-a1c59fbc9a4f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_input",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_start_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "updated_end_date",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "requisition_bypassed"
+                    },
+                    {
+                      "key": "status",
+                      "value": "appointment_pending"
+                    },
+                    {
+                      "key": "order_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "walk_in_test"
+                    },
+                    {
+                      "key": "order_type",
+                      "value": "at_home_phlebotomy"
+                    },
+                    {
+                      "key": "is_critical",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "interpretation",
+                      "value": "critical"
+                    },
+                    {
+                      "key": "order_activation_types",
+                      "value": "current"
+                    },
+                    {
+                      "key": "order_activation_types",
+                      "value": "current"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "patient_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "shipping_recipient_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "order_ids",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "order_transaction_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "63b3eb2d-4c44-46ce-a3a3-f3a020e73cc2",
+    "name": "Vital Lab Report Parser Aggregate orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

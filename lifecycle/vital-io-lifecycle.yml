@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: https://status.vital.io/
+notes: >-
+  Vital publishes a hosted status page (Instatus) covering its patient-experience products. No
+  public versioning policy, deprecation policy, or SLA document was found — Vital is an enterprise
+  healthcare SaaS with EHR integrations rather than a public API, so these are absent (valid).
+status_page: https://status.vital.io/
+status_page_platform: instatus
+monitored_components:
+- Vital Access
+- Vital Emergency
+- Vital Inpatient
+- Vital Urgent Care
+- Vital Guard
+- Vital Care Team
+versioning: null
+deprecation: null
+sla: null
+deprecated_operations: []

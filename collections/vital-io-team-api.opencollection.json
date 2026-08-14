@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vital Lab Report Parser Aggregate team API",
+    "version": "0.4.497"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-vital-api-key",
+      "value": "{{x-vital-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/team/:team_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get team."
+        },
+        {
+          "info": {
+            "name": "Search Team Users By Uuid Or Client User Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/team/users/search",
+            "params": [
+              {
+                "name": "query_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search team users by user_id"
+        },
+        {
+          "info": {
+            "name": "Get Svix Webhook Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/team/svix/url"
+          },
+          "docs": "Get Svix Webhook Url"
+        },
+        {
+          "info": {
+            "name": "Get Source Priorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/team/source/priorities",
+            "params": [
+              {
+                "name": "data_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GET source priorities."
+        },
+        {
+          "info": {
+            "name": "Update Source Priorities",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.us.junction.com/v2/team/source/priorities"
+          },
+          "docs": "Patch source priorities."
+        },
+        {
+          "info": {
+            "name": "Get Team Physicians",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.us.junction.com/v2/team/:team_id/physicians",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Team Physicians"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

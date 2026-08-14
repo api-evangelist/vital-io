@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+source: https://security.vital.io/
+url: https://security.vital.io/
+platform: SafeBase
+certifications:
+- SOC 2
+- HITRUST CSF
+- HIPAA
+- NIST CSF
+evidence:
+- source: https://security.vital.io/
+  keywords:
+  - soc 2
+  - hitrust
+  - hipaa
+  - nist csf
+  - trust center

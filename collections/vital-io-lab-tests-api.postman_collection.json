@@ -1,0 +1,2174 @@
+{
+  "item": [
+    {
+      "id": "75bd0c37-594c-454c-a906-0808a6a69460",
+      "name": "lab_tests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6074e04a-cbf1-433c-a9f6-16cd57421e68",
+          "name": "Get Lab Tests For Team",
+          "request": {
+            "name": "Get Lab Tests For Team",
+            "description": {
+              "content": "GET all the lab tests the team has access to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "generation_method",
+                  "value": "manual",
+                  "description": "Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "lab_slug",
+                  "value": "<string>",
+                  "description": "Filter by the slug of the lab for these lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "collection_method",
+                  "value": "<string>",
+                  "description": "Filter by the collection method for these lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by the status of these lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "marker_ids",
+                  "value": "<integer>",
+                  "description": "Filter to only include lab tests containing these marker IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "marker_ids",
+                  "value": "<integer>",
+                  "description": "Filter to only include lab tests containing these marker IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_ids",
+                  "value": "<string>",
+                  "description": "Filter to only include lab tests containing these provider IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_ids",
+                  "value": "<string>",
+                  "description": "Filter to only include lab tests containing these provider IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by the name of the lab test (a case-insensitive substring search)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_direction",
+                  "value": "asc"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "580a3bf1-5404-456e-95f5-9e88e77dd8ff",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "generation_method",
+                      "value": "manual"
+                    },
+                    {
+                      "key": "lab_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection_method",
+                      "value": "at_home_phlebotomy"
+                    },
+                    {
+                      "key": "status",
+                      "value": "inactive"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"838c307c-3d40-955b-3fea-04c1a3d25109\",\n    \"slug\": \"string\",\n    \"name\": \"string\",\n    \"sample_type\": \"saliva\",\n    \"method\": \"at_home_phlebotomy\",\n    \"price\": 850.5306757938857,\n    \"is_active\": false,\n    \"status\": \"active\",\n    \"lab\": {\n      \"city\": \"San Francisco\",\n      \"collection_methods\": [\n        \"testkit\"\n      ],\n      \"first_line_address\": \"123 Main St\",\n      \"id\": 1,\n      \"name\": \"LabCorp\",\n      \"sample_types\": [\n        \"saliva\"\n      ],\n      \"slug\": \"labcorp\",\n      \"zipcode\": \"91789\"\n    },\n    \"markers\": [\n      {\n        \"aoe\": {\n          \"questions\": [\n            {\n              \"answers\": [\n                {\n                  \"code\": \"answer_code\",\n                  \"id\": 1,\n                  \"value\": \"answer_value\"\n                }\n              ],\n              \"code\": \"question_code\",\n              \"id\": 1,\n              \"value\": \"question_value\"\n            }\n          ]\n        },\n        \"common_tat_days\": 3,\n        \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n        \"id\": 1,\n        \"is_orderable\": true,\n        \"lab_id\": 1,\n        \"name\": \"Hemoglobin A1c\",\n        \"price\": \"10.00\",\n        \"provider_id\": \"1234\",\n        \"slug\": \"hemoglobin-a1c\",\n        \"type\": \"biomarker\",\n        \"unit\": \"%\",\n        \"worst_case_tat_days\": 5\n      },\n      {\n        \"aoe\": {\n          \"questions\": [\n            {\n              \"answers\": [\n                {\n                  \"code\": \"answer_code\",\n                  \"id\": 1,\n                  \"value\": \"answer_value\"\n                }\n              ],\n              \"code\": \"question_code\",\n              \"id\": 1,\n              \"value\": \"question_value\"\n            }\n          ]\n        },\n        \"common_tat_days\": 3,\n        \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n        \"id\": 1,\n        \"is_orderable\": true,\n        \"lab_id\": 1,\n        \"name\": \"Hemoglobin A1c\",\n        \"price\": \"10.00\",\n        \"provider_id\": \"1234\",\n        \"slug\": \"hemoglobin-a1c\",\n        \"type\": \"biomarker\",\n        \"unit\": \"%\",\n        \"worst_case_tat_days\": 5\n      }\n    ],\n    \"fasting\": false,\n    \"is_delegated\": false,\n    \"auto_generated\": false,\n    \"has_collection_instructions\": true,\n    \"common_tat_days\": 2761,\n    \"worst_case_tat_days\": 4230\n  },\n  {\n    \"id\": \"11c3e029-50c8-4c22-559e-59725d5f7311\",\n    \"slug\": \"string\",\n    \"name\": \"string\",\n    \"sample_type\": \"serum\",\n    \"method\": \"at_home_phlebotomy\",\n    \"price\": 1541.4896413514589,\n    \"is_active\": false,\n    \"status\": \"pending_approval\",\n    \"lab\": {\n      \"city\": \"San Francisco\",\n      \"collection_methods\": [\n        \"testkit\"\n      ],\n      \"first_line_address\": \"123 Main St\",\n      \"id\": 1,\n      \"name\": \"LabCorp\",\n      \"sample_types\": [\n        \"saliva\"\n      ],\n      \"slug\": \"labcorp\",\n      \"zipcode\": \"91789\"\n    },\n    \"markers\": [\n      {\n        \"aoe\": {\n          \"questions\": [\n            {\n              \"answers\": [\n                {\n                  \"code\": \"answer_code\",\n                  \"id\": 1,\n                  \"value\": \"answer_value\"\n                }\n              ],\n              \"code\": \"question_code\",\n              \"id\": 1,\n              \"value\": \"question_value\"\n            }\n          ]\n        },\n        \"common_tat_days\": 3,\n        \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n        \"id\": 1,\n        \"is_orderable\": true,\n        \"lab_id\": 1,\n        \"name\": \"Hemoglobin A1c\",\n        \"price\": \"10.00\",\n        \"provider_id\": \"1234\",\n        \"slug\": \"hemoglobin-a1c\",\n        \"type\": \"biomarker\",\n        \"unit\": \"%\",\n        \"worst_case_tat_days\": 5\n      },\n      {\n        \"aoe\": {\n          \"questions\": [\n            {\n              \"answers\": [\n                {\n                  \"code\": \"answer_code\",\n                  \"id\": 1,\n                  \"value\": \"answer_value\"\n                }\n              ],\n              \"code\": \"question_code\",\n              \"id\": 1,\n              \"value\": \"question_value\"\n            }\n          ]\n        },\n        \"common_tat_days\": 3,\n        \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n        \"id\": 1,\n        \"is_orderable\": true,\n        \"lab_id\": 1,\n        \"name\": \"Hemoglobin A1c\",\n        \"price\": \"10.00\",\n        \"provider_id\": \"1234\",\n        \"slug\": \"hemoglobin-a1c\",\n        \"type\": \"biomarker\",\n        \"unit\": \"%\",\n        \"worst_case_tat_days\": 5\n      }\n    ],\n    \"fasting\": false,\n    \"is_delegated\": false,\n    \"auto_generated\": false,\n    \"has_collection_instructions\": true,\n    \"common_tat_days\": 3604,\n    \"worst_case_tat_days\": 1705\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "064a8338-ebaf-462f-97b5-4a8e26410488",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "generation_method",
+                      "value": "manual"
+                    },
+                    {
+                      "key": "lab_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection_method",
+                      "value": "at_home_phlebotomy"
+                    },
+                    {
+                      "key": "status",
+                      "value": "inactive"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b3e84f2-5449-472f-9fac-546b4d91986b",
+          "name": "Create Lab Test For Team",
+          "request": {
+            "name": "Create Lab Test For Team",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"marker_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"provider_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fasting\": \"<boolean>\",\n  \"lab_account_id\": \"<uuid>\",\n  \"lab_slug\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f035c79-39fb-4f2b-ad0e-2fc345bd5266",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"method\": \"on_site_collection\",\n  \"description\": \"<string>\",\n  \"marker_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"provider_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fasting\": \"<boolean>\",\n  \"lab_account_id\": \"<uuid>\",\n  \"lab_slug\": \"ayumetrix\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ba49c734-bf5c-f06a-0e9b-aa2dfbdd8c0d\",\n  \"slug\": \"string\",\n  \"name\": \"string\",\n  \"sample_type\": \"arm_collector\",\n  \"method\": \"testkit\",\n  \"price\": 8550.089999764614,\n  \"is_active\": false,\n  \"status\": \"pending_approval\",\n  \"lab\": {\n    \"city\": \"San Francisco\",\n    \"collection_methods\": [\n      \"testkit\"\n    ],\n    \"first_line_address\": \"123 Main St\",\n    \"id\": 1,\n    \"name\": \"LabCorp\",\n    \"sample_types\": [\n      \"saliva\"\n    ],\n    \"slug\": \"labcorp\",\n    \"zipcode\": \"91789\"\n  },\n  \"markers\": [\n    {\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"answers\": [\n              {\n                \"code\": \"answer_code\",\n                \"id\": 1,\n                \"value\": \"answer_value\"\n              }\n            ],\n            \"code\": \"question_code\",\n            \"id\": 1,\n            \"value\": \"question_value\"\n          }\n        ]\n      },\n      \"common_tat_days\": 3,\n      \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n      \"id\": 1,\n      \"is_orderable\": true,\n      \"lab_id\": 1,\n      \"name\": \"Hemoglobin A1c\",\n      \"price\": \"10.00\",\n      \"provider_id\": \"1234\",\n      \"slug\": \"hemoglobin-a1c\",\n      \"type\": \"biomarker\",\n      \"unit\": \"%\",\n      \"worst_case_tat_days\": 5\n    },\n    {\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"answers\": [\n              {\n                \"code\": \"answer_code\",\n                \"id\": 1,\n                \"value\": \"answer_value\"\n              }\n            ],\n            \"code\": \"question_code\",\n            \"id\": 1,\n            \"value\": \"question_value\"\n          }\n        ]\n      },\n      \"common_tat_days\": 3,\n      \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n      \"id\": 1,\n      \"is_orderable\": true,\n      \"lab_id\": 1,\n      \"name\": \"Hemoglobin A1c\",\n      \"price\": \"10.00\",\n      \"provider_id\": \"1234\",\n      \"slug\": \"hemoglobin-a1c\",\n      \"type\": \"biomarker\",\n      \"unit\": \"%\",\n      \"worst_case_tat_days\": 5\n    }\n  ],\n  \"fasting\": false,\n  \"is_delegated\": false,\n  \"auto_generated\": false,\n  \"has_collection_instructions\": true,\n  \"common_tat_days\": 3544,\n  \"worst_case_tat_days\": 5283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84603b82-9b51-4b21-8770-259849030268",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"method\": \"on_site_collection\",\n  \"description\": \"<string>\",\n  \"marker_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"provider_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fasting\": \"<boolean>\",\n  \"lab_account_id\": \"<uuid>\",\n  \"lab_slug\": \"ayumetrix\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "809f701d-c6ce-41f6-968d-3a0c09deb451",
+          "name": "Update Lab Test For Team",
+          "request": {
+            "name": "Update Lab Test For Team",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests",
+                ":lab_test_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lab_test_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e699d0f-5aee-4855-ab65-1f8fa75dacc8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_test_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ba49c734-bf5c-f06a-0e9b-aa2dfbdd8c0d\",\n  \"slug\": \"string\",\n  \"name\": \"string\",\n  \"sample_type\": \"arm_collector\",\n  \"method\": \"testkit\",\n  \"price\": 8550.089999764614,\n  \"is_active\": false,\n  \"status\": \"pending_approval\",\n  \"lab\": {\n    \"city\": \"San Francisco\",\n    \"collection_methods\": [\n      \"testkit\"\n    ],\n    \"first_line_address\": \"123 Main St\",\n    \"id\": 1,\n    \"name\": \"LabCorp\",\n    \"sample_types\": [\n      \"saliva\"\n    ],\n    \"slug\": \"labcorp\",\n    \"zipcode\": \"91789\"\n  },\n  \"markers\": [\n    {\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"answers\": [\n              {\n                \"code\": \"answer_code\",\n                \"id\": 1,\n                \"value\": \"answer_value\"\n              }\n            ],\n            \"code\": \"question_code\",\n            \"id\": 1,\n            \"value\": \"question_value\"\n          }\n        ]\n      },\n      \"common_tat_days\": 3,\n      \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n      \"id\": 1,\n      \"is_orderable\": true,\n      \"lab_id\": 1,\n      \"name\": \"Hemoglobin A1c\",\n      \"price\": \"10.00\",\n      \"provider_id\": \"1234\",\n      \"slug\": \"hemoglobin-a1c\",\n      \"type\": \"biomarker\",\n      \"unit\": \"%\",\n      \"worst_case_tat_days\": 5\n    },\n    {\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"answers\": [\n              {\n                \"code\": \"answer_code\",\n                \"id\": 1,\n                \"value\": \"answer_value\"\n              }\n            ],\n            \"code\": \"question_code\",\n            \"id\": 1,\n            \"value\": \"question_value\"\n          }\n        ]\n      },\n      \"common_tat_days\": 3,\n      \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n      \"id\": 1,\n      \"is_orderable\": true,\n      \"lab_id\": 1,\n      \"name\": \"Hemoglobin A1c\",\n      \"price\": \"10.00\",\n      \"provider_id\": \"1234\",\n      \"slug\": \"hemoglobin-a1c\",\n      \"type\": \"biomarker\",\n      \"unit\": \"%\",\n      \"worst_case_tat_days\": 5\n    }\n  ],\n  \"fasting\": false,\n  \"is_delegated\": false,\n  \"auto_generated\": false,\n  \"has_collection_instructions\": true,\n  \"common_tat_days\": 3544,\n  \"worst_case_tat_days\": 5283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88bb9652-8d5d-4f3e-a12b-257fe17cae11",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_test_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"active\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77500d74-49cf-4432-8f14-2cadfa893e91",
+          "name": "Get Lab Test For Team",
+          "request": {
+            "name": "Get Lab Test For Team",
+            "description": {
+              "content": "GET all the lab tests the team has access to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests",
+                ":lab_test_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_account_id",
+                  "value": "<uuid>",
+                  "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lab_test_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "256de46e-efe3-44a4-9371-e4862c6c3314",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_test_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ba49c734-bf5c-f06a-0e9b-aa2dfbdd8c0d\",\n  \"slug\": \"string\",\n  \"name\": \"string\",\n  \"sample_type\": \"arm_collector\",\n  \"method\": \"testkit\",\n  \"price\": 8550.089999764614,\n  \"is_active\": false,\n  \"status\": \"pending_approval\",\n  \"lab\": {\n    \"city\": \"San Francisco\",\n    \"collection_methods\": [\n      \"testkit\"\n    ],\n    \"first_line_address\": \"123 Main St\",\n    \"id\": 1,\n    \"name\": \"LabCorp\",\n    \"sample_types\": [\n      \"saliva\"\n    ],\n    \"slug\": \"labcorp\",\n    \"zipcode\": \"91789\"\n  },\n  \"markers\": [\n    {\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"answers\": [\n              {\n                \"code\": \"answer_code\",\n                \"id\": 1,\n                \"value\": \"answer_value\"\n              }\n            ],\n            \"code\": \"question_code\",\n            \"id\": 1,\n            \"value\": \"question_value\"\n          }\n        ]\n      },\n      \"common_tat_days\": 3,\n      \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n      \"id\": 1,\n      \"is_orderable\": true,\n      \"lab_id\": 1,\n      \"name\": \"Hemoglobin A1c\",\n      \"price\": \"10.00\",\n      \"provider_id\": \"1234\",\n      \"slug\": \"hemoglobin-a1c\",\n      \"type\": \"biomarker\",\n      \"unit\": \"%\",\n      \"worst_case_tat_days\": 5\n    },\n    {\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"answers\": [\n              {\n                \"code\": \"answer_code\",\n                \"id\": 1,\n                \"value\": \"answer_value\"\n              }\n            ],\n            \"code\": \"question_code\",\n            \"id\": 1,\n            \"value\": \"question_value\"\n          }\n        ]\n      },\n      \"common_tat_days\": 3,\n      \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n      \"id\": 1,\n      \"is_orderable\": true,\n      \"lab_id\": 1,\n      \"name\": \"Hemoglobin A1c\",\n      \"price\": \"10.00\",\n      \"provider_id\": \"1234\",\n      \"slug\": \"hemoglobin-a1c\",\n      \"type\": \"biomarker\",\n      \"unit\": \"%\",\n      \"worst_case_tat_days\": 5\n    }\n  ],\n  \"fasting\": false,\n  \"is_delegated\": false,\n  \"auto_generated\": false,\n  \"has_collection_instructions\": true,\n  \"common_tat_days\": 3544,\n  \"worst_case_tat_days\": 5283\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7e7bece-1eeb-4e6c-b2b5-628352ba243e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_test_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9813d2a5-1f6d-4c8f-8d2b-ef8b837e6e53",
+          "name": "Get Markers",
+          "request": {
+            "name": "Get Markers",
+            "description": {
+              "content": "List active and orderable markers for a given Lab. Note that reflex markers are not included.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests",
+                "markers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_id",
+                  "value": "<integer>",
+                  "description": "The identifier Vital assigned to a lab partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "lab_id",
+                  "value": "<integer>",
+                  "description": "The identifier Vital assigned to a lab partner."
+                },
+                {
+                  "disabled": false,
+                  "key": "lab_slug",
+                  "value": "<string>",
+                  "description": "The slug of the lab for these markers. If both lab_id and lab_slug are provided, lab_slug will be used."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "",
+                  "description": "The name or test code of an individual biomarker or a panel."
+                },
+                {
+                  "disabled": false,
+                  "key": "a_la_carte_enabled",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "lab_account_id",
+                  "value": "<uuid>",
+                  "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df4af107-e069-4110-8427-f86c107aeaf2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    "markers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lab_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lab_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "a_la_carte_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"markers\": [\n    {\n      \"id\": 4712,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"expected_results\": [\n        {\n          \"id\": 1667,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 1578,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        },\n        {\n          \"id\": 4771,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 9875,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        }\n      ],\n      \"description\": \"string\",\n      \"lab_id\": 3837,\n      \"provider_id\": \"string\",\n      \"type\": \"panel\",\n      \"unit\": \"string\",\n      \"price\": \"string\",\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"a_la_carte_enabled\": false,\n      \"common_tat_days\": 9725,\n      \"worst_case_tat_days\": 9719,\n      \"is_orderable\": false\n    },\n    {\n      \"id\": 6550,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"expected_results\": [\n        {\n          \"id\": 1683,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": false,\n          \"lab_id\": 2404,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        },\n        {\n          \"id\": 4795,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 7578,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        }\n      ],\n      \"description\": \"string\",\n      \"lab_id\": 5494,\n      \"provider_id\": \"string\",\n      \"type\": \"panel\",\n      \"unit\": \"string\",\n      \"price\": \"string\",\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"a_la_carte_enabled\": false,\n      \"common_tat_days\": 4556,\n      \"worst_case_tat_days\": 6351,\n      \"is_orderable\": true\n    }\n  ],\n  \"total\": 3394,\n  \"page\": 5215,\n  \"size\": 9440,\n  \"pages\": 5256\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "650b8b15-2308-45ff-bc96-45e1ea3130b4",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    "markers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lab_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "lab_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": ""
+                    },
+                    {
+                      "key": "a_la_carte_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f19f7211-c04c-4aa1-bce5-a9760cc92b77",
+          "name": "Get Markers For Order Set",
+          "request": {
+            "name": "Get Markers For Order Set",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests",
+                "list_order_set_markers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lab_test_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"add_on\": {\n    \"marker_ids\": [\n      \"<integer>\",\n      \"<integer>\"\n    ],\n    \"provider_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"lab_account_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee2775b8-bf2e-4959-bbcd-3aa1e9511487",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    "list_order_set_markers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lab_test_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"add_on\": {\n    \"marker_ids\": [\n      8081,\n      947\n    ],\n    \"provider_ids\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"lab_account_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"markers\": [\n    {\n      \"id\": 4712,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"expected_results\": [\n        {\n          \"id\": 1667,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 1578,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        },\n        {\n          \"id\": 4771,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 9875,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        }\n      ],\n      \"description\": \"string\",\n      \"lab_id\": 3837,\n      \"provider_id\": \"string\",\n      \"type\": \"panel\",\n      \"unit\": \"string\",\n      \"price\": \"string\",\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"a_la_carte_enabled\": false,\n      \"common_tat_days\": 9725,\n      \"worst_case_tat_days\": 9719,\n      \"is_orderable\": false\n    },\n    {\n      \"id\": 6550,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"expected_results\": [\n        {\n          \"id\": 1683,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": false,\n          \"lab_id\": 2404,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        },\n        {\n          \"id\": 4795,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 7578,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        }\n      ],\n      \"description\": \"string\",\n      \"lab_id\": 5494,\n      \"provider_id\": \"string\",\n      \"type\": \"panel\",\n      \"unit\": \"string\",\n      \"price\": \"string\",\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"a_la_carte_enabled\": false,\n      \"common_tat_days\": 4556,\n      \"worst_case_tat_days\": 6351,\n      \"is_orderable\": true\n    }\n  ],\n  \"total\": 3394,\n  \"page\": 5215,\n  \"size\": 9440,\n  \"pages\": 5256\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "65e3a5c9-8532-4955-9e9a-abbb6a15a3cc",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    "list_order_set_markers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lab_test_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"add_on\": {\n    \"marker_ids\": [\n      8081,\n      947\n    ],\n    \"provider_ids\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"lab_account_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec9ff6ab-1501-4677-8823-6e553828b260",
+          "name": "Get Markers For Test",
+          "request": {
+            "name": "Get Markers For Test",
+            "description": {
+              "content": "List all markers for a given Lab Test, as well as any associated reflex markers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests",
+                ":lab_test_id",
+                "markers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_account_id",
+                  "value": "<uuid>",
+                  "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lab_test_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "326d01cc-637e-4299-bc7b-96535461ee9b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_test_id",
+                    "markers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"markers\": [\n    {\n      \"id\": 4712,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"expected_results\": [\n        {\n          \"id\": 1667,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 1578,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        },\n        {\n          \"id\": 4771,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 9875,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        }\n      ],\n      \"description\": \"string\",\n      \"lab_id\": 3837,\n      \"provider_id\": \"string\",\n      \"type\": \"panel\",\n      \"unit\": \"string\",\n      \"price\": \"string\",\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"a_la_carte_enabled\": false,\n      \"common_tat_days\": 9725,\n      \"worst_case_tat_days\": 9719,\n      \"is_orderable\": false\n    },\n    {\n      \"id\": 6550,\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"expected_results\": [\n        {\n          \"id\": 1683,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": false,\n          \"lab_id\": 2404,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        },\n        {\n          \"id\": 4795,\n          \"name\": \"string\",\n          \"slug\": \"string\",\n          \"required\": true,\n          \"lab_id\": 7578,\n          \"provider_id\": \"string\",\n          \"loinc\": {\n            \"code\": \"1234-1\",\n            \"id\": 1,\n            \"name\": \"Hemoglobin A1c\",\n            \"slug\": \"hemoglobin-a1c\",\n            \"unit\": \"%\"\n          }\n        }\n      ],\n      \"description\": \"string\",\n      \"lab_id\": 5494,\n      \"provider_id\": \"string\",\n      \"type\": \"panel\",\n      \"unit\": \"string\",\n      \"price\": \"string\",\n      \"aoe\": {\n        \"questions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"a_la_carte_enabled\": false,\n      \"common_tat_days\": 4556,\n      \"worst_case_tat_days\": 6351,\n      \"is_orderable\": true\n    }\n  ],\n  \"total\": 3394,\n  \"page\": 5215,\n  \"size\": 9440,\n  \"pages\": 5256\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eb5b8db-80e9-4299-995f-e62f1a5aaebb",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_test_id",
+                    "markers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9126905a-7b6d-4a8f-8c73-39caaf27f9f4",
+          "name": "Get Markers By Provider Id",
+          "request": {
+            "name": "Get Markers By Provider Id",
+            "description": {
+              "content": "GET a specific marker for the given lab and provider_id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests",
+                ":lab_id",
+                "markers",
+                ":provider_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_account_id",
+                  "value": "<uuid>",
+                  "description": "The lab account ID. This lab account is used to determine the availability of markers and lab tests."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "lab_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b99a2d9-8035-4866-9cfc-5a63af3a9966",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_id",
+                    "markers",
+                    ":provider_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lab_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 9275,\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"description\": \"string\",\n  \"lab_id\": 4294,\n  \"provider_id\": \"string\",\n  \"type\": \"panel\",\n  \"unit\": \"string\",\n  \"price\": \"string\",\n  \"aoe\": {\n    \"questions\": [\n      {\n        \"id\": 1118,\n        \"required\": true,\n        \"code\": \"string\",\n        \"value\": \"string\",\n        \"type\": \"numeric\",\n        \"sequence\": 1719,\n        \"answers\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"constraint\": \"string\",\n        \"default\": \"string\"\n      },\n      {\n        \"id\": 1955,\n        \"required\": true,\n        \"code\": \"string\",\n        \"value\": \"string\",\n        \"type\": \"choice\",\n        \"sequence\": 5228,\n        \"answers\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"constraint\": \"string\",\n        \"default\": \"string\"\n      }\n    ]\n  },\n  \"a_la_carte_enabled\": false,\n  \"common_tat_days\": 5986,\n  \"worst_case_tat_days\": 7233,\n  \"is_orderable\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3b4940e-3ae3-4cbc-9586-60b643d6a988",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    ":lab_id",
+                    "markers",
+                    ":provider_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_account_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "lab_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ef0a992-3bd8-4609-903d-c79d35c8036d",
+          "name": "Get Labs",
+          "request": {
+            "name": "Get Labs",
+            "description": {
+              "content": "GET all the labs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "lab_tests",
+                "labs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "717dda8c-0dcd-4024-bcb0-0de85c6be2b3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_tests",
+                    "labs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"city\": \"San Francisco\",\n    \"collection_methods\": [\n      \"testkit\"\n    ],\n    \"first_line_address\": \"123 Main St\",\n    \"id\": 1,\n    \"name\": \"LabCorp\",\n    \"sample_types\": [\n      \"saliva\"\n    ],\n    \"slug\": \"labcorp\",\n    \"zipcode\": \"91789\"\n  },\n  {\n    \"city\": \"San Francisco\",\n    \"collection_methods\": [\n      \"testkit\"\n    ],\n    \"first_line_address\": \"123 Main St\",\n    \"id\": 1,\n    \"name\": \"LabCorp\",\n    \"sample_types\": [\n      \"saliva\"\n    ],\n    \"slug\": \"labcorp\",\n    \"zipcode\": \"91789\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "39bdb27f-98c8-4053-a28f-de2fed6fc9ec",
+          "name": "Get Paginated Lab Tests For Team",
+          "request": {
+            "name": "Get Paginated Lab Tests For Team",
+            "description": {
+              "content": "GET lab tests the team has access to as a paginated list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "lab_test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lab_test_limit",
+                  "value": "50"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "generation_method",
+                  "value": "manual",
+                  "description": "Filter on whether auto-generated lab tests created by Vital, manually created lab tests, or all lab tests should be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "lab_slug",
+                  "value": "<string>",
+                  "description": "Filter by the slug of the lab for these lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "collection_method",
+                  "value": "<string>",
+                  "description": "Filter by the collection method for these lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by the status of these lab tests."
+                },
+                {
+                  "disabled": false,
+                  "key": "marker_ids",
+                  "value": "<integer>",
+                  "description": "Filter to only include lab tests containing these marker IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "marker_ids",
+                  "value": "<integer>",
+                  "description": "Filter to only include lab tests containing these marker IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_ids",
+                  "value": "<string>",
+                  "description": "Filter to only include lab tests containing these provider IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_ids",
+                  "value": "<string>",
+                  "description": "Filter to only include lab tests containing these provider IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by the name of the lab test (a case-insensitive substring search)."
+                },
+                {
+                  "disabled": false,
+                  "key": "order_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_direction",
+                  "value": "asc"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc422fc4-9a31-40a2-8f9a-440793accf2d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_test_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "next_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "generation_method",
+                      "value": "manual"
+                    },
+                    {
+                      "key": "lab_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection_method",
+                      "value": "at_home_phlebotomy"
+                    },
+                    {
+                      "key": "status",
+                      "value": "inactive"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"eb95e318-0334-9a49-0af8-9c17d0667b9b\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"sample_type\": \"dried_blood_spot\",\n      \"method\": \"on_site_collection\",\n      \"price\": 4608.870543557061,\n      \"is_active\": true,\n      \"status\": \"pending_approval\",\n      \"lab\": {\n        \"city\": \"San Francisco\",\n        \"collection_methods\": [\n          \"testkit\"\n        ],\n        \"first_line_address\": \"123 Main St\",\n        \"id\": 1,\n        \"name\": \"LabCorp\",\n        \"sample_types\": [\n          \"saliva\"\n        ],\n        \"slug\": \"labcorp\",\n        \"zipcode\": \"91789\"\n      },\n      \"markers\": [\n        {\n          \"aoe\": {\n            \"questions\": [\n              {\n                \"answers\": [\n                  {\n                    \"code\": \"answer_code\",\n                    \"id\": 1,\n                    \"value\": \"answer_value\"\n                  }\n                ],\n                \"code\": \"question_code\",\n                \"id\": 1,\n                \"value\": \"question_value\"\n              }\n            ]\n          },\n          \"common_tat_days\": 3,\n          \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n          \"id\": 1,\n          \"is_orderable\": true,\n          \"lab_id\": 1,\n          \"name\": \"Hemoglobin A1c\",\n          \"price\": \"10.00\",\n          \"provider_id\": \"1234\",\n          \"slug\": \"hemoglobin-a1c\",\n          \"type\": \"biomarker\",\n          \"unit\": \"%\",\n          \"worst_case_tat_days\": 5\n        },\n        {\n          \"aoe\": {\n            \"questions\": [\n              {\n                \"answers\": [\n                  {\n                    \"code\": \"answer_code\",\n                    \"id\": 1,\n                    \"value\": \"answer_value\"\n                  }\n                ],\n                \"code\": \"question_code\",\n                \"id\": 1,\n                \"value\": \"question_value\"\n              }\n            ]\n          },\n          \"common_tat_days\": 3,\n          \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n          \"id\": 1,\n          \"is_orderable\": true,\n          \"lab_id\": 1,\n          \"name\": \"Hemoglobin A1c\",\n          \"price\": \"10.00\",\n          \"provider_id\": \"1234\",\n          \"slug\": \"hemoglobin-a1c\",\n          \"type\": \"biomarker\",\n          \"unit\": \"%\",\n          \"worst_case_tat_days\": 5\n        }\n      ],\n      \"fasting\": false,\n      \"is_delegated\": false,\n      \"auto_generated\": false,\n      \"has_collection_instructions\": true,\n      \"common_tat_days\": 5835,\n      \"worst_case_tat_days\": 1140\n    },\n    {\n      \"id\": \"2012e954-a8d2-c946-645d-f9fcc78703c1\",\n      \"slug\": \"string\",\n      \"name\": \"string\",\n      \"sample_type\": \"dried_blood_spot\",\n      \"method\": \"testkit\",\n      \"price\": 851.0917372531391,\n      \"is_active\": false,\n      \"status\": \"pending_approval\",\n      \"lab\": {\n        \"city\": \"San Francisco\",\n        \"collection_methods\": [\n          \"testkit\"\n        ],\n        \"first_line_address\": \"123 Main St\",\n        \"id\": 1,\n        \"name\": \"LabCorp\",\n        \"sample_types\": [\n          \"saliva\"\n        ],\n        \"slug\": \"labcorp\",\n        \"zipcode\": \"91789\"\n      },\n      \"markers\": [\n        {\n          \"aoe\": {\n            \"questions\": [\n              {\n                \"answers\": [\n                  {\n                    \"code\": \"answer_code\",\n                    \"id\": 1,\n                    \"value\": \"answer_value\"\n                  }\n                ],\n                \"code\": \"question_code\",\n                \"id\": 1,\n                \"value\": \"question_value\"\n              }\n            ]\n          },\n          \"common_tat_days\": 3,\n          \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n          \"id\": 1,\n          \"is_orderable\": true,\n          \"lab_id\": 1,\n          \"name\": \"Hemoglobin A1c\",\n          \"price\": \"10.00\",\n          \"provider_id\": \"1234\",\n          \"slug\": \"hemoglobin-a1c\",\n          \"type\": \"biomarker\",\n          \"unit\": \"%\",\n          \"worst_case_tat_days\": 5\n        },\n        {\n          \"aoe\": {\n            \"questions\": [\n              {\n                \"answers\": [\n                  {\n                    \"code\": \"answer_code\",\n                    \"id\": 1,\n                    \"value\": \"answer_value\"\n                  }\n                ],\n                \"code\": \"question_code\",\n                \"id\": 1,\n                \"value\": \"question_value\"\n              }\n            ]\n          },\n          \"common_tat_days\": 3,\n          \"description\": \"Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.\",\n          \"id\": 1,\n          \"is_orderable\": true,\n          \"lab_id\": 1,\n          \"name\": \"Hemoglobin A1c\",\n          \"price\": \"10.00\",\n          \"provider_id\": \"1234\",\n          \"slug\": \"hemoglobin-a1c\",\n          \"type\": \"biomarker\",\n          \"unit\": \"%\",\n          \"worst_case_tat_days\": 5\n        }\n      ],\n      \"fasting\": false,\n      \"is_delegated\": false,\n      \"auto_generated\": false,\n      \"has_collection_instructions\": false,\n      \"common_tat_days\": 3120,\n      \"worst_case_tat_days\": 2047\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d22829b-d421-4d8a-ac34-c0065a1acdc1",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lab_test_limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "next_cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "generation_method",
+                      "value": "manual"
+                    },
+                    {
+                      "key": "lab_slug",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection_method",
+                      "value": "at_home_phlebotomy"
+                    },
+                    {
+                      "key": "status",
+                      "value": "inactive"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "marker_ids",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "provider_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order_direction",
+                      "value": "asc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aa84d12-7116-4d0d-abc6-7d89d43fe544",
+          "name": "Get Lab Test Collection Instructions Url",
+          "request": {
+            "name": "Get Lab Test Collection Instructions Url",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "lab_test",
+                ":lab_test_id",
+                "collection_instruction_pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "lab_test_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "492943e6-5795-406a-a097-5dfff3903d4e",
+              "name": "PDF with collection instructions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_test",
+                    ":lab_test_id",
+                    "collection_instruction_pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbc0b502-f6f1-4cfe-af6d-01070631e0a9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "lab_test",
+                    ":lab_test_id",
+                    "collection_instruction_pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "lab_test_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e71b25c-bf59-4ff3-86a5-061988193873",
+    "name": "Vital Lab Report Parser Aggregate lab_tests API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}

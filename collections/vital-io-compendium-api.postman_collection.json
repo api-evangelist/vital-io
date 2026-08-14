@@ -1,0 +1,355 @@
+{
+  "item": [
+    {
+      "id": "775853f4-8232-43ea-92ab-7960d9581eab",
+      "name": "compendium",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4b0fad5d-5555-4662-8495-52bacb5f9929",
+          "name": "Search Compendium",
+          "request": {
+            "name": "Search Compendium",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "compendium",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mode\": \"<string>\",\n  \"query\": \"<string>\",\n  \"cpt_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"loinc_set_hash\": \"<string>\",\n  \"labs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include_related\": true,\n  \"limit\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d89b1c94-91be-488d-8a06-e3773e85ba79",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "compendium",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mode\": \"crosswalk\",\n  \"query\": \"<string>\",\n  \"cpt_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"loinc_set_hash\": \"<string>\",\n  \"labs\": [\n    \"labcorp\",\n    \"bioreference\"\n  ],\n  \"include_related\": true,\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mode\": \"canonical\",\n  \"selected_canonical\": {\n    \"loinc_set_hash\": \"string\",\n    \"display_name\": \"string\",\n    \"popularity_score\": 8945.982327731954,\n    \"confidence\": 8293.482289959082,\n    \"aliases\": [\n      \"string\",\n      \"string\"\n    ],\n    \"loinc_codes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"provider_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"loinc_components\": [\n      \"string\",\n      \"string\"\n    ],\n    \"loinc_groups\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cpt_codes\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"canonical_candidates\": [\n    {\n      \"loinc_set_hash\": \"string\",\n      \"display_name\": \"string\",\n      \"popularity_score\": 3412.468660119624,\n      \"confidence\": 9105.789761127979,\n      \"aliases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loinc_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"provider_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loinc_components\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loinc_groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cpt_codes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"loinc_set_hash\": \"string\",\n      \"display_name\": \"string\",\n      \"popularity_score\": 5736.196640372659,\n      \"confidence\": 5002.563670297386,\n      \"aliases\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loinc_codes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"provider_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loinc_components\": [\n        \"string\",\n        \"string\"\n      ],\n      \"loinc_groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"cpt_codes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"per_lab\": {\n    \"key_0\": [\n      {\n        \"marker_id\": 7077,\n        \"lab_id\": 8995,\n        \"name\": \"string\",\n        \"loinc_set_hash\": \"string\",\n        \"relation\": \"string\",\n        \"confidence\": 1006.9776222346783,\n        \"marker_popularity_score\": 3179.7879348121683,\n        \"lab_slug\": \"string\",\n        \"result_names\": [\n          \"string\",\n          \"string\"\n        ],\n        \"provider_id\": \"string\",\n        \"loinc_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cpt_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reason_codes\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"marker_id\": 9773,\n        \"lab_id\": 6949,\n        \"name\": \"string\",\n        \"loinc_set_hash\": \"string\",\n        \"relation\": \"string\",\n        \"confidence\": 74.2182628764354,\n        \"marker_popularity_score\": 4585.328803130382,\n        \"lab_slug\": \"string\",\n        \"result_names\": [\n          \"string\",\n          \"string\"\n        ],\n        \"provider_id\": \"string\",\n        \"loinc_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cpt_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reason_codes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"key_1\": [\n      {\n        \"marker_id\": 4454,\n        \"lab_id\": 2598,\n        \"name\": \"string\",\n        \"loinc_set_hash\": \"string\",\n        \"relation\": \"string\",\n        \"confidence\": 9888.951868111411,\n        \"marker_popularity_score\": 5779.463270742218,\n        \"lab_slug\": \"string\",\n        \"result_names\": [\n          \"string\",\n          \"string\"\n        ],\n        \"provider_id\": \"string\",\n        \"loinc_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cpt_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reason_codes\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"marker_id\": 9551,\n        \"lab_id\": 1141,\n        \"name\": \"string\",\n        \"loinc_set_hash\": \"string\",\n        \"relation\": \"string\",\n        \"confidence\": 6850.119841111024,\n        \"marker_popularity_score\": 3252.9895727775147,\n        \"lab_slug\": \"string\",\n        \"result_names\": [\n          \"string\",\n          \"string\"\n        ],\n        \"provider_id\": \"string\",\n        \"loinc_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cpt_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"reason_codes\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  \"related\": [\n    {\n      \"canonical\": {\n        \"loinc_set_hash\": \"string\",\n        \"display_name\": \"string\",\n        \"popularity_score\": 4408.766484699362,\n        \"confidence\": 3868.7160937248123,\n        \"aliases\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"provider_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cpt_codes\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"relation\": \"string\",\n      \"confidence\": 4535.612895143767,\n      \"reason_codes\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"canonical\": {\n        \"loinc_set_hash\": \"string\",\n        \"display_name\": \"string\",\n        \"popularity_score\": 8079.407773477638,\n        \"confidence\": 6106.091525210801,\n        \"aliases\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_codes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"provider_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_components\": [\n          \"string\",\n          \"string\"\n        ],\n        \"loinc_groups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cpt_codes\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"relation\": \"string\",\n      \"confidence\": 3402.6606501933097,\n      \"reason_codes\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff02ae2f-f8ed-48a2-bb27-e141b1a655a3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "compendium",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mode\": \"crosswalk\",\n  \"query\": \"<string>\",\n  \"cpt_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"loinc_set_hash\": \"<string>\",\n  \"labs\": [\n    \"labcorp\",\n    \"bioreference\"\n  ],\n  \"include_related\": true,\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bd09487-70fb-4a8a-9d05-9b07ba0ca9bb",
+          "name": "Convert Compendium",
+          "request": {
+            "name": "Convert Compendium",
+            "description": {},
+            "url": {
+              "path": [
+                "v3",
+                "compendium",
+                "convert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"target_lab\": \"<string>\",\n  \"lab_test_id\": \"<uuid>\",\n  \"provider_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5fe593f1-492a-44c6-9961-c7920a69c056",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "compendium",
+                    "convert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_lab\": \"bioreference\",\n  \"lab_test_id\": \"<uuid>\",\n  \"provider_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"target_lab_id\": 7076,\n  \"target_lab_slug\": \"string\",\n  \"source_lab_test_id\": \"f0bbb418-460e-7af4-4958-d985643a428f\",\n  \"source_lab_id\": 2033,\n  \"source_provider_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"converted_provider_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"unresolved_provider_ids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"by_source_provider_id\": {\n    \"key_0\": {\n      \"source_provider_id\": \"string\",\n      \"candidates\": [\n        {\n          \"marker_id\": 9349,\n          \"lab_id\": 9315,\n          \"name\": \"string\",\n          \"loinc_set_hash\": \"string\",\n          \"relation\": \"string\",\n          \"confidence\": 7359.9410544577695,\n          \"marker_popularity_score\": 8377.764388626354,\n          \"lab_slug\": \"string\",\n          \"result_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"provider_id\": \"string\",\n          \"loinc_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_groups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"cpt_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reason_codes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"marker_id\": 9225,\n          \"lab_id\": 9818,\n          \"name\": \"string\",\n          \"loinc_set_hash\": \"string\",\n          \"relation\": \"string\",\n          \"confidence\": 6927.506418770638,\n          \"marker_popularity_score\": 1375.3194653200474,\n          \"lab_slug\": \"string\",\n          \"result_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"provider_id\": \"string\",\n          \"loinc_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_groups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"cpt_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reason_codes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    \"key_1\": {\n      \"source_provider_id\": \"string\",\n      \"candidates\": [\n        {\n          \"marker_id\": 3040,\n          \"lab_id\": 747,\n          \"name\": \"string\",\n          \"loinc_set_hash\": \"string\",\n          \"relation\": \"string\",\n          \"confidence\": 5810.655767959465,\n          \"marker_popularity_score\": 7752.075236806766,\n          \"lab_slug\": \"string\",\n          \"result_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"provider_id\": \"string\",\n          \"loinc_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_groups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"cpt_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reason_codes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"marker_id\": 9378,\n          \"lab_id\": 3453,\n          \"name\": \"string\",\n          \"loinc_set_hash\": \"string\",\n          \"relation\": \"string\",\n          \"confidence\": 3377.5355346879987,\n          \"marker_popularity_score\": 5658.658849766141,\n          \"lab_slug\": \"string\",\n          \"result_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"provider_id\": \"string\",\n          \"loinc_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_groups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"cpt_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reason_codes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    \"key_2\": {\n      \"source_provider_id\": \"string\",\n      \"candidates\": [\n        {\n          \"marker_id\": 1551,\n          \"lab_id\": 6635,\n          \"name\": \"string\",\n          \"loinc_set_hash\": \"string\",\n          \"relation\": \"string\",\n          \"confidence\": 2848.1690307472963,\n          \"marker_popularity_score\": 8456.519957682041,\n          \"lab_slug\": \"string\",\n          \"result_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"provider_id\": \"string\",\n          \"loinc_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_groups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"cpt_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reason_codes\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"marker_id\": 7735,\n          \"lab_id\": 4287,\n          \"name\": \"string\",\n          \"loinc_set_hash\": \"string\",\n          \"relation\": \"string\",\n          \"confidence\": 2219.9333997101535,\n          \"marker_popularity_score\": 45.94871002877476,\n          \"lab_slug\": \"string\",\n          \"result_names\": [\n            \"string\",\n            \"string\"\n          ],\n          \"provider_id\": \"string\",\n          \"loinc_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_components\": [\n            \"string\",\n            \"string\"\n          ],\n          \"loinc_groups\": [\n            \"string\",\n            \"string\"\n          ],\n          \"cpt_codes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"reason_codes\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88e7ad9d-3641-4d4a-a93c-5e43029e2c02",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "compendium",
+                    "convert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-vital-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"target_lab\": \"bioreference\",\n  \"lab_test_id\": \"<uuid>\",\n  \"provider_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"limit\": 3\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.us.junction.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-vital-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3cda73df-f70d-4231-ba84-22b70730be9d",
+    "name": "Vital Lab Report Parser Aggregate compendium API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.\n\nContact Support:\n Name: Junction (Vital) Support",
+      "type": "text/plain"
+    }
+  }
+}
