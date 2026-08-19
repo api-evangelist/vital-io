@@ -51,7 +51,7 @@ tags:
 created: '2026-05-25'
 modified: '2026-05-25'
 url: https://raw.githubusercontent.com/api-evangelist/vital-io/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 kind: company
 apis:
 - aid: vital-io:vital-management-api
