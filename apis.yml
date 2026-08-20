@@ -32,6 +32,27 @@ tags:
 - Wearables
 - Lab Testing
 - Digital Health
+- Health Tech
+- Healthcare
+- HIPAA
+- HealthKit
+- Health Connect
+- EHR
+- EMR
+- Biomarkers
+- Diagnostics
+- Continuous Glucose Monitoring
+- Sleep
+- Activity
+- Heart Rate
+- Webhook
+- Phlebotomy
+- Lab Orders
+tags_raw:
+- Health Data
+- Wearables
+- Lab Testing
+- Digital Health
 - Healthtech
 - Healthcare
 - HIPAA
@@ -57,6 +78,13 @@ apis:
 - aid: vital-io:vital-management-api
   name: Vital Management API
   tags:
+  - Management
+  - Organization
+  - Team
+  - APIKeys
+  - ETL Pipelines
+  - Webhook
+  tags_raw:
   - Management
   - Organizations
   - Teams
@@ -164,6 +192,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Insurance
+  tags_raw:
   - insurance
   properties:
   - type: OpenAPI
@@ -206,6 +236,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Introspect
+  tags_raw:
   - introspect
   properties:
   - type: OpenAPI
@@ -247,7 +279,8 @@ apis:
   description: The lab_account API from Vital — 1 operation(s) for lab_account.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
-  tags:
+  tags: []
+  tags_raw:
   - lab_account
   properties:
   - type: OpenAPI
@@ -289,7 +322,8 @@ apis:
   description: The lab_report API from Vital — 2 operation(s) for lab_report.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
-  tags:
+  tags: []
+  tags_raw:
   - lab_report
   properties:
   - type: OpenAPI
@@ -332,6 +366,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Lab Tests
+  tags_raw:
   - lab_tests
   properties:
   - type: OpenAPI
@@ -374,6 +410,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Link
+  tags_raw:
   - link
   properties:
   - type: OpenAPI
@@ -416,6 +454,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Order
+  tags_raw:
   - order
   properties:
   - type: OpenAPI
@@ -457,7 +497,8 @@ apis:
   description: The order_transaction API from Vital — 3 operation(s) for order_transaction.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
-  tags:
+  tags: []
+  tags_raw:
   - order_transaction
   properties:
   - type: OpenAPI
@@ -500,6 +541,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Order
+  tags_raw:
   - orders
   properties:
   - type: OpenAPI
@@ -584,6 +627,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Providers
+  tags_raw:
   - providers
   properties:
   - type: OpenAPI
@@ -626,6 +671,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Summary
+  tags_raw:
   - summary
   properties:
   - type: OpenAPI
@@ -668,6 +715,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Team
+  tags_raw:
   - team
   properties:
   - type: OpenAPI
@@ -710,6 +759,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - Time Series
+  tags_raw:
   - timeseries
   properties:
   - type: OpenAPI
@@ -752,6 +803,8 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
+  - User
+  tags_raw:
   - user
   properties:
   - type: OpenAPI
