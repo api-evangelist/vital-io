@@ -12,8 +12,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: vitalUsersApi
-  url: ../openapi/vital-users-api-openapi.yml
+- name: userApi
+  url: ../openapi/vital-io-user-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: mobile-signin-token-handoff

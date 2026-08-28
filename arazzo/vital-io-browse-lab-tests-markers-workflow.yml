@@ -12,8 +12,8 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: vitalLabTestingApi
-  url: ../openapi/vital-lab-testing-api-openapi.yml
+- name: labTestsApi
+  url: ../openapi/vital-io-lab-tests-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: browse-lab-tests-markers

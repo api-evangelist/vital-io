@@ -11,8 +11,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: vitalLabTestingApi
-  url: ../openapi/vital-lab-testing-api-openapi.yml
+- name: orderApi
+  url: ../openapi/vital-io-order-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: testkit-order-register

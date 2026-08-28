@@ -12,11 +12,11 @@ info:
     the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: vitalUsersApi
-  url: ../openapi/vital-users-api-openapi.yml
+- name: linkApi
+  url: ../openapi/vital-io-link-api-openapi.yml
   type: openapi
-- name: vitalLinkApi
-  url: ../openapi/vital-link-api-openapi.yml
+- name: userApi
+  url: ../openapi/vital-io-user-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: onboard-user-connect-wearable
