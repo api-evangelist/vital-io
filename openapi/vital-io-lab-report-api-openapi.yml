@@ -1,11 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vital Lab Report Parser Aggregate lab_report API
-  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  title: Vital Io Lab Report API
   version: 0.4.497
-  contact:
-    name: Junction (Vital) Support
-    url: https://docs.junction.com
+  description: 'Operations tagged lab_report across 3 of this provider''s published API definitions: vital-lab-report-parser-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -51,6 +48,15 @@ paths:
       x-fern-sdk-group-name: lab_report
       x-fern-sdk-method-name: parser_create_job
       x-fern-availability: beta
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
   /lab_report/v1/parser/job/{job_id}:
     get:
       tags:
@@ -82,6 +88,15 @@ paths:
       x-fern-sdk-group-name: lab_report
       x-fern-sdk-method-name: parser_get_job
       x-fern-availability: beta
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
 components:
   schemas:
     Interpretation:
@@ -93,12 +108,84 @@ components:
       - unknown
       title: Interpretation
       description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
+    ParsingJob:
       properties:
-        detail:
-          title: Detail
+        id:
+          type: string
+          format: uuid
+          title: Id
+        status:
+          $ref: '#/components/schemas/ParsingJobStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        failure_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ParsingJobFailureReason'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ParsedLabReportData'
+          - type: 'null'
+        needs_human_review:
+          type: boolean
+          title: Needs Human Review
+        is_reviewed:
+          type: boolean
+          title: Is Reviewed
       type: object
-      title: HTTPValidationError
+      required:
+      - id
+      - status
+      - needs_human_review
+      - is_reviewed
+      title: ParsingJob
+      example:
+        data:
+          metadata:
+            date_collected: '2024-12-30'
+            date_reported: '2025-01-01'
+            dob: '1990-01-01'
+            lab_name: Acme Labs
+            patient_first_name: Jane
+            patient_last_name: Doe
+            specimen_number: ABC123
+          results:
+          - interpretation: normal
+            is_above_max_range: false
+            is_below_min_range: false
+            loinc_matches:
+            - aliases: []
+              confidence_score: 0.99
+              display_name: Glucose
+              loinc_code: 2345-7
+              loinc_name: Glucose [Mass/volume] in Serum or Plasma
+            max_reference_range: 99
+            measurement_kind: direct
+            min_reference_range: 70
+            sample_type: serum_plasma_blood
+            source_panel_name: CMP
+            test_name: Glucose
+            type: numeric
+            units: mg/dL
+            value: '90'
+        id: 8eb0217f-4683-4a3c-adca-faf95ac65739
+        is_reviewed: false
+        needs_human_review: false
+        status: completed
+    ParsedLabReportData:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ResultMetadata'
+        results:
+          items:
+            $ref: '#/components/schemas/LabReportResult'
+          type: array
+          title: Results
+      type: object
+      required:
+      - metadata
+      - results
+      title: ParsedLabReportData
     LabReportResult:
       properties:
         test_name:
@@ -192,6 +279,23 @@ components:
       - test_name
       - value
       title: LabReportResult
+    ParsingJobStatus:
+      type: string
+      enum:
+      - upload_pending
+      - started
+      - completed
+      - failed
+      title: ParsingJobStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ParsingJobFailureReason:
+      type: string
+      enum:
+      - invalid_input
+      - low_quality
+      - not_english
+      title: ParsingJobFailureReason
+      description: Machine-readable failure reasons for parsing jobs. ℹ️ This enum is non-exhaustive.
     LoincMatch:
       properties:
         loinc_code:
@@ -240,101 +344,12 @@ components:
       - file
       - user_id
       title: CreateLabReportParserJobBody
-    ParsedLabReportData:
+    HTTPValidationError:
       properties:
-        metadata:
-          $ref: '#/components/schemas/ResultMetadata'
-        results:
-          items:
-            $ref: '#/components/schemas/LabReportResult'
-          type: array
-          title: Results
+        detail:
+          title: Detail
       type: object
-      required:
-      - metadata
-      - results
-      title: ParsedLabReportData
-    ParsingJob:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        status:
-          $ref: '#/components/schemas/ParsingJobStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        failure_reason:
-          anyOf:
-          - $ref: '#/components/schemas/ParsingJobFailureReason'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ParsedLabReportData'
-          - type: 'null'
-        needs_human_review:
-          type: boolean
-          title: Needs Human Review
-        is_reviewed:
-          type: boolean
-          title: Is Reviewed
-      type: object
-      required:
-      - id
-      - status
-      - needs_human_review
-      - is_reviewed
-      title: ParsingJob
-      example:
-        data:
-          metadata:
-            date_collected: '2024-12-30'
-            date_reported: '2025-01-01'
-            dob: '1990-01-01'
-            lab_name: Acme Labs
-            patient_first_name: Jane
-            patient_last_name: Doe
-            specimen_number: ABC123
-          results:
-          - interpretation: normal
-            is_above_max_range: false
-            is_below_min_range: false
-            loinc_matches:
-            - aliases: []
-              confidence_score: 0.99
-              display_name: Glucose
-              loinc_code: 2345-7
-              loinc_name: Glucose [Mass/volume] in Serum or Plasma
-            max_reference_range: 99
-            measurement_kind: direct
-            min_reference_range: 70
-            sample_type: serum_plasma_blood
-            source_panel_name: CMP
-            test_name: Glucose
-            type: numeric
-            units: mg/dL
-            value: '90'
-        id: 8eb0217f-4683-4a3c-adca-faf95ac65739
-        is_reviewed: false
-        needs_human_review: false
-        status: completed
-    ParsingJobStatus:
-      type: string
-      enum:
-      - upload_pending
-      - started
-      - completed
-      - failed
-      title: ParsingJobStatus
-      description: ℹ️ This enum is non-exhaustive.
-    ParsingJobFailureReason:
-      type: string
-      enum:
-      - invalid_input
-      - low_quality
-      - not_english
-      title: ParsingJobFailureReason
-      description: Machine-readable failure reasons for parsing jobs. ℹ️ This enum is non-exhaustive.
+      title: HTTPValidationError
     LabReportResultType:
       type: string
       enum:
@@ -401,3 +416,7 @@ components:
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
+x-refined-from:
+- vital-lab-report-parser-api-openapi.yml
+- vital-openapi-original.json
+- vital-openapi-original.yml

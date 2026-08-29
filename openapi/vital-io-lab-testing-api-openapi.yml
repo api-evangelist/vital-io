@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Vital Io Orders API
+  title: Vital Io Lab Testing API
   version: 0.4.497
-  description: 'Operations tagged orders across 3 of this provider''s published API definitions: vital-lab-testing-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged lab-testing across 9 of this provider''s published API definitions: vital-lab-report-parser-api-openapi.yml, vital-lab-testing-api-openapi.yml, vital-link-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml, vital-sense-api-openapi.yml, vital-team-api-openapi.yml, vital-users-api-openapi.yml, vital-wearables-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -15,240 +15,165 @@ servers:
 security:
 - apiKeyAuth: []
 tags:
-- name: orders
-paths:
-  /v3/orders:
-    get:
+- name: lab-testing
+paths: {}
+webhooks:
+  labtest.order.*:
+    post:
       tags:
-      - orders
-      summary: Get Orders
-      description: GET many orders with filters.
-      operationId: get_orders_v3_orders_get
-      parameters:
-      - name: search_input
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Search by order id, user id, patient name, shipping dob, or shipping recipient name.
-          title: Search Input
-        description: Search by order id, user id, patient name, shipping dob, or shipping recipient name.
-      - name: start_date
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
-          title: Start Date
-        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
-      - name: end_date
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
-          title: End Date
-        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
-      - name: updated_start_date
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
-          title: Updated Start Date
-        description: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
-      - name: updated_end_date
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
-          title: Updated End Date
-        description: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
-      - name: status
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/OrderLowLevelStatus'
-          - type: 'null'
-          description: Filter by low level status.
-          title: Status
-        description: Filter by low level status.
-      - name: order_key
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - enum:
-            - created_at
-            - patient_name
-            - last_status
-            type: string
-          - type: 'null'
-          description: Order key to sort by.
-          title: Order Key
-        description: Order key to sort by.
-      - name: order_direction
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - enum:
-            - asc
-            - desc
-            type: string
-          - type: 'null'
-          description: Order direction to sort by.
-          title: Order Direction
-        description: Order direction to sort by.
-      - name: order_type
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/LabTestCollectionMethod'
-          - type: 'null'
-          description: Filter by method used to perform the lab test.
-          title: Order Type
-        description: Filter by method used to perform the lab test.
-      - name: is_critical
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          description: Filter by critical order status.
-          title: Is Critical
-        description: Filter by critical order status.
-      - name: interpretation
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - $ref: '#/components/schemas/Interpretation'
-          - type: 'null'
-          description: Filter by result interpretation of the lab test.
-          title: Interpretation
-        description: Filter by result interpretation of the lab test.
-      - name: order_activation_types
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: array
-            items:
-              $ref: '#/components/schemas/OrderActivationType'
-          - type: 'null'
-          description: Filter by activation type.
-          title: Order Activation Types
-        description: Filter by activation type.
-      - name: user_id
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          description: Filter by user ID.
-          title: User Id
-        description: Filter by user ID.
-      - name: patient_name
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Filter by patient name.
-          title: Patient Name
-        description: Filter by patient name.
-      - name: shipping_recipient_name
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: Filter by shipping recipient name.
-          title: Shipping Recipient Name
-        description: Filter by shipping recipient name.
-      - name: order_ids
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: array
-            items:
-              type: string
-              format: uuid
-          - type: 'null'
-          description: Filter by order ids.
-          title: Order Ids
-        description: Filter by order ids.
-      - name: order_transaction_id
-        in: query
-        required: false
-        schema:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          description: Filter by order transaction ID
-          title: Order Transaction Id
-        description: Filter by order transaction ID
-      - name: page
-        in: query
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-          default: 1
-          title: Page
-      - name: size
-        in: query
-        required: false
-        schema:
-          type: integer
-          maximum: 100
-          minimum: 1
-          default: 50
-          title: Size
+      - lab-testing
+      summary: Order
+      operationId: orderlabtest_order___post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacingOrderChanged'
+        required: true
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/GetOrdersResponse'
+              schema: {}
         '422':
           description: Validation Error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-      x-fern-sdk-group-name: lab_tests
-      x-fern-sdk-method-name: get_orders
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
+  labtest.appointment.*:
+    post:
+      tags:
+      - lab-testing
+      summary: Appointment
+      operationId: appointmentlabtest_appointment___post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacingAppointmentChanged'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
+  labtest.result.critical:
+    post:
+      tags:
+      - lab-testing
+      summary: Critical Result
+      operationId: critical_resultlabtest_result_critical_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacingCriticalResultIdentified'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
+  lab_report.parsing_job.created:
+    post:
+      tags:
+      - lab-testing
+      summary: Lab Report Parsing Job Created
+      operationId: lab_report_parsing_job_createdlab_report_parsing_job_created_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacingLabReportParsingJobCreatedEvent'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
+  lab_report.parsing_job.updated:
+    post:
+      tags:
+      - lab-testing
+      summary: Lab Report Parsing Job Updated
+      operationId: lab_report_parsing_job_updatedlab_report_parsing_job_updated_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacingLabReportParsingJobUpdatedEvent'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
     servers:
     - url: https://api.us.junction.com
       x-fern-server-name: Production
@@ -279,6 +204,81 @@ components:
       - other
       title: SexualOrientation
       description: ℹ️ This enum is non-exhaustive.
+    ParsingJob:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        status:
+          $ref: '#/components/schemas/ParsingJobStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        failure_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ParsingJobFailureReason'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ParsedLabReportData'
+          - type: 'null'
+        needs_human_review:
+          type: boolean
+          title: Needs Human Review
+        is_reviewed:
+          type: boolean
+          title: Is Reviewed
+      type: object
+      required:
+      - id
+      - status
+      - needs_human_review
+      - is_reviewed
+      title: ParsingJob
+      example:
+        data:
+          metadata:
+            date_collected: '2024-12-30'
+            date_reported: '2025-01-01'
+            dob: '1990-01-01'
+            lab_name: Acme Labs
+            patient_first_name: Jane
+            patient_last_name: Doe
+            specimen_number: ABC123
+          results:
+          - interpretation: normal
+            is_above_max_range: false
+            is_below_min_range: false
+            loinc_matches:
+            - aliases: []
+              confidence_score: 0.99
+              display_name: Glucose
+              loinc_code: 2345-7
+              loinc_name: Glucose [Mass/volume] in Serum or Plasma
+            max_reference_range: 99
+            measurement_kind: direct
+            min_reference_range: 70
+            sample_type: serum_plasma_blood
+            source_panel_name: CMP
+            test_name: Glucose
+            type: numeric
+            units: mg/dL
+            value: '90'
+        id: 8eb0217f-4683-4a3c-adca-faf95ac65739
+        is_reviewed: false
+        needs_human_review: false
+        status: completed
+    AppointmentEventStatus:
+      type: string
+      enum:
+      - pending
+      - reserved
+      - scheduled
+      - completed
+      - cancelled
+      - in_progress
+      title: AppointmentEventStatus
+      description: ℹ️ This enum is non-exhaustive.
     OrderTransactionStatus:
       type: string
       enum:
@@ -287,6 +287,37 @@ components:
       - cancelled
       title: OrderTransactionStatus
       description: ℹ️ This enum is non-exhaustive.
+    ClientFacingAppointmentChanged:
+      properties:
+        event_type:
+          type: string
+          enum:
+          - labtest.appointment.created
+          - labtest.appointment.updated
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          $ref: '#/components/schemas/ClientFacingAppointment'
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingAppointmentChanged
     ClientFacingPhysician:
       properties:
         first_name:
@@ -315,6 +346,37 @@ components:
       - failed
       title: OrderTopLevelStatus
       description: ℹ️ This enum is non-exhaustive.
+    ClientFacingOrderChanged:
+      properties:
+        event_type:
+          type: string
+          enum:
+          - labtest.order.created
+          - labtest.order.updated
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          $ref: '#/components/schemas/ClientFacingOrder'
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingOrderChanged
     ClientFacingOrderInTransaction:
       properties:
         id:
@@ -367,6 +429,35 @@ components:
       - patient_bill
       title: Billing
       description: ℹ️ This enum is non-exhaustive.
+    ClientFacingLabReportParsingJobUpdatedEvent:
+      properties:
+        event_type:
+          type: string
+          const: lab_report.parsing_job.updated
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          $ref: '#/components/schemas/ParsingJob'
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingLabReportParsingJobUpdatedEvent
     Ethnicity:
       type: string
       enum:
@@ -662,6 +753,90 @@ components:
         team_id: 8b394366-3502-48e9-a07a-f9503091fd9c
         updated_at: '2020-01-01T00:00:00Z'
         user_id: 1fb6c1b6-9572-4596-8cfd-930e45ea9d01
+    AppointmentType:
+      type: string
+      enum:
+      - phlebotomy
+      - patient_service_center
+      title: AppointmentType
+      description: ℹ️ This enum is non-exhaustive.
+    ResultMetadata:
+      properties:
+        patient_first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Patient First Name
+        patient_last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Patient Last Name
+        dob:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dob
+        gender:
+          type: string
+          enum:
+          - male
+          - female
+          - other
+          title: Gender
+          default: other
+          description: ℹ️ This enum is non-exhaustive.
+        lab_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Lab Name
+        date_reported:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Reported
+        date_collected:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Collected
+        specimen_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Specimen Number
+      type: object
+      title: ResultMetadata
+    ClientFacingCriticalResultIdentified:
+      properties:
+        event_type:
+          type: string
+          const: labtest.result.critical
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          $ref: '#/components/schemas/ClientFacingCriticalResult'
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingCriticalResultIdentified
     ClientFacingLab:
       properties:
         id:
@@ -728,6 +903,108 @@ components:
       required:
       - type
       title: ClientFacingOnSiteCollectionOrderDetails
+    LabReportResult:
+      properties:
+        test_name:
+          type: string
+          title: Test Name
+        value:
+          type: string
+          title: Value
+        sample_type:
+          type: string
+          enum:
+          - urine
+          - serum_plasma_blood
+          - capillary_blood
+          - stool
+          - saliva
+          - other
+          - unknown
+          title: Sample Type
+          default: unknown
+          description: ℹ️ This enum is non-exhaustive.
+        measurement_kind:
+          type: string
+          enum:
+          - direct
+          - calculated
+          - ratio
+          - unknown
+          title: Measurement Kind
+          default: unknown
+          description: ℹ️ This enum is non-exhaustive.
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/LabReportResultType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        units:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Units
+        max_reference_range:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Reference Range
+        min_reference_range:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Min Reference Range
+        source_panel_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Panel Name
+        loinc_matches:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/LoincMatch'
+            type: array
+          - type: 'null'
+          title: Loinc Matches
+        loinc_match_status:
+          anyOf:
+          - type: string
+            enum:
+            - auto_match
+            - needs_review
+            - no_match
+          - type: 'null'
+          title: Loinc Match Status
+          description: ℹ️ This enum is non-exhaustive.
+        interpretation:
+          anyOf:
+          - $ref: '#/components/schemas/Interpretation'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        is_above_max_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Above Max Range
+        is_below_min_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Below Min Range
+      type: object
+      required:
+      - test_name
+      - value
+      title: LabReportResult
+    ParsingJobStatus:
+      type: string
+      enum:
+      - upload_pending
+      - started
+      - completed
+      - failed
+      title: ParsingJobStatus
+      description: ℹ️ This enum is non-exhaustive.
     ClientFacingOnSiteCollectionOrder:
       properties:
         id:
@@ -848,6 +1125,141 @@ components:
           outbound_tracking_url: <outbound_tracking_url>
           updated_at: '2020-01-01T00:00:00.000Z'
         updated_at: '2020-01-01T00:00:00Z'
+    ClientFacingAppointment:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        user_id:
+          type: string
+          format: uuid4
+          title: User Id
+        order_id:
+          type: string
+          format: uuid4
+          title: Order Id
+        order_transaction_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Order Transaction Id
+        address:
+          $ref: '#/components/schemas/USAddress'
+        location:
+          $ref: '#/components/schemas/LngLat'
+        start_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start At
+          description: Time is in UTC
+        end_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End At
+          description: Time is in UTC
+        iana_timezone:
+          anyOf:
+          - type: string
+            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
+          - type: 'null'
+          title: Iana Timezone
+        type:
+          $ref: '#/components/schemas/AppointmentType'
+          description: ℹ️ This enum is non-exhaustive.
+        provider:
+          $ref: '#/components/schemas/AppointmentProvider'
+          description: ℹ️ This enum is non-exhaustive.
+        status:
+          $ref: '#/components/schemas/AppointmentStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_id:
+          type: string
+          title: Provider Id
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+        can_reschedule:
+          type: boolean
+          title: Can Reschedule
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+        event_status:
+          $ref: '#/components/schemas/AppointmentEventStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        event_data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Event Data
+        events:
+          items:
+            $ref: '#/components/schemas/ClientFacingAppointmentEvent'
+          type: array
+          title: Events
+      type: object
+      required:
+      - id
+      - user_id
+      - order_id
+      - address
+      - location
+      - start_at
+      - end_at
+      - type
+      - provider
+      - status
+      - provider_id
+      - can_reschedule
+      - event_status
+      - events
+      title: ClientFacingAppointment
+      example:
+        address:
+          access_notes: 'Gate code #1234, use side entrance'
+          city: San Francisco
+          country: United States
+          first_line: 123 Main St.
+          second_line: Apt. 208
+          state: CA
+          zip_code: '91189'
+        appointment_notes: Please bring photo ID
+        can_reschedule: true
+        end_at: '2022-01-01T00:00:00'
+        event_data:
+          description: Metadata field containing provider specific data, like cancellation reason or origin
+        event_status: scheduled
+        events:
+        - created_at: '2022-01-01T00:00:00Z'
+          status: scheduled
+        - created_at: '2022-01-02T00:00:00Z'
+          status: completed
+        external_id: ext-123
+        iana_timezone: America/New_York
+        id: 1614a22c-4322-43a0-96bc-8ff01e5401c8
+        location:
+          lat: 37.7749295
+          lng: -122.4194155
+        order_id: 6b6b38ef-d312-48b4-95d4-731fc2ce7a6f
+        order_transaction_id: cc089173-7db8-428e-a233-c58472226917
+        provider: getlabs
+        provider_id: '123'
+        start_at: '2022-01-01T00:00:00'
+        status: confirmed
+        type: phlebotomy
+        user_id: 61fac3ce-a2c9-4218-b404-941ca948776f
     AoE:
       properties:
         questions:
@@ -876,6 +1288,33 @@ components:
       - multi_choice
       title: QuestionType
       description: ℹ️ This enum is non-exhaustive.
+    LoincMatch:
+      properties:
+        loinc_code:
+          type: string
+          title: Loinc Code
+        loinc_name:
+          type: string
+          title: Loinc Name
+        display_name:
+          type: string
+          title: Display Name
+          default: ''
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          default: []
+        confidence_score:
+          type: number
+          title: Confidence Score
+      type: object
+      required:
+      - loinc_code
+      - loinc_name
+      - confidence_score
+      title: LoincMatch
     ClientFacingAtHomePhlebotomyOrderDetails:
       properties:
         type:
@@ -890,6 +1329,46 @@ components:
       required:
       - type
       title: ClientFacingAtHomePhlebotomyOrderDetails
+    USAddress:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip_code:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip Code
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+          description: Deprecated. Use `second_line` instead to provide the unit number. Subject to removal after 20 Nov 2023.
+          deprecated: true
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - city
+      - state
+      - zip_code
+      title: USAddress
     Question:
       properties:
         id:
@@ -936,32 +1415,20 @@ components:
       - sequence
       - answers
       title: Question
-    GetOrdersResponse:
+    ParsedLabReportData:
       properties:
-        orders:
+        metadata:
+          $ref: '#/components/schemas/ResultMetadata'
+        results:
           items:
-            $ref: '#/components/schemas/ClientFacingOrder'
+            $ref: '#/components/schemas/LabReportResult'
           type: array
-          title: Orders
-        total:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total
-        page:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Page
-        size:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Size
+          title: Results
       type: object
       required:
-      - orders
-      title: GetOrdersResponse
+      - metadata
+      - results
+      title: ParsedLabReportData
     LabTestSampleType:
       type: string
       enum:
@@ -1102,6 +1569,14 @@ components:
       - zip
       - country
       title: PatientAddressCompatible
+    ParsingJobFailureReason:
+      type: string
+      enum:
+      - invalid_input
+      - low_quality
+      - not_english
+      title: ParsingJobFailureReason
+      description: Machine-readable failure reasons for parsing jobs. ℹ️ This enum is non-exhaustive.
     ClientFacingLabTest:
       properties:
         id:
@@ -1221,13 +1696,6 @@ components:
           price: 10
           sample_type: dried blood spot
           status: active
-    OrderActivationType:
-      type: string
-      enum:
-      - current
-      - scheduled
-      title: OrderActivationType
-      description: ℹ️ This enum is non-exhaustive.
     OrderStatus:
       type: string
       enum:
@@ -1303,6 +1771,55 @@ components:
       required:
       - type
       title: ClientFacingWalkInOrderDetails
+    AppointmentStatus:
+      type: string
+      enum:
+      - confirmed
+      - pending
+      - reserved
+      - in_progress
+      - completed
+      - cancelled
+      title: AppointmentStatus
+      description: ℹ️ This enum is non-exhaustive.
+    LngLat:
+      properties:
+        lng:
+          type: number
+          maximum: 180
+          minimum: -180
+          title: Lng
+        lat:
+          type: number
+          maximum: 90
+          minimum: -90
+          title: Lat
+      type: object
+      required:
+      - lng
+      - lat
+      title: LngLat
+    AppointmentProvider:
+      type: string
+      enum:
+      - getlabs
+      - phlebfinders
+      - quest
+      - sonora_quest
+      title: AppointmentProvider
+      description: ℹ️ This enum is non-exhaustive.
+    LabReportResultType:
+      type: string
+      enum:
+      - numeric
+      - range
+      - comment
+      - boolean
+      - duration
+      - percentage
+      - ratio
+      title: LabReportResultType
+      description: ℹ️ This enum is non-exhaustive.
     HTTPValidationError:
       properties:
         detail:
@@ -1347,6 +1864,35 @@ components:
       - country
       - phone_number
       title: ShippingAddress
+    ClientFacingLabReportParsingJobCreatedEvent:
+      properties:
+        event_type:
+          type: string
+          const: lab_report.parsing_job.created
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          $ref: '#/components/schemas/ParsingJob'
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingLabReportParsingJobCreatedEvent
     ClientFacingShipment:
       properties:
         id:
@@ -1553,6 +2099,26 @@ components:
         type: biomarker
         unit: '%'
         worst_case_tat_days: 5
+    ClientFacingAppointmentEvent:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        status:
+          $ref: '#/components/schemas/AppointmentEventStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+      type: object
+      required:
+      - created_at
+      - status
+      title: ClientFacingAppointmentEvent
     ClientFacingOrderTransaction:
       properties:
         id:
@@ -1662,38 +2228,6 @@ components:
       - recreation
       title: OrderOrigin
       description: ℹ️ This enum is non-exhaustive.
-    OrderLowLevelStatus:
-      type: string
-      enum:
-      - ordered
-      - requisition_created
-      - requisition_bypassed
-      - transit_customer
-      - out_for_delivery
-      - with_customer
-      - transit_lab
-      - delivered_to_lab
-      - completed
-      - failure_to_deliver_to_lab
-      - failure_to_deliver_to_customer
-      - problem_in_transit_lab
-      - problem_in_transit_customer
-      - sample_error
-      - appointment_scheduled
-      - appointment_cancelled
-      - appointment_pending
-      - draw_completed
-      - cancelled
-      - lost
-      - do_not_process
-      - partial_results
-      - awaiting_registration
-      - registered
-      - redraw_available
-      - corrected
-      - lab_processing_blocked
-      title: OrderLowLevelStatus
-      description: ℹ️ This enum is non-exhaustive.
     ClientFacingWalkInTestOrder:
       properties:
         id:
@@ -1730,6 +2264,96 @@ components:
         created_at: '2020-01-01T00:00:00Z'
         id: 757df2fd-8ff1-4399-bc48-c37527d9d73a
         updated_at: '2020-01-01T00:00:00Z'
+    OrderLowLevelStatus:
+      type: string
+      enum:
+      - ordered
+      - requisition_created
+      - requisition_bypassed
+      - transit_customer
+      - out_for_delivery
+      - with_customer
+      - transit_lab
+      - delivered_to_lab
+      - completed
+      - failure_to_deliver_to_lab
+      - failure_to_deliver_to_customer
+      - problem_in_transit_lab
+      - problem_in_transit_customer
+      - sample_error
+      - appointment_scheduled
+      - appointment_cancelled
+      - appointment_pending
+      - draw_completed
+      - cancelled
+      - lost
+      - do_not_process
+      - partial_results
+      - awaiting_registration
+      - registered
+      - redraw_available
+      - corrected
+      - lab_processing_blocked
+      title: OrderLowLevelStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingCriticalResult:
+      properties:
+        order_id:
+          type: string
+          format: uuid
+          title: Order Id
+          description: The Vital Order ID
+        sample_id:
+          type: string
+          title: Sample Id
+          description: Sample ID
+        status:
+          type: string
+          title: Status
+          description: The current results status, can be either (final, partial).
+        interpretation:
+          type: string
+          title: Interpretation
+          description: The results interpretation, can be one of (normal, abnormal, critical).
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Your team id.
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: When the result was first fetched from a laboratory.
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+          description: When the result was last fetched from a laboratory.
+      type: object
+      required:
+      - order_id
+      - sample_id
+      - status
+      - interpretation
+      - team_id
+      - user_id
+      - created_at
+      - updated_at
+      title: ClientFacingCriticalResult
+      example:
+        created_at: '2020-01-01T00:00:00Z'
+        interpretation: normal
+        order_id: 20e2a5ba-0ea2-4c31-bef7-7a839cc6af5a
+        sample_id: '123456789'
+        status: final
+        team_id: 45d73ffc-ce71-48f3-bf01-54ec2b346e93
+        updated_at: '2020-01-01T00:00:00Z'
+        user_id: 0b8a38fa-bb73-4801-a401-ab0d1bb728b8
   securitySchemes:
     apiKeyAuth:
       type: apiKey
@@ -1737,6 +2361,12 @@ components:
       name: x-vital-api-key
       description: Vital Team API Key
 x-refined-from:
+- vital-lab-report-parser-api-openapi.yml
 - vital-lab-testing-api-openapi.yml
+- vital-link-api-openapi.yml
 - vital-openapi-original.json
 - vital-openapi-original.yml
+- vital-sense-api-openapi.yml
+- vital-team-api-openapi.yml
+- vital-users-api-openapi.yml
+- vital-wearables-api-openapi.yml

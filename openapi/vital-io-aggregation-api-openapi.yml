@@ -1,0 +1,144 @@
+openapi: 3.2.0
+info:
+  title: Vital Io Aggregation API
+  version: 0.4.497
+  description: 'Operations tagged aggregation across 9 of this provider''s published API definitions: vital-lab-report-parser-api-openapi.yml, vital-lab-testing-api-openapi.yml, vital-link-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml, vital-sense-api-openapi.yml, vital-team-api-openapi.yml, vital-users-api-openapi.yml, vital-wearables-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.us.junction.com
+  x-fern-server-name: Production
+- url: https://api.eu.junction.com
+  x-fern-server-name: ProductionEU
+- url: https://api.sandbox.us.junction.com
+  x-fern-server-name: Sandbox
+- url: https://api.sandbox.eu.junction.com
+  x-fern-server-name: SandboxEU
+security:
+- apiKeyAuth: []
+tags:
+- name: aggregation
+paths: {}
+webhooks:
+  continuous_query.result_table.changed:
+    post:
+      tags:
+      - aggregation
+      summary: Result Table Changed
+      operationId: result_table_changedcontinuous_query_result_table_changed_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientFacingContinuousQueryResultTableChanged'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
+components:
+  schemas:
+    ClientFacingContinuousQueryResultTableChanged:
+      properties:
+        event_type:
+          type: string
+          const: continuous_query.result_table.changed
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          items:
+            $ref: '#/components/schemas/ContinuousQueryResultTableChanges'
+          type: array
+          title: Data
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingContinuousQueryResultTableChanged
+    ContinuousQueryResultTableChanges:
+      properties:
+        query_id:
+          type: string
+          format: uuid
+          title: Query Id
+        query_slug:
+          type: string
+          title: Query Slug
+        data:
+          additionalProperties:
+            items: {}
+            type: array
+          type: object
+          title: Data
+      type: object
+      required:
+      - query_id
+      - query_slug
+      - data
+      title: ContinuousQueryResultTableChanges
+      example:
+        data:
+          group_key.0:
+          - '2025-02-17T00:00:00'
+          mean.efficiency:
+          - 98.22
+          mean.sleep_score:
+          - 76.75
+          min.sleep_score:
+          - 61
+          newest.chronotype:
+          - third
+        query_id: 3d459f48-a736-476a-8714-95aa3b2b3708
+        query_slug: sleep-analysis-v1
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-vital-api-key
+      description: Vital Team API Key
+x-refined-from:
+- vital-lab-report-parser-api-openapi.yml
+- vital-lab-testing-api-openapi.yml
+- vital-link-api-openapi.yml
+- vital-openapi-original.json
+- vital-openapi-original.yml
+- vital-sense-api-openapi.yml
+- vital-team-api-openapi.yml
+- vital-users-api-openapi.yml
+- vital-wearables-api-openapi.yml

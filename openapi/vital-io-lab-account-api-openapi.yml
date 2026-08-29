@@ -1,11 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vital Lab Report Parser Aggregate lab_account API
-  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  title: Vital Io Lab Account API
   version: 0.4.497
-  contact:
-    name: Junction (Vital) Support
-    url: https://docs.junction.com
+  description: 'Operations tagged lab_account across 3 of this provider''s published API definitions: vital-lab-testing-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -59,59 +56,17 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: lab_account
       x-fern-sdk-method-name: get_team_lab_accounts
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
 components:
   schemas:
-    GetTeamLabAccountsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ClientFacingLabAccount'
-          type: array
-          title: Data
-      type: object
-      title: GetTeamLabAccountsResponse
-    LabAccountStatus:
-      type: string
-      enum:
-      - active
-      - pending
-      - suspended
-      - ready_to_launch
-      title: LabAccountStatus
-      description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Billing:
-      type: string
-      enum:
-      - client_bill
-      - commercial_insurance
-      - patient_bill_passthrough
-      - patient_bill
-      title: Billing
-      description: ℹ️ This enum is non-exhaustive.
-    LabAccountDelegatedFlow:
-      type: string
-      enum:
-      - order_delegated
-      - result_delegated
-      - fully_delegated
-      - not_delegated
-      title: LabAccountDelegatedFlow
-      description: 'Describes which parts of the lab testing flow are delegated to the customer.
-
-
-        - ORDER_DELEGATED: Ordering using client''s physicians, critical result follow up via Junction
-
-        - RESULT_DELEGATED: Ordering using Junction''s Physician Network, critical results handled by client
-
-        - FULLY_DELEGATED: Order and critical results handled by client
-
-        - NOT_DELEGATED: Junction handles both ordering and results ℹ️ This enum is non-exhaustive.'
     Labs:
       type: string
       enum:
@@ -130,61 +85,6 @@ components:
       - my_uti
       - crl
       title: Labs
-      description: ℹ️ This enum is non-exhaustive.
-    USState:
-      type: string
-      enum:
-      - AL
-      - AK
-      - AZ
-      - AR
-      - CA
-      - CO
-      - CT
-      - DE
-      - FL
-      - GA
-      - HI
-      - ID
-      - IL
-      - IN
-      - IA
-      - KS
-      - KY
-      - LA
-      - ME
-      - MD
-      - MA
-      - MI
-      - MN
-      - MS
-      - MO
-      - MT
-      - NE
-      - NV
-      - NH
-      - NJ
-      - NM
-      - NY
-      - NC
-      - ND
-      - OH
-      - OK
-      - OR
-      - PA
-      - RI
-      - SC
-      - SD
-      - TN
-      - TX
-      - UT
-      - VT
-      - VA
-      - WA
-      - WV
-      - WI
-      - WY
-      title: USState
       description: ℹ️ This enum is non-exhaustive.
     ClientFacingLabAccount:
       properties:
@@ -252,9 +152,119 @@ components:
       - allowed_billing
       - team_id_allowlist
       title: ClientFacingLabAccount
+    USState:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: USState
+      description: ℹ️ This enum is non-exhaustive.
+    LabAccountStatus:
+      type: string
+      enum:
+      - active
+      - pending
+      - suspended
+      - ready_to_launch
+      title: LabAccountStatus
+      description: ℹ️ This enum is non-exhaustive.
+    GetTeamLabAccountsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ClientFacingLabAccount'
+          type: array
+          title: Data
+      type: object
+      title: GetTeamLabAccountsResponse
+    LabAccountDelegatedFlow:
+      type: string
+      enum:
+      - order_delegated
+      - result_delegated
+      - fully_delegated
+      - not_delegated
+      title: LabAccountDelegatedFlow
+      description: 'Describes which parts of the lab testing flow are delegated to the customer.
+
+
+        - ORDER_DELEGATED: Ordering using client''s physicians, critical result follow up via Junction
+
+        - RESULT_DELEGATED: Ordering using Junction''s Physician Network, critical results handled by client
+
+        - FULLY_DELEGATED: Order and critical results handled by client
+
+        - NOT_DELEGATED: Junction handles both ordering and results ℹ️ This enum is non-exhaustive.'
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Billing:
+      type: string
+      enum:
+      - client_bill
+      - commercial_insurance
+      - patient_bill_passthrough
+      - patient_bill
+      title: Billing
+      description: ℹ️ This enum is non-exhaustive.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
+x-refined-from:
+- vital-lab-testing-api-openapi.yml
+- vital-openapi-original.json
+- vital-openapi-original.yml

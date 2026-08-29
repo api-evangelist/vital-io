@@ -1,11 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vital Lab Report Parser Aggregate introspect API
-  description: Submit existing lab-result PDFs to be parsed and normalized into structured biomarker results. Create lab-report parser jobs and poll for job status and parsed results.
+  title: Vital Io Introspect API
   version: 0.4.497
-  contact:
-    name: Junction (Vital) Support
-    url: https://docs.junction.com
+  description: 'Operations tagged introspect across 3 of this provider''s published API definitions: vital-openapi-original.json, vital-openapi-original.yml, vital-team-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -88,6 +85,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: introspect
       x-fern-sdk-method-name: get_user_resources
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
   /v2/introspect/historical_pull:
     get:
       tags:
@@ -157,123 +163,42 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: introspect
       x-fern-sdk-method-name: get_user_historical_pulls
+    servers:
+    - url: https://api.us.junction.com
+      x-fern-server-name: Production
+    - url: https://api.eu.junction.com
+      x-fern-server-name: ProductionEU
+    - url: https://api.sandbox.us.junction.com
+      x-fern-server-name: Sandbox
+    - url: https://api.sandbox.eu.junction.com
+      x-fern-server-name: SandboxEU
 components:
   schemas:
-    HTTPValidationError:
+    SingleResourceStatistics:
       properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    SingleProviderHistoricalPullResponse:
-      properties:
-        pulled:
-          additionalProperties:
-            $ref: '#/components/schemas/SingleHistoricalPullStatistics'
-          propertyNames:
-            $ref: '#/components/schemas/Resource'
-          type: object
-          title: Pulled
-        not_pulled:
-          items:
-            $ref: '#/components/schemas/Resource'
-          type: array
-          title: Not Pulled
-      type: object
-      required:
-      - pulled
-      - not_pulled
-      title: SingleProviderHistoricalPullResponse
-    Providers:
-      type: string
-      enum:
-      - oura
-      - fitbit
-      - garmin
-      - whoop
-      - strava
-      - renpho
-      - peloton
-      - wahoo
-      - zwift
-      - freestyle_libre
-      - abbott_libreview
-      - tandem_source
-      - freestyle_libre_ble
-      - eight_sleep
-      - withings
-      - apple_health_kit
-      - manual
-      - ihealth
-      - google_fit
-      - beurer_api
-      - beurer_ble
-      - omron
-      - omron_ble
-      - onetouch_ble
-      - accuchek_ble
-      - contour_ble
-      - dexcom
-      - dexcom_v3
-      - hammerhead
-      - my_fitness_pal
-      - health_connect
-      - samsung_health
-      - polar
-      - cronometer
-      - kardia
-      - whoop_v2
-      - ultrahuman
-      - my_fitness_pal_v2
-      - map_my_fitness
-      - runkeeper
-      title: Providers
-      description: ℹ️ This enum is non-exhaustive.
-    LastAttempt:
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-          title: Timestamp
-        status:
-          $ref: '#/components/schemas/AttemptStatus'
-          description: ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - timestamp
-      - status
-      title: LastAttempt
-    HistoricalPullTimeline:
-      properties:
-        scheduled_at:
-          type: string
-          format: date-time
-          title: Scheduled At
-        started_at:
+        last_attempt:
+          anyOf:
+          - $ref: '#/components/schemas/LastAttempt'
+          - type: 'null'
+        oldest_data:
           anyOf:
           - type: string
             format: date-time
           - type: 'null'
-          title: Started At
-        ended_at:
+          title: Oldest Data
+        newest_data:
           anyOf:
           - type: string
             format: date-time
           - type: 'null'
-          title: Ended At
+          title: Newest Data
+        sent_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sent Count
       type: object
-      required:
-      - scheduled_at
-      title: HistoricalPullTimeline
-    HistoricalPullRetriableErrorDetails:
-      type: string
-      enum:
-      - provider_rate_limit_exceeded
-      - provider_unavailable
-      - transport_failure
-      - resource_contention
-      title: HistoricalPullRetriableErrorDetails
-      description: ℹ️ This enum is non-exhaustive.
+      title: SingleResourceStatistics
     UserResourcesResponse:
       properties:
         data:
@@ -311,72 +236,67 @@ components:
                 oldest_data: '2023-06-21T00:00:00+00:00'
                 sent_count: 231
           user_id: ''
-    SingleHistoricalPullStatistics:
+    LastAttempt:
       properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
         status:
-          $ref: '#/components/schemas/HistoricalPullStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        range_start:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Range Start
-        range_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Range End
-        timeline:
-          $ref: '#/components/schemas/HistoricalPullTimeline'
-        days_with_data:
-          type: integer
-          title: Days With Data
-          default: 0
-        release:
-          type: string
-          title: Release
-        trace_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Trace Id
-        error_details:
-          anyOf:
-          - $ref: '#/components/schemas/HistoricalPullRetriableErrorDetails'
-          - $ref: '#/components/schemas/HistoricalPullNonRetriableErrorDetails'
-          - type: 'null'
-          title: Error Details
+          $ref: '#/components/schemas/AttemptStatus'
           description: ℹ️ This enum is non-exhaustive.
       type: object
       required:
+      - timestamp
       - status
-      - timeline
-      - release
-      title: SingleHistoricalPullStatistics
-    SingleUserResourceResponse:
+      title: LastAttempt
+    SingleProviderHistoricalPullResponse:
       properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        provider:
+        pulled:
           additionalProperties:
-            additionalProperties:
-              $ref: '#/components/schemas/SingleResourceStatistics'
-            propertyNames:
-              $ref: '#/components/schemas/Resource'
-            type: object
+            $ref: '#/components/schemas/SingleHistoricalPullStatistics'
           propertyNames:
-            $ref: '#/components/schemas/Providers'
+            $ref: '#/components/schemas/Resource'
           type: object
-          title: Provider
+          title: Pulled
+        not_pulled:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+          title: Not Pulled
       type: object
       required:
-      - user_id
-      - provider
-      title: SingleUserResourceResponse
+      - pulled
+      - not_pulled
+      title: SingleProviderHistoricalPullResponse
+    HistoricalPullRetriableErrorDetails:
+      type: string
+      enum:
+      - provider_rate_limit_exceeded
+      - provider_unavailable
+      - transport_failure
+      - resource_contention
+      title: HistoricalPullRetriableErrorDetails
+      description: ℹ️ This enum is non-exhaustive.
+    Labs:
+      type: string
+      enum:
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
+      description: ℹ️ This enum is non-exhaustive.
     UserHistoricalPullsResponse:
       properties:
         data:
@@ -452,25 +372,170 @@ components:
       - user_id
       - provider
       title: SingleUserHistoricalPullResponse
-    Labs:
+    HistoricalPullStatus:
       type: string
       enum:
-      - ayumetrix
-      - spiriplex
-      - ussl
-      - quest
-      - sonora_quest
-      - labcorp
-      - bioreference
-      - us_biotek
-      - manual
-      - sanocardio
-      - ihd
-      - nexus
-      - my_uti
-      - crl
-      title: Labs
+      - success
+      - failure
+      - in_progress
+      - scheduled
+      - retrying
+      title: HistoricalPullStatus
       description: ℹ️ This enum is non-exhaustive.
+    HistoricalPullTimeline:
+      properties:
+        scheduled_at:
+          type: string
+          format: date-time
+          title: Scheduled At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+      type: object
+      required:
+      - scheduled_at
+      title: HistoricalPullTimeline
+    SingleHistoricalPullStatistics:
+      properties:
+        status:
+          $ref: '#/components/schemas/HistoricalPullStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        range_start:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Range Start
+        range_end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Range End
+        timeline:
+          $ref: '#/components/schemas/HistoricalPullTimeline'
+        days_with_data:
+          type: integer
+          title: Days With Data
+          default: 0
+        release:
+          type: string
+          title: Release
+        trace_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Trace Id
+        error_details:
+          anyOf:
+          - $ref: '#/components/schemas/HistoricalPullRetriableErrorDetails'
+          - $ref: '#/components/schemas/HistoricalPullNonRetriableErrorDetails'
+          - type: 'null'
+          title: Error Details
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - status
+      - timeline
+      - release
+      title: SingleHistoricalPullStatistics
+    AttemptStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      title: AttemptStatus
+      description: ℹ️ This enum is non-exhaustive.
+    HistoricalPullNonRetriableErrorDetails:
+      type: string
+      enum:
+      - non_retriable_error
+      - unexpected_error
+      - retry_quota_exhausted
+      title: HistoricalPullNonRetriableErrorDetails
+      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    SingleUserResourceResponse:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider:
+          additionalProperties:
+            additionalProperties:
+              $ref: '#/components/schemas/SingleResourceStatistics'
+            propertyNames:
+              $ref: '#/components/schemas/Resource'
+            type: object
+          propertyNames:
+            $ref: '#/components/schemas/Providers'
+          type: object
+          title: Provider
+      type: object
+      required:
+      - user_id
+      - provider
+      title: SingleUserResourceResponse
     Resource:
       type: string
       enum:
@@ -547,59 +612,13 @@ components:
       title: ClientFacingResource
       x-fern-type-name: ClientFacingResource
       description: ℹ️ This enum is non-exhaustive.
-    HistoricalPullNonRetriableErrorDetails:
-      type: string
-      enum:
-      - non_retriable_error
-      - unexpected_error
-      - retry_quota_exhausted
-      title: HistoricalPullNonRetriableErrorDetails
-      description: ℹ️ This enum is non-exhaustive.
-    HistoricalPullStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      - in_progress
-      - scheduled
-      - retrying
-      title: HistoricalPullStatus
-      description: ℹ️ This enum is non-exhaustive.
-    AttemptStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      title: AttemptStatus
-      description: ℹ️ This enum is non-exhaustive.
-    SingleResourceStatistics:
-      properties:
-        last_attempt:
-          anyOf:
-          - $ref: '#/components/schemas/LastAttempt'
-          - type: 'null'
-        oldest_data:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Oldest Data
-        newest_data:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Newest Data
-        sent_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Sent Count
-      type: object
-      title: SingleResourceStatistics
   securitySchemes:
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
+x-refined-from:
+- vital-openapi-original.json
+- vital-openapi-original.yml
+- vital-team-api-openapi.yml

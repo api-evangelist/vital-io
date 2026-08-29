@@ -109,9 +109,10 @@ apis:
   properties:
   - url: https://docs.junction.com/api-details/junction-management-api
     type: Documentation
-  description: Programmatically manage all Junction regional and global resources for your organization.
-    Authenticated with a separate x-vital-management-api-key, this API governs organizations, teams (create,
-    update, delete, list), team and management API keys, team members and invitations, custom OAuth credentials,
+  description: >-
+    Programmatically manage all Junction regional and global resources for your organization. Authenticated
+    with a separate x-vital-management-api-key, this API governs organizations, teams (create, update,
+    delete, list), team and management API keys, team members and invitations, custom OAuth credentials,
     data-pull preferences, ETL pipeline configuration (Azure Event Hubs, Google Cloud Pub/Sub, RabbitMQ),
     webhook subscriptions (create, list, rotate secret, update headers, patch, delete), scope requirements,
     physician assignments, and lab-account team assignments.
@@ -854,6 +855,26 @@ apis:
     url: examples/vital-lab-result-example.json
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
+- aid: vital-io:vital-io-aggregation-api
+  name: Vital Aggregation API
+  description: The aggregation API from Vital — 0 operation(s) for aggregation.
+  humanURL: https://docs.junction.com/api-details/junction-management-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - aggregation
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-aggregation-api-openapi.yml
+- aid: vital-io:vital-io-lab-testing-api
+  name: Vital Lab Testing API
+  description: The lab-testing API from Vital — 0 operation(s) for lab-testing.
+  humanURL: https://docs.junction.com/api-details/junction-management-api
+  baseURL: https://api.us.junction.com
+  tags:
+  - lab-testing
+  properties:
+  - type: OpenAPI
+    url: openapi/vital-io-lab-testing-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/vital-io-agentic-access.yml
