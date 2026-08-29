@@ -11,17 +11,48 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 4
 edges:
+- tag: order_transaction
+  spec_file: vital-io-order-transaction-api-openapi.yml
+  capability_id: BC-2860.60
+  capability_id_l1: BC-2860
+  capability_name: Diagnostic Results Management
+  confidence: 0.78
+  evidence: GET /v3/order_transaction/{transaction_id}/result  Get Order Transaction Result; GET .../result/pdf;
+    schemas LabResultsRaw, BiomarkerResult, MissingBiomarkerResult, LabResultsMetadata
+  reason: The surface retrieves lab order status and validated diagnostic results (including PDF report),
+    i.e. distribution and management of diagnostic results. 'Transaction' here is a lab order transaction,
+    not a payment.
+- tag: lab_report
+  spec_file: vital-io-lab-report-api-openapi.yml
+  capability_id: BC-2860.60
+  capability_id_l1: BC-2860
+  capability_name: Diagnostic Results Management
+  confidence: 0.7
+  evidence: POST /lab_report/v1/parser/job  Create Lab Report Parser Job; schemas ParsedLabReportData,
+    LabReportResult, LoincMatch, Interpretation
+  reason: Parses lab reports into structured, LOINC-coded results with interpretation — validation and
+    structuring/distribution of diagnostic results.
 - tag: lab_tests
   spec_file: vital-io-lab-tests-api-openapi.yml
   capability_id: BC-2860.10
   capability_id_l1: BC-2860
   capability_name: Laboratory Services Management
   confidence: 0.7
-  evidence: POST /v3/lab_tests 'Create Lab Test For Team'; GET /v3/lab_tests/markers 'Get Markers'; GET
-    /v3/lab_tests/labs 'Get Labs'; GET /v3/lab_test/{lab_test_id}/collection_instruction_pdf 'Get Lab
-    Test Collection Instructions Url'; schemas ClientFacingLabTest, LabTestSampleType, LabTestCollectionMethod
-  reason: CRUD over lab test definitions, their biomarkers/markers, performing labs, sample types and
-    specimen collection instructions. This is laboratory services / lab test catalogue and collection
-    configuration, squarely Diagnostic Services Management.
+  evidence: POST /v3/lab_tests  Create Lab Test For Team; GET /v3/lab_tests/{lab_test_id}/markers  Get
+    Markers For Test; GET /v3/lab_test/{lab_test_id}/collection_instruction_pdf
+  reason: Defines lab tests, their markers, labs and specimen collection instructions (LabTestSampleType,
+    LabTestCollectionMethod) — laboratory testing service definition and specimen collection.
+- tag: order
+  spec_file: vital-io-order-api-openapi.yml
+  capability_id: BC-2860.10
+  capability_id_l1: BC-2860
+  capability_name: Laboratory Services Management
+  confidence: 0.7
+  evidence: POST /v3/order/testkit  Create Testkit Order; POST /v3/order/{order_id}/phlebotomy/appointment/book  Book
+    Phlebotomy Appointment; schemas PerformingLaboratory, BiomarkerResult, PSCInfo
+  reason: Operations create and manage lab test orders and phlebotomy (specimen-collection) appointments
+    at patient service centres, with performing-laboratory and biomarker schemas. That is laboratory diagnostic
+    service ordering and specimen collection, not generic commercial order management. Sub-capability
+    choice between laboratory services and results management is somewhat ambiguous, hence 0.7.
