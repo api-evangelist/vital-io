@@ -876,6 +876,9 @@ apis:
   - type: OpenAPI
     url: openapi/vital-io-lab-testing-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/vital-io-capability-edges.yml
+  name: Vital Business Capability Map
 - type: AgenticAccess
   url: agentic-access/vital-io-agentic-access.yml
 - type: DomainSecurity

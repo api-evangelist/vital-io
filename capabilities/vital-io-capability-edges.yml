@@ -1,0 +1,27 @@
+slug: vital-io
+provider: Vital
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Healthcare Providers
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: lab_tests
+  spec_file: vital-io-lab-tests-api-openapi.yml
+  capability_id: BC-2860.10
+  capability_id_l1: BC-2860
+  capability_name: Laboratory Services Management
+  confidence: 0.7
+  evidence: POST /v3/lab_tests 'Create Lab Test For Team'; GET /v3/lab_tests/markers 'Get Markers'; GET
+    /v3/lab_tests/labs 'Get Labs'; GET /v3/lab_test/{lab_test_id}/collection_instruction_pdf 'Get Lab
+    Test Collection Instructions Url'; schemas ClientFacingLabTest, LabTestSampleType, LabTestCollectionMethod
+  reason: CRUD over lab test definitions, their biomarkers/markers, performing labs, sample types and
+    specimen collection instructions. This is laboratory services / lab test catalogue and collection
+    configuration, squarely Diagnostic Services Management.
