@@ -11,6 +11,19 @@ description: Vital (now operating as Junction, formerly tryVital) is a health-da
   Sense continuous queries to turn raw data into clinically actionable insights. Backed by SOC 2 Type
   2, ISO 27001, GDPR-ready, and HIPAA-compliant infrastructure with both US and EU regional deployments.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
