@@ -45,7 +45,7 @@ tags:
 - Wearables
 - Lab Testing
 - Digital Health
-- Healthtech
+- Health Tech
 - Healthcare
 - HIPAA
 - HealthKit
@@ -250,7 +250,7 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
-  - introspect
+  - Introspect
   tags_raw:
   - introspect
   properties:
@@ -379,7 +379,8 @@ apis:
   description: The lab_tests API from Vital — 9 operation(s) for lab_tests.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
-  tags: []
+  tags:
+  - Lab Tests
   tags_raw:
   - lab_tests
   properties:
@@ -423,7 +424,7 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
-  - link
+  - Link
   tags_raw:
   - link
   properties:
@@ -467,7 +468,7 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
-  - order
+  - Order
   tags_raw:
   - order
   properties:
@@ -684,7 +685,7 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
-  - summary
+  - Summary
   tags_raw:
   - summary
   properties:
@@ -772,7 +773,7 @@ apis:
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
   tags:
-  - timeseries
+  - Time Series
   tags_raw:
   - timeseries
   properties:
