@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Vital Io Payor API
+  title: Junction Payor API
+  description: https://docs.junction.com/
   version: 0.4.497
-  description: 'Operations tagged payor across 3 of this provider''s published API definitions: vital-lab-testing-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -44,39 +44,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: payor
       x-fern-sdk-method-name: create_payor
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
 components:
   schemas:
-    CreatePayorBody:
-      properties:
-        name:
-          type: string
-          title: Name
-        address:
-          $ref: '#/components/schemas/Address'
-        provider:
-          anyOf:
-          - $ref: '#/components/schemas/PayorCodeExternalProvider'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        provider_payor_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Payor Id
-      type: object
-      required:
-      - name
-      - address
-      title: CreatePayorBody
     Address:
       properties:
         first_line:
@@ -139,6 +108,28 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    CreatePayorBody:
+      properties:
+        name:
+          type: string
+          title: Name
+        address:
+          $ref: '#/components/schemas/Address'
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/PayorCodeExternalProvider'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_payor_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Payor Id
+      type: object
+      required:
+      - name
+      - address
+      title: CreatePayorBody
     ClientFacingPayor:
       properties:
         payor_code:
@@ -175,7 +166,3 @@ components:
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
-x-refined-from:
-- vital-lab-testing-api-openapi.yml
-- vital-openapi-original.json
-- vital-openapi-original.yml

@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Vital Io Lab Report API
+  title: Junction Lab Report API
+  description: https://docs.junction.com/
   version: 0.4.497
-  description: 'Operations tagged lab_report across 3 of this provider''s published API definitions: vital-lab-report-parser-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -48,21 +48,17 @@ paths:
       x-fern-sdk-group-name: lab_report
       x-fern-sdk-method-name: parser_create_job
       x-fern-availability: beta
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /lab_report/v1/parser/job/{job_id}:
     get:
       tags:
       - lab_report
       summary: Get Lab Report Parser Job
-      description: "Retrieves the parse job status and stored result if completed.\n\nReturns:\n    ParseLabResultJobResponse with job status and parsed data (if complete)"
+      description: 'Retrieves the parse job status and stored result if completed.
+
+
+        Returns:
+
+        ParseLabResultJobResponse with job status and parsed data (if complete)'
       operationId: get_lab_report_parser_job_lab_report_v1_parser_job__job_id__get
       parameters:
       - name: job_id
@@ -88,17 +84,20 @@ paths:
       x-fern-sdk-group-name: lab_report
       x-fern-sdk-method-name: parser_get_job
       x-fern-availability: beta
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
 components:
   schemas:
+    LabReportResultType:
+      type: string
+      enum:
+      - numeric
+      - range
+      - comment
+      - boolean
+      - duration
+      - percentage
+      - ratio
+      title: LabReportResultType
+      description: ℹ️ This enum is non-exhaustive.
     Interpretation:
       type: string
       enum:
@@ -108,84 +107,6 @@ components:
       - unknown
       title: Interpretation
       description: ℹ️ This enum is non-exhaustive.
-    ParsingJob:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        status:
-          $ref: '#/components/schemas/ParsingJobStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        failure_reason:
-          anyOf:
-          - $ref: '#/components/schemas/ParsingJobFailureReason'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ParsedLabReportData'
-          - type: 'null'
-        needs_human_review:
-          type: boolean
-          title: Needs Human Review
-        is_reviewed:
-          type: boolean
-          title: Is Reviewed
-      type: object
-      required:
-      - id
-      - status
-      - needs_human_review
-      - is_reviewed
-      title: ParsingJob
-      example:
-        data:
-          metadata:
-            date_collected: '2024-12-30'
-            date_reported: '2025-01-01'
-            dob: '1990-01-01'
-            lab_name: Acme Labs
-            patient_first_name: Jane
-            patient_last_name: Doe
-            specimen_number: ABC123
-          results:
-          - interpretation: normal
-            is_above_max_range: false
-            is_below_min_range: false
-            loinc_matches:
-            - aliases: []
-              confidence_score: 0.99
-              display_name: Glucose
-              loinc_code: 2345-7
-              loinc_name: Glucose [Mass/volume] in Serum or Plasma
-            max_reference_range: 99
-            measurement_kind: direct
-            min_reference_range: 70
-            sample_type: serum_plasma_blood
-            source_panel_name: CMP
-            test_name: Glucose
-            type: numeric
-            units: mg/dL
-            value: '90'
-        id: 8eb0217f-4683-4a3c-adca-faf95ac65739
-        is_reviewed: false
-        needs_human_review: false
-        status: completed
-    ParsedLabReportData:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ResultMetadata'
-        results:
-          items:
-            $ref: '#/components/schemas/LabReportResult'
-          type: array
-          title: Results
-      type: object
-      required:
-      - metadata
-      - results
-      title: ParsedLabReportData
     LabReportResult:
       properties:
         test_name:
@@ -279,50 +200,20 @@ components:
       - test_name
       - value
       title: LabReportResult
-    ParsingJobStatus:
-      type: string
-      enum:
-      - upload_pending
-      - started
-      - completed
-      - failed
-      title: ParsingJobStatus
-      description: ℹ️ This enum is non-exhaustive.
-    ParsingJobFailureReason:
-      type: string
-      enum:
-      - invalid_input
-      - low_quality
-      - not_english
-      title: ParsingJobFailureReason
-      description: Machine-readable failure reasons for parsing jobs. ℹ️ This enum is non-exhaustive.
-    LoincMatch:
+    ParsedLabReportData:
       properties:
-        loinc_code:
-          type: string
-          title: Loinc Code
-        loinc_name:
-          type: string
-          title: Loinc Name
-        display_name:
-          type: string
-          title: Display Name
-          default: ''
-        aliases:
+        metadata:
+          $ref: '#/components/schemas/ResultMetadata'
+        results:
           items:
-            type: string
+            $ref: '#/components/schemas/LabReportResult'
           type: array
-          title: Aliases
-          default: []
-        confidence_score:
-          type: number
-          title: Confidence Score
+          title: Results
       type: object
       required:
-      - loinc_code
-      - loinc_name
-      - confidence_score
-      title: LoincMatch
+      - metadata
+      - results
+      title: ParsedLabReportData
     CreateLabReportParserJobBody:
       properties:
         file:
@@ -344,24 +235,6 @@ components:
       - file
       - user_id
       title: CreateLabReportParserJobBody
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    LabReportResultType:
-      type: string
-      enum:
-      - numeric
-      - range
-      - comment
-      - boolean
-      - duration
-      - percentage
-      - ratio
-      title: LabReportResultType
-      description: ℹ️ This enum is non-exhaustive.
     ResultMetadata:
       properties:
         patient_first_name:
@@ -410,13 +283,123 @@ components:
           title: Specimen Number
       type: object
       title: ResultMetadata
+    ParsingJobFailureReason:
+      type: string
+      enum:
+      - invalid_input
+      - low_quality
+      - not_english
+      title: ParsingJobFailureReason
+      description: Machine-readable failure reasons for parsing jobs. ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ParsingJob:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        status:
+          $ref: '#/components/schemas/ParsingJobStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        failure_reason:
+          anyOf:
+          - $ref: '#/components/schemas/ParsingJobFailureReason'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ParsedLabReportData'
+          - type: 'null'
+        needs_human_review:
+          type: boolean
+          title: Needs Human Review
+        is_reviewed:
+          type: boolean
+          title: Is Reviewed
+      type: object
+      required:
+      - id
+      - status
+      - needs_human_review
+      - is_reviewed
+      title: ParsingJob
+      example:
+        data:
+          metadata:
+            date_collected: '2024-12-30'
+            date_reported: '2025-01-01'
+            dob: '1990-01-01'
+            lab_name: Acme Labs
+            patient_first_name: Jane
+            patient_last_name: Doe
+            specimen_number: ABC123
+          results:
+          - interpretation: normal
+            is_above_max_range: false
+            is_below_min_range: false
+            loinc_matches:
+            - aliases: []
+              confidence_score: 0.99
+              display_name: Glucose
+              loinc_code: 2345-7
+              loinc_name: Glucose [Mass/volume] in Serum or Plasma
+            max_reference_range: 99
+            measurement_kind: direct
+            min_reference_range: 70
+            sample_type: serum_plasma_blood
+            source_panel_name: CMP
+            test_name: Glucose
+            type: numeric
+            units: mg/dL
+            value: '90'
+        id: 8eb0217f-4683-4a3c-adca-faf95ac65739
+        is_reviewed: false
+        needs_human_review: false
+        status: completed
+    ParsingJobStatus:
+      type: string
+      enum:
+      - upload_pending
+      - started
+      - completed
+      - failed
+      title: ParsingJobStatus
+      description: ℹ️ This enum is non-exhaustive.
+    LoincMatch:
+      properties:
+        loinc_code:
+          type: string
+          title: Loinc Code
+        loinc_name:
+          type: string
+          title: Loinc Name
+        display_name:
+          type: string
+          title: Display Name
+          default: ''
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          default: []
+        confidence_score:
+          type: number
+          title: Confidence Score
+      type: object
+      required:
+      - loinc_code
+      - loinc_name
+      - confidence_score
+      title: LoincMatch
   securitySchemes:
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
-x-refined-from:
-- vital-lab-report-parser-api-openapi.yml
-- vital-openapi-original.json
-- vital-openapi-original.yml

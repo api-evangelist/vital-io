@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Vital Io Providers API
+  title: Junction Providers API
+  description: https://docs.junction.com/
   version: 0.4.497
-  description: 'Operations tagged providers across 3 of this provider''s published API definitions: vital-link-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -15,12 +15,12 @@ servers:
 security:
 - apiKeyAuth: []
 tags:
-- name: providers
+- name: Providers
 paths:
   /v2/providers:
     get:
       tags:
-      - providers
+      - Providers
       summary: Get List Of Providers
       description: Get Provider list
       operationId: get_list_of_providers_v2_providers_get
@@ -51,84 +51,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: providers
       x-fern-sdk-method-name: get_all
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
 components:
   schemas:
-    ClientFacingProviderDetailed:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of source of information
-        slug:
-          type: string
-          title: Slug
-          description: Slug for designated source
-        description:
-          type: string
-          title: Description
-          description: Description of source of information
-        logo:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Logo
-          description: URL for source logo
-        auth_type:
-          anyOf:
-          - $ref: '#/components/schemas/SourceAuthType'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        supported_resources:
-          items:
-            $ref: '#/components/schemas/Resource'
-          type: array
-          title: Supported Resources
-          default: []
-      type: object
-      required:
-      - name
-      - slug
-      - description
-      - logo
-      title: Provider
-      example:
-        auth_type: oauth
-        logo: https://logo_url.com
-        name: Oura
-        slug: oura
-        supported_resources:
-        - workouts
-        - sleep
-    SourceAuthType:
-      type: string
-      enum:
-      - oauth
-      - team_oauth
-      - sdk
-      - password
-      - email
-      - app
-      - ''
-      title: SourceAuthType
-      x-fern-enum:
-        ? ''
-        : name: Empty
-      description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Resource:
       type: string
       enum:
@@ -205,13 +129,76 @@ components:
       title: ClientFacingResource
       x-fern-type-name: ClientFacingResource
       description: ℹ️ This enum is non-exhaustive.
+    SourceAuthType:
+      type: string
+      enum:
+      - oauth
+      - team_oauth
+      - sdk
+      - password
+      - email
+      - app
+      - ''
+      title: SourceAuthType
+      x-fern-enum:
+        ? ''
+        : name: Empty
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingProviderDetailed:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        description:
+          type: string
+          title: Description
+          description: Description of source of information
+        logo:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Logo
+          description: URL for source logo
+        auth_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceAuthType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        supported_resources:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+          title: Supported Resources
+          default: []
+      type: object
+      required:
+      - name
+      - slug
+      - description
+      - logo
+      title: Provider
+      example:
+        auth_type: oauth
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+        supported_resources:
+        - workouts
+        - sleep
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
-x-refined-from:
-- vital-link-api-openapi.yml
-- vital-openapi-original.json
-- vital-openapi-original.yml

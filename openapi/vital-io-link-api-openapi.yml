@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Vital Io Link API
+  title: Junction Link API
+  description: https://docs.junction.com/
   version: 0.4.497
-  description: 'Operations tagged link across 9 of this provider''s published API definitions: vital-lab-report-parser-api-openapi.yml, vital-lab-testing-api-openapi.yml, vital-link-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml, vital-sense-api-openapi.yml, vital-team-api-openapi.yml, vital-users-api-openapi.yml, vital-wearables-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -15,12 +15,12 @@ servers:
 security:
 - apiKeyAuth: []
 tags:
-- name: link
+- name: Link
 paths:
   /v2/link/bulk_op:
     get:
       tags:
-      - link
+      - Link
       summary: List Bulk Ops
       operationId: list_bulk_ops_v2_link_bulk_op_get
       parameters:
@@ -57,19 +57,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: list_bulk_ops
       x-fern-availability: beta
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/bulk_import:
     post:
       tags:
-      - link
+      - Link
       summary: Bulk Import Connections
       operationId: bulk_import_connections_v2_link_bulk_import_post
       requestBody:
@@ -96,19 +87,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: bulk_import
       x-fern-availability: beta
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/bulk_trigger_historical_pull:
     post:
       tags:
-      - link
+      - Link
       summary: Bulk Trigger Historical Pull
       operationId: bulk_trigger_historical_pull_v2_link_bulk_trigger_historical_pull_post
       requestBody:
@@ -134,19 +116,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: bulk_trigger_historical_pull
       x-fern-availability: beta
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/bulk_export:
     post:
       tags:
-      - link
+      - Link
       summary: Bulk Export Connections
       operationId: bulk_export_connections_v2_link_bulk_export_post
       requestBody:
@@ -171,19 +144,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: bulk_export
       x-fern-availability: beta
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/bulk_pause:
     post:
       tags:
-      - link
+      - Link
       summary: Bulk Pause Connections
       operationId: bulk_pause_connections_v2_link_bulk_pause_post
       requestBody:
@@ -207,19 +171,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: bulk_pause
       x-fern-availability: beta
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/token:
     post:
       tags:
-      - link
+      - Link
       summary: Generate Vital Link Token
       description: 'Endpoint to generate a user link token, to be used throughout the vital
 
@@ -254,19 +209,10 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: token
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/code/create:
     post:
       tags:
-      - link
+      - Link
       summary: Create Token
       description: Generate a token to invite a user of Vital mobile app to your team
       operationId: create_token_v2_link_code_create_post
@@ -304,19 +250,10 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: code_create
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/provider/oauth/{oauth_provider}:
     get:
       tags:
-      - link
+      - Link
       summary: Generate Oauth Link Endpoint
       description: This endpoint generates an OAuth link for oauth provider
       operationId: generate_oauth_link
@@ -350,19 +287,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: generate_oauth_link
       security: []
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/provider/password/{provider}:
     post:
       tags:
-      - link
+      - Link
       summary: Connect Password Provider
       description: This connects auth providers that are password based.
       operationId: connect_password_provider_v2_link_provider_password__provider__post
@@ -403,19 +331,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: connect_password_provider
       security: []
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/provider/password/{provider}/complete_mfa:
     post:
       tags:
-      - link
+      - Link
       summary: Complete Password Provider Mfa
       description: This connects auth providers that are password based.
       operationId: complete_password_provider_mfa_v2_link_provider_password__provider__complete_mfa_post
@@ -456,19 +375,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: complete_password_provider_mfa
       security: []
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/provider/email/{provider}:
     post:
       tags:
-      - link
+      - Link
       summary: Connect Email Auth Provider
       description: This connects auth providers that are email based.
       operationId: connect_email_auth_provider_v2_link_provider_email__provider__post
@@ -508,19 +418,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: connect_email_auth_provider
       security: []
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/providers:
     get:
       tags:
-      - link
+      - Link
       summary: Get Providers
       description: GET List of all available providers given the generated link token.
       operationId: get_providers_v2_link_providers_get
@@ -552,19 +453,10 @@ paths:
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: get_all_providers
       security: []
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v2/link/connect/demo:
     post:
       tags:
-      - link
+      - Link
       summary: Create Demo Connection
       description: POST Connect the given Vital user to a demo provider.
       operationId: create_demo_connection_v2_link_connect_demo_post
@@ -589,20 +481,11 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: link
       x-fern-sdk-method-name: connect_demo_provider
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
 webhooks:
   provider.connection.created:
     post:
       tags:
-      - link
+      - Link
       summary: Provider Connection Created
       operationId: provider_connection_createdprovider_connection_created_post
       requestBody:
@@ -623,19 +506,10 @@ webhooks:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   provider.connection.error:
     post:
       tags:
-      - link
+      - Link
       summary: Provider Connection Error
       operationId: provider_connection_errorprovider_connection_error_post
       requestBody:
@@ -656,17 +530,643 @@ webhooks:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
 components:
   schemas:
+    ProviderLinkResponse:
+      properties:
+        state:
+          type: string
+          enum:
+          - success
+          - error
+          - pending_provider_mfa
+          title: State
+          description: ℹ️ This enum is non-exhaustive.
+        redirect_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Redirect Url
+          description: The redirect URL you supplied when creating the Link Token (via `POST /v2/link/token`).
+        error_type:
+          anyOf:
+          - type: string
+            enum:
+            - invalid_token
+            - token_expired
+            - token_not_validated
+            - token_consumed
+            - provider_credential_error
+            - provider_password_expired
+            - provider_api_error
+            - unsupported_region
+            - duplicate_connection
+            - required_scopes_not_granted
+            - incorrect_mfa_code
+            - user_cancelled
+          - type: 'null'
+          title: Error Type
+          description: The Link Error Type. This field is populated only when state is `error`. ℹ️ This enum is non-exhaustive.
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+          description: A developer-readable debug description of the Link Error. This field is populated only when state is `error`.
+        provider_mfa:
+          anyOf:
+          - $ref: '#/components/schemas/ProviderMFARequest'
+          - type: 'null'
+          description: The provider MFA request. This field is populated only when state is `pending_provider_mfa`.
+        provider:
+          $ref: '#/components/schemas/PasswordProviders'
+          deprecated: true
+          description: ℹ️ This enum is non-exhaustive.
+        connected:
+          type: boolean
+          title: Connected
+          deprecated: true
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+          deprecated: true
+      type: object
+      required:
+      - state
+      - provider
+      - connected
+      - provider_id
+      title: ProviderLinkResponse
+      example:
+        state: success
+    BulkPauseConnectionsBody:
+      properties:
+        user_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: User Ids
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - user_ids
+      - provider
+      title: BulkPauseConnectionsBody
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Availability:
+      type: string
+      enum:
+      - available
+      - unavailable
+      title: Availability
+      description: ℹ️ This enum is non-exhaustive.
+    BulkOp:
+      properties:
+        type:
+          type: string
+          enum:
+          - link_bulk_import
+          - link_bulk_historical_trigger
+          title: Type
+          description: ℹ️ This enum is non-exhaustive.
+        status:
+          type: string
+          enum:
+          - in_progress
+          - success
+          - failure
+          - aborted
+          title: Status
+          description: ℹ️ This enum is non-exhaustive.
+        provider:
+          $ref: '#/components/schemas/Providers'
+          description: ℹ️ This enum is non-exhaustive.
+        pending:
+          type: integer
+          title: Pending
+        processed:
+          type: integer
+          title: Processed
+        started_at:
+          type: string
+          format: date-time
+          title: Started At
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+      type: object
+      required:
+      - type
+      - status
+      - provider
+      - pending
+      - processed
+      - started_at
+      - ended_at
+      title: BulkOp
+    ScopeRequirements_str_:
+      properties:
+        required:
+          items:
+            type: string
+          type: array
+          title: Required
+        optional:
+          items:
+            type: string
+          type: array
+          title: Optional
+      type: object
+      required:
+      - required
+      - optional
+      title: ScopeRequirements[str]
+    EmailProviders:
+      type: string
+      enum:
+      - freestyle_libre
+      title: EmailProviders
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingProviderConnectionErrorEvent:
+      properties:
+        event_type:
+          type: string
+          const: provider.connection.error
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          $ref: '#/components/schemas/ProviderConnectionError'
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingProviderConnectionErrorEvent
+    ProviderMFARequest:
+      properties:
+        method:
+          type: string
+          enum:
+          - sms
+          - email
+          title: Method
+          description: The MFA method requested by the password provider to complete authentication. ℹ️ This enum is non-exhaustive.
+        hint:
+          type: string
+          title: Hint
+          description: The MFA hint provided by the password provider, e.g., the redacted phone number.
+      type: object
+      required:
+      - method
+      - hint
+      title: ProviderMFARequest
+    SourceLink:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        description:
+          type: string
+          title: Description
+        logo:
+          type: string
+          title: Logo
+        oauth_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Url
+        auth_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceAuthType'
+          - type: 'null'
+          default: oauth
+          description: ℹ️ This enum is non-exhaustive.
+        form_components:
+          additionalProperties: true
+          type: object
+          title: Form Components
+          default: {}
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      - description
+      - logo
+      title: SourceLink
+    BulkExportConnectionsBody:
+      properties:
+        user_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: User Ids
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+        next_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Token
+      type: object
+      required:
+      - provider
+      title: BulkExportConnectionsBody
+    ClientFacingProvider:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        logo:
+          type: string
+          title: Logo
+          description: URL for source logo
+      type: object
+      required:
+      - name
+      - slug
+      - logo
+      title: Provider
+      description: A vendor, a service, or a platform which Vital can connect with.
+      example:
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+    ConnectionRecipe:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: Vital User ID. The user must be created ahead of the bulk import operation.
+        access_token:
+          type: string
+          title: Access Token
+          description: '* OAuth 2.0 providers (Fitbit, etc): The latest Access Token.
+
+            * OAuth 1.0 providers (Garmin): The Access Token.'
+        refresh_token:
+          type: string
+          title: Refresh Token
+          description: '* OAuth 2.0 providers (Fitbit, etc): The latest Refresh Token.
+
+            * OAuth 1.0 providers (Garmin): The Token Secret.'
+        provider_id:
+          type: string
+          title: Provider Id
+          description: "User ID of the data provider.\n\n* Fitbit: 6-character Fitbit User ID \n* Garmin: 36-character Garmin User ID"
+        expires_at:
+          type: integer
+          title: Expires At
+          description: 'Access token expiry date, in terms of UNIX epoch seconds.
+
+
+            * OAuth 2.0 providers (Fitbit, etc): The latest expiry date on your record.
+
+            * OAuth 1.0 providers (Garmin): Use the constant value `2147483647`.'
+        oauth_scopes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Oauth Scopes
+          description: 'OAuth scopes of the data provider. Specify `null` if you do not
+
+            have any scopes on record.
+
+
+            * Fitbit: Has scopes
+
+            * Garmin: No scope'
+      type: object
+      required:
+      - user_id
+      - access_token
+      - refresh_token
+      - provider_id
+      - expires_at
+      title: ConnectionRecipe
+    ClientFacingProviderConnectionCreatedEvent:
+      properties:
+        event_type:
+          type: string
+          const: provider.connection.created
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          $ref: '#/components/schemas/ProviderConnectionCreated'
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingProviderConnectionCreatedEvent
+    DemoConnectionCreationPayload:
+      properties:
+        user_id:
+          type: string
+          format: uuid4
+          title: User Id
+          description: Vital user ID
+        provider:
+          $ref: '#/components/schemas/DemoProviders'
+          description: Demo provider. For more information, please check out our docs (https://docs.tryvital.io/wearables/providers/test_data) ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - user_id
+      - provider
+      title: DemoConnectionCreationPayload
+    IndividualProviderData:
+      properties:
+        username:
+          type: string
+          title: Username
+          description: Username for provider
+        password:
+          type: string
+          title: Password
+          description: Password for provider
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/Region'
+          - type: 'null'
+          description: Provider region to authenticate against. Only applicable to specific providers. ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - username
+      - password
+      title: IndividualProviderData
+    BulkTriggerHistoricalPullBody:
+      properties:
+        user_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: User Ids
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+        wait_for_completion:
+          type: boolean
+          title: Wait For Completion
+          description: '
+
+            Whether or not the endpoint should wait for the Bulk Op to complete before responding.
+
+
+            When `wait_for_completion` is enabled, the endpoint may respond 200 OK if the Bulk Op takes less than 20 seconds to complete.
+
+
+            Otherwise, the endpoint always responds with 202 Created once the submitted data have been enqueued successfully. You can use
+
+            the [List Bulk Ops](https://docs.tryvital.io/api-reference/link/list-bulk-ops) endpoint to inspect the progress of the Bulk Op.
+
+            '
+          default: false
+      type: object
+      required:
+      - user_ids
+      - provider
+      title: BulkTriggerHistoricalPullBody
+    ProviderConnectionError:
+      properties:
+        provider:
+          type: string
+          title: Provider
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        message:
+          type: string
+          title: Message
+        error_type:
+          type: string
+          enum:
+          - token_refresh_failed
+          - webhook_registration_failed
+          - user_not_found
+          - deregistered_per_provider
+          - required_scopes_not_granted
+          - provider_credential_error
+          - provider_password_expired
+          - unknown
+          title: Error Type
+          description: ℹ️ This enum is non-exhaustive.
+        error_details:
+          type: string
+          title: Error Details
+      type: object
+      required:
+      - provider
+      - user_id
+      - message
+      - error_type
+      - error_details
+      title: ProviderConnectionError
+      example:
+        error_details: Failed to pull provider data
+        error_type: token_refresh_failed
+        message: We are having issues fetching information for user.                             We won't try to fetch again from this specific provider. Please reconnect device.
+        provider: oura
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    BulkImportConnectionsBody:
+      properties:
+        provider:
+          $ref: '#/components/schemas/OAuthProviders'
+          description: ℹ️ This enum is non-exhaustive.
+        connections:
+          items:
+            $ref: '#/components/schemas/ConnectionRecipe'
+          type: array
+          title: Connections
+        wait_for_completion:
+          type: boolean
+          title: Wait For Completion
+          description: '
+
+            Whether or not the endpoint should wait for the Bulk Op to complete before responding.
+
+
+            When `wait_for_completion` is enabled, the endpoint may respond 200 OK if the Bulk Op takes less than 20 seconds to complete.
+
+
+            Otherwise, the endpoint always responds with 202 Created once the submitted data have been enqueued successfully. You can use
+
+            the [List Bulk Ops](https://docs.tryvital.io/api-reference/link/list-bulk-ops) endpoint to inspect the progress of the Bulk Op.
+
+            '
+          default: false
+      type: object
+      required:
+      - provider
+      - connections
+      title: BulkImportConnectionsBody
+    ScopeRequirementsGrants:
+      properties:
+        user_granted:
+          $ref: '#/components/schemas/ScopeRequirements_str_'
+        user_denied:
+          $ref: '#/components/schemas/ScopeRequirements_str_'
+      type: object
+      required:
+      - user_granted
+      - user_denied
+      title: ScopeRequirementsGrants
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    SourceAuthType:
+      type: string
+      enum:
+      - oauth
+      - team_oauth
+      - sdk
+      - password
+      - email
+      - app
+      - ''
+      title: SourceAuthType
+      x-fern-enum:
+        ? ''
+        : name: Empty
+      description: ℹ️ This enum is non-exhaustive.
+    EmailProviderAuthLink:
+      properties:
+        email:
+          type: string
+          title: Email
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/Providers'
+          - type: 'null'
+          deprecated: true
+          description: ℹ️ This enum is non-exhaustive.
+        region:
+          $ref: '#/components/schemas/Region'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - email
+      title: EmailProviderAuthLink
+    BulkExportConnectionsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ConnectionRecipe'
+          type: array
+          title: Data
+        next_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Token
+      type: object
+      required:
+      - data
+      - next_token
+      title: BulkExportConnectionsResponse
     ProviderConnectionCreated:
       properties:
         user_id:
@@ -743,185 +1243,145 @@ components:
                 required: []
             status: unavailable
         user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
-    ClientFacingProviderConnectionCreatedEvent:
-      properties:
-        event_type:
-          type: string
-          const: provider.connection.created
-          title: Event Type
-          x-junction-exhaustive: true
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        client_user_id:
-          type: string
-          format: uuid
-          title: Client User Id
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-        data:
-          $ref: '#/components/schemas/ProviderConnectionCreated'
-      type: object
-      required:
-      - event_type
-      - user_id
-      - client_user_id
-      - team_id
-      - data
-      title: ClientFacingProviderConnectionCreatedEvent
-    ProviderConnectionError:
-      properties:
-        provider:
-          type: string
-          title: Provider
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        message:
-          type: string
-          title: Message
-        error_type:
-          type: string
-          enum:
-          - token_refresh_failed
-          - webhook_registration_failed
-          - user_not_found
-          - deregistered_per_provider
-          - required_scopes_not_granted
-          - provider_credential_error
-          - provider_password_expired
-          - unknown
-          title: Error Type
-          description: ℹ️ This enum is non-exhaustive.
-        error_details:
-          type: string
-          title: Error Details
-      type: object
-      required:
-      - provider
-      - user_id
-      - message
-      - error_type
-      - error_details
-      title: ProviderConnectionError
-      example:
-        error_details: Failed to pull provider data
-        error_type: token_refresh_failed
-        message: We are having issues fetching information for user.                             We won't try to fetch again from this specific provider. Please reconnect device.
-        provider: oura
-        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
-    ResourceAvailability:
-      properties:
-        status:
-          $ref: '#/components/schemas/Availability'
-          description: ℹ️ This enum is non-exhaustive.
-        scope_requirements:
-          anyOf:
-          - $ref: '#/components/schemas/ScopeRequirementsGrants'
-          - type: 'null'
-      type: object
-      required:
-      - status
-      title: ResourceAvailability
-    Availability:
-      type: string
-      enum:
-      - available
-      - unavailable
-      title: Availability
-      description: ℹ️ This enum is non-exhaustive.
-    ScopeRequirementsGrants:
-      properties:
-        user_granted:
-          $ref: '#/components/schemas/ScopeRequirements_str_'
-        user_denied:
-          $ref: '#/components/schemas/ScopeRequirements_str_'
-      type: object
-      required:
-      - user_granted
-      - user_denied
-      title: ScopeRequirementsGrants
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ClientFacingProvider:
+    Source:
       properties:
         name:
           type: string
           title: Name
-          description: Name of source of information
         slug:
           type: string
           title: Slug
-          description: Slug for designated source
+        description:
+          type: string
+          title: Description
         logo:
           type: string
           title: Logo
-          description: URL for source logo
+        group:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group
+        oauth_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Oauth Url
+        auth_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceAuthType'
+          - type: 'null'
+          default: oauth
+          description: ℹ️ This enum is non-exhaustive.
+        source_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceType'
+          - type: 'null'
+          default: device
+          description: ℹ️ This enum is non-exhaustive.
+        is_active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Active
+          default: true
+        backfill_num_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Backfill Num Days
+        id:
+          type: integer
+          title: Id
       type: object
       required:
       - name
       - slug
+      - description
       - logo
+      - id
       title: Provider
-      description: A vendor, a service, or a platform which Vital can connect with.
       example:
-        logo: https://logo_url.com
-        name: Oura
-        slug: oura
-    ClientFacingProviderConnectionErrorEvent:
+        auth_type: oauth
+        description: Garmin Watches
+        id: 1
+        logo: https://garmin.com
+        name: Garmin
+        oauth_url: https://garmin_aouth_url.com
+        slug: garmin
+    DemoConnectionStatus:
       properties:
-        event_type:
+        success:
+          type: boolean
+          title: Success
+        detail:
           type: string
-          const: provider.connection.error
-          title: Event Type
-          x-junction-exhaustive: true
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        client_user_id:
-          type: string
-          format: uuid
-          title: Client User Id
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-        data:
-          $ref: '#/components/schemas/ProviderConnectionError'
+          title: Detail
       type: object
       required:
-      - event_type
-      - user_id
-      - client_user_id
-      - team_id
-      - data
-      title: ClientFacingProviderConnectionErrorEvent
-    ScopeRequirements_str_:
+      - success
+      - detail
+      title: DemoConnectionStatus
+      example:
+        detail: Connected user 37c9c3fa-49e8-4d60-8cc8-328cba420f30 to provider fitbit
+        success: true
+    OAuthProviders:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - strava
+      - wahoo
+      - ihealth
+      - withings
+      - google_fit
+      - dexcom_v3
+      - polar
+      - cronometer
+      - omron
+      - whoop_v2
+      - my_fitness_pal_v2
+      - ultrahuman
+      - runkeeper
+      title: OAuthProviders
+      description: ℹ️ This enum is non-exhaustive.
+    PasswordProviders:
+      type: string
+      enum:
+      - whoop
+      - renpho
+      - peloton
+      - zwift
+      - eight_sleep
+      - beurer_api
+      - dexcom
+      - hammerhead
+      - my_fitness_pal
+      - kardia
+      - abbott_libreview
+      - tandem_source
+      title: PasswordProviders
+      description: ℹ️ This enum is non-exhaustive.
+    BulkImportConnectionsResponse:
       properties:
-        required:
+        user_ids_imported:
           items:
             type: string
+            format: uuid
           type: array
-          title: Required
-        optional:
+          title: User Ids Imported
+        user_ids_failed:
           items:
             type: string
+            format: uuid
           type: array
-          title: Optional
+          title: User Ids Failed
       type: object
       required:
-      - required
-      - optional
-      title: ScopeRequirements[str]
+      - user_ids_imported
+      - user_ids_failed
+      title: BulkImportConnectionsResponse
     Resource:
       type: string
       enum:
@@ -998,22 +1458,125 @@ components:
       title: ClientFacingResource
       x-fern-type-name: ClientFacingResource
       description: ℹ️ This enum is non-exhaustive.
-    PasswordProviders:
+    BulkOpsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/BulkOp'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: BulkOpsResponse
+    LinkTokenExchangeResponse:
+      properties:
+        link_token:
+          type: string
+          title: Link Token
+          description: A short-lived Vital Link token for your Custom Link Widget to communicate with the Vital API.
+        link_web_url:
+          type: string
+          title: Link Web Url
+          description: The web browser link to launch the default Vital Link experience. If you requested the token for one specific provider, the link would redirect directly to the provider authentication flow. Otherwise, the user would be presented with a list of providers based on your team and token configurations.
+      type: object
+      required:
+      - link_token
+      - link_web_url
+      title: LinkTokenExchangeResponse
+      example:
+        link_token: dGVzdCB0ZXN0IHRlc3Q=
+        link_web_url: https://link.tryvital.io/?token=dGVzdCB0ZXN0IHRlc3Q%3D&env=production&region=us
+    CompletePasswordProviderMFABody:
+      properties:
+        mfa_code:
+          type: string
+          title: Mfa Code
+      type: object
+      required:
+      - mfa_code
+      title: CompletePasswordProviderMFABody
+    Region:
       type: string
       enum:
-      - whoop
-      - renpho
-      - peloton
-      - zwift
-      - eight_sleep
-      - beurer_api
-      - dexcom
-      - hammerhead
-      - my_fitness_pal
-      - kardia
-      - abbott_libreview
-      - tandem_source
-      title: PasswordProviders
+      - us
+      - eu
+      - de
+      - fr
+      - ca
+      - br
+      - ar
+      - cl
+      - co
+      - mx
+      - gb
+      - ie
+      - au
+      - nz
+      - nl
+      - at
+      - be
+      - bh
+      - ch
+      - cz
+      - dk
+      - eg
+      - es
+      - fi
+      - gr
+      - hr
+      - il
+      - it
+      - jo
+      - kw
+      - lb
+      - lu
+      - 'no'
+      - om
+      - pl
+      - pt
+      - qa
+      - sa
+      - se
+      - si
+      - sk
+      - tr
+      - za
+      - in
+      - sg
+      - hk
+      - kr
+      - ph
+      - tw
+      title: Region
+      description: ℹ️ This enum is non-exhaustive.
+    ResourceAvailability:
+      properties:
+        status:
+          $ref: '#/components/schemas/Availability'
+          description: ℹ️ This enum is non-exhaustive.
+        scope_requirements:
+          anyOf:
+          - $ref: '#/components/schemas/ScopeRequirementsGrants'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ResourceAvailability
+    DemoProviders:
+      type: string
+      enum:
+      - apple_health_kit
+      - fitbit
+      - freestyle_libre
+      - oura
+      title: DemoProviders
       description: ℹ️ This enum is non-exhaustive.
     LinkTokenExchange:
       properties:
@@ -1082,295 +1645,6 @@ components:
       required:
       - user_id
       title: LinkTokenExchange
-    IndividualProviderData:
-      properties:
-        username:
-          type: string
-          title: Username
-          description: Username for provider
-        password:
-          type: string
-          title: Password
-          description: Password for provider
-        region:
-          anyOf:
-          - $ref: '#/components/schemas/Region'
-          - type: 'null'
-          description: Provider region to authenticate against. Only applicable to specific providers. ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - username
-      - password
-      title: IndividualProviderData
-    Region:
-      type: string
-      enum:
-      - us
-      - eu
-      - de
-      - fr
-      - ca
-      - br
-      - ar
-      - cl
-      - co
-      - mx
-      - gb
-      - ie
-      - au
-      - nz
-      - nl
-      - at
-      - be
-      - bh
-      - ch
-      - cz
-      - dk
-      - eg
-      - es
-      - fi
-      - gr
-      - hr
-      - il
-      - it
-      - jo
-      - kw
-      - lb
-      - lu
-      - 'no'
-      - om
-      - pl
-      - pt
-      - qa
-      - sa
-      - se
-      - si
-      - sk
-      - tr
-      - za
-      - in
-      - sg
-      - hk
-      - kr
-      - ph
-      - tw
-      title: Region
-      description: ℹ️ This enum is non-exhaustive.
-    BulkExportConnectionsBody:
-      properties:
-        user_ids:
-          anyOf:
-          - items:
-              type: string
-              format: uuid
-            type: array
-          - type: 'null'
-          title: User Ids
-        provider:
-          $ref: '#/components/schemas/OAuthProviders'
-          description: ℹ️ This enum is non-exhaustive.
-        next_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Token
-      type: object
-      required:
-      - provider
-      title: BulkExportConnectionsBody
-    OAuthProviders:
-      type: string
-      enum:
-      - oura
-      - fitbit
-      - garmin
-      - strava
-      - wahoo
-      - ihealth
-      - withings
-      - google_fit
-      - dexcom_v3
-      - polar
-      - cronometer
-      - omron
-      - whoop_v2
-      - my_fitness_pal_v2
-      - ultrahuman
-      - runkeeper
-      title: OAuthProviders
-      description: ℹ️ This enum is non-exhaustive.
-    ProviderMFARequest:
-      properties:
-        method:
-          type: string
-          enum:
-          - sms
-          - email
-          title: Method
-          description: The MFA method requested by the password provider to complete authentication. ℹ️ This enum is non-exhaustive.
-        hint:
-          type: string
-          title: Hint
-          description: The MFA hint provided by the password provider, e.g., the redacted phone number.
-      type: object
-      required:
-      - method
-      - hint
-      title: ProviderMFARequest
-    SourceAuthType:
-      type: string
-      enum:
-      - oauth
-      - team_oauth
-      - sdk
-      - password
-      - email
-      - app
-      - ''
-      title: SourceAuthType
-      x-fern-enum:
-        ? ''
-        : name: Empty
-      description: ℹ️ This enum is non-exhaustive.
-    DemoConnectionStatus:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - success
-      - detail
-      title: DemoConnectionStatus
-      example:
-        detail: Connected user 37c9c3fa-49e8-4d60-8cc8-328cba420f30 to provider fitbit
-        success: true
-    BulkPauseConnectionsBody:
-      properties:
-        user_ids:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: User Ids
-        provider:
-          $ref: '#/components/schemas/OAuthProviders'
-          description: ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - user_ids
-      - provider
-      title: BulkPauseConnectionsBody
-    EmailProviders:
-      type: string
-      enum:
-      - freestyle_libre
-      title: EmailProviders
-      description: ℹ️ This enum is non-exhaustive.
-    ProviderLinkResponse:
-      properties:
-        state:
-          type: string
-          enum:
-          - success
-          - error
-          - pending_provider_mfa
-          title: State
-          description: ℹ️ This enum is non-exhaustive.
-        redirect_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Redirect Url
-          description: The redirect URL you supplied when creating the Link Token (via `POST /v2/link/token`).
-        error_type:
-          anyOf:
-          - type: string
-            enum:
-            - invalid_token
-            - token_expired
-            - token_not_validated
-            - token_consumed
-            - provider_credential_error
-            - provider_password_expired
-            - provider_api_error
-            - unsupported_region
-            - duplicate_connection
-            - required_scopes_not_granted
-            - incorrect_mfa_code
-            - user_cancelled
-          - type: 'null'
-          title: Error Type
-          description: The Link Error Type. This field is populated only when state is `error`. ℹ️ This enum is non-exhaustive.
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-          description: A developer-readable debug description of the Link Error. This field is populated only when state is `error`.
-        provider_mfa:
-          anyOf:
-          - $ref: '#/components/schemas/ProviderMFARequest'
-          - type: 'null'
-          description: The provider MFA request. This field is populated only when state is `pending_provider_mfa`.
-        provider:
-          $ref: '#/components/schemas/PasswordProviders'
-          deprecated: true
-          description: ℹ️ This enum is non-exhaustive.
-        connected:
-          type: boolean
-          title: Connected
-          deprecated: true
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-          deprecated: true
-      type: object
-      required:
-      - state
-      - provider
-      - connected
-      - provider_id
-      title: ProviderLinkResponse
-      example:
-        state: success
-    BulkImportConnectionsBody:
-      properties:
-        provider:
-          $ref: '#/components/schemas/OAuthProviders'
-          description: ℹ️ This enum is non-exhaustive.
-        connections:
-          items:
-            $ref: '#/components/schemas/ConnectionRecipe'
-          type: array
-          title: Connections
-        wait_for_completion:
-          type: boolean
-          title: Wait For Completion
-          description: '
-
-            Whether or not the endpoint should wait for the Bulk Op to complete before responding.
-
-
-            When `wait_for_completion` is enabled, the endpoint may respond 200 OK if the Bulk Op takes less than 20 seconds to complete.
-
-
-            Otherwise, the endpoint always responds with 202 Created once the submitted data have been enqueued successfully. You can use
-
-            the [List Bulk Ops](https://docs.tryvital.io/api-reference/link/list-bulk-ops) endpoint to inspect the progress of the Bulk Op.
-
-            '
-          default: false
-      type: object
-      required:
-      - provider
-      - connections
-      title: BulkImportConnectionsBody
     VitalTokenCreatedResponse:
       properties:
         code:
@@ -1391,247 +1665,6 @@ components:
       - exchange_url
       - expires_at
       title: VitalTokenCreatedResponse
-    BulkOpsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/BulkOp'
-          type: array
-          title: Data
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: BulkOpsResponse
-    BulkExportConnectionsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ConnectionRecipe'
-          type: array
-          title: Data
-        next_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Token
-      type: object
-      required:
-      - data
-      - next_token
-      title: BulkExportConnectionsResponse
-    CompletePasswordProviderMFABody:
-      properties:
-        mfa_code:
-          type: string
-          title: Mfa Code
-      type: object
-      required:
-      - mfa_code
-      title: CompletePasswordProviderMFABody
-    ConnectionRecipe:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: Vital User ID. The user must be created ahead of the bulk import operation.
-        access_token:
-          type: string
-          title: Access Token
-          description: '* OAuth 2.0 providers (Fitbit, etc): The latest Access Token.
-
-            * OAuth 1.0 providers (Garmin): The Access Token.'
-        refresh_token:
-          type: string
-          title: Refresh Token
-          description: '* OAuth 2.0 providers (Fitbit, etc): The latest Refresh Token.
-
-            * OAuth 1.0 providers (Garmin): The Token Secret.'
-        provider_id:
-          type: string
-          title: Provider Id
-          description: "User ID of the data provider.\n\n* Fitbit: 6-character Fitbit User ID \n* Garmin: 36-character Garmin User ID"
-        expires_at:
-          type: integer
-          title: Expires At
-          description: 'Access token expiry date, in terms of UNIX epoch seconds.
-
-
-            * OAuth 2.0 providers (Fitbit, etc): The latest expiry date on your record.
-
-            * OAuth 1.0 providers (Garmin): Use the constant value `2147483647`.'
-        oauth_scopes:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Oauth Scopes
-          description: 'OAuth scopes of the data provider. Specify `null` if you do not
-
-            have any scopes on record.
-
-
-            * Fitbit: Has scopes
-
-            * Garmin: No scope'
-      type: object
-      required:
-      - user_id
-      - access_token
-      - refresh_token
-      - provider_id
-      - expires_at
-      title: ConnectionRecipe
-    SourceLink:
-      properties:
-        id:
-          type: integer
-          title: Id
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-        description:
-          type: string
-          title: Description
-        logo:
-          type: string
-          title: Logo
-        oauth_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Url
-        auth_type:
-          anyOf:
-          - $ref: '#/components/schemas/SourceAuthType'
-          - type: 'null'
-          default: oauth
-          description: ℹ️ This enum is non-exhaustive.
-        form_components:
-          additionalProperties: true
-          type: object
-          title: Form Components
-          default: {}
-      type: object
-      required:
-      - id
-      - name
-      - slug
-      - description
-      - logo
-      title: SourceLink
-    Source:
-      properties:
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-        description:
-          type: string
-          title: Description
-        logo:
-          type: string
-          title: Logo
-        group:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group
-        oauth_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Oauth Url
-        auth_type:
-          anyOf:
-          - $ref: '#/components/schemas/SourceAuthType'
-          - type: 'null'
-          default: oauth
-          description: ℹ️ This enum is non-exhaustive.
-        source_type:
-          anyOf:
-          - $ref: '#/components/schemas/SourceType'
-          - type: 'null'
-          default: device
-          description: ℹ️ This enum is non-exhaustive.
-        is_active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Active
-          default: true
-        backfill_num_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Backfill Num Days
-        id:
-          type: integer
-          title: Id
-      type: object
-      required:
-      - name
-      - slug
-      - description
-      - logo
-      - id
-      title: Provider
-      example:
-        auth_type: oauth
-        description: Garmin Watches
-        id: 1
-        logo: https://garmin.com
-        name: Garmin
-        oauth_url: https://garmin_aouth_url.com
-        slug: garmin
-    LinkTokenExchangeResponse:
-      properties:
-        link_token:
-          type: string
-          title: Link Token
-          description: A short-lived Vital Link token for your Custom Link Widget to communicate with the Vital API.
-        link_web_url:
-          type: string
-          title: Link Web Url
-          description: The web browser link to launch the default Vital Link experience. If you requested the token for one specific provider, the link would redirect directly to the provider authentication flow. Otherwise, the user would be presented with a list of providers based on your team and token configurations.
-      type: object
-      required:
-      - link_token
-      - link_web_url
-      title: LinkTokenExchangeResponse
-      example:
-        link_token: dGVzdCB0ZXN0IHRlc3Q=
-        link_web_url: https://link.tryvital.io/?token=dGVzdCB0ZXN0IHRlc3Q%3D&env=production&region=us
-    EmailProviderAuthLink:
-      properties:
-        email:
-          type: string
-          title: Email
-        provider:
-          anyOf:
-          - $ref: '#/components/schemas/Providers'
-          - type: 'null'
-          deprecated: true
-          description: ℹ️ This enum is non-exhaustive.
-        region:
-          $ref: '#/components/schemas/Region'
-          description: ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - email
-      title: EmailProviderAuthLink
     SourceType:
       type: string
       enum:
@@ -1642,187 +1675,9 @@ components:
       - provider
       title: SourceType
       description: ℹ️ This enum is non-exhaustive.
-    BulkOp:
-      properties:
-        type:
-          type: string
-          enum:
-          - link_bulk_import
-          - link_bulk_historical_trigger
-          title: Type
-          description: ℹ️ This enum is non-exhaustive.
-        status:
-          type: string
-          enum:
-          - in_progress
-          - success
-          - failure
-          - aborted
-          title: Status
-          description: ℹ️ This enum is non-exhaustive.
-        provider:
-          $ref: '#/components/schemas/Providers'
-          description: ℹ️ This enum is non-exhaustive.
-        pending:
-          type: integer
-          title: Pending
-        processed:
-          type: integer
-          title: Processed
-        started_at:
-          type: string
-          format: date-time
-          title: Started At
-        ended_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Ended At
-      type: object
-      required:
-      - type
-      - status
-      - provider
-      - pending
-      - processed
-      - started_at
-      - ended_at
-      title: BulkOp
-    BulkTriggerHistoricalPullBody:
-      properties:
-        user_ids:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: User Ids
-        provider:
-          $ref: '#/components/schemas/OAuthProviders'
-          description: ℹ️ This enum is non-exhaustive.
-        wait_for_completion:
-          type: boolean
-          title: Wait For Completion
-          description: '
-
-            Whether or not the endpoint should wait for the Bulk Op to complete before responding.
-
-
-            When `wait_for_completion` is enabled, the endpoint may respond 200 OK if the Bulk Op takes less than 20 seconds to complete.
-
-
-            Otherwise, the endpoint always responds with 202 Created once the submitted data have been enqueued successfully. You can use
-
-            the [List Bulk Ops](https://docs.tryvital.io/api-reference/link/list-bulk-ops) endpoint to inspect the progress of the Bulk Op.
-
-            '
-          default: false
-      type: object
-      required:
-      - user_ids
-      - provider
-      title: BulkTriggerHistoricalPullBody
-    DemoConnectionCreationPayload:
-      properties:
-        user_id:
-          type: string
-          format: uuid4
-          title: User Id
-          description: Vital user ID
-        provider:
-          $ref: '#/components/schemas/DemoProviders'
-          description: Demo provider. For more information, please check out our docs (https://docs.tryvital.io/wearables/providers/test_data) ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - user_id
-      - provider
-      title: DemoConnectionCreationPayload
-    BulkImportConnectionsResponse:
-      properties:
-        user_ids_imported:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: User Ids Imported
-        user_ids_failed:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: User Ids Failed
-      type: object
-      required:
-      - user_ids_imported
-      - user_ids_failed
-      title: BulkImportConnectionsResponse
-    DemoProviders:
-      type: string
-      enum:
-      - apple_health_kit
-      - fitbit
-      - freestyle_libre
-      - oura
-      title: DemoProviders
-      description: ℹ️ This enum is non-exhaustive.
-    Providers:
-      type: string
-      enum:
-      - oura
-      - fitbit
-      - garmin
-      - whoop
-      - strava
-      - renpho
-      - peloton
-      - wahoo
-      - zwift
-      - freestyle_libre
-      - abbott_libreview
-      - tandem_source
-      - freestyle_libre_ble
-      - eight_sleep
-      - withings
-      - apple_health_kit
-      - manual
-      - ihealth
-      - google_fit
-      - beurer_api
-      - beurer_ble
-      - omron
-      - omron_ble
-      - onetouch_ble
-      - accuchek_ble
-      - contour_ble
-      - dexcom
-      - dexcom_v3
-      - hammerhead
-      - my_fitness_pal
-      - health_connect
-      - samsung_health
-      - polar
-      - cronometer
-      - kardia
-      - whoop_v2
-      - ultrahuman
-      - my_fitness_pal_v2
-      - map_my_fitness
-      - runkeeper
-      title: Providers
-      description: ℹ️ This enum is non-exhaustive.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
-x-refined-from:
-- vital-lab-report-parser-api-openapi.yml
-- vital-lab-testing-api-openapi.yml
-- vital-link-api-openapi.yml
-- vital-openapi-original.json
-- vital-openapi-original.yml
-- vital-sense-api-openapi.yml
-- vital-team-api-openapi.yml
-- vital-users-api-openapi.yml
-- vital-wearables-api-openapi.yml

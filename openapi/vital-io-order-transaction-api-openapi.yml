@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Vital Io Order Transaction API
+  title: Junction Order Transaction API
+  description: https://docs.junction.com/
   version: 0.4.497
-  description: 'Operations tagged order_transaction across 3 of this provider''s published API definitions: vital-lab-testing-api-openapi.yml, vital-openapi-original.json, vital-openapi-original.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.us.junction.com
   x-fern-server-name: Production
@@ -46,15 +46,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: order_transaction
       x-fern-sdk-method-name: get_transaction
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v3/order_transaction/{transaction_id}/result:
     get:
       tags:
@@ -84,15 +75,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
       x-fern-sdk-group-name: order_transaction
       x-fern-sdk-method-name: get_transaction_result
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
   /v3/order_transaction/{transaction_id}/result/pdf:
     get:
       tags:
@@ -127,62 +109,186 @@ paths:
       x-fern-sdk-group-name: order_transaction
       x-fern-sdk-method-name: get_transaction_result_pdf
       x-fern-streaming: true
-    servers:
-    - url: https://api.us.junction.com
-      x-fern-server-name: Production
-    - url: https://api.eu.junction.com
-      x-fern-server-name: ProductionEU
-    - url: https://api.sandbox.us.junction.com
-      x-fern-server-name: Sandbox
-    - url: https://api.sandbox.eu.junction.com
-      x-fern-server-name: SandboxEU
 components:
   schemas:
-    UTCTimestampWithTimezoneOffset:
+    HTTPValidationError:
       properties:
-        timestamp:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    OrderSummary:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        origin:
+          anyOf:
+          - $ref: '#/components/schemas/OrderOrigin'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        parent_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Parent Id
+        last_status:
+          $ref: '#/components/schemas/OrderLowLevelStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        last_status_created_at:
           type: string
           format: date-time
-          title: Timestamp
-        timezone_offset:
-          type: integer
-          title: Timezone Offset
+          title: Last Status Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
       type: object
       required:
-      - timestamp
-      - timezone_offset
-      title: UTCTimestampWithTimezoneOffset
-    OrderTransactionStatus:
+      - id
+      - last_status
+      - last_status_created_at
+      - updated_at
+      - created_at
+      title: OrderSummary
+      description: Lightweight order summary.
+    OrderLowLevelStatus:
       type: string
       enum:
-      - active
+      - ordered
+      - requisition_created
+      - requisition_bypassed
+      - transit_customer
+      - out_for_delivery
+      - with_customer
+      - transit_lab
+      - delivered_to_lab
       - completed
+      - failure_to_deliver_to_lab
+      - failure_to_deliver_to_customer
+      - problem_in_transit_lab
+      - problem_in_transit_customer
+      - sample_error
+      - appointment_scheduled
+      - appointment_cancelled
+      - appointment_pending
+      - draw_completed
       - cancelled
-      title: OrderTransactionStatus
+      - lost
+      - do_not_process
+      - partial_results
+      - awaiting_registration
+      - registered
+      - redraw_available
+      - corrected
+      - lab_processing_blocked
+      title: OrderLowLevelStatus
       description: ℹ️ This enum is non-exhaustive.
-    PerformingLaboratory:
+    LabResultsRaw:
       properties:
-        name:
-          type: string
-          title: Name
-        phone_number:
+        metadata:
+          $ref: '#/components/schemas/LabResultsMetadata'
+        results:
           anyOf:
-          - type: string
+          - items:
+              $ref: '#/components/schemas/BiomarkerResult'
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Results
+        missing_results:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/MissingBiomarkerResult'
+            type: array
           - type: 'null'
-          title: Phone Number
-        medical_director:
+          title: Missing Results
+        sample_information:
           anyOf:
-          - type: string
+          - additionalProperties:
+              $ref: '#/components/schemas/SampleData'
+            type: object
           - type: 'null'
-          title: Medical Director
-        address:
+          title: Sample Information
+        order_transaction:
           anyOf:
-          - $ref: '#/components/schemas/Address'
+          - $ref: '#/components/schemas/ClientFacingOrderTransaction'
           - type: 'null'
       type: object
       required:
-      - name
-      title: PerformingLaboratory
+      - metadata
+      - results
+      title: LabResultsRaw
+      example:
+        metadata:
+          age: 19
+          clia_number: '12331231'
+          date_collected: '2022-02-02'
+          date_received: '2022-01-01'
+          date_reported: '2020-01-01'
+          dob: 18/08/1993
+          interpretation: normal
+          laboratory: Quest Diagnostics
+          patient: Bob Smith
+          provider: Dr. Jack Smith
+          specimen_number: '123131'
+          status: final
+        results:
+          '[marker]': {}
+          fsh: {}
+          ige: {}
+    Address:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
+    ResultType:
+      type: string
+      enum:
+      - numeric
+      - range
+      - comment
+      - coded_value
+      title: ResultType
+      description: ℹ️ This enum is non-exhaustive.
     FailureType:
       type: string
       enum:
@@ -199,6 +305,114 @@ components:
       - insufficient_volume
       title: FailureType
       description: ℹ️ This enum is non-exhaustive.
+    LabResultsMetadata:
+      properties:
+        age:
+          type: string
+          title: Age
+        dob:
+          type: string
+          title: Dob
+        clia_#:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: 'Clia #'
+        patient:
+          type: string
+          title: Patient
+        provider:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider
+        laboratory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Laboratory
+        date_reported:
+          type: string
+          title: Date Reported
+          deprecated: true
+        date_collected:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Collected
+          deprecated: true
+        specimen_number:
+          type: string
+          title: Specimen Number
+        date_received:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Received
+          deprecated: true
+        status:
+          type: string
+          title: Status
+          default: final
+        interpretation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Interpretation
+        patient_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Patient Id
+        account_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Id
+      type: object
+      required:
+      - age
+      - dob
+      - patient
+      - date_reported
+      - specimen_number
+      title: LabResultsMetadata
+      example:
+        age: 19
+        clia_number: '12331231'
+        date_collected: '2022-02-02'
+        date_received: '2022-01-01'
+        date_reported: '2020-01-01'
+        dob: 18/08/1993
+        interpretation: normal
+        laboratory: Quest Diagnostics
+        patient: Bob Smith
+        provider: Dr. Jack Smith
+        specimen_number: '123131'
+        status: final
+    ClinicalInformation:
+      properties:
+        fasting:
+          type: boolean
+          title: Fasting
+          default: false
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        information:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Information
+        total_volume:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Volume
+      type: object
+      title: ClinicalInformation
     ClientFacingOrderInTransaction:
       properties:
         id:
@@ -242,15 +456,213 @@ components:
       - updated_at
       title: ClientFacingOrderInTransaction
       description: Minimal order info for embedding in order_transaction payload.
-    ResultType:
+    ParentBiomarkerData:
+      properties:
+        marker_id:
+          type: integer
+          title: Marker Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+      type: object
+      required:
+      - marker_id
+      - name
+      - slug
+      title: ParentBiomarkerData
+    PerformingLaboratory:
+      properties:
+        name:
+          type: string
+          title: Name
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        medical_director:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medical Director
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+      type: object
+      required:
+      - name
+      title: PerformingLaboratory
+    OrderOrigin:
       type: string
       enum:
-      - numeric
-      - range
-      - comment
-      - coded_value
-      title: ResultType
+      - initial
+      - redraw
+      - recreation
+      title: OrderOrigin
       description: ℹ️ This enum is non-exhaustive.
+    UTCTimestampWithTimezoneOffset:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        timezone_offset:
+          type: integer
+          title: Timezone Offset
+      type: object
+      required:
+      - timestamp
+      - timezone_offset
+      title: UTCTimestampWithTimezoneOffset
+    ClientFacingOrderTransaction:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        status:
+          $ref: '#/components/schemas/OrderTransactionStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        orders:
+          items:
+            $ref: '#/components/schemas/ClientFacingOrderInTransaction'
+          type: array
+          title: Orders
+      type: object
+      required:
+      - id
+      - status
+      - orders
+      title: ClientFacingOrderTransaction
+      description: Order transaction info.
+    OrderTransactionStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - cancelled
+      title: OrderTransactionStatus
+      description: ℹ️ This enum is non-exhaustive.
+    SampleData:
+      properties:
+        sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sample Id
+        control_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Control Number
+        date_collected:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Collected
+        date_received:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Received
+        date_reported:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Reported
+        performing_laboratories:
+          anyOf:
+          - additionalProperties:
+              $ref: '#/components/schemas/PerformingLaboratory'
+            type: object
+          - type: 'null'
+          title: Performing Laboratories
+        clinical_information:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalInformation'
+          - type: 'null'
+      type: object
+      title: SampleData
+    GetOrderTransactionResponse:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        status:
+          $ref: '#/components/schemas/OrderTransactionStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        orders:
+          items:
+            $ref: '#/components/schemas/OrderSummary'
+          type: array
+          title: Orders
+      type: object
+      required:
+      - id
+      - team_id
+      - status
+      title: GetOrderTransactionResponse
+    MissingBiomarkerResult:
+      properties:
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        inferred_failure_type:
+          $ref: '#/components/schemas/FailureType'
+          description: ℹ️ This enum is non-exhaustive.
+        note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Note
+        loinc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc
+        loinc_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        source_markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ParentBiomarkerData'
+            type: array
+          - type: 'null'
+          title: Source Markers
+      type: object
+      required:
+      - name
+      - slug
+      - inferred_failure_type
+      title: MissingBiomarkerResult
     BiomarkerResult:
       properties:
         name:
@@ -374,452 +786,9 @@ components:
         type: numeric
         unit: x10E3/uL
         value: 0.4
-    LabResultsRaw:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/LabResultsMetadata'
-        results:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/BiomarkerResult'
-            type: array
-          - additionalProperties: true
-            type: object
-          title: Results
-        missing_results:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/MissingBiomarkerResult'
-            type: array
-          - type: 'null'
-          title: Missing Results
-        sample_information:
-          anyOf:
-          - additionalProperties:
-              $ref: '#/components/schemas/SampleData'
-            type: object
-          - type: 'null'
-          title: Sample Information
-        order_transaction:
-          anyOf:
-          - $ref: '#/components/schemas/ClientFacingOrderTransaction'
-          - type: 'null'
-      type: object
-      required:
-      - metadata
-      - results
-      title: LabResultsRaw
-      example:
-        metadata:
-          age: 19
-          clia_number: '12331231'
-          date_collected: '2022-02-02'
-          date_received: '2022-01-01'
-          date_reported: '2020-01-01'
-          dob: 18/08/1993
-          interpretation: normal
-          laboratory: Quest Diagnostics
-          patient: Bob Smith
-          provider: Dr. Jack Smith
-          specimen_number: '123131'
-          status: final
-        results:
-          '[marker]': {}
-          fsh: {}
-          ige: {}
-    Address:
-      properties:
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-          default: ''
-        country:
-          type: string
-          title: Country
-        zip:
-          type: string
-          title: Zip
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        access_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Access Notes
-      type: object
-      required:
-      - first_line
-      - country
-      - zip
-      - city
-      - state
-      title: Address
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ClinicalInformation:
-      properties:
-        fasting:
-          type: boolean
-          title: Fasting
-          default: false
-        notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Notes
-        information:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Information
-        total_volume:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Total Volume
-      type: object
-      title: ClinicalInformation
-    ParentBiomarkerData:
-      properties:
-        marker_id:
-          type: integer
-          title: Marker Id
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-      type: object
-      required:
-      - marker_id
-      - name
-      - slug
-      title: ParentBiomarkerData
-    OrderSummary:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        origin:
-          anyOf:
-          - $ref: '#/components/schemas/OrderOrigin'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        parent_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Parent Id
-        last_status:
-          $ref: '#/components/schemas/OrderLowLevelStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        last_status_created_at:
-          type: string
-          format: date-time
-          title: Last Status Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-      type: object
-      required:
-      - id
-      - last_status
-      - last_status_created_at
-      - updated_at
-      - created_at
-      title: OrderSummary
-      description: Lightweight order summary.
-    ClientFacingOrderTransaction:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        status:
-          $ref: '#/components/schemas/OrderTransactionStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        orders:
-          items:
-            $ref: '#/components/schemas/ClientFacingOrderInTransaction'
-          type: array
-          title: Orders
-      type: object
-      required:
-      - id
-      - status
-      - orders
-      title: ClientFacingOrderTransaction
-      description: Order transaction info.
-    GetOrderTransactionResponse:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-        status:
-          $ref: '#/components/schemas/OrderTransactionStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        orders:
-          items:
-            $ref: '#/components/schemas/OrderSummary'
-          type: array
-          title: Orders
-      type: object
-      required:
-      - id
-      - team_id
-      - status
-      title: GetOrderTransactionResponse
-    SampleData:
-      properties:
-        sample_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sample Id
-        control_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Control Number
-        date_collected:
-          anyOf:
-          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
-          - type: string
-          - type: 'null'
-          title: Date Collected
-        date_received:
-          anyOf:
-          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
-          - type: string
-          - type: 'null'
-          title: Date Received
-        date_reported:
-          anyOf:
-          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
-          - type: string
-          - type: 'null'
-          title: Date Reported
-        performing_laboratories:
-          anyOf:
-          - additionalProperties:
-              $ref: '#/components/schemas/PerformingLaboratory'
-            type: object
-          - type: 'null'
-          title: Performing Laboratories
-        clinical_information:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalInformation'
-          - type: 'null'
-      type: object
-      title: SampleData
-    MissingBiomarkerResult:
-      properties:
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-        inferred_failure_type:
-          $ref: '#/components/schemas/FailureType'
-          description: ℹ️ This enum is non-exhaustive.
-        note:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Note
-        loinc:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Loinc
-        loinc_slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Loinc Slug
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-        source_markers:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ParentBiomarkerData'
-            type: array
-          - type: 'null'
-          title: Source Markers
-      type: object
-      required:
-      - name
-      - slug
-      - inferred_failure_type
-      title: MissingBiomarkerResult
-    LabResultsMetadata:
-      properties:
-        age:
-          type: string
-          title: Age
-        dob:
-          type: string
-          title: Dob
-        clia_#:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: 'Clia #'
-        patient:
-          type: string
-          title: Patient
-        provider:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider
-        laboratory:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Laboratory
-        date_reported:
-          type: string
-          title: Date Reported
-          deprecated: true
-        date_collected:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Date Collected
-          deprecated: true
-        specimen_number:
-          type: string
-          title: Specimen Number
-        date_received:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Date Received
-          deprecated: true
-        status:
-          type: string
-          title: Status
-          default: final
-        interpretation:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Interpretation
-        patient_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Patient Id
-        account_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Id
-      type: object
-      required:
-      - age
-      - dob
-      - patient
-      - date_reported
-      - specimen_number
-      title: LabResultsMetadata
-      example:
-        age: 19
-        clia_number: '12331231'
-        date_collected: '2022-02-02'
-        date_received: '2022-01-01'
-        date_reported: '2020-01-01'
-        dob: 18/08/1993
-        interpretation: normal
-        laboratory: Quest Diagnostics
-        patient: Bob Smith
-        provider: Dr. Jack Smith
-        specimen_number: '123131'
-        status: final
-    OrderOrigin:
-      type: string
-      enum:
-      - initial
-      - redraw
-      - recreation
-      title: OrderOrigin
-      description: ℹ️ This enum is non-exhaustive.
-    OrderLowLevelStatus:
-      type: string
-      enum:
-      - ordered
-      - requisition_created
-      - requisition_bypassed
-      - transit_customer
-      - out_for_delivery
-      - with_customer
-      - transit_lab
-      - delivered_to_lab
-      - completed
-      - failure_to_deliver_to_lab
-      - failure_to_deliver_to_customer
-      - problem_in_transit_lab
-      - problem_in_transit_customer
-      - sample_error
-      - appointment_scheduled
-      - appointment_cancelled
-      - appointment_pending
-      - draw_completed
-      - cancelled
-      - lost
-      - do_not_process
-      - partial_results
-      - awaiting_registration
-      - registered
-      - redraw_available
-      - corrected
-      - lab_processing_blocked
-      title: OrderLowLevelStatus
-      description: ℹ️ This enum is non-exhaustive.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
       in: header
       name: x-vital-api-key
       description: Vital Team API Key
-x-refined-from:
-- vital-lab-testing-api-openapi.yml
-- vital-openapi-original.json
-- vital-openapi-original.yml
