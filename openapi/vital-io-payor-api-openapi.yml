@@ -90,24 +90,6 @@ components:
       - team
       title: ClientFacingPayorCodeSource
       description: ℹ️ This enum is non-exhaustive.
-    PayorCodeExternalProvider:
-      type: string
-      enum:
-      - change_healthcare
-      - availity
-      - stedi
-      - waystar
-      - claim_md
-      - apero
-      - pverify
-      title: PayorCodeExternalProvider
-      description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
     CreatePayorBody:
       properties:
         name:
@@ -160,6 +142,24 @@ components:
       - org_address
       - source
       title: ClientFacingPayor
+    PayorCodeExternalProvider:
+      type: string
+      enum:
+      - change_healthcare
+      - availity
+      - stedi
+      - waystar
+      - claim_md
+      - apero
+      - pverify
+      title: PayorCodeExternalProvider
+      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     apiKeyAuth:
       type: apiKey

@@ -44,6 +44,38 @@ webhooks:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ClientFacingContinuousQueryResultTableChanged:
+      properties:
+        event_type:
+          type: string
+          const: continuous_query.result_table.changed
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          items:
+            $ref: '#/components/schemas/ContinuousQueryResultTableChanges'
+          type: array
+          title: Data
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingContinuousQueryResultTableChanged
     ContinuousQueryResultTableChanges:
       properties:
         query_id:
@@ -85,38 +117,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ClientFacingContinuousQueryResultTableChanged:
-      properties:
-        event_type:
-          type: string
-          const: continuous_query.result_table.changed
-          title: Event Type
-          x-junction-exhaustive: true
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        client_user_id:
-          type: string
-          format: uuid
-          title: Client User Id
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-        data:
-          items:
-            $ref: '#/components/schemas/ContinuousQueryResultTableChanges'
-          type: array
-          title: Data
-      type: object
-      required:
-      - event_type
-      - user_id
-      - client_user_id
-      - team_id
-      - data
-      title: ClientFacingContinuousQueryResultTableChanged
   securitySchemes:
     apiKeyAuth:
       type: apiKey

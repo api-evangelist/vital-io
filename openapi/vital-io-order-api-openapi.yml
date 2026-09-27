@@ -1388,113 +1388,15 @@ paths:
       x-fern-sdk-method-name: update_on_site_collection_order_draw_completed
 components:
   schemas:
-    TimeSlot:
-      properties:
-        booking_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Booking Key
-        start:
-          type: string
-          format: date-time
-          title: Start
-          description: Time is in UTC
-        end:
-          type: string
-          format: date-time
-          title: End
-          description: Time is in UTC
-        expires_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expires At
-        price:
-          type: number
-          title: Price
-        is_priority:
-          type: boolean
-          title: Is Priority
-        num_appointments_available:
-          type: integer
-          title: Num Appointments Available
-      type: object
-      required:
-      - start
-      - end
-      - price
-      - is_priority
-      - num_appointments_available
-      title: TimeSlot
-    HealthInsuranceCreateRequest:
-      properties:
-        front_image:
-          anyOf:
-          - $ref: '#/components/schemas/Jpeg'
-          - $ref: '#/components/schemas/Png'
-          - type: 'null'
-          title: Front Image
-          description: An image of the front of the patient insurance card.
-        back_image:
-          anyOf:
-          - $ref: '#/components/schemas/Jpeg'
-          - $ref: '#/components/schemas/Png'
-          - type: 'null'
-          title: Back Image
-          description: An image of the back of the patient insurance card.
-        patient_signature_image:
-          anyOf:
-          - $ref: '#/components/schemas/Jpeg'
-          - $ref: '#/components/schemas/Png'
-          - type: 'null'
-          title: Patient Signature Image
-          description: An image of the patient signature for health insurance billing.
-        subjective:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Subjective
-          description: Textual description of what are the patient symptoms and attempted treatments.
-        assessment_plan:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Assessment Plan
-          description: Textual description of what are the physician assessments and testing plans.
-        payor_code:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Payor Code
-          description: Unique identifier representing a specific Health Insurance.
-        insurance_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Insurance Id
-          description: Insurance unique number assigned to a patient, usually present on the insurance card.
-        responsible_relationship:
-          anyOf:
-          - $ref: '#/components/schemas/ResponsibleRelationship'
-          - type: 'null'
-          description: Relationship between the patient and the insurance contractor. Values can be (Self, Spouse, Other Relationship). ℹ️ This enum is non-exhaustive.
-        responsible_details:
-          anyOf:
-          - $ref: '#/components/schemas/vital_core__schemas__db_schemas__lab_test__health_insurance__PersonDetails'
-          - type: 'null'
-          description: Responsible details when the value of responsible_relationship is not 'Self'.
-        diagnosis_codes:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Diagnosis Codes
-          description: Diagnosis codes for insurance billing.
-      type: object
-      title: HealthInsuranceCreateRequest
+    LabTestCollectionMethod:
+      type: string
+      enum:
+      - testkit
+      - walk_in_test
+      - at_home_phlebotomy
+      - on_site_collection
+      title: LabTestCollectionMethod
+      description: The method used to perform a lab test. ℹ️ This enum is non-exhaustive.
     Address:
       properties:
         first_line:
@@ -1532,352 +1434,36 @@ components:
       - city
       - state
       title: Address
-    LabTestSampleType:
-      type: string
-      enum:
-      - dried_blood_spot
-      - arm_collector
-      - serum
-      - saliva
-      - urine
-      - stool
-      title: LabTestSampleType
-      description: The type of sample used to perform a lab test. ℹ️ This enum is non-exhaustive.
-    ClientFacingPhysician:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        npi:
-          type: string
-          title: Npi
-      type: object
-      required:
-      - first_name
-      - last_name
-      - npi
-      title: ClientFacingPhysician
-    Ethnicity:
-      type: string
-      enum:
-      - hispanic
-      - non_hispanic
-      - ashkenazi_jewish
-      - other
-      title: Ethnicity
-      description: ℹ️ This enum is non-exhaustive.
-    DaySlots:
-      properties:
-        location:
-          anyOf:
-          - $ref: '#/components/schemas/AppointmentLocation'
-          - type: 'null'
-        date:
-          type: string
-          format: date
-          title: Date
-        slots:
-          items:
-            $ref: '#/components/schemas/TimeSlot'
-          type: array
-          title: Slots
-      type: object
-      required:
-      - date
-      - slots
-      title: DaySlots
-    AoEAnswer:
+    ParentBiomarkerData:
       properties:
         marker_id:
           type: integer
           title: Marker Id
-        question_id:
-          type: integer
-          title: Question Id
-        answer:
-          type: string
-          title: Answer
-      type: object
-      required:
-      - marker_id
-      - question_id
-      - answer
-      title: AoEAnswer
-    SexualOrientation:
-      type: string
-      enum:
-      - lesbian_gay_or_homosexual
-      - heterosexual_or_straight
-      - bisexual
-      - dont_know
-      - other
-      title: SexualOrientation
-      description: ℹ️ This enum is non-exhaustive.
-    api__api_v1__endpoints__vital_api__lab_testing__orders__helpers__AppointmentCancelRequest:
-      properties:
-        cancellation_reason_id:
-          type: string
-          format: uuid4
-          title: Cancellation Reason Id
-        notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Notes
-      type: object
-      required:
-      - cancellation_reason_id
-      title: AppointmentCancelRequest
-    ResultType:
-      type: string
-      enum:
-      - numeric
-      - range
-      - comment
-      - coded_value
-      title: ResultType
-      description: ℹ️ This enum is non-exhaustive.
-    PSCAreaInfoDetails:
-      properties:
-        appointment_with_vital:
-          type: boolean
-          title: Appointment With Vital
-        within_radius:
-          type: integer
-          title: Within Radius
-        radius:
-          type: string
-          title: Radius
-        capabilities:
-          items:
-            $ref: '#/components/schemas/LabLocationCapability'
-          type: array
-          title: Capabilities
-      type: object
-      required:
-      - appointment_with_vital
-      - within_radius
-      - radius
-      title: PSCAreaInfoDetails
-    ClientFacingWalkInOrderDetails:
-      properties:
-        type:
-          type: string
-          const: walk_in_test
-          title: Type
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ClientFacingWalkInTestOrder'
-          - type: 'null'
-      type: object
-      required:
-      - type
-      title: ClientFacingWalkInOrderDetails
-    AppointmentProvider:
-      type: string
-      enum:
-      - getlabs
-      - phlebfinders
-      - quest
-      - sonora_quest
-      title: AppointmentProvider
-      description: ℹ️ This enum is non-exhaustive.
-    LabTestCollectionMethod:
-      type: string
-      enum:
-      - testkit
-      - walk_in_test
-      - at_home_phlebotomy
-      - on_site_collection
-      title: LabTestCollectionMethod
-      description: The method used to perform a lab test. ℹ️ This enum is non-exhaustive.
-    OrderStatusDetail:
-      type: string
-      enum:
-      - fulfillment_error
-      - date_of_collection_unspecified
-      - demographic_information_unspecified
-      - demographic_information_mismatch
-      - sample_quantity_not_sufficient
-      - sample_contaminated
-      - sample_stability_exceeded
-      - sample_hemolyzed
-      - sample_improper_collection
-      title: OrderStatusDetail
-      description: A descriptive-only additional field to be used in combination with OrderStatus. Exposed in the API. ℹ️ This enum is non-exhaustive.
-    ResponsibleRelationship:
-      type: string
-      enum:
-      - Self
-      - Spouse
-      - Other
-      title: ResponsibleRelationship
-      description: ℹ️ This enum is non-exhaustive.
-    PerformingLaboratory:
-      properties:
         name:
           type: string
           title: Name
-        phone_number:
+        slug:
+          type: string
+          title: Slug
+        provider_id:
           anyOf:
           - type: string
           - type: 'null'
-          title: Phone Number
-        medical_director:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Medical Director
-        address:
-          anyOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
+          title: Provider Id
       type: object
       required:
+      - marker_id
       - name
-      title: PerformingLaboratory
-    AppointmentEventStatus:
+      - slug
+      title: ParentBiomarkerData
+    Gender:
       type: string
       enum:
-      - pending
-      - reserved
-      - scheduled
-      - completed
-      - cancelled
-      - in_progress
-      title: AppointmentEventStatus
-      description: ℹ️ This enum is non-exhaustive.
-    ResendWebhookResponse:
-      properties:
-        order_ids:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: Order Ids
-      type: object
-      required:
-      - order_ids
-      title: ResendWebhookResponse
-    ResendWebhookBody:
-      properties:
-        order_ids:
-          anyOf:
-          - items:
-              type: string
-              format: uuid
-            type: array
-          - type: 'null'
-          title: Order Ids
-        start_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Start At
-        end_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End At
-      type: object
-      title: ResendWebhookBody
-    ClientFacingAtHomePhlebotomyOrderDetails:
-      properties:
-        type:
-          type: string
-          const: at_home_phlebotomy
-          title: Type
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ClientFacingAtHomePhlebotomyOrder'
-          - type: 'null'
-      type: object
-      required:
-      - type
-      title: ClientFacingAtHomePhlebotomyOrderDetails
-    OrderSetRequest:
-      properties:
-        lab_test_ids:
-          anyOf:
-          - items:
-              type: string
-              format: uuid
-            type: array
-          - type: 'null'
-          title: Lab Test Ids
-        add_on:
-          anyOf:
-          - $ref: '#/components/schemas/AddOnOrder'
-          - type: 'null'
-        lab_account_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Lab Account Id
-      type: object
-      title: OrderSetRequest
-    Question:
-      properties:
-        id:
-          type: integer
-          format: int64
-          title: Id
-        required:
-          type: boolean
-          title: Required
-        code:
-          type: string
-          title: Code
-        value:
-          type: string
-          title: Value
-        type:
-          $ref: '#/components/schemas/QuestionType'
-          description: ℹ️ This enum is non-exhaustive.
-        sequence:
-          type: integer
-          title: Sequence
-        answers:
-          items:
-            $ref: '#/components/schemas/Answer'
-          type: array
-          title: Answers
-        constraint:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Constraint
-        default:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Default
-      type: object
-      required:
-      - id
-      - required
-      - code
-      - value
-      - type
-      - sequence
-      - answers
-      title: Question
-    GenderIdentity:
-      type: string
-      enum:
-      - male
       - female
-      - female_to_male_ftm_transgender_male_trans_man
-      - male_to_female_mtf_transgender_female_trans_woman
-      - genderqueer
+      - male
       - other
-      title: GenderIdentity
+      - unknown
+      title: Gender
       description: ℹ️ This enum is non-exhaustive.
     PatientAddressWithValidation:
       properties:
@@ -1925,322 +1511,6 @@ components:
       - zip
       - country
       title: PatientAddressWithValidation
-    Gender:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Gender
-      description: ℹ️ This enum is non-exhaustive.
-    ClientFacingMarker:
-      properties:
-        id:
-          type: integer
-          title: Id
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        lab_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Lab Id
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/MarkerType'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Unit
-        price:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Price
-        aoe:
-          anyOf:
-          - $ref: '#/components/schemas/AoE'
-          - type: 'null'
-        a_la_carte_enabled:
-          type: boolean
-          title: A La Carte Enabled
-          default: false
-        common_tat_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Common Tat Days
-        worst_case_tat_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Worst Case Tat Days
-        is_orderable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Orderable
-          default: true
-      type: object
-      required:
-      - id
-      - name
-      - slug
-      title: ClientFacingMarker
-      example:
-        aoe:
-          questions:
-          - answers:
-            - code: answer_code
-              id: 1
-              value: answer_value
-            code: question_code
-            id: 1
-            value: question_value
-        common_tat_days: 3
-        description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
-        id: 1
-        is_orderable: true
-        lab_id: 1
-        name: Hemoglobin A1c
-        price: '10.00'
-        provider_id: '1234'
-        slug: hemoglobin-a1c
-        type: biomarker
-        unit: '%'
-        worst_case_tat_days: 5
-    LabTestStatus:
-      type: string
-      enum:
-      - active
-      - pending_approval
-      - inactive
-      title: LabTestStatus
-      description: ℹ️ This enum is non-exhaustive.
-    RequestAppointmentRequest:
-      properties:
-        address:
-          $ref: '#/components/schemas/USAddress'
-          description: At-home phlebotomy appointment address.
-        provider:
-          $ref: '#/components/schemas/AppointmentProvider'
-          description: ℹ️ This enum is non-exhaustive.
-        appointment_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Appointment Notes
-      type: object
-      required:
-      - address
-      - provider
-      title: RequestAppointmentRequest
-    Answer:
-      properties:
-        id:
-          type: integer
-          title: Id
-        code:
-          type: string
-          title: Code
-        value:
-          type: string
-          title: Value
-      type: object
-      required:
-      - id
-      - code
-      - value
-      title: Answer
-    Billing:
-      type: string
-      enum:
-      - client_bill
-      - commercial_insurance
-      - patient_bill_passthrough
-      - patient_bill
-      title: Billing
-      description: ℹ️ This enum is non-exhaustive.
-    OrderLowLevelStatus:
-      type: string
-      enum:
-      - ordered
-      - requisition_created
-      - requisition_bypassed
-      - transit_customer
-      - out_for_delivery
-      - with_customer
-      - transit_lab
-      - delivered_to_lab
-      - completed
-      - failure_to_deliver_to_lab
-      - failure_to_deliver_to_customer
-      - problem_in_transit_lab
-      - problem_in_transit_customer
-      - sample_error
-      - appointment_scheduled
-      - appointment_cancelled
-      - appointment_pending
-      - draw_completed
-      - cancelled
-      - lost
-      - do_not_process
-      - partial_results
-      - awaiting_registration
-      - registered
-      - redraw_available
-      - corrected
-      - lab_processing_blocked
-      title: OrderLowLevelStatus
-      description: ℹ️ This enum is non-exhaustive.
-    PatientAddressCompatible:
-      properties:
-        receiver_name:
-          type: string
-          title: Receiver Name
-          default: ''
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        zip:
-          type: string
-          title: Zip
-        country:
-          type: string
-          title: Country
-        access_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Access Notes
-        phone_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone Number
-      type: object
-      required:
-      - first_line
-      - city
-      - state
-      - zip
-      - country
-      title: PatientAddressCompatible
-    PatientDetailsWithValidation:
-      properties:
-        first_name:
-          type: string
-          maxLength: 50
-          minLength: 1
-          title: First Name
-        last_name:
-          type: string
-          maxLength: 50
-          minLength: 1
-          title: Last Name
-        dob:
-          type: string
-          format: date
-          title: Dob
-        gender:
-          $ref: '#/components/schemas/Gender'
-          description: ℹ️ This enum is non-exhaustive.
-        phone_number:
-          type: string
-          title: Phone Number
-        email:
-          type: string
-          format: email
-          title: Email
-        medical_proxy:
-          anyOf:
-          - $ref: '#/components/schemas/GuarantorDetails'
-          - type: 'null'
-          description: Parent/medical_proxy details. Required if patient is a minor.
-        race:
-          anyOf:
-          - $ref: '#/components/schemas/Race'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-        ethnicity:
-          anyOf:
-          - $ref: '#/components/schemas/Ethnicity'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-        sexual_orientation:
-          anyOf:
-          - $ref: '#/components/schemas/SexualOrientation'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-        gender_identity:
-          anyOf:
-          - $ref: '#/components/schemas/GenderIdentity'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-        household_income:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Household Income
-          description: Household income in USD. If not provided, will be set to None
-        household_size:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Household Size
-          description: Household size. If not provided, will be set to None
-      type: object
-      required:
-      - first_name
-      - last_name
-      - dob
-      - gender
-      - phone_number
-      - email
-      title: PatientDetailsWithValidation
-      description: Patient details with validation for first_name, last_name, email, and dob.
-    ConsentType:
-      type: string
-      enum:
-      - terms-of-use
-      - telehealth-informed-consent
-      - mobile-terms-and-conditions
-      - notice-of-privacy-practices
-      - privacy-policy
-      - hipaa-authorization
-      title: ConsentType
-      description: ℹ️ This enum is non-exhaustive.
     ClientFacingLabTest:
       properties:
         id:
@@ -2360,1054 +1630,6 @@ components:
           price: 10
           sample_type: dried blood spot
           status: active
-    SimulationFlags:
-      properties:
-        interpretation:
-          $ref: '#/components/schemas/Interpretation'
-          default: normal
-          description: ℹ️ This enum is non-exhaustive.
-        result_types:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ResultType'
-            type: array
-          - type: 'null'
-          title: Result Types
-        has_missing_results:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Missing Results
-      type: object
-      title: SimulationFlags
-    ClientFacingOnSiteCollectionOrder:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: The Junction on-site collection Order ID
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - id
-      - created_at
-      - updated_at
-      title: ClientFacingOnSiteCollectionOrder
-      description: 'Schema for an on-site collection order in the client facing API.
-
-        To be used as part of a ClientFacingOrder.'
-      example:
-        created_at: '2020-01-01T00:00:00Z'
-        id: 64d787c3-825d-462b-bf0c-5b895f7a9bf5
-        updated_at: '2020-01-01T00:00:00Z'
-    ClientFacingShipment:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: The Vital Shipment ID
-        outbound_tracking_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Outbound Tracking Number
-          description: Tracking number for delivery to customer
-        outbound_tracking_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Outbound Tracking Url
-          description: Tracking url for delivery to customer
-        inbound_tracking_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inbound Tracking Number
-          description: Tracking number for delivery to lab
-        inbound_tracking_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inbound Tracking Url
-          description: Tracking url for delivery to lab
-        outbound_courier:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Outbound Courier
-          description: Courier used for delivery to customer
-        inbound_courier:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Inbound Courier
-          description: Courier used for delivery to lab
-        notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Notes
-          description: Notes associated to the Vital shipment
-      type: object
-      required:
-      - id
-      - outbound_tracking_number
-      - outbound_tracking_url
-      - inbound_tracking_number
-      - inbound_tracking_url
-      - outbound_courier
-      - inbound_courier
-      - notes
-      title: ClientFacingShipment
-      description: 'Schema for a Shipment in the client facing API.
-
-
-        To be used as part of a ClientFacingTestkitOrder.'
-      example:
-        id: 6d249293-7ee9-4c7f-8889-113ccbf5f89b
-        inbound_courier: usps
-        inbound_tracking_number: <inbound_tracking_number>
-        inbound_tracking_url: <inbound_tracking_url>
-        notes: <notes>
-        outbound_courier: usps
-        outbound_tracking_number: <outbound_tracking_number>
-        outbound_tracking_url: <outbound_tracking_url>
-    AppointmentAvailabilitySlots:
-      properties:
-        slots:
-          items:
-            $ref: '#/components/schemas/DaySlots'
-          type: array
-          title: Slots
-        timezone:
-          anyOf:
-          - type: string
-            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
-          - type: 'null'
-          title: Timezone
-      type: object
-      required:
-      - slots
-      title: AppointmentAvailabilitySlots
-    ClinicalInformation:
-      properties:
-        fasting:
-          type: boolean
-          title: Fasting
-          default: false
-        notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Notes
-        information:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Information
-        total_volume:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Total Volume
-      type: object
-      title: ClinicalInformation
-    UpdateOrderBody:
-      properties:
-        activate_by:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Activate By
-          description: 'The date on which the order should be activated (dispatched to the lab). Must be today or a future date. Set to `null` to clear an existing scheduled date and dispatch the order immediately. Note: an order originally created for immediate processing (no `activate_by` at creation time) cannot be rescheduled — only orders that were created with an `activate_by` can have it changed or cleared.'
-      type: object
-      required:
-      - activate_by
-      title: UpdateOrderBody
-      description: Patch body for updating a modifiable order's scheduled activation date.
-    ClientFacingAppointmentCancellationReason:
-      properties:
-        id:
-          type: string
-          format: uuid4
-          title: Id
-        name:
-          type: string
-          title: Name
-        is_refundable:
-          type: boolean
-          title: Is Refundable
-      type: object
-      required:
-      - id
-      - name
-      - is_refundable
-      title: ClientFacingAppointmentCancellationReason
-      example:
-        id: 04e00ffd-f053-4732-9be8-72913ea1981d
-        is_refundable: true
-        name: I'm feeling sick
-    UTCTimestampWithTimezoneOffset:
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-          title: Timestamp
-        timezone_offset:
-          type: integer
-          title: Timezone Offset
-      type: object
-      required:
-      - timestamp
-      - timezone_offset
-      title: UTCTimestampWithTimezoneOffset
-    OrderTransactionStatus:
-      type: string
-      enum:
-      - active
-      - completed
-      - cancelled
-      title: OrderTransactionStatus
-      description: ℹ️ This enum is non-exhaustive.
-    SampleData:
-      properties:
-        sample_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sample Id
-        control_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Control Number
-        date_collected:
-          anyOf:
-          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
-          - type: string
-          - type: 'null'
-          title: Date Collected
-        date_received:
-          anyOf:
-          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
-          - type: string
-          - type: 'null'
-          title: Date Received
-        date_reported:
-          anyOf:
-          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
-          - type: string
-          - type: 'null'
-          title: Date Reported
-        performing_laboratories:
-          anyOf:
-          - additionalProperties:
-              $ref: '#/components/schemas/PerformingLaboratory'
-            type: object
-          - type: 'null'
-          title: Performing Laboratories
-        clinical_information:
-          anyOf:
-          - $ref: '#/components/schemas/ClinicalInformation'
-          - type: 'null'
-      type: object
-      title: SampleData
-    ClientFacingWalkInTestOrder:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: The Vital walk-in test Order ID
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        appointment_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Appointment Id
-      type: object
-      required:
-      - id
-      - created_at
-      - updated_at
-      title: ClientFacingWalkInTestOrder
-      description: 'Schema for a walk-in test order in the client facing API.
-
-
-        To be used as part of a ClientFacingOrder.'
-      example:
-        appointment_id: 961495c2-aa74-43ac-bd7d-4284b46499bf
-        created_at: '2020-01-01T00:00:00Z'
-        id: 757df2fd-8ff1-4399-bc48-c37527d9d73a
-        updated_at: '2020-01-01T00:00:00Z'
-    ClientFacingTestKitOrderDetails:
-      properties:
-        type:
-          type: string
-          const: testkit
-          title: Type
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ClientFacingTestkitOrder'
-          - type: 'null'
-      type: object
-      required:
-      - type
-      title: ClientFacingTestKitOrderDetails
-    OrderStatus:
-      type: string
-      enum:
-      - received.walk_in_test.ordered
-      - received.walk_in_test.requisition_created
-      - received.walk_in_test.requisition_bypassed
-      - completed.walk_in_test.completed
-      - sample_with_lab.walk_in_test.partial_results
-      - failed.walk_in_test.sample_error
-      - cancelled.walk_in_test.cancelled
-      - collecting_sample.walk_in_test.appointment_pending
-      - collecting_sample.walk_in_test.appointment_scheduled
-      - collecting_sample.walk_in_test.appointment_cancelled
-      - collecting_sample.walk_in_test.redraw_available
-      - received.at_home_phlebotomy.ordered
-      - received.at_home_phlebotomy.requisition_created
-      - received.at_home_phlebotomy.requisition_bypassed
-      - collecting_sample.at_home_phlebotomy.appointment_pending
-      - collecting_sample.at_home_phlebotomy.appointment_scheduled
-      - collecting_sample.at_home_phlebotomy.draw_completed
-      - collecting_sample.at_home_phlebotomy.appointment_cancelled
-      - completed.at_home_phlebotomy.completed
-      - sample_with_lab.at_home_phlebotomy.partial_results
-      - cancelled.at_home_phlebotomy.cancelled
-      - failed.at_home_phlebotomy.sample_error
-      - received.testkit.ordered
-      - received.testkit.awaiting_registration
-      - received.testkit.requisition_created
-      - received.testkit.requisition_bypassed
-      - received.testkit.registered
-      - collecting_sample.testkit.transit_customer
-      - collecting_sample.testkit.out_for_delivery
-      - collecting_sample.testkit.with_customer
-      - collecting_sample.testkit.transit_lab
-      - sample_with_lab.testkit.delivered_to_lab
-      - sample_with_lab.testkit.lab_processing_blocked
-      - completed.testkit.completed
-      - failed.testkit.failure_to_deliver_to_customer
-      - failed.testkit.failure_to_deliver_to_lab
-      - failed.testkit.sample_error
-      - failed.testkit.lost
-      - cancelled.testkit.cancelled
-      - cancelled.testkit.do_not_process
-      - collecting_sample.testkit.problem_in_transit_customer
-      - collecting_sample.testkit.problem_in_transit_lab
-      - received.on_site_collection.ordered
-      - received.on_site_collection.requisition_created
-      - received.on_site_collection.requisition_bypassed
-      - sample_with_lab.on_site_collection.draw_completed
-      - completed.on_site_collection.completed
-      - cancelled.on_site_collection.cancelled
-      - sample_with_lab.on_site_collection.partial_results
-      - failed.on_site_collection.sample_error
-      - completed.walk_in_test.corrected
-      - completed.at_home_phlebotomy.corrected
-      - completed.on_site_collection.corrected
-      - completed.testkit.corrected
-      title: OrderStatus
-      description: 'Used in combination with OrderStatusDetail to represent the current order state.
-
-        OrderStatus is driven by a FSM whereas OrderStatusDetail is descriptive only. ℹ️ This enum is non-exhaustive.'
-    ClientFacingLabs:
-      type: string
-      enum:
-      - quest
-      - labcorp
-      - bioreference
-      - sonora_quest
-      title: ClientFacingLabs
-      description: ℹ️ This enum is non-exhaustive.
-    PhlebotomyAreaInfo:
-      properties:
-        is_served:
-          type: boolean
-          title: Is Served
-        providers:
-          items:
-            $ref: '#/components/schemas/PhlebotomyProviderInfo'
-          type: array
-          title: Providers
-      type: object
-      required:
-      - is_served
-      - providers
-      title: PhlebotomyAreaInfo
-    PSCAreaInfo:
-      properties:
-        patient_service_centers:
-          $ref: '#/components/schemas/PSCAreaInfoDetails'
-        supported_bill_types:
-          items:
-            $ref: '#/components/schemas/Billing'
-          type: array
-          title: Supported Bill Types
-        lab_id:
-          type: integer
-          title: Lab Id
-      type: object
-      required:
-      - patient_service_centers
-      - supported_bill_types
-      - lab_id
-      title: PSCAreaInfo
-    BiomarkerResult:
-      properties:
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-          default: ''
-        value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Value
-          description: 'Deprecated: Use ''result'' (string) and `type` (enum) instead. '
-          deprecated: true
-          x-fern-ignore: true
-        result:
-          type: string
-          title: Result
-        type:
-          $ref: '#/components/schemas/ResultType'
-          description: ℹ️ This enum is non-exhaustive.
-        unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Unit
-        timestamp:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Timestamp
-        notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Notes
-        reference_range:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Reference Range
-        min_range_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Min Range Value
-        max_range_value:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Max Range Value
-        is_above_max_range:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Above Max Range
-        is_below_min_range:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Below Min Range
-        interpretation:
-          type: string
-          title: Interpretation
-          default: normal
-        loinc:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Loinc
-        loinc_slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Loinc Slug
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-        source_markers:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/ParentBiomarkerData'
-            type: array
-          - type: 'null'
-          title: Source Markers
-        performing_laboratory:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Performing Laboratory
-        source_sample_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Source Sample Id
-      type: object
-      required:
-      - name
-      - result
-      - type
-      title: BiomarkerResult
-      description: Represent the schema for an individual biomarker result.
-      example:
-        interpretation: normal
-        is_above_max_range: false
-        is_below_min_range: false
-        loinc: 742-7
-        loinc_slug: monocytes-auto-bld-vol
-        max_range_value: 0.9
-        min_range_value: 0.1
-        name: Monocytes(Absolute)
-        notes: Final
-        result: '0.4'
-        slug: monocytes-absolute
-        timestamp: '2023-11-01T08:28:00+00:00'
-        type: numeric
-        unit: x10E3/uL
-        value: 0.4
-    ClientFacingAppointmentEvent:
-      properties:
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        status:
-          $ref: '#/components/schemas/AppointmentEventStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        data:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Data
-      type: object
-      required:
-      - created_at
-      - status
-      title: ClientFacingAppointmentEvent
-    QuestionType:
-      type: string
-      enum:
-      - choice
-      - text
-      - numeric
-      - multi_choice
-      title: QuestionType
-      description: ℹ️ This enum is non-exhaustive.
-    ClientFacingAppointment:
-      properties:
-        id:
-          type: string
-          format: uuid4
-          title: Id
-        user_id:
-          type: string
-          format: uuid4
-          title: User Id
-        order_id:
-          type: string
-          format: uuid4
-          title: Order Id
-        order_transaction_id:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: 'null'
-          title: Order Transaction Id
-        address:
-          $ref: '#/components/schemas/USAddress'
-        location:
-          $ref: '#/components/schemas/LngLat'
-        start_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Start At
-          description: Time is in UTC
-        end_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End At
-          description: Time is in UTC
-        iana_timezone:
-          anyOf:
-          - type: string
-            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
-          - type: 'null'
-          title: Iana Timezone
-        type:
-          $ref: '#/components/schemas/AppointmentType'
-          description: ℹ️ This enum is non-exhaustive.
-        provider:
-          $ref: '#/components/schemas/AppointmentProvider'
-          description: ℹ️ This enum is non-exhaustive.
-        status:
-          $ref: '#/components/schemas/AppointmentStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        provider_id:
-          type: string
-          title: Provider Id
-        external_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Id
-        can_reschedule:
-          type: boolean
-          title: Can Reschedule
-        appointment_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Appointment Notes
-        event_status:
-          $ref: '#/components/schemas/AppointmentEventStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        event_data:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Event Data
-        events:
-          items:
-            $ref: '#/components/schemas/ClientFacingAppointmentEvent'
-          type: array
-          title: Events
-      type: object
-      required:
-      - id
-      - user_id
-      - order_id
-      - address
-      - location
-      - start_at
-      - end_at
-      - type
-      - provider
-      - status
-      - provider_id
-      - can_reschedule
-      - event_status
-      - events
-      title: ClientFacingAppointment
-      example:
-        address:
-          access_notes: 'Gate code #1234, use side entrance'
-          city: San Francisco
-          country: United States
-          first_line: 123 Main St.
-          second_line: Apt. 208
-          state: CA
-          zip_code: '91189'
-        appointment_notes: Please bring photo ID
-        can_reschedule: true
-        end_at: '2022-01-01T00:00:00'
-        event_data:
-          description: Metadata field containing provider specific data, like cancellation reason or origin
-        event_status: scheduled
-        events:
-        - created_at: '2022-01-01T00:00:00Z'
-          status: scheduled
-        - created_at: '2022-01-02T00:00:00Z'
-          status: completed
-        external_id: ext-123
-        iana_timezone: America/New_York
-        id: 1614a22c-4322-43a0-96bc-8ff01e5401c8
-        location:
-          lat: 37.7749295
-          lng: -122.4194155
-        order_id: 6b6b38ef-d312-48b4-95d4-731fc2ce7a6f
-        order_transaction_id: cc089173-7db8-428e-a233-c58472226917
-        provider: getlabs
-        provider_id: '123'
-        start_at: '2022-01-01T00:00:00'
-        status: confirmed
-        type: phlebotomy
-        user_id: 61fac3ce-a2c9-4218-b404-941ca948776f
-    LabLocationCapability:
-      type: string
-      enum:
-      - stat
-      - appointment_scheduling_via_junction
-      - appointment_scheduling_with_lab
-      title: LabLocationCapability
-      description: ℹ️ This enum is non-exhaustive.
-    LabLocationMetadata:
-      properties:
-        name:
-          type: string
-          title: Name
-        state:
-          type: string
-          title: State
-        city:
-          type: string
-          title: City
-        zip_code:
-          type: string
-          title: Zip Code
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-        phone_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone Number
-        fax_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Fax Number
-        hours:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Hours
-      type: object
-      required:
-      - name
-      - state
-      - city
-      - zip_code
-      - first_line
-      title: LabLocationMetadata
-    Race:
-      type: string
-      enum:
-      - african_american_or_black
-      - asian
-      - indigenous_native_american_alaska_native
-      - other
-      - pacific_islander_or_hawaiian
-      - white_caucasian
-      title: Race
-      description: ℹ️ This enum is non-exhaustive.
-    ClientFacingLab:
-      properties:
-        id:
-          type: integer
-          title: Id
-        slug:
-          type: string
-          title: Slug
-        name:
-          type: string
-          title: Name
-        first_line_address:
-          type: string
-          title: First Line Address
-        city:
-          type: string
-          title: City
-        zipcode:
-          type: string
-          title: Zipcode
-        collection_methods:
-          items:
-            $ref: '#/components/schemas/LabTestCollectionMethod'
-          type: array
-          title: Collection Methods
-        sample_types:
-          items:
-            $ref: '#/components/schemas/LabTestSampleType'
-          type: array
-          title: Sample Types
-      type: object
-      required:
-      - id
-      - slug
-      - name
-      - first_line_address
-      - city
-      - zipcode
-      - collection_methods
-      - sample_types
-      title: ClientFacingLab
-      example:
-        city: San Francisco
-        collection_methods:
-        - testkit
-        first_line_address: 123 Main St
-        id: 1
-        name: LabCorp
-        sample_types:
-        - saliva
-        slug: labcorp
-        zipcode: '91789'
-    AreaInfo:
-      properties:
-        zip_code:
-          type: string
-          pattern: ^\d{5}(-\d{4})?$
-          title: Zip Code
-        phlebotomy:
-          $ref: '#/components/schemas/PhlebotomyAreaInfo'
-        central_labs:
-          additionalProperties:
-            $ref: '#/components/schemas/PSCAreaInfo'
-          propertyNames:
-            $ref: '#/components/schemas/ClientFacingLabs'
-          type: object
-          title: Central Labs
-      type: object
-      required:
-      - zip_code
-      - phlebotomy
-      - central_labs
-      title: AreaInfo
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    AppointmentType:
-      type: string
-      enum:
-      - phlebotomy
-      - patient_service_center
-      title: AppointmentType
-      description: ℹ️ This enum is non-exhaustive.
-    AoE:
-      properties:
-        questions:
-          items:
-            $ref: '#/components/schemas/Question'
-          type: array
-          title: Questions
-      type: object
-      required:
-      - questions
-      title: AoE
-    LabResultsMetadata:
-      properties:
-        age:
-          type: string
-          title: Age
-        dob:
-          type: string
-          title: Dob
-        clia_#:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: 'Clia #'
-        patient:
-          type: string
-          title: Patient
-        provider:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider
-        laboratory:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Laboratory
-        date_reported:
-          type: string
-          title: Date Reported
-          deprecated: true
-        date_collected:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Date Collected
-          deprecated: true
-        specimen_number:
-          type: string
-          title: Specimen Number
-        date_received:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Date Received
-          deprecated: true
-        status:
-          type: string
-          title: Status
-          default: final
-        interpretation:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Interpretation
-        patient_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Patient Id
-        account_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Account Id
-      type: object
-      required:
-      - age
-      - dob
-      - patient
-      - date_reported
-      - specimen_number
-      title: LabResultsMetadata
-      example:
-        age: 19
-        clia_number: '12331231'
-        date_collected: '2022-02-02'
-        date_received: '2022-01-01'
-        date_reported: '2020-01-01'
-        dob: 18/08/1993
-        interpretation: normal
-        laboratory: Quest Diagnostics
-        patient: Bob Smith
-        provider: Dr. Jack Smith
-        specimen_number: '123131'
-        status: final
-    ClientFacingAtHomePhlebotomyOrder:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-          description: The Vital at-home phlebotomy Order ID
-        appointment_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Appointment Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - id
-      - created_at
-      - updated_at
-      title: ClientFacingAtHomePhlebotomyOrder
-      description: 'Schema for a at-home-phlebotomy test order in the client facing API.
-
-
-        To be used as part of a ClientFacingOrder.'
-      example:
-        appointment_id: 10d7a598-5a7d-4743-9045-6038c73eeace
-        created_at: '2020-01-01T00:00:00Z'
-        id: 81d0f268-303b-486a-b8c9-1d2e4466e50b
-        updated_at: '2020-01-01T00:00:00Z'
-    ClientFacingOrderInTransaction:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        low_level_status:
-          anyOf:
-          - $ref: '#/components/schemas/OrderLowLevelStatus'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        low_level_status_created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Low Level Status Created At
-        origin:
-          anyOf:
-          - $ref: '#/components/schemas/OrderOrigin'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        parent_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Parent Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - id
-      - created_at
-      - updated_at
-      title: ClientFacingOrderInTransaction
-      description: Minimal order info for embedding in order_transaction payload.
-    AppointmentStatus:
-      type: string
-      enum:
-      - confirmed
-      - pending
-      - reserved
-      - in_progress
-      - completed
-      - cancelled
-      title: AppointmentStatus
-      description: ℹ️ This enum is non-exhaustive.
-    Interpretation:
-      type: string
-      enum:
-      - normal
-      - abnormal
-      - critical
-      - unknown
-      title: Interpretation
-      description: ℹ️ This enum is non-exhaustive.
     PostOrderResponse:
       properties:
         order:
@@ -3424,103 +1646,6 @@ components:
       - status
       - message
       title: PostOrderResponse
-    ClientFacingPatientDetailsCompatible:
-      properties:
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        dob:
-          type: string
-          format: date-time
-          title: Dob
-        gender:
-          type: string
-          title: Gender
-        phone_number:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Phone Number
-        email:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Email
-        medical_proxy:
-          anyOf:
-          - $ref: '#/components/schemas/GuarantorDetails'
-          - type: 'null'
-          description: Parent/medical_proxy details. Required if patient is a minor.
-        race:
-          anyOf:
-          - $ref: '#/components/schemas/Race'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-        ethnicity:
-          anyOf:
-          - $ref: '#/components/schemas/Ethnicity'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-        sexual_orientation:
-          anyOf:
-          - $ref: '#/components/schemas/SexualOrientation'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-        gender_identity:
-          anyOf:
-          - $ref: '#/components/schemas/GenderIdentity'
-          - type: 'null'
-          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - dob
-      - gender
-      title: ClientFacingPatientDetailsCompatible
-    LngLat:
-      properties:
-        lng:
-          type: number
-          maximum: 180
-          minimum: -180
-          title: Lng
-        lat:
-          type: number
-          maximum: 90
-          minimum: -90
-          title: Lat
-      type: object
-      required:
-      - lng
-      - lat
-      title: LngLat
-    AllowedRadius:
-      type: string
-      enum:
-      - '10'
-      - '20'
-      - '25'
-      - '50'
-      - '100'
-      title: AllowedRadius
-      description: ℹ️ This enum is non-exhaustive.
-    OrderTopLevelStatus:
-      type: string
-      enum:
-      - received
-      - collecting_sample
-      - sample_with_lab
-      - completed
-      - cancelled
-      - failed
-      title: OrderTopLevelStatus
-      description: ℹ️ This enum is non-exhaustive.
     ClientFacingOrder:
       properties:
         user_id:
@@ -3784,21 +1909,626 @@ components:
         team_id: 8b394366-3502-48e9-a07a-f9503091fd9c
         updated_at: '2020-01-01T00:00:00Z'
         user_id: 1fb6c1b6-9572-4596-8cfd-930e45ea9d01
-    AppointmentRescheduleRequest:
+    ClientFacingShipment:
       properties:
-        booking_key:
+        id:
           type: string
-          title: Booking Key
-        appointment_notes:
+          format: uuid
+          title: Id
+          description: The Vital Shipment ID
+        outbound_tracking_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Outbound Tracking Number
+          description: Tracking number for delivery to customer
+        outbound_tracking_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Outbound Tracking Url
+          description: Tracking url for delivery to customer
+        inbound_tracking_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inbound Tracking Number
+          description: Tracking number for delivery to lab
+        inbound_tracking_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inbound Tracking Url
+          description: Tracking url for delivery to lab
+        outbound_courier:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Outbound Courier
+          description: Courier used for delivery to customer
+        inbound_courier:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Inbound Courier
+          description: Courier used for delivery to lab
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+          description: Notes associated to the Vital shipment
+      type: object
+      required:
+      - id
+      - outbound_tracking_number
+      - outbound_tracking_url
+      - inbound_tracking_number
+      - inbound_tracking_url
+      - outbound_courier
+      - inbound_courier
+      - notes
+      title: ClientFacingShipment
+      description: 'Schema for a Shipment in the client facing API.
+
+
+        To be used as part of a ClientFacingTestkitOrder.'
+      example:
+        id: 6d249293-7ee9-4c7f-8889-113ccbf5f89b
+        inbound_courier: usps
+        inbound_tracking_number: <inbound_tracking_number>
+        inbound_tracking_url: <inbound_tracking_url>
+        notes: <notes>
+        outbound_courier: usps
+        outbound_tracking_number: <outbound_tracking_number>
+        outbound_tracking_url: <outbound_tracking_url>
+    GenderIdentity:
+      type: string
+      enum:
+      - male
+      - female
+      - female_to_male_ftm_transgender_male_trans_man
+      - male_to_female_mtf_transgender_female_trans_woman
+      - genderqueer
+      - other
+      title: GenderIdentity
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingLabLocation:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/LabLocationMetadata'
+        distance:
+          type: integer
+          title: Distance
+        site_code:
+          type: string
+          title: Site Code
+        supported_bill_types:
+          items:
+            $ref: '#/components/schemas/Billing'
+          type: array
+          title: Supported Bill Types
+        location:
+          $ref: '#/components/schemas/LngLat'
+        capabilities:
+          items:
+            $ref: '#/components/schemas/LabLocationCapability'
+          type: array
+          title: Capabilities
+      type: object
+      required:
+      - metadata
+      - distance
+      - site_code
+      - supported_bill_types
+      - location
+      - capabilities
+      title: ClientFacingLabLocation
+    ClientFacingWalkInOrderDetails:
+      properties:
+        type:
+          type: string
+          const: walk_in_test
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingWalkInTestOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingWalkInOrderDetails
+    AppointmentLocation:
+      properties:
+        location:
+          $ref: '#/components/schemas/LngLat'
+        distance:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Distance
+        address:
+          $ref: '#/components/schemas/USAddress'
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+        iana_timezone:
+          anyOf:
+          - type: string
+            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
+          - type: 'null'
+          title: Iana Timezone
+      type: object
+      required:
+      - location
+      - address
+      - code
+      - name
+      title: AppointmentLocation
+    PatientAddress:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          title: Zip
+        country:
+          type: string
+          title: Country
+        access_notes:
           anyOf:
           - type: string
             maxLength: 1000
           - type: 'null'
-          title: Appointment Notes
+          title: Access Notes
       type: object
       required:
-      - booking_key
-      title: AppointmentRescheduleRequest
+      - receiver_name
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      title: PatientAddress
+    AppointmentServiceType:
+      type: string
+      enum:
+      - appointment-ready
+      - appointment-request
+      title: AppointmentServiceType
+      description: ℹ️ This enum is non-exhaustive.
+    PatientDetailsWithValidation:
+      properties:
+        first_name:
+          type: string
+          maxLength: 50
+          minLength: 1
+          title: First Name
+        last_name:
+          type: string
+          maxLength: 50
+          minLength: 1
+          title: Last Name
+        dob:
+          type: string
+          format: date
+          title: Dob
+        gender:
+          $ref: '#/components/schemas/Gender'
+          description: ℹ️ This enum is non-exhaustive.
+        phone_number:
+          type: string
+          title: Phone Number
+        email:
+          type: string
+          format: email
+          title: Email
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+          description: Parent/medical_proxy details. Required if patient is a minor.
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        household_income:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Income
+          description: Household income in USD. If not provided, will be set to None
+        household_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Size
+          description: Household size. If not provided, will be set to None
+      type: object
+      required:
+      - first_name
+      - last_name
+      - dob
+      - gender
+      - phone_number
+      - email
+      title: PatientDetailsWithValidation
+      description: Patient details with validation for first_name, last_name, email, and dob.
+    Consent:
+      properties:
+        consentType:
+          $ref: '#/components/schemas/ConsentType'
+          description: ℹ️ This enum is non-exhaustive.
+        version:
+          type: string
+          title: Version
+          default: '1.0'
+        timeOfConsent:
+          type: string
+          format: date-time
+          title: Timeofconsent
+      type: object
+      required:
+      - consentType
+      title: Consent
+    LabLocationMetadata:
+      properties:
+        name:
+          type: string
+          title: Name
+        state:
+          type: string
+          title: State
+        city:
+          type: string
+          title: City
+        zip_code:
+          type: string
+          title: Zip Code
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        fax_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fax Number
+        hours:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Hours
+      type: object
+      required:
+      - name
+      - state
+      - city
+      - zip_code
+      - first_line
+      title: LabLocationMetadata
+    ClientFacingPatientDetailsCompatible:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        dob:
+          type: string
+          format: date-time
+          title: Dob
+        gender:
+          type: string
+          title: Gender
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+          description: Parent/medical_proxy details. Required if patient is a minor.
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: If not provided, will be set to 'Not Specified' ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - dob
+      - gender
+      title: ClientFacingPatientDetailsCompatible
+    GuarantorDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone_number:
+          type: string
+          title: Phone Number
+        household_income:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Income
+        household_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Size
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+      type: object
+      required:
+      - first_name
+      - last_name
+      - address
+      - phone_number
+      title: GuarantorDetails
+    LabResultsRaw:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/LabResultsMetadata'
+        results:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/BiomarkerResult'
+            type: array
+          - additionalProperties: true
+            type: object
+          title: Results
+        missing_results:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/MissingBiomarkerResult'
+            type: array
+          - type: 'null'
+          title: Missing Results
+        sample_information:
+          anyOf:
+          - additionalProperties:
+              $ref: '#/components/schemas/SampleData'
+            type: object
+          - type: 'null'
+          title: Sample Information
+        order_transaction:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingOrderTransaction'
+          - type: 'null'
+      type: object
+      required:
+      - metadata
+      - results
+      title: LabResultsRaw
+      example:
+        metadata:
+          age: 19
+          clia_number: '12331231'
+          date_collected: '2022-02-02'
+          date_received: '2022-01-01'
+          date_reported: '2020-01-01'
+          dob: 18/08/1993
+          interpretation: normal
+          laboratory: Quest Diagnostics
+          patient: Bob Smith
+          provider: Dr. Jack Smith
+          specimen_number: '123131'
+          status: final
+        results:
+          '[marker]': {}
+          fsh: {}
+          ige: {}
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    OrderOrigin:
+      type: string
+      enum:
+      - initial
+      - redraw
+      - recreation
+      title: OrderOrigin
+      description: ℹ️ This enum is non-exhaustive.
+    PSCAreaInfo:
+      properties:
+        patient_service_centers:
+          $ref: '#/components/schemas/PSCAreaInfoDetails'
+        supported_bill_types:
+          items:
+            $ref: '#/components/schemas/Billing'
+          type: array
+          title: Supported Bill Types
+        lab_id:
+          type: integer
+          title: Lab Id
+      type: object
+      required:
+      - patient_service_centers
+      - supported_bill_types
+      - lab_id
+      title: PSCAreaInfo
+    FailureType:
+      type: string
+      enum:
+      - quantity_not_sufficient_failure
+      - collection_process_failure
+      - drop_off_failure
+      - internal_lab_failure
+      - order_entry_failure
+      - non_failure
+      - unknown_failure
+      - patient_condition_failure
+      - missing_result_calc_failure
+      - missing_demo_aoe_calc_failure
+      - insufficient_volume
+      title: FailureType
+      description: ℹ️ This enum is non-exhaustive.
+    OrderStatus:
+      type: string
+      enum:
+      - received.walk_in_test.ordered
+      - received.walk_in_test.requisition_created
+      - received.walk_in_test.requisition_bypassed
+      - completed.walk_in_test.completed
+      - sample_with_lab.walk_in_test.partial_results
+      - failed.walk_in_test.sample_error
+      - cancelled.walk_in_test.cancelled
+      - collecting_sample.walk_in_test.appointment_pending
+      - collecting_sample.walk_in_test.appointment_scheduled
+      - collecting_sample.walk_in_test.appointment_cancelled
+      - collecting_sample.walk_in_test.redraw_available
+      - received.at_home_phlebotomy.ordered
+      - received.at_home_phlebotomy.requisition_created
+      - received.at_home_phlebotomy.requisition_bypassed
+      - collecting_sample.at_home_phlebotomy.appointment_pending
+      - collecting_sample.at_home_phlebotomy.appointment_scheduled
+      - collecting_sample.at_home_phlebotomy.draw_completed
+      - collecting_sample.at_home_phlebotomy.appointment_cancelled
+      - completed.at_home_phlebotomy.completed
+      - sample_with_lab.at_home_phlebotomy.partial_results
+      - cancelled.at_home_phlebotomy.cancelled
+      - failed.at_home_phlebotomy.sample_error
+      - received.testkit.ordered
+      - received.testkit.awaiting_registration
+      - received.testkit.requisition_created
+      - received.testkit.requisition_bypassed
+      - received.testkit.registered
+      - collecting_sample.testkit.transit_customer
+      - collecting_sample.testkit.out_for_delivery
+      - collecting_sample.testkit.with_customer
+      - collecting_sample.testkit.transit_lab
+      - sample_with_lab.testkit.delivered_to_lab
+      - sample_with_lab.testkit.lab_processing_blocked
+      - completed.testkit.completed
+      - failed.testkit.failure_to_deliver_to_customer
+      - failed.testkit.failure_to_deliver_to_lab
+      - failed.testkit.sample_error
+      - failed.testkit.lost
+      - cancelled.testkit.cancelled
+      - cancelled.testkit.do_not_process
+      - collecting_sample.testkit.problem_in_transit_customer
+      - collecting_sample.testkit.problem_in_transit_lab
+      - received.on_site_collection.ordered
+      - received.on_site_collection.requisition_created
+      - received.on_site_collection.requisition_bypassed
+      - sample_with_lab.on_site_collection.draw_completed
+      - completed.on_site_collection.completed
+      - cancelled.on_site_collection.cancelled
+      - sample_with_lab.on_site_collection.partial_results
+      - failed.on_site_collection.sample_error
+      - completed.walk_in_test.corrected
+      - completed.at_home_phlebotomy.corrected
+      - completed.on_site_collection.corrected
+      - completed.testkit.corrected
+      title: OrderStatus
+      description: 'Used in combination with OrderStatusDetail to represent the current order state.
+
+        OrderStatus is driven by a FSM whereas OrderStatusDetail is descriptive only. ℹ️ This enum is non-exhaustive.'
+    ClientFacingAppointmentCancellationReason:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        name:
+          type: string
+          title: Name
+        is_refundable:
+          type: boolean
+          title: Is Refundable
+      type: object
+      required:
+      - id
+      - name
+      - is_refundable
+      title: ClientFacingAppointmentCancellationReason
+      example:
+        id: 04e00ffd-f053-4732-9be8-72913ea1981d
+        is_refundable: true
+        name: I'm feeling sick
     RegisterTestkitRequest:
       properties:
         user_id:
@@ -3835,6 +2565,1112 @@ components:
       - patient_details
       - patient_address
       title: RegisterTestkitRequest
+    OrderSetRequest:
+      properties:
+        lab_test_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: Lab Test Ids
+        add_on:
+          anyOf:
+          - $ref: '#/components/schemas/AddOnOrder'
+          - type: 'null'
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+      type: object
+      title: OrderSetRequest
+    ShippingAddressWithValidation:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip
+        country:
+          type: string
+          title: Country
+        phone_number:
+          type: string
+          title: Phone Number
+      type: object
+      required:
+      - receiver_name
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      - phone_number
+      title: ShippingAddressWithValidation
+    PhysicianCreateRequest:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        npi:
+          type: string
+          title: Npi
+        licensed_states:
+          items:
+            type: string
+          type: array
+          title: Licensed States
+        signature_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Signature Image
+          description: An image of the physician signature for health insurance billing
+      type: object
+      required:
+      - first_name
+      - last_name
+      - npi
+      title: PhysicianCreateRequest
+    USAddress:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip_code:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip Code
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+          description: Deprecated. Use `second_line` instead to provide the unit number. Subject to removal after 20 Nov 2023.
+          deprecated: true
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - city
+      - state
+      - zip_code
+      title: USAddress
+    OrderLowLevelStatus:
+      type: string
+      enum:
+      - ordered
+      - requisition_created
+      - requisition_bypassed
+      - transit_customer
+      - out_for_delivery
+      - with_customer
+      - transit_lab
+      - delivered_to_lab
+      - completed
+      - failure_to_deliver_to_lab
+      - failure_to_deliver_to_customer
+      - problem_in_transit_lab
+      - problem_in_transit_customer
+      - sample_error
+      - appointment_scheduled
+      - appointment_cancelled
+      - appointment_pending
+      - draw_completed
+      - cancelled
+      - lost
+      - do_not_process
+      - partial_results
+      - awaiting_registration
+      - registered
+      - redraw_available
+      - corrected
+      - lab_processing_blocked
+      title: OrderLowLevelStatus
+      description: ℹ️ This enum is non-exhaustive.
+    HealthInsuranceCreateRequest:
+      properties:
+        front_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Front Image
+          description: An image of the front of the patient insurance card.
+        back_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Back Image
+          description: An image of the back of the patient insurance card.
+        patient_signature_image:
+          anyOf:
+          - $ref: '#/components/schemas/Jpeg'
+          - $ref: '#/components/schemas/Png'
+          - type: 'null'
+          title: Patient Signature Image
+          description: An image of the patient signature for health insurance billing.
+        subjective:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subjective
+          description: Textual description of what are the patient symptoms and attempted treatments.
+        assessment_plan:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Assessment Plan
+          description: Textual description of what are the physician assessments and testing plans.
+        payor_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Payor Code
+          description: Unique identifier representing a specific Health Insurance.
+        insurance_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Insurance Id
+          description: Insurance unique number assigned to a patient, usually present on the insurance card.
+        responsible_relationship:
+          anyOf:
+          - $ref: '#/components/schemas/ResponsibleRelationship'
+          - type: 'null'
+          description: Relationship between the patient and the insurance contractor. Values can be (Self, Spouse, Other Relationship). ℹ️ This enum is non-exhaustive.
+        responsible_details:
+          anyOf:
+          - $ref: '#/components/schemas/vital_core__schemas__db_schemas__lab_test__health_insurance__PersonDetails'
+          - type: 'null'
+          description: Responsible details when the value of responsible_relationship is not 'Self'.
+        diagnosis_codes:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Diagnosis Codes
+          description: Diagnosis codes for insurance billing.
+      type: object
+      title: HealthInsuranceCreateRequest
+    ClinicalInformation:
+      properties:
+        fasting:
+          type: boolean
+          title: Fasting
+          default: false
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        information:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Information
+        total_volume:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Total Volume
+      type: object
+      title: ClinicalInformation
+    ClientFacingOrderEvent:
+      properties:
+        id:
+          type: integer
+          title: Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        status_detail:
+          anyOf:
+          - $ref: '#/components/schemas/OrderStatusDetail'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - id
+      - created_at
+      - status
+      title: ClientFacingOrderEvent
+    PatientAddressCompatible:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+          default: ''
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          title: Zip
+        country:
+          type: string
+          title: Country
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+      type: object
+      required:
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      title: PatientAddressCompatible
+    PhlebotomyAreaInfo:
+      properties:
+        is_served:
+          type: boolean
+          title: Is Served
+        providers:
+          items:
+            $ref: '#/components/schemas/PhlebotomyProviderInfo'
+          type: array
+          title: Providers
+      type: object
+      required:
+      - is_served
+      - providers
+      title: PhlebotomyAreaInfo
+    Png:
+      properties:
+        content:
+          type: string
+          title: Content
+          format: binary
+        content_type:
+          type: string
+          const: image/png
+          title: Content Type
+      type: object
+      required:
+      - content
+      - content_type
+      title: Png
+    ShippingAddress:
+      properties:
+        receiver_name:
+          type: string
+          title: Receiver Name
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        zip:
+          type: string
+          title: Zip
+        country:
+          type: string
+          title: Country
+        phone_number:
+          type: string
+          title: Phone Number
+      type: object
+      required:
+      - receiver_name
+      - first_line
+      - city
+      - state
+      - zip
+      - country
+      - phone_number
+      title: ShippingAddress
+    api__api_v1__endpoints__vital_api__lab_testing__orders__helpers__AppointmentCancelRequest:
+      properties:
+        cancellation_reason_id:
+          type: string
+          format: uuid4
+          title: Cancellation Reason Id
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+      type: object
+      required:
+      - cancellation_reason_id
+      title: AppointmentCancelRequest
+    AoEAnswer:
+      properties:
+        marker_id:
+          type: integer
+          title: Marker Id
+        question_id:
+          type: integer
+          title: Question Id
+        answer:
+          type: string
+          title: Answer
+      type: object
+      required:
+      - marker_id
+      - question_id
+      - answer
+      title: AoEAnswer
+    CreateRegistrableTestkitOrderRequest:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        lab_test_id:
+          type: string
+          format: uuid
+          title: Lab Test Id
+        shipping_details:
+          $ref: '#/components/schemas/ShippingAddressWithValidation'
+        passthrough:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Passthrough
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+      type: object
+      required:
+      - user_id
+      - lab_test_id
+      - shipping_details
+      title: CreateRegistrableTestkitOrderRequest
+    AoE:
+      properties:
+        questions:
+          items:
+            $ref: '#/components/schemas/Question'
+          type: array
+          title: Questions
+      type: object
+      required:
+      - questions
+      title: AoE
+    PerformingLaboratory:
+      properties:
+        name:
+          type: string
+          title: Name
+        phone_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Phone Number
+        medical_director:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Medical Director
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+      type: object
+      required:
+      - name
+      title: PerformingLaboratory
+    ResendWebhookResponse:
+      properties:
+        order_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Order Ids
+      type: object
+      required:
+      - order_ids
+      title: ResendWebhookResponse
+    DaySlots:
+      properties:
+        location:
+          anyOf:
+          - $ref: '#/components/schemas/AppointmentLocation'
+          - type: 'null'
+        date:
+          type: string
+          format: date
+          title: Date
+        slots:
+          items:
+            $ref: '#/components/schemas/TimeSlot'
+          type: array
+          title: Slots
+      type: object
+      required:
+      - date
+      - slots
+      title: DaySlots
+    AppointmentPSCLabs:
+      type: string
+      enum:
+      - quest
+      - sonora_quest
+      title: AppointmentPSCLabs
+      description: ℹ️ This enum is non-exhaustive.
+    Labs:
+      type: string
+      enum:
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
+      description: ℹ️ This enum is non-exhaustive.
+    SexualOrientation:
+      type: string
+      enum:
+      - lesbian_gay_or_homosexual
+      - heterosexual_or_straight
+      - bisexual
+      - dont_know
+      - other
+      title: SexualOrientation
+      description: ℹ️ This enum is non-exhaustive.
+    LabResultsMetadata:
+      properties:
+        age:
+          type: string
+          title: Age
+        dob:
+          type: string
+          title: Dob
+        clia_#:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: 'Clia #'
+        patient:
+          type: string
+          title: Patient
+        provider:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider
+        laboratory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Laboratory
+        date_reported:
+          type: string
+          title: Date Reported
+          deprecated: true
+        date_collected:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Collected
+          deprecated: true
+        specimen_number:
+          type: string
+          title: Specimen Number
+        date_received:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Date Received
+          deprecated: true
+        status:
+          type: string
+          title: Status
+          default: final
+        interpretation:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Interpretation
+        patient_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Patient Id
+        account_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Id
+      type: object
+      required:
+      - age
+      - dob
+      - patient
+      - date_reported
+      - specimen_number
+      title: LabResultsMetadata
+      example:
+        age: 19
+        clia_number: '12331231'
+        date_collected: '2022-02-02'
+        date_received: '2022-01-01'
+        date_reported: '2020-01-01'
+        dob: 18/08/1993
+        interpretation: normal
+        laboratory: Quest Diagnostics
+        patient: Bob Smith
+        provider: Dr. Jack Smith
+        specimen_number: '123131'
+        status: final
+    Billing:
+      type: string
+      enum:
+      - client_bill
+      - commercial_insurance
+      - patient_bill_passthrough
+      - patient_bill
+      title: Billing
+      description: ℹ️ This enum is non-exhaustive.
+    ResponsibleRelationship:
+      type: string
+      enum:
+      - Self
+      - Spouse
+      - Other
+      title: ResponsibleRelationship
+      description: ℹ️ This enum is non-exhaustive.
+    PhlebotomyProviderInfo:
+      properties:
+        name:
+          $ref: '#/components/schemas/AppointmentProvider'
+          description: ℹ️ This enum is non-exhaustive.
+        service_types:
+          items:
+            $ref: '#/components/schemas/AppointmentServiceType'
+          type: array
+          title: Service Types
+      type: object
+      required:
+      - name
+      - service_types
+      title: PhlebotomyProviderInfo
+    Race:
+      type: string
+      enum:
+      - african_american_or_black
+      - asian
+      - indigenous_native_american_alaska_native
+      - other
+      - pacific_islander_or_hawaiian
+      - white_caucasian
+      title: Race
+      description: ℹ️ This enum is non-exhaustive.
+    AddOnOrder:
+      properties:
+        marker_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Marker Ids
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+      type: object
+      title: AddOnOrder
+    PSCInfo:
+      properties:
+        lab_id:
+          type: integer
+          title: Lab Id
+        slug:
+          $ref: '#/components/schemas/Labs'
+          description: ℹ️ This enum is non-exhaustive.
+        patient_service_centers:
+          items:
+            $ref: '#/components/schemas/ClientFacingLabLocation'
+          type: array
+          title: Patient Service Centers
+      type: object
+      required:
+      - lab_id
+      - slug
+      - patient_service_centers
+      title: PSCInfo
+    UpdateOrderBody:
+      properties:
+        activate_by:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Activate By
+          description: 'The date on which the order should be activated (dispatched to the lab). Must be today or a future date. Set to `null` to clear an existing scheduled date and dispatch the order immediately. Note: an order originally created for immediate processing (no `activate_by` at creation time) cannot be rescheduled — only orders that were created with an `activate_by` can have it changed or cleared.'
+      type: object
+      required:
+      - activate_by
+      title: UpdateOrderBody
+      description: Patch body for updating a modifiable order's scheduled activation date.
+    Jpeg:
+      properties:
+        content:
+          type: string
+          title: Content
+          format: binary
+        content_type:
+          type: string
+          const: image/jpeg
+          title: Content Type
+      type: object
+      required:
+      - content
+      - content_type
+      title: Jpeg
+    QuestionType:
+      type: string
+      enum:
+      - choice
+      - text
+      - numeric
+      - multi_choice
+      title: QuestionType
+      description: ℹ️ This enum is non-exhaustive.
+    AppointmentAvailabilitySlots:
+      properties:
+        slots:
+          items:
+            $ref: '#/components/schemas/DaySlots'
+          type: array
+          title: Slots
+        timezone:
+          anyOf:
+          - type: string
+            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
+          - type: 'null'
+          title: Timezone
+      type: object
+      required:
+      - slots
+      title: AppointmentAvailabilitySlots
+    ClientFacingAppointment:
+      properties:
+        id:
+          type: string
+          format: uuid4
+          title: Id
+        user_id:
+          type: string
+          format: uuid4
+          title: User Id
+        order_id:
+          type: string
+          format: uuid4
+          title: Order Id
+        order_transaction_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: 'null'
+          title: Order Transaction Id
+        address:
+          $ref: '#/components/schemas/USAddress'
+        location:
+          $ref: '#/components/schemas/LngLat'
+        start_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start At
+          description: Time is in UTC
+        end_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End At
+          description: Time is in UTC
+        iana_timezone:
+          anyOf:
+          - type: string
+            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
+          - type: 'null'
+          title: Iana Timezone
+        type:
+          $ref: '#/components/schemas/AppointmentType'
+          description: ℹ️ This enum is non-exhaustive.
+        provider:
+          $ref: '#/components/schemas/AppointmentProvider'
+          description: ℹ️ This enum is non-exhaustive.
+        status:
+          $ref: '#/components/schemas/AppointmentStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_id:
+          type: string
+          title: Provider Id
+        external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Id
+        can_reschedule:
+          type: boolean
+          title: Can Reschedule
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+        event_status:
+          $ref: '#/components/schemas/AppointmentEventStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        event_data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Event Data
+        events:
+          items:
+            $ref: '#/components/schemas/ClientFacingAppointmentEvent'
+          type: array
+          title: Events
+      type: object
+      required:
+      - id
+      - user_id
+      - order_id
+      - address
+      - location
+      - start_at
+      - end_at
+      - type
+      - provider
+      - status
+      - provider_id
+      - can_reschedule
+      - event_status
+      - events
+      title: ClientFacingAppointment
+      example:
+        address:
+          access_notes: 'Gate code #1234, use side entrance'
+          city: San Francisco
+          country: United States
+          first_line: 123 Main St.
+          second_line: Apt. 208
+          state: CA
+          zip_code: '91189'
+        appointment_notes: Please bring photo ID
+        can_reschedule: true
+        end_at: '2022-01-01T00:00:00'
+        event_data:
+          description: Metadata field containing provider specific data, like cancellation reason or origin
+        event_status: scheduled
+        events:
+        - created_at: '2022-01-01T00:00:00Z'
+          status: scheduled
+        - created_at: '2022-01-02T00:00:00Z'
+          status: completed
+        external_id: ext-123
+        iana_timezone: America/New_York
+        id: 1614a22c-4322-43a0-96bc-8ff01e5401c8
+        location:
+          lat: 37.7749295
+          lng: -122.4194155
+        order_id: 6b6b38ef-d312-48b4-95d4-731fc2ce7a6f
+        order_transaction_id: cc089173-7db8-428e-a233-c58472226917
+        provider: getlabs
+        provider_id: '123'
+        start_at: '2022-01-01T00:00:00'
+        status: confirmed
+        type: phlebotomy
+        user_id: 61fac3ce-a2c9-4218-b404-941ca948776f
+    PhysicianCreateRequestBase:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+        npi:
+          type: string
+          title: Npi
+        licensed_states:
+          items:
+            type: string
+          type: array
+          title: Licensed States
+      type: object
+      required:
+      - first_name
+      - last_name
+      - npi
+      title: PhysicianCreateRequestBase
+    OrderTransactionStatus:
+      type: string
+      enum:
+      - active
+      - completed
+      - cancelled
+      title: OrderTransactionStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingMarker:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lab Id
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/MarkerType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        price:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price
+        aoe:
+          anyOf:
+          - $ref: '#/components/schemas/AoE'
+          - type: 'null'
+        a_la_carte_enabled:
+          type: boolean
+          title: A La Carte Enabled
+          default: false
+        common_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Common Tat Days
+        worst_case_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Worst Case Tat Days
+        is_orderable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Orderable
+          default: true
+      type: object
+      required:
+      - id
+      - name
+      - slug
+      title: ClientFacingMarker
+      example:
+        aoe:
+          questions:
+          - answers:
+            - code: answer_code
+              id: 1
+              value: answer_value
+            code: question_code
+            id: 1
+            value: question_value
+        common_tat_days: 3
+        description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+        id: 1
+        is_orderable: true
+        lab_id: 1
+        name: Hemoglobin A1c
+        price: '10.00'
+        provider_id: '1234'
+        slug: hemoglobin-a1c
+        type: biomarker
+        unit: '%'
+        worst_case_tat_days: 5
+    vital_core__clients__lab_test__getlabs__schema__AppointmentCancelRequest:
+      properties:
+        cancellationReasonId:
+          type: string
+          format: uuid4
+          title: Cancellationreasonid
+        note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Note
+      type: object
+      required:
+      - cancellationReasonId
+      title: AppointmentCancelRequest
+    UTCTimestampWithTimezoneOffset:
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          title: Timestamp
+        timezone_offset:
+          type: integer
+          title: Timezone Offset
+      type: object
+      required:
+      - timestamp
+      - timezone_offset
+      title: UTCTimestampWithTimezoneOffset
+    MarkerType:
+      type: string
+      enum:
+      - biomarker
+      - panel
+      title: MarkerType
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingAppointmentEvent:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        status:
+          $ref: '#/components/schemas/AppointmentEventStatus'
+          description: ℹ️ This enum is non-exhaustive.
+        data:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Data
+      type: object
+      required:
+      - created_at
+      - status
+      title: ClientFacingAppointmentEvent
+    ConsentType:
+      type: string
+      enum:
+      - terms-of-use
+      - telehealth-informed-consent
+      - mobile-terms-and-conditions
+      - notice-of-privacy-practices
+      - privacy-policy
+      - hipaa-authorization
+      title: ConsentType
+      description: ℹ️ This enum is non-exhaustive.
     MissingBiomarkerResult:
       properties:
         name:
@@ -3879,56 +3715,13 @@ components:
       - slug
       - inferred_failure_type
       title: MissingBiomarkerResult
-    PSCInfo:
-      properties:
-        lab_id:
-          type: integer
-          title: Lab Id
-        slug:
-          $ref: '#/components/schemas/Labs'
-          description: ℹ️ This enum is non-exhaustive.
-        patient_service_centers:
-          items:
-            $ref: '#/components/schemas/ClientFacingLabLocation'
-          type: array
-          title: Patient Service Centers
-      type: object
-      required:
-      - lab_id
-      - slug
-      - patient_service_centers
-      title: PSCInfo
-    Labs:
-      type: string
-      enum:
-      - ayumetrix
-      - spiriplex
-      - ussl
-      - quest
-      - sonora_quest
-      - labcorp
-      - bioreference
-      - us_biotek
-      - manual
-      - sanocardio
-      - ihd
-      - nexus
-      - my_uti
-      - crl
-      title: Labs
-      description: ℹ️ This enum is non-exhaustive.
-    ClientFacingTestkitOrder:
+    ClientFacingWalkInTestOrder:
       properties:
         id:
           type: string
           format: uuid
           title: Id
-          description: The Vital TestKit Order ID
-        shipment:
-          anyOf:
-          - $ref: '#/components/schemas/ClientFacingShipment'
-          - type: 'null'
-          description: Shipment object
+          description: The Vital walk-in test Order ID
         created_at:
           type: string
           format: date-time
@@ -3937,32 +3730,166 @@ components:
           type: string
           format: date-time
           title: Updated At
+        appointment_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Appointment Id
       type: object
       required:
       - id
-      - shipment
       - created_at
       - updated_at
-      title: ClientFacingTestkitOrder
-      description: 'Schema for a testkit order in the client facing API.
+      title: ClientFacingWalkInTestOrder
+      description: 'Schema for a walk-in test order in the client facing API.
 
 
         To be used as part of a ClientFacingOrder.'
       example:
+        appointment_id: 961495c2-aa74-43ac-bd7d-4284b46499bf
         created_at: '2020-01-01T00:00:00Z'
-        id: b31c2663-88de-44b7-977d-c37ef107254f
-        shipment:
-          created_at: '2020-01-01T00:00:00.000Z'
-          id: e56c84fb-f8fa-4d74-bed0-a129b04cb3bc
-          inbound_courier: usps
-          inbound_tracking_number: <inbound_tracking_number>
-          inbound_tracking_url: <inbound_tracking_url>
-          notes: <notes>
-          outbound_courier: usps
-          outbound_tracking_number: <outbound_tracking_number>
-          outbound_tracking_url: <outbound_tracking_url>
-          updated_at: '2020-01-01T00:00:00.000Z'
+        id: 757df2fd-8ff1-4399-bc48-c37527d9d73a
         updated_at: '2020-01-01T00:00:00Z'
+    AllowedRadius:
+      type: string
+      enum:
+      - '10'
+      - '20'
+      - '25'
+      - '50'
+      - '100'
+      title: AllowedRadius
+      description: ℹ️ This enum is non-exhaustive.
+    SampleData:
+      properties:
+        sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sample Id
+        control_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Control Number
+        date_collected:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Collected
+        date_received:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Received
+        date_reported:
+          anyOf:
+          - $ref: '#/components/schemas/UTCTimestampWithTimezoneOffset'
+          - type: string
+          - type: 'null'
+          title: Date Reported
+        performing_laboratories:
+          anyOf:
+          - additionalProperties:
+              $ref: '#/components/schemas/PerformingLaboratory'
+            type: object
+          - type: 'null'
+          title: Performing Laboratories
+        clinical_information:
+          anyOf:
+          - $ref: '#/components/schemas/ClinicalInformation'
+          - type: 'null'
+      type: object
+      title: SampleData
+    AppointmentStatus:
+      type: string
+      enum:
+      - confirmed
+      - pending
+      - reserved
+      - in_progress
+      - completed
+      - cancelled
+      title: AppointmentStatus
+      description: ℹ️ This enum is non-exhaustive.
+    PSCAreaInfoDetails:
+      properties:
+        appointment_with_vital:
+          type: boolean
+          title: Appointment With Vital
+        within_radius:
+          type: integer
+          title: Within Radius
+        radius:
+          type: string
+          title: Radius
+        capabilities:
+          items:
+            $ref: '#/components/schemas/LabLocationCapability'
+          type: array
+          title: Capabilities
+      type: object
+      required:
+      - appointment_with_vital
+      - within_radius
+      - radius
+      title: PSCAreaInfoDetails
+    vital_core__schemas__db_schemas__lab_test__health_insurance__PersonDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone_number:
+          type: string
+          title: Phone Number
+        phone_type:
+          type: string
+          title: Phone Type
+          default: Mobile
+      type: object
+      required:
+      - first_name
+      - last_name
+      - address
+      - phone_number
+      title: PersonDetails
+    Ethnicity:
+      type: string
+      enum:
+      - hispanic
+      - non_hispanic
+      - ashkenazi_jewish
+      - other
+      title: Ethnicity
+      description: ℹ️ This enum is non-exhaustive.
+    SimulationFlags:
+      properties:
+        interpretation:
+          $ref: '#/components/schemas/Interpretation'
+          default: normal
+          description: ℹ️ This enum is non-exhaustive.
+        result_types:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ResultType'
+            type: array
+          - type: 'null'
+          title: Result Types
+        has_missing_results:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Has Missing Results
+      type: object
+      title: SimulationFlags
     CreateOrderRequestCompatible:
       properties:
         user_id:
@@ -4062,355 +3989,7 @@ components:
       - patient_address
       title: CreateOrderRequestCompatible
       description: Schema for the create Order endpoint.
-    AppointmentPSCLabs:
-      type: string
-      enum:
-      - quest
-      - sonora_quest
-      title: AppointmentPSCLabs
-      description: ℹ️ This enum is non-exhaustive.
-    PhlebotomyProviderInfo:
-      properties:
-        name:
-          $ref: '#/components/schemas/AppointmentProvider'
-          description: ℹ️ This enum is non-exhaustive.
-        service_types:
-          items:
-            $ref: '#/components/schemas/AppointmentServiceType'
-          type: array
-          title: Service Types
-      type: object
-      required:
-      - name
-      - service_types
-      title: PhlebotomyProviderInfo
-    ClientFacingOrderEvent:
-      properties:
-        id:
-          type: integer
-          title: Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        status:
-          $ref: '#/components/schemas/OrderStatus'
-          description: ℹ️ This enum is non-exhaustive.
-        status_detail:
-          anyOf:
-          - $ref: '#/components/schemas/OrderStatusDetail'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - id
-      - created_at
-      - status
-      title: ClientFacingOrderEvent
-    PatientAddress:
-      properties:
-        receiver_name:
-          type: string
-          title: Receiver Name
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        zip:
-          type: string
-          title: Zip
-        country:
-          type: string
-          title: Country
-        access_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Access Notes
-      type: object
-      required:
-      - receiver_name
-      - first_line
-      - city
-      - state
-      - zip
-      - country
-      title: PatientAddress
-    LabResultsRaw:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/LabResultsMetadata'
-        results:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/BiomarkerResult'
-            type: array
-          - additionalProperties: true
-            type: object
-          title: Results
-        missing_results:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/MissingBiomarkerResult'
-            type: array
-          - type: 'null'
-          title: Missing Results
-        sample_information:
-          anyOf:
-          - additionalProperties:
-              $ref: '#/components/schemas/SampleData'
-            type: object
-          - type: 'null'
-          title: Sample Information
-        order_transaction:
-          anyOf:
-          - $ref: '#/components/schemas/ClientFacingOrderTransaction'
-          - type: 'null'
-      type: object
-      required:
-      - metadata
-      - results
-      title: LabResultsRaw
-      example:
-        metadata:
-          age: 19
-          clia_number: '12331231'
-          date_collected: '2022-02-02'
-          date_received: '2022-01-01'
-          date_reported: '2020-01-01'
-          dob: 18/08/1993
-          interpretation: normal
-          laboratory: Quest Diagnostics
-          patient: Bob Smith
-          provider: Dr. Jack Smith
-          specimen_number: '123131'
-          status: final
-        results:
-          '[marker]': {}
-          fsh: {}
-          ige: {}
-    ClientFacingOnSiteCollectionOrderDetails:
-      properties:
-        type:
-          type: string
-          const: on_site_collection
-          title: Type
-        data:
-          anyOf:
-          - $ref: '#/components/schemas/ClientFacingOnSiteCollectionOrder'
-          - type: 'null'
-      type: object
-      required:
-      - type
-      title: ClientFacingOnSiteCollectionOrderDetails
-    AddOnOrder:
-      properties:
-        marker_ids:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Marker Ids
-        provider_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Provider Ids
-      type: object
-      title: AddOnOrder
-    USAddress:
-      properties:
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        zip_code:
-          type: string
-          pattern: ^\d{5}(-\d{4})?$
-          title: Zip Code
-        unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Unit
-          description: Deprecated. Use `second_line` instead to provide the unit number. Subject to removal after 20 Nov 2023.
-          deprecated: true
-        access_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Access Notes
-      type: object
-      required:
-      - first_line
-      - city
-      - state
-      - zip_code
-      title: USAddress
-    vital_core__clients__lab_test__getlabs__schema__AppointmentCancelRequest:
-      properties:
-        cancellationReasonId:
-          type: string
-          format: uuid4
-          title: Cancellationreasonid
-        note:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Note
-      type: object
-      required:
-      - cancellationReasonId
-      title: AppointmentCancelRequest
-    ClientFacingLabLocation:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/LabLocationMetadata'
-        distance:
-          type: integer
-          title: Distance
-        site_code:
-          type: string
-          title: Site Code
-        supported_bill_types:
-          items:
-            $ref: '#/components/schemas/Billing'
-          type: array
-          title: Supported Bill Types
-        location:
-          $ref: '#/components/schemas/LngLat'
-        capabilities:
-          items:
-            $ref: '#/components/schemas/LabLocationCapability'
-          type: array
-          title: Capabilities
-      type: object
-      required:
-      - metadata
-      - distance
-      - site_code
-      - supported_bill_types
-      - location
-      - capabilities
-      title: ClientFacingLabLocation
-    ShippingAddressWithValidation:
-      properties:
-        receiver_name:
-          type: string
-          title: Receiver Name
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        zip:
-          type: string
-          pattern: ^\d{5}(-\d{4})?$
-          title: Zip
-        country:
-          type: string
-          title: Country
-        phone_number:
-          type: string
-          title: Phone Number
-      type: object
-      required:
-      - receiver_name
-      - first_line
-      - city
-      - state
-      - zip
-      - country
-      - phone_number
-      title: ShippingAddressWithValidation
-    FailureType:
-      type: string
-      enum:
-      - quantity_not_sufficient_failure
-      - collection_process_failure
-      - drop_off_failure
-      - internal_lab_failure
-      - order_entry_failure
-      - non_failure
-      - unknown_failure
-      - patient_condition_failure
-      - missing_result_calc_failure
-      - missing_demo_aoe_calc_failure
-      - insufficient_volume
-      title: FailureType
-      description: ℹ️ This enum is non-exhaustive.
-    Png:
-      properties:
-        content:
-          type: string
-          title: Content
-          format: binary
-        content_type:
-          type: string
-          const: image/png
-          title: Content Type
-      type: object
-      required:
-      - content
-      - content_type
-      title: Png
-    ParentBiomarkerData:
-      properties:
-        marker_id:
-          type: integer
-          title: Marker Id
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-      type: object
-      required:
-      - marker_id
-      - name
-      - slug
-      title: ParentBiomarkerData
-    vital_core__schemas__db_schemas__lab_test__health_insurance__PersonDetails:
+    ClientFacingPhysician:
       properties:
         first_name:
           type: string
@@ -4418,62 +3997,282 @@ components:
         last_name:
           type: string
           title: Last Name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone_number:
+        npi:
           type: string
-          title: Phone Number
-        phone_type:
-          type: string
-          title: Phone Type
-          default: Mobile
+          title: Npi
       type: object
       required:
       - first_name
       - last_name
-      - address
-      - phone_number
-      title: PersonDetails
-    Consent:
+      - npi
+      title: ClientFacingPhysician
+    ClientFacingLab:
       properties:
-        consentType:
-          $ref: '#/components/schemas/ConsentType'
-          description: ℹ️ This enum is non-exhaustive.
-        version:
+        id:
+          type: integer
+          title: Id
+        slug:
           type: string
-          title: Version
-          default: '1.0'
-        timeOfConsent:
+          title: Slug
+        name:
           type: string
-          format: date-time
-          title: Timeofconsent
+          title: Name
+        first_line_address:
+          type: string
+          title: First Line Address
+        city:
+          type: string
+          title: City
+        zipcode:
+          type: string
+          title: Zipcode
+        collection_methods:
+          items:
+            $ref: '#/components/schemas/LabTestCollectionMethod'
+          type: array
+          title: Collection Methods
+        sample_types:
+          items:
+            $ref: '#/components/schemas/LabTestSampleType'
+          type: array
+          title: Sample Types
       type: object
       required:
-      - consentType
-      title: Consent
-    OrderOrigin:
+      - id
+      - slug
+      - name
+      - first_line_address
+      - city
+      - zipcode
+      - collection_methods
+      - sample_types
+      title: ClientFacingLab
+      example:
+        city: San Francisco
+        collection_methods:
+        - testkit
+        first_line_address: 123 Main St
+        id: 1
+        name: LabCorp
+        sample_types:
+        - saliva
+        slug: labcorp
+        zipcode: '91789'
+    ClientFacingAtHomePhlebotomyOrderDetails:
+      properties:
+        type:
+          type: string
+          const: at_home_phlebotomy
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingAtHomePhlebotomyOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingAtHomePhlebotomyOrderDetails
+    ClientFacingTestKitOrderDetails:
+      properties:
+        type:
+          type: string
+          const: testkit
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingTestkitOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingTestKitOrderDetails
+    BiomarkerResult:
+      properties:
+        name:
+          type: string
+          title: Name
+        slug:
+          type: string
+          title: Slug
+          default: ''
+        value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Value
+          description: 'Deprecated: Use ''result'' (string) and `type` (enum) instead. '
+          deprecated: true
+          x-fern-ignore: true
+        result:
+          type: string
+          title: Result
+        type:
+          $ref: '#/components/schemas/ResultType'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        timestamp:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Timestamp
+        notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notes
+        reference_range:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reference Range
+        min_range_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Min Range Value
+        max_range_value:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Max Range Value
+        is_above_max_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Above Max Range
+        is_below_min_range:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Below Min Range
+        interpretation:
+          type: string
+          title: Interpretation
+          default: normal
+        loinc:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc
+        loinc_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Slug
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        source_markers:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/ParentBiomarkerData'
+            type: array
+          - type: 'null'
+          title: Source Markers
+        performing_laboratory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Performing Laboratory
+        source_sample_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Source Sample Id
+      type: object
+      required:
+      - name
+      - result
+      - type
+      title: BiomarkerResult
+      description: Represent the schema for an individual biomarker result.
+      example:
+        interpretation: normal
+        is_above_max_range: false
+        is_below_min_range: false
+        loinc: 742-7
+        loinc_slug: monocytes-auto-bld-vol
+        max_range_value: 0.9
+        min_range_value: 0.1
+        name: Monocytes(Absolute)
+        notes: Final
+        result: '0.4'
+        slug: monocytes-absolute
+        timestamp: '2023-11-01T08:28:00+00:00'
+        type: numeric
+        unit: x10E3/uL
+        value: 0.4
+    AppointmentType:
       type: string
       enum:
-      - initial
-      - redraw
-      - recreation
-      title: OrderOrigin
+      - phlebotomy
+      - patient_service_center
+      title: AppointmentType
       description: ℹ️ This enum is non-exhaustive.
-    Jpeg:
+    LngLat:
       properties:
-        content:
-          type: string
-          title: Content
-          format: binary
-        content_type:
-          type: string
-          const: image/jpeg
-          title: Content Type
+        lng:
+          type: number
+          maximum: 180
+          minimum: -180
+          title: Lng
+        lat:
+          type: number
+          maximum: 90
+          minimum: -90
+          title: Lat
       type: object
       required:
-      - content
-      - content_type
-      title: Jpeg
+      - lng
+      - lat
+      title: LngLat
+    TimeSlot:
+      properties:
+        booking_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Booking Key
+        start:
+          type: string
+          format: date-time
+          title: Start
+          description: Time is in UTC
+        end:
+          type: string
+          format: date-time
+          title: End
+          description: Time is in UTC
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+        price:
+          type: number
+          title: Price
+        is_priority:
+          type: boolean
+          title: Is Priority
+        num_appointments_available:
+          type: integer
+          title: Num Appointments Available
+      type: object
+      required:
+      - start
+      - end
+      - price
+      - is_priority
+      - num_appointments_available
+      title: TimeSlot
     ClientFacingOrderTransaction:
       properties:
         id:
@@ -4495,116 +4294,23 @@ components:
       - orders
       title: ClientFacingOrderTransaction
       description: Order transaction info.
-    AppointmentLocation:
-      properties:
-        location:
-          $ref: '#/components/schemas/LngLat'
-        distance:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Distance
-        address:
-          $ref: '#/components/schemas/USAddress'
-        code:
-          type: string
-          title: Code
-        name:
-          type: string
-          title: Name
-        iana_timezone:
-          anyOf:
-          - type: string
-            pattern: ^(?:(?:[A-Za-z_\-]+\/[A-Za-z_\-]+(?:\/[A-Za-z_\-]+)?)|(?:Etc\/[A-Za-z0-9+\-]+(?:\/[A-Za-z0-9]+)?|(?:CET|CST6CDT|EET|EST|EST5EDT|MET|MST|MST7MDT|PST8PDT|HST)))$
-          - type: 'null'
-          title: Iana Timezone
-      type: object
-      required:
-      - location
-      - address
-      - code
-      - name
-      title: AppointmentLocation
-    GuarantorDetails:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone_number:
-          type: string
-          title: Phone Number
-        household_income:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Household Income
-        household_size:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Household Size
-        email:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Email
-      type: object
-      required:
-      - first_name
-      - last_name
-      - address
-      - phone_number
-      title: GuarantorDetails
-    AppointmentServiceType:
+    AppointmentProvider:
       type: string
       enum:
-      - appointment-ready
-      - appointment-request
-      title: AppointmentServiceType
+      - getlabs
+      - phlebfinders
+      - quest
+      - sonora_quest
+      title: AppointmentProvider
       description: ℹ️ This enum is non-exhaustive.
-    ShippingAddress:
-      properties:
-        receiver_name:
-          type: string
-          title: Receiver Name
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        zip:
-          type: string
-          title: Zip
-        country:
-          type: string
-          title: Country
-        phone_number:
-          type: string
-          title: Phone Number
-      type: object
-      required:
-      - receiver_name
-      - first_line
-      - city
-      - state
-      - zip
-      - country
-      - phone_number
-      title: ShippingAddress
+    LabLocationCapability:
+      type: string
+      enum:
+      - stat
+      - appointment_scheduling_via_junction
+      - appointment_scheduling_with_lab
+      title: LabLocationCapability
+      description: ℹ️ This enum is non-exhaustive.
     ImportOrderBody:
       properties:
         user_id:
@@ -4646,69 +4352,6 @@ components:
       - patient_address
       - sample_id
       title: ImportOrderBody
-    MarkerType:
-      type: string
-      enum:
-      - biomarker
-      - panel
-      title: MarkerType
-      description: ℹ️ This enum is non-exhaustive.
-    CreateRegistrableTestkitOrderRequest:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        lab_test_id:
-          type: string
-          format: uuid
-          title: Lab Test Id
-        shipping_details:
-          $ref: '#/components/schemas/ShippingAddressWithValidation'
-        passthrough:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Passthrough
-        lab_account_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Lab Account Id
-      type: object
-      required:
-      - user_id
-      - lab_test_id
-      - shipping_details
-      title: CreateRegistrableTestkitOrderRequest
-    PhysicianCreateRequestBase:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Email
-        npi:
-          type: string
-          title: Npi
-        licensed_states:
-          items:
-            type: string
-          type: array
-          title: Licensed States
-      type: object
-      required:
-      - first_name
-      - last_name
-      - npi
-      title: PhysicianCreateRequestBase
     AppointmentBookingRequest:
       properties:
         booking_key:
@@ -4745,40 +4388,397 @@ components:
       required:
       - booking_key
       title: AppointmentBookingRequest
-    PhysicianCreateRequest:
+    Question:
       properties:
-        first_name:
+        id:
+          type: integer
+          format: int64
+          title: Id
+        required:
+          type: boolean
+          title: Required
+        code:
           type: string
-          title: First Name
-        last_name:
+          title: Code
+        value:
           type: string
-          title: Last Name
-        email:
+          title: Value
+        type:
+          $ref: '#/components/schemas/QuestionType'
+          description: ℹ️ This enum is non-exhaustive.
+        sequence:
+          type: integer
+          title: Sequence
+        answers:
+          items:
+            $ref: '#/components/schemas/Answer'
+          type: array
+          title: Answers
+        constraint:
           anyOf:
           - type: string
           - type: 'null'
-          title: Email
-        npi:
-          type: string
-          title: Npi
-        licensed_states:
-          items:
-            type: string
-          type: array
-          title: Licensed States
-        signature_image:
+          title: Constraint
+        default:
           anyOf:
-          - $ref: '#/components/schemas/Jpeg'
-          - $ref: '#/components/schemas/Png'
+          - type: string
           - type: 'null'
-          title: Signature Image
-          description: An image of the physician signature for health insurance billing
+          title: Default
       type: object
       required:
-      - first_name
-      - last_name
-      - npi
-      title: PhysicianCreateRequest
+      - id
+      - required
+      - code
+      - value
+      - type
+      - sequence
+      - answers
+      title: Question
+    LabTestSampleType:
+      type: string
+      enum:
+      - dried_blood_spot
+      - arm_collector
+      - serum
+      - saliva
+      - urine
+      - stool
+      title: LabTestSampleType
+      description: The type of sample used to perform a lab test. ℹ️ This enum is non-exhaustive.
+    ClientFacingOnSiteCollectionOrderDetails:
+      properties:
+        type:
+          type: string
+          const: on_site_collection
+          title: Type
+        data:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingOnSiteCollectionOrder'
+          - type: 'null'
+      type: object
+      required:
+      - type
+      title: ClientFacingOnSiteCollectionOrderDetails
+    ClientFacingLabs:
+      type: string
+      enum:
+      - quest
+      - labcorp
+      - bioreference
+      - sonora_quest
+      title: ClientFacingLabs
+      description: ℹ️ This enum is non-exhaustive.
+    AppointmentEventStatus:
+      type: string
+      enum:
+      - pending
+      - reserved
+      - scheduled
+      - completed
+      - cancelled
+      - in_progress
+      title: AppointmentEventStatus
+      description: ℹ️ This enum is non-exhaustive.
+    Answer:
+      properties:
+        id:
+          type: integer
+          title: Id
+        code:
+          type: string
+          title: Code
+        value:
+          type: string
+          title: Value
+      type: object
+      required:
+      - id
+      - code
+      - value
+      title: Answer
+    ClientFacingOnSiteCollectionOrder:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Junction on-site collection Order ID
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingOnSiteCollectionOrder
+      description: 'Schema for an on-site collection order in the client facing API.
+
+        To be used as part of a ClientFacingOrder.'
+      example:
+        created_at: '2020-01-01T00:00:00Z'
+        id: 64d787c3-825d-462b-bf0c-5b895f7a9bf5
+        updated_at: '2020-01-01T00:00:00Z'
+    ResendWebhookBody:
+      properties:
+        order_ids:
+          anyOf:
+          - items:
+              type: string
+              format: uuid
+            type: array
+          - type: 'null'
+          title: Order Ids
+        start_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start At
+        end_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End At
+      type: object
+      title: ResendWebhookBody
+    ResultType:
+      type: string
+      enum:
+      - numeric
+      - range
+      - comment
+      - coded_value
+      title: ResultType
+      description: ℹ️ This enum is non-exhaustive.
+    RequestAppointmentRequest:
+      properties:
+        address:
+          $ref: '#/components/schemas/USAddress'
+          description: At-home phlebotomy appointment address.
+        provider:
+          $ref: '#/components/schemas/AppointmentProvider'
+          description: ℹ️ This enum is non-exhaustive.
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+      type: object
+      required:
+      - address
+      - provider
+      title: RequestAppointmentRequest
+    OrderStatusDetail:
+      type: string
+      enum:
+      - fulfillment_error
+      - date_of_collection_unspecified
+      - demographic_information_unspecified
+      - demographic_information_mismatch
+      - sample_quantity_not_sufficient
+      - sample_contaminated
+      - sample_stability_exceeded
+      - sample_hemolyzed
+      - sample_improper_collection
+      title: OrderStatusDetail
+      description: A descriptive-only additional field to be used in combination with OrderStatus. Exposed in the API. ℹ️ This enum is non-exhaustive.
+    ClientFacingOrderInTransaction:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        low_level_status:
+          anyOf:
+          - $ref: '#/components/schemas/OrderLowLevelStatus'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        low_level_status_created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Low Level Status Created At
+        origin:
+          anyOf:
+          - $ref: '#/components/schemas/OrderOrigin'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        parent_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Parent Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingOrderInTransaction
+      description: Minimal order info for embedding in order_transaction payload.
+    Interpretation:
+      type: string
+      enum:
+      - normal
+      - abnormal
+      - critical
+      - unknown
+      title: Interpretation
+      description: ℹ️ This enum is non-exhaustive.
+    AreaInfo:
+      properties:
+        zip_code:
+          type: string
+          pattern: ^\d{5}(-\d{4})?$
+          title: Zip Code
+        phlebotomy:
+          $ref: '#/components/schemas/PhlebotomyAreaInfo'
+        central_labs:
+          additionalProperties:
+            $ref: '#/components/schemas/PSCAreaInfo'
+          propertyNames:
+            $ref: '#/components/schemas/ClientFacingLabs'
+          type: object
+          title: Central Labs
+      type: object
+      required:
+      - zip_code
+      - phlebotomy
+      - central_labs
+      title: AreaInfo
+    AppointmentRescheduleRequest:
+      properties:
+        booking_key:
+          type: string
+          title: Booking Key
+        appointment_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Appointment Notes
+      type: object
+      required:
+      - booking_key
+      title: AppointmentRescheduleRequest
+    ClientFacingTestkitOrder:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Vital TestKit Order ID
+        shipment:
+          anyOf:
+          - $ref: '#/components/schemas/ClientFacingShipment'
+          - type: 'null'
+          description: Shipment object
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - shipment
+      - created_at
+      - updated_at
+      title: ClientFacingTestkitOrder
+      description: 'Schema for a testkit order in the client facing API.
+
+
+        To be used as part of a ClientFacingOrder.'
+      example:
+        created_at: '2020-01-01T00:00:00Z'
+        id: b31c2663-88de-44b7-977d-c37ef107254f
+        shipment:
+          created_at: '2020-01-01T00:00:00.000Z'
+          id: e56c84fb-f8fa-4d74-bed0-a129b04cb3bc
+          inbound_courier: usps
+          inbound_tracking_number: <inbound_tracking_number>
+          inbound_tracking_url: <inbound_tracking_url>
+          notes: <notes>
+          outbound_courier: usps
+          outbound_tracking_number: <outbound_tracking_number>
+          outbound_tracking_url: <outbound_tracking_url>
+          updated_at: '2020-01-01T00:00:00.000Z'
+        updated_at: '2020-01-01T00:00:00Z'
+    LabTestStatus:
+      type: string
+      enum:
+      - active
+      - pending_approval
+      - inactive
+      title: LabTestStatus
+      description: ℹ️ This enum is non-exhaustive.
+    OrderTopLevelStatus:
+      type: string
+      enum:
+      - received
+      - collecting_sample
+      - sample_with_lab
+      - completed
+      - cancelled
+      - failed
+      title: OrderTopLevelStatus
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingAtHomePhlebotomyOrder:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+          description: The Vital at-home phlebotomy Order ID
+        appointment_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Appointment Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - created_at
+      - updated_at
+      title: ClientFacingAtHomePhlebotomyOrder
+      description: 'Schema for a at-home-phlebotomy test order in the client facing API.
+
+
+        To be used as part of a ClientFacingOrder.'
+      example:
+        appointment_id: 10d7a598-5a7d-4743-9045-6038c73eeace
+        created_at: '2020-01-01T00:00:00Z'
+        id: 81d0f268-303b-486a-b8c9-1d2e4466e50b
+        updated_at: '2020-01-01T00:00:00Z'
   securitySchemes:
     apiKeyAuth:
       type: apiKey

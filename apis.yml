@@ -12,17 +12,21 @@ description: Vital (now operating as Junction, formerly tryVital) is a health-da
   2, ISO 27001, GDPR-ready, and HIPAA-compliant infrastructure with both US and EU regional deployments.
 type: Index
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - tryvital/docs
+    - tryvital/vital-fern-api
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: paid
@@ -160,7 +164,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-compendium-api
-  name: Vital compendium API
+  name: Vital Compendium API
   description: The compendium API from Vital — 2 operation(s) for compendium.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -202,7 +206,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-insurance-api
-  name: Vital insurance API
+  name: Vital Insurance API
   description: The insurance API from Vital — 3 operation(s) for insurance.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -246,7 +250,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-introspect-api
-  name: Vital introspect API
+  name: Vital Introspect API
   description: The introspect API from Vital — 2 operation(s) for introspect.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -290,7 +294,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-lab-account-api
-  name: Vital lab_account API
+  name: Vital Lab Account API
   description: The lab_account API from Vital — 1 operation(s) for lab_account.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -333,7 +337,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-lab-report-api
-  name: Vital lab_report API
+  name: Vital Lab Report API
   description: The lab_report API from Vital — 2 operation(s) for lab_report.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -376,7 +380,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-lab-tests-api
-  name: Vital lab_tests API
+  name: Vital Lab Tests API
   description: The lab_tests API from Vital — 9 operation(s) for lab_tests.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -420,7 +424,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-link-api
-  name: Vital link API
+  name: Vital Link API
   description: The link API from Vital — 13 operation(s) for link.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -464,7 +468,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-order-api
-  name: Vital order API
+  name: Vital Order API
   description: The order API from Vital — 32 operation(s) for order.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -508,7 +512,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-order-transaction-api
-  name: Vital order_transaction API
+  name: Vital Order Transaction API
   description: The order_transaction API from Vital — 3 operation(s) for order_transaction.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -551,7 +555,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-orders-api
-  name: Vital orders API
+  name: Vital Orders API
   description: The orders API from Vital — 1 operation(s) for orders.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -595,7 +599,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-payor-api
-  name: Vital payor API
+  name: Vital Payor API
   description: The payor API from Vital — 1 operation(s) for payor.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -637,7 +641,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-providers-api
-  name: Vital providers API
+  name: Vital Providers API
   description: The providers API from Vital — 1 operation(s) for providers.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -681,7 +685,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-summary-api
-  name: Vital summary API
+  name: Vital Summary API
   description: The summary API from Vital — 15 operation(s) for summary.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -725,7 +729,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-team-api
-  name: Vital team API
+  name: Vital Team API
   description: The team API from Vital — 5 operation(s) for team.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com
@@ -769,7 +773,7 @@ apis:
   - type: Documentation
     url: https://docs.junction.com/api-details/junction-management-api
 - aid: vital-io:vital-io-user-api
-  name: Vital user API
+  name: Vital User API
   description: The user API from Vital — 16 operation(s) for user.
   humanURL: https://docs.junction.com/api-details/junction-api
   baseURL: https://api.us.junction.com

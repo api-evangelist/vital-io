@@ -73,6 +73,217 @@ paths:
       x-fern-sdk-method-name: convert
 components:
   schemas:
+    SearchCompendiumResponse:
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchMode'
+          description: ℹ️ This enum is non-exhaustive.
+        selected_canonical:
+          anyOf:
+          - $ref: '#/components/schemas/CanonicalCandidate'
+          - type: 'null'
+        canonical_candidates:
+          items:
+            $ref: '#/components/schemas/CanonicalCandidate'
+          type: array
+          title: Canonical Candidates
+        per_lab:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/PerLabCandidate'
+            type: array
+          type: object
+          title: Per Lab
+        related:
+          items:
+            $ref: '#/components/schemas/RelatedCandidate'
+          type: array
+          title: Related
+      type: object
+      required:
+      - mode
+      title: SearchCompendiumResponse
+    SearchMode:
+      type: string
+      enum:
+      - canonical
+      - crosswalk
+      title: SearchMode
+      description: ℹ️ This enum is non-exhaustive.
+    ConvertCompendiumBody:
+      properties:
+        lab_test_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Test Id
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+        target_lab:
+          $ref: '#/components/schemas/CompendiumSearchLabs'
+          description: ℹ️ This enum is non-exhaustive.
+        limit:
+          type: integer
+          title: Limit
+          default: 3
+      type: object
+      required:
+      - target_lab
+      title: ConvertCompendiumBody
+    ConvertCompendiumResponse:
+      properties:
+        source_lab_test_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Source Lab Test Id
+        source_lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Source Lab Id
+        target_lab_id:
+          type: integer
+          title: Target Lab Id
+        target_lab_slug:
+          type: string
+          title: Target Lab Slug
+        source_provider_ids:
+          items:
+            type: string
+          type: array
+          title: Source Provider Ids
+        converted_provider_ids:
+          items:
+            type: string
+          type: array
+          title: Converted Provider Ids
+        unresolved_provider_ids:
+          items:
+            type: string
+          type: array
+          title: Unresolved Provider Ids
+        by_source_provider_id:
+          additionalProperties:
+            $ref: '#/components/schemas/ProviderIdConversionResponse'
+          type: object
+          title: By Source Provider Id
+      type: object
+      required:
+      - target_lab_id
+      - target_lab_slug
+      title: ConvertCompendiumResponse
+    ProviderIdConversionResponse:
+      properties:
+        source_provider_id:
+          type: string
+          title: Source Provider Id
+        candidates:
+          items:
+            $ref: '#/components/schemas/PerLabCandidate'
+          type: array
+          title: Candidates
+      type: object
+      required:
+      - source_provider_id
+      title: ProviderIdConversionResponse
+    SearchCompendiumBody:
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchMode'
+          description: ℹ️ This enum is non-exhaustive.
+        query:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query
+        cpt_codes:
+          items:
+            type: string
+          type: array
+          title: Cpt Codes
+        loinc_set_hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Set Hash
+        labs:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/CompendiumSearchLabs'
+            type: array
+          - type: 'null'
+          title: Labs
+        include_related:
+          type: boolean
+          title: Include Related
+          default: true
+        limit:
+          type: integer
+          title: Limit
+          default: 3
+      type: object
+      required:
+      - mode
+      title: SearchCompendiumBody
+    CanonicalCandidate:
+      properties:
+        loinc_set_hash:
+          type: string
+          title: Loinc Set Hash
+        display_name:
+          type: string
+          title: Display Name
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+        loinc_codes:
+          items:
+            type: string
+          type: array
+          title: Loinc Codes
+        provider_ids:
+          items:
+            type: string
+          type: array
+          title: Provider Ids
+        loinc_components:
+          items:
+            type: string
+          type: array
+          title: Loinc Components
+        loinc_groups:
+          items:
+            type: string
+          type: array
+          title: Loinc Groups
+        cpt_codes:
+          items:
+            type: string
+          type: array
+          title: Cpt Codes
+        popularity_score:
+          type: number
+          title: Popularity Score
+        confidence:
+          type: number
+          title: Confidence
+      type: object
+      required:
+      - loinc_set_hash
+      - display_name
+      - popularity_score
+      - confidence
+      title: CanonicalCandidate
     PerLabCandidate:
       properties:
         marker_id:
@@ -146,223 +357,6 @@ components:
       - confidence
       - marker_popularity_score
       title: PerLabCandidate
-    ProviderIdConversionResponse:
-      properties:
-        source_provider_id:
-          type: string
-          title: Source Provider Id
-        candidates:
-          items:
-            $ref: '#/components/schemas/PerLabCandidate'
-          type: array
-          title: Candidates
-      type: object
-      required:
-      - source_provider_id
-      title: ProviderIdConversionResponse
-    ConvertCompendiumResponse:
-      properties:
-        source_lab_test_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Source Lab Test Id
-        source_lab_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Source Lab Id
-        target_lab_id:
-          type: integer
-          title: Target Lab Id
-        target_lab_slug:
-          type: string
-          title: Target Lab Slug
-        source_provider_ids:
-          items:
-            type: string
-          type: array
-          title: Source Provider Ids
-        converted_provider_ids:
-          items:
-            type: string
-          type: array
-          title: Converted Provider Ids
-        unresolved_provider_ids:
-          items:
-            type: string
-          type: array
-          title: Unresolved Provider Ids
-        by_source_provider_id:
-          additionalProperties:
-            $ref: '#/components/schemas/ProviderIdConversionResponse'
-          type: object
-          title: By Source Provider Id
-      type: object
-      required:
-      - target_lab_id
-      - target_lab_slug
-      title: ConvertCompendiumResponse
-    SearchCompendiumBody:
-      properties:
-        mode:
-          $ref: '#/components/schemas/SearchMode'
-          description: ℹ️ This enum is non-exhaustive.
-        query:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Query
-        cpt_codes:
-          items:
-            type: string
-          type: array
-          title: Cpt Codes
-        loinc_set_hash:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Loinc Set Hash
-        labs:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/CompendiumSearchLabs'
-            type: array
-          - type: 'null'
-          title: Labs
-        include_related:
-          type: boolean
-          title: Include Related
-          default: true
-        limit:
-          type: integer
-          title: Limit
-          default: 3
-      type: object
-      required:
-      - mode
-      title: SearchCompendiumBody
-    SearchMode:
-      type: string
-      enum:
-      - canonical
-      - crosswalk
-      title: SearchMode
-      description: ℹ️ This enum is non-exhaustive.
-    ConvertCompendiumBody:
-      properties:
-        lab_test_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Lab Test Id
-        provider_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Provider Ids
-        target_lab:
-          $ref: '#/components/schemas/CompendiumSearchLabs'
-          description: ℹ️ This enum is non-exhaustive.
-        limit:
-          type: integer
-          title: Limit
-          default: 3
-      type: object
-      required:
-      - target_lab
-      title: ConvertCompendiumBody
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CanonicalCandidate:
-      properties:
-        loinc_set_hash:
-          type: string
-          title: Loinc Set Hash
-        display_name:
-          type: string
-          title: Display Name
-        aliases:
-          items:
-            type: string
-          type: array
-          title: Aliases
-        loinc_codes:
-          items:
-            type: string
-          type: array
-          title: Loinc Codes
-        provider_ids:
-          items:
-            type: string
-          type: array
-          title: Provider Ids
-        loinc_components:
-          items:
-            type: string
-          type: array
-          title: Loinc Components
-        loinc_groups:
-          items:
-            type: string
-          type: array
-          title: Loinc Groups
-        cpt_codes:
-          items:
-            type: string
-          type: array
-          title: Cpt Codes
-        popularity_score:
-          type: number
-          title: Popularity Score
-        confidence:
-          type: number
-          title: Confidence
-      type: object
-      required:
-      - loinc_set_hash
-      - display_name
-      - popularity_score
-      - confidence
-      title: CanonicalCandidate
-    SearchCompendiumResponse:
-      properties:
-        mode:
-          $ref: '#/components/schemas/SearchMode'
-          description: ℹ️ This enum is non-exhaustive.
-        selected_canonical:
-          anyOf:
-          - $ref: '#/components/schemas/CanonicalCandidate'
-          - type: 'null'
-        canonical_candidates:
-          items:
-            $ref: '#/components/schemas/CanonicalCandidate'
-          type: array
-          title: Canonical Candidates
-        per_lab:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/PerLabCandidate'
-            type: array
-          type: object
-          title: Per Lab
-        related:
-          items:
-            $ref: '#/components/schemas/RelatedCandidate'
-          type: array
-          title: Related
-      type: object
-      required:
-      - mode
-      title: SearchCompendiumResponse
     RelatedCandidate:
       properties:
         canonical:
@@ -393,6 +387,12 @@ components:
       - sonora_quest
       title: CompendiumSearchLabs
       description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     apiKeyAuth:
       type: apiKey
