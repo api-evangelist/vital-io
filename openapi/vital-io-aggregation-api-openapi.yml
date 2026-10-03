@@ -44,38 +44,6 @@ webhooks:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ClientFacingContinuousQueryResultTableChanged:
-      properties:
-        event_type:
-          type: string
-          const: continuous_query.result_table.changed
-          title: Event Type
-          x-junction-exhaustive: true
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        client_user_id:
-          type: string
-          format: uuid
-          title: Client User Id
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-        data:
-          items:
-            $ref: '#/components/schemas/ContinuousQueryResultTableChanges'
-          type: array
-          title: Data
-      type: object
-      required:
-      - event_type
-      - user_id
-      - client_user_id
-      - team_id
-      - data
-      title: ClientFacingContinuousQueryResultTableChanged
     ContinuousQueryResultTableChanges:
       properties:
         query_id:
@@ -111,6 +79,38 @@ components:
           - third
         query_id: 3d459f48-a736-476a-8714-95aa3b2b3708
         query_slug: sleep-analysis-v1
+    ClientFacingContinuousQueryResultTableChanged:
+      properties:
+        event_type:
+          type: string
+          const: continuous_query.result_table.changed
+          title: Event Type
+          x-junction-exhaustive: true
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        client_user_id:
+          type: string
+          format: uuid
+          title: Client User Id
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+        data:
+          items:
+            $ref: '#/components/schemas/ContinuousQueryResultTableChanges'
+          type: array
+          title: Data
+      type: object
+      required:
+      - event_type
+      - user_id
+      - client_user_id
+      - team_id
+      - data
+      title: ClientFacingContinuousQueryResultTableChanged
     HTTPValidationError:
       properties:
         detail:

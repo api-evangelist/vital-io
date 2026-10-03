@@ -46,50 +46,12 @@ paths:
       x-fern-sdk-method-name: create_payor
 components:
   schemas:
-    Address:
+    HTTPValidationError:
       properties:
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-          default: ''
-        country:
-          type: string
-          title: Country
-        zip:
-          type: string
-          title: Zip
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        access_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Access Notes
+        detail:
+          title: Detail
       type: object
-      required:
-      - first_line
-      - country
-      - zip
-      - city
-      - state
-      title: Address
-    ClientFacingPayorCodeSource:
-      type: string
-      enum:
-      - platform
-      - team
-      title: ClientFacingPayorCodeSource
-      description: ℹ️ This enum is non-exhaustive.
+      title: HTTPValidationError
     CreatePayorBody:
       properties:
         name:
@@ -142,6 +104,13 @@ components:
       - org_address
       - source
       title: ClientFacingPayor
+    ClientFacingPayorCodeSource:
+      type: string
+      enum:
+      - platform
+      - team
+      title: ClientFacingPayorCodeSource
+      description: ℹ️ This enum is non-exhaustive.
     PayorCodeExternalProvider:
       type: string
       enum:
@@ -154,12 +123,43 @@ components:
       - pverify
       title: PayorCodeExternalProvider
       description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
+    Address:
       properties:
-        detail:
-          title: Detail
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
       type: object
-      title: HTTPValidationError
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
   securitySchemes:
     apiKeyAuth:
       type: apiKey

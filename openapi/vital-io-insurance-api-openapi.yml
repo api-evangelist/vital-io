@@ -156,6 +156,201 @@ paths:
       x-fern-sdk-method-name: validate_icd_codes
 components:
   schemas:
+    ClientFacingDiagnosisInformation:
+      properties:
+        diagnosis_code:
+          type: string
+          title: Diagnosis Code
+          description: Diagnosis code for insurance information.
+        description:
+          type: string
+          title: Description
+          description: Diagnosis description insurance information.
+        is_secondary:
+          type: boolean
+          title: Is Secondary
+          default: false
+      type: object
+      required:
+      - diagnosis_code
+      - description
+      title: ClientFacingDiagnosisInformation
+    ValidateICDCodesResponse:
+      properties:
+        valid:
+          type: boolean
+          title: Valid
+        errors:
+          items:
+            type: string
+          type: array
+          title: Errors
+        violations:
+          items:
+            $ref: '#/components/schemas/ICDExcludesViolation'
+          type: array
+          title: Violations
+        warnings:
+          items:
+            $ref: '#/components/schemas/ICDExcludesWarning'
+          type: array
+          title: Warnings
+      type: object
+      required:
+      - valid
+      - errors
+      - violations
+      - warnings
+      title: ValidateICDCodesResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ICDExcludesWarning:
+      properties:
+        code:
+          type: string
+          title: Code
+        overlaps_with:
+          type: string
+          title: Overlaps With
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+      - code
+      - overlaps_with
+      - type
+      title: ICDExcludesWarning
+    ValidateICDCodesBody:
+      properties:
+        codes:
+          items:
+            type: string
+          type: array
+          title: Codes
+      type: object
+      required:
+      - codes
+      title: ValidateICDCodesBody
+    PayorSearchRequest:
+      properties:
+        insurance_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Insurance Name
+        provider:
+          anyOf:
+          - $ref: '#/components/schemas/PayorCodeExternalProvider'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+      type: object
+      title: PayorSearchRequest
+    ICDExcludesViolation:
+      properties:
+        code:
+          type: string
+          title: Code
+        conflicts_with:
+          type: string
+          title: Conflicts With
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+      - code
+      - conflicts_with
+      - type
+      title: ICDExcludesViolation
+    ClientFacingPayorSearchResponse:
+      properties:
+        payor_code:
+          type: string
+          title: Payor Code
+          description: Payor code returned for the insurance information.
+        name:
+          type: string
+          title: Name
+          description: Insurance name returned for the insurance information.
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          description: Insurance name aliases returned for the insurance information.
+        org_address:
+          $ref: '#/components/schemas/Address'
+          description: Insurance business address returned for the insurance information.
+        source:
+          $ref: '#/components/schemas/ClientFacingPayorCodeSource'
+          description: The source of the payor, can be one of (platform, team). ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - payor_code
+      - name
+      - aliases
+      - org_address
+      - source
+      title: ClientFacingPayorSearchResponse
+    ClientFacingPayorCodeSource:
+      type: string
+      enum:
+      - platform
+      - team
+      title: ClientFacingPayorCodeSource
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingPayorSearchResponseDeprecated:
+      properties:
+        code:
+          type: string
+          title: Code
+          description: Payor code returned for the insurance information.
+        name:
+          type: string
+          title: Name
+          description: Insurance name returned for the insurance information.
+        aliases:
+          items:
+            type: string
+          type: array
+          title: Aliases
+          description: Insurance name aliases returned for the insurance information.
+        org_address:
+          $ref: '#/components/schemas/Address'
+          description: Insurance business address returned for the insurance information.
+        source:
+          $ref: '#/components/schemas/ClientFacingPayorCodeSource'
+          description: The source of the payor, can be one of (platform, team). ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - code
+      - name
+      - aliases
+      - org_address
+      - source
+      title: ClientFacingPayorSearchResponseDeprecated
+    PayorCodeExternalProvider:
+      type: string
+      enum:
+      - change_healthcare
+      - availity
+      - stedi
+      - waystar
+      - claim_md
+      - apero
+      - pverify
+      title: PayorCodeExternalProvider
+      description: ℹ️ This enum is non-exhaustive.
     Address:
       properties:
         first_line:
@@ -193,201 +388,6 @@ components:
       - city
       - state
       title: Address
-    ClientFacingPayorCodeSource:
-      type: string
-      enum:
-      - platform
-      - team
-      title: ClientFacingPayorCodeSource
-      description: ℹ️ This enum is non-exhaustive.
-    ICDExcludesWarning:
-      properties:
-        code:
-          type: string
-          title: Code
-        overlaps_with:
-          type: string
-          title: Overlaps With
-        type:
-          type: string
-          title: Type
-      type: object
-      required:
-      - code
-      - overlaps_with
-      - type
-      title: ICDExcludesWarning
-    ICDExcludesViolation:
-      properties:
-        code:
-          type: string
-          title: Code
-        conflicts_with:
-          type: string
-          title: Conflicts With
-        type:
-          type: string
-          title: Type
-      type: object
-      required:
-      - code
-      - conflicts_with
-      - type
-      title: ICDExcludesViolation
-    ValidateICDCodesResponse:
-      properties:
-        valid:
-          type: boolean
-          title: Valid
-        errors:
-          items:
-            type: string
-          type: array
-          title: Errors
-        violations:
-          items:
-            $ref: '#/components/schemas/ICDExcludesViolation'
-          type: array
-          title: Violations
-        warnings:
-          items:
-            $ref: '#/components/schemas/ICDExcludesWarning'
-          type: array
-          title: Warnings
-      type: object
-      required:
-      - valid
-      - errors
-      - violations
-      - warnings
-      title: ValidateICDCodesResponse
-    ClientFacingPayorSearchResponse:
-      properties:
-        payor_code:
-          type: string
-          title: Payor Code
-          description: Payor code returned for the insurance information.
-        name:
-          type: string
-          title: Name
-          description: Insurance name returned for the insurance information.
-        aliases:
-          items:
-            type: string
-          type: array
-          title: Aliases
-          description: Insurance name aliases returned for the insurance information.
-        org_address:
-          $ref: '#/components/schemas/Address'
-          description: Insurance business address returned for the insurance information.
-        source:
-          $ref: '#/components/schemas/ClientFacingPayorCodeSource'
-          description: The source of the payor, can be one of (platform, team). ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - payor_code
-      - name
-      - aliases
-      - org_address
-      - source
-      title: ClientFacingPayorSearchResponse
-    ClientFacingPayorSearchResponseDeprecated:
-      properties:
-        code:
-          type: string
-          title: Code
-          description: Payor code returned for the insurance information.
-        name:
-          type: string
-          title: Name
-          description: Insurance name returned for the insurance information.
-        aliases:
-          items:
-            type: string
-          type: array
-          title: Aliases
-          description: Insurance name aliases returned for the insurance information.
-        org_address:
-          $ref: '#/components/schemas/Address'
-          description: Insurance business address returned for the insurance information.
-        source:
-          $ref: '#/components/schemas/ClientFacingPayorCodeSource'
-          description: The source of the payor, can be one of (platform, team). ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - code
-      - name
-      - aliases
-      - org_address
-      - source
-      title: ClientFacingPayorSearchResponseDeprecated
-    ClientFacingDiagnosisInformation:
-      properties:
-        diagnosis_code:
-          type: string
-          title: Diagnosis Code
-          description: Diagnosis code for insurance information.
-        description:
-          type: string
-          title: Description
-          description: Diagnosis description insurance information.
-        is_secondary:
-          type: boolean
-          title: Is Secondary
-          default: false
-      type: object
-      required:
-      - diagnosis_code
-      - description
-      title: ClientFacingDiagnosisInformation
-    PayorSearchRequest:
-      properties:
-        insurance_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Insurance Name
-        provider:
-          anyOf:
-          - $ref: '#/components/schemas/PayorCodeExternalProvider'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-      type: object
-      title: PayorSearchRequest
-    ValidateICDCodesBody:
-      properties:
-        codes:
-          items:
-            type: string
-          type: array
-          title: Codes
-      type: object
-      required:
-      - codes
-      title: ValidateICDCodesBody
-    PayorCodeExternalProvider:
-      type: string
-      enum:
-      - change_healthcare
-      - availity
-      - stedi
-      - waystar
-      - claim_md
-      - apero
-      - pverify
-      title: PayorCodeExternalProvider
-      description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     apiKeyAuth:
       type: apiKey

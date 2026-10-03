@@ -53,6 +53,21 @@ paths:
       x-fern-sdk-method-name: get_all
 components:
   schemas:
+    SourceAuthType:
+      type: string
+      enum:
+      - oauth
+      - team_oauth
+      - sdk
+      - password
+      - email
+      - app
+      - ''
+      title: SourceAuthType
+      x-fern-enum:
+        ? ''
+        : name: Empty
+      description: ℹ️ This enum is non-exhaustive.
     ClientFacingProviderDetailed:
       properties:
         name:
@@ -99,21 +114,12 @@ components:
         supported_resources:
         - workouts
         - sleep
-    SourceAuthType:
-      type: string
-      enum:
-      - oauth
-      - team_oauth
-      - sdk
-      - password
-      - email
-      - app
-      - ''
-      title: SourceAuthType
-      x-fern-enum:
-        ? ''
-        : name: Empty
-      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
     Resource:
       type: string
       enum:
@@ -190,12 +196,6 @@ components:
       title: ClientFacingResource
       x-fern-type-name: ClientFacingResource
       description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     apiKeyAuth:
       type: apiKey

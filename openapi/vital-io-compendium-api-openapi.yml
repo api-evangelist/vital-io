@@ -73,69 +73,6 @@ paths:
       x-fern-sdk-method-name: convert
 components:
   schemas:
-    SearchCompendiumResponse:
-      properties:
-        mode:
-          $ref: '#/components/schemas/SearchMode'
-          description: ℹ️ This enum is non-exhaustive.
-        selected_canonical:
-          anyOf:
-          - $ref: '#/components/schemas/CanonicalCandidate'
-          - type: 'null'
-        canonical_candidates:
-          items:
-            $ref: '#/components/schemas/CanonicalCandidate'
-          type: array
-          title: Canonical Candidates
-        per_lab:
-          additionalProperties:
-            items:
-              $ref: '#/components/schemas/PerLabCandidate'
-            type: array
-          type: object
-          title: Per Lab
-        related:
-          items:
-            $ref: '#/components/schemas/RelatedCandidate'
-          type: array
-          title: Related
-      type: object
-      required:
-      - mode
-      title: SearchCompendiumResponse
-    SearchMode:
-      type: string
-      enum:
-      - canonical
-      - crosswalk
-      title: SearchMode
-      description: ℹ️ This enum is non-exhaustive.
-    ConvertCompendiumBody:
-      properties:
-        lab_test_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Lab Test Id
-        provider_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Provider Ids
-        target_lab:
-          $ref: '#/components/schemas/CompendiumSearchLabs'
-          description: ℹ️ This enum is non-exhaustive.
-        limit:
-          type: integer
-          title: Limit
-          default: 3
-      type: object
-      required:
-      - target_lab
-      title: ConvertCompendiumBody
     ConvertCompendiumResponse:
       properties:
         source_lab_test_id:
@@ -194,45 +131,63 @@ components:
       required:
       - source_provider_id
       title: ProviderIdConversionResponse
-    SearchCompendiumBody:
+    RelatedCandidate:
+      properties:
+        canonical:
+          $ref: '#/components/schemas/CanonicalCandidate'
+        relation:
+          type: string
+          title: Relation
+        confidence:
+          type: number
+          title: Confidence
+        reason_codes:
+          items:
+            type: string
+          type: array
+          title: Reason Codes
+      type: object
+      required:
+      - canonical
+      - relation
+      - confidence
+      title: RelatedCandidate
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SearchCompendiumResponse:
       properties:
         mode:
           $ref: '#/components/schemas/SearchMode'
           description: ℹ️ This enum is non-exhaustive.
-        query:
+        selected_canonical:
           anyOf:
-          - type: string
+          - $ref: '#/components/schemas/CanonicalCandidate'
           - type: 'null'
-          title: Query
-        cpt_codes:
+        canonical_candidates:
           items:
-            type: string
+            $ref: '#/components/schemas/CanonicalCandidate'
           type: array
-          title: Cpt Codes
-        loinc_set_hash:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Loinc Set Hash
-        labs:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/CompendiumSearchLabs'
+          title: Canonical Candidates
+        per_lab:
+          additionalProperties:
+            items:
+              $ref: '#/components/schemas/PerLabCandidate'
             type: array
-          - type: 'null'
-          title: Labs
-        include_related:
-          type: boolean
-          title: Include Related
-          default: true
-        limit:
-          type: integer
-          title: Limit
-          default: 3
+          type: object
+          title: Per Lab
+        related:
+          items:
+            $ref: '#/components/schemas/RelatedCandidate'
+          type: array
+          title: Related
       type: object
       required:
       - mode
-      title: SearchCompendiumBody
+      title: SearchCompendiumResponse
     CanonicalCandidate:
       properties:
         loinc_set_hash:
@@ -284,6 +239,45 @@ components:
       - popularity_score
       - confidence
       title: CanonicalCandidate
+    SearchCompendiumBody:
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchMode'
+          description: ℹ️ This enum is non-exhaustive.
+        query:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Query
+        cpt_codes:
+          items:
+            type: string
+          type: array
+          title: Cpt Codes
+        loinc_set_hash:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Loinc Set Hash
+        labs:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/CompendiumSearchLabs'
+            type: array
+          - type: 'null'
+          title: Labs
+        include_related:
+          type: boolean
+          title: Include Related
+          default: true
+        limit:
+          type: integer
+          title: Limit
+          default: 3
+      type: object
+      required:
+      - mode
+      title: SearchCompendiumBody
     PerLabCandidate:
       properties:
         marker_id:
@@ -357,27 +351,13 @@ components:
       - confidence
       - marker_popularity_score
       title: PerLabCandidate
-    RelatedCandidate:
-      properties:
-        canonical:
-          $ref: '#/components/schemas/CanonicalCandidate'
-        relation:
-          type: string
-          title: Relation
-        confidence:
-          type: number
-          title: Confidence
-        reason_codes:
-          items:
-            type: string
-          type: array
-          title: Reason Codes
-      type: object
-      required:
+    SearchMode:
+      type: string
+      enum:
       - canonical
-      - relation
-      - confidence
-      title: RelatedCandidate
+      - crosswalk
+      title: SearchMode
+      description: ℹ️ This enum is non-exhaustive.
     CompendiumSearchLabs:
       type: string
       enum:
@@ -387,12 +367,32 @@ components:
       - sonora_quest
       title: CompendiumSearchLabs
       description: ℹ️ This enum is non-exhaustive.
-    HTTPValidationError:
+    ConvertCompendiumBody:
       properties:
-        detail:
-          title: Detail
+        lab_test_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Test Id
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+        target_lab:
+          $ref: '#/components/schemas/CompendiumSearchLabs'
+          description: ℹ️ This enum is non-exhaustive.
+        limit:
+          type: integer
+          title: Limit
+          default: 3
       type: object
-      title: HTTPValidationError
+      required:
+      - target_lab
+      title: ConvertCompendiumBody
   securitySchemes:
     apiKeyAuth:
       type: apiKey

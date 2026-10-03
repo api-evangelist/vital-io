@@ -156,6 +156,163 @@ paths:
       x-fern-sdk-method-name: get_user_historical_pulls
 components:
   schemas:
+    AttemptStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      title: AttemptStatus
+      description: ℹ️ This enum is non-exhaustive.
+    HistoricalPullTimeline:
+      properties:
+        scheduled_at:
+          type: string
+          format: date-time
+          title: Scheduled At
+        started_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Started At
+        ended_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Ended At
+      type: object
+      required:
+      - scheduled_at
+      title: HistoricalPullTimeline
+    SingleProviderHistoricalPullResponse:
+      properties:
+        pulled:
+          additionalProperties:
+            $ref: '#/components/schemas/SingleHistoricalPullStatistics'
+          propertyNames:
+            $ref: '#/components/schemas/Resource'
+          type: object
+          title: Pulled
+        not_pulled:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+          title: Not Pulled
+      type: object
+      required:
+      - pulled
+      - not_pulled
+      title: SingleProviderHistoricalPullResponse
+    SingleUserResourceResponse:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider:
+          additionalProperties:
+            additionalProperties:
+              $ref: '#/components/schemas/SingleResourceStatistics'
+            propertyNames:
+              $ref: '#/components/schemas/Resource'
+            type: object
+          propertyNames:
+            $ref: '#/components/schemas/Providers'
+          type: object
+          title: Provider
+      type: object
+      required:
+      - user_id
+      - provider
+      title: SingleUserResourceResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HistoricalPullNonRetriableErrorDetails:
+      type: string
+      enum:
+      - non_retriable_error
+      - unexpected_error
+      - retry_quota_exhausted
+      title: HistoricalPullNonRetriableErrorDetails
+      description: ℹ️ This enum is non-exhaustive.
+    HistoricalPullStatus:
+      type: string
+      enum:
+      - success
+      - failure
+      - in_progress
+      - scheduled
+      - retrying
+      title: HistoricalPullStatus
+      description: ℹ️ This enum is non-exhaustive.
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    SingleUserHistoricalPullResponse:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider:
+          additionalProperties:
+            $ref: '#/components/schemas/SingleProviderHistoricalPullResponse'
+          propertyNames:
+            $ref: '#/components/schemas/Providers'
+          type: object
+          title: Provider
+      type: object
+      required:
+      - user_id
+      - provider
+      title: SingleUserHistoricalPullResponse
     LastAttempt:
       properties:
         timestamp:
@@ -170,6 +327,125 @@ components:
       - timestamp
       - status
       title: LastAttempt
+    UserResourcesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SingleUserResourceResponse'
+          type: array
+          title: Data
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+          deprecated: true
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+      type: object
+      required:
+      - data
+      - next
+      - next_cursor
+      title: UserResourcesResponse
+      example:
+        data:
+        - provider:
+            fitbit:
+              activity:
+                last_attempt:
+                  status: success
+                  timestamp: '2023-10-24T13:13:27+00:00'
+                newest_data: '2023-10-24T00:00:00+00:00'
+                oldest_data: '2023-06-21T00:00:00+00:00'
+                sent_count: 231
+          user_id: ''
+    UserHistoricalPullsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SingleUserHistoricalPullResponse'
+          type: array
+          title: Data
+        next:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next
+          deprecated: true
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+      type: object
+      required:
+      - data
+      - next
+      - next_cursor
+      title: UserHistoricalPullsResponse
+      example:
+        data:
+        - provider:
+            fitbit:
+              not_pulled:
+              - blood_oxygen
+              pulled:
+                activity:
+                  days_with_data: 70
+                  range_end: '2023-10-24T00:00:00+00:00'
+                  range_start: '2023-07-24T00:00:00+00:00'
+                  release: 0.0.0-dev.cd0e262
+                  status: success
+                  timeline:
+                    ended_at: '2023-10-24T13:53:59+00:00'
+                    scheduled_at: '2023-10-24T13:52:51+00:00'
+                    started_at: '2023-10-24T13:52:54+00:00'
+                  trace_id: 51cc7d2d72e98ed4eb63e2b0864b39e3
+                sleep:
+                  days_with_data: 70
+                  error_details: provider_rate_limit_exceeded
+                  range_end: '2023-10-24T00:00:00+00:00'
+                  range_start: '2023-07-24T00:00:00+00:00'
+                  release: 0.0.0-dev.cd0e262
+                  status: retrying
+                  timeline:
+                    ended_at: '2023-10-24T13:53:04+00:00'
+                    scheduled_at: '2023-10-24T13:52:51+00:00'
+                    started_at: '2023-10-24T13:53:01+00:00'
+                  trace_id: 51cc7d2d72e98ed4eb63e2b0864b39e3
+          user_id: ''
+        next_cursor: None
+    SingleResourceStatistics:
+      properties:
+        last_attempt:
+          anyOf:
+          - $ref: '#/components/schemas/LastAttempt'
+          - type: 'null'
+        oldest_data:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Oldest Data
+        newest_data:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Newest Data
+        sent_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Sent Count
+      type: object
+      title: SingleResourceStatistics
     HistoricalPullRetriableErrorDetails:
       type: string
       enum:
@@ -255,50 +531,24 @@ components:
       title: ClientFacingResource
       x-fern-type-name: ClientFacingResource
       description: ℹ️ This enum is non-exhaustive.
-    Providers:
+    Labs:
       type: string
       enum:
-      - oura
-      - fitbit
-      - garmin
-      - whoop
-      - strava
-      - renpho
-      - peloton
-      - wahoo
-      - zwift
-      - freestyle_libre
-      - abbott_libreview
-      - tandem_source
-      - freestyle_libre_ble
-      - eight_sleep
-      - withings
-      - apple_health_kit
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
       - manual
-      - ihealth
-      - google_fit
-      - beurer_api
-      - beurer_ble
-      - omron
-      - omron_ble
-      - onetouch_ble
-      - accuchek_ble
-      - contour_ble
-      - dexcom
-      - dexcom_v3
-      - hammerhead
-      - my_fitness_pal
-      - health_connect
-      - samsung_health
-      - polar
-      - cronometer
-      - kardia
-      - whoop_v2
-      - ultrahuman
-      - my_fitness_pal_v2
-      - map_my_fitness
-      - runkeeper
-      title: Providers
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
       description: ℹ️ This enum is non-exhaustive.
     SingleHistoricalPullStatistics:
       properties:
@@ -344,256 +594,6 @@ components:
       - timeline
       - release
       title: SingleHistoricalPullStatistics
-    UserHistoricalPullsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SingleUserHistoricalPullResponse'
-          type: array
-          title: Data
-        next:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next
-          deprecated: true
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-          description: The cursor for fetching the next page, or `null` to fetch the first page.
-      type: object
-      required:
-      - data
-      - next
-      - next_cursor
-      title: UserHistoricalPullsResponse
-      example:
-        data:
-        - provider:
-            fitbit:
-              not_pulled:
-              - blood_oxygen
-              pulled:
-                activity:
-                  days_with_data: 70
-                  range_end: '2023-10-24T00:00:00+00:00'
-                  range_start: '2023-07-24T00:00:00+00:00'
-                  release: 0.0.0-dev.cd0e262
-                  status: success
-                  timeline:
-                    ended_at: '2023-10-24T13:53:59+00:00'
-                    scheduled_at: '2023-10-24T13:52:51+00:00'
-                    started_at: '2023-10-24T13:52:54+00:00'
-                  trace_id: 51cc7d2d72e98ed4eb63e2b0864b39e3
-                sleep:
-                  days_with_data: 70
-                  error_details: provider_rate_limit_exceeded
-                  range_end: '2023-10-24T00:00:00+00:00'
-                  range_start: '2023-07-24T00:00:00+00:00'
-                  release: 0.0.0-dev.cd0e262
-                  status: retrying
-                  timeline:
-                    ended_at: '2023-10-24T13:53:04+00:00'
-                    scheduled_at: '2023-10-24T13:52:51+00:00'
-                    started_at: '2023-10-24T13:53:01+00:00'
-                  trace_id: 51cc7d2d72e98ed4eb63e2b0864b39e3
-          user_id: ''
-        next_cursor: None
-    Labs:
-      type: string
-      enum:
-      - ayumetrix
-      - spiriplex
-      - ussl
-      - quest
-      - sonora_quest
-      - labcorp
-      - bioreference
-      - us_biotek
-      - manual
-      - sanocardio
-      - ihd
-      - nexus
-      - my_uti
-      - crl
-      title: Labs
-      description: ℹ️ This enum is non-exhaustive.
-    AttemptStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      title: AttemptStatus
-      description: ℹ️ This enum is non-exhaustive.
-    SingleProviderHistoricalPullResponse:
-      properties:
-        pulled:
-          additionalProperties:
-            $ref: '#/components/schemas/SingleHistoricalPullStatistics'
-          propertyNames:
-            $ref: '#/components/schemas/Resource'
-          type: object
-          title: Pulled
-        not_pulled:
-          items:
-            $ref: '#/components/schemas/Resource'
-          type: array
-          title: Not Pulled
-      type: object
-      required:
-      - pulled
-      - not_pulled
-      title: SingleProviderHistoricalPullResponse
-    HistoricalPullStatus:
-      type: string
-      enum:
-      - success
-      - failure
-      - in_progress
-      - scheduled
-      - retrying
-      title: HistoricalPullStatus
-      description: ℹ️ This enum is non-exhaustive.
-    SingleUserResourceResponse:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        provider:
-          additionalProperties:
-            additionalProperties:
-              $ref: '#/components/schemas/SingleResourceStatistics'
-            propertyNames:
-              $ref: '#/components/schemas/Resource'
-            type: object
-          propertyNames:
-            $ref: '#/components/schemas/Providers'
-          type: object
-          title: Provider
-      type: object
-      required:
-      - user_id
-      - provider
-      title: SingleUserResourceResponse
-    UserResourcesResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/SingleUserResourceResponse'
-          type: array
-          title: Data
-        next:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next
-          deprecated: true
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-          description: The cursor for fetching the next page, or `null` to fetch the first page.
-      type: object
-      required:
-      - data
-      - next
-      - next_cursor
-      title: UserResourcesResponse
-      example:
-        data:
-        - provider:
-            fitbit:
-              activity:
-                last_attempt:
-                  status: success
-                  timestamp: '2023-10-24T13:13:27+00:00'
-                newest_data: '2023-10-24T00:00:00+00:00'
-                oldest_data: '2023-06-21T00:00:00+00:00'
-                sent_count: 231
-          user_id: ''
-    HistoricalPullTimeline:
-      properties:
-        scheduled_at:
-          type: string
-          format: date-time
-          title: Scheduled At
-        started_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Started At
-        ended_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Ended At
-      type: object
-      required:
-      - scheduled_at
-      title: HistoricalPullTimeline
-    HistoricalPullNonRetriableErrorDetails:
-      type: string
-      enum:
-      - non_retriable_error
-      - unexpected_error
-      - retry_quota_exhausted
-      title: HistoricalPullNonRetriableErrorDetails
-      description: ℹ️ This enum is non-exhaustive.
-    SingleUserHistoricalPullResponse:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        provider:
-          additionalProperties:
-            $ref: '#/components/schemas/SingleProviderHistoricalPullResponse'
-          propertyNames:
-            $ref: '#/components/schemas/Providers'
-          type: object
-          title: Provider
-      type: object
-      required:
-      - user_id
-      - provider
-      title: SingleUserHistoricalPullResponse
-    SingleResourceStatistics:
-      properties:
-        last_attempt:
-          anyOf:
-          - $ref: '#/components/schemas/LastAttempt'
-          - type: 'null'
-        oldest_data:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Oldest Data
-        newest_data:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Newest Data
-        sent_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Sent Count
-      type: object
-      title: SingleResourceStatistics
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     apiKeyAuth:
       type: apiKey
