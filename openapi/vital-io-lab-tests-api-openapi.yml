@@ -666,125 +666,35 @@ paths:
       x-fern-streaming: true
 components:
   schemas:
-    AoE:
-      properties:
-        questions:
-          items:
-            $ref: '#/components/schemas/Question'
-          type: array
-          title: Questions
-      type: object
-      required:
-      - questions
-      title: AoE
     HTTPValidationError:
       properties:
         detail:
           title: Detail
       type: object
       title: HTTPValidationError
-    LabTestResourcesResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/ClientFacingLabTest'
-          type: array
-          title: Data
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-          description: The cursor for fetching the next page, or `null` to fetch the first page.
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: LabTestResourcesResponse
-    ClientFacingLoinc:
-      properties:
-        id:
-          type: integer
-          title: Id
-        name:
-          type: string
-          title: Name
-        slug:
-          type: string
-          title: Slug
-        code:
-          type: string
-          title: Code
-        unit:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Unit
-      type: object
-      required:
-      - id
-      - name
-      - slug
-      - code
-      title: ClientFacingLoinc
-      example:
-        code: 1234-1
-        id: 1
-        name: Hemoglobin A1c
-        slug: hemoglobin-a1c
-        unit: '%'
-    ClientFacingLab:
-      properties:
-        id:
-          type: integer
-          title: Id
-        slug:
-          type: string
-          title: Slug
-        name:
-          type: string
-          title: Name
-        first_line_address:
-          type: string
-          title: First Line Address
-        city:
-          type: string
-          title: City
-        zipcode:
-          type: string
-          title: Zipcode
-        collection_methods:
-          items:
-            $ref: '#/components/schemas/LabTestCollectionMethod'
-          type: array
-          title: Collection Methods
-        sample_types:
-          items:
-            $ref: '#/components/schemas/LabTestSampleType'
-          type: array
-          title: Sample Types
-      type: object
-      required:
-      - id
-      - slug
-      - name
-      - first_line_address
-      - city
-      - zipcode
-      - collection_methods
-      - sample_types
-      title: ClientFacingLab
-      example:
-        city: San Francisco
-        collection_methods:
-        - testkit
-        first_line_address: 123 Main St
-        id: 1
-        name: LabCorp
-        sample_types:
-        - saliva
-        slug: labcorp
-        zipcode: '91789'
+    LabTestStatus:
+      type: string
+      enum:
+      - active
+      - pending_approval
+      - inactive
+      title: LabTestStatus
+      description: ℹ️ This enum is non-exhaustive.
+    LabTestGenerationMethodFilter:
+      type: string
+      enum:
+      - auto
+      - manual
+      - all
+      title: LabTestGenerationMethodFilter
+      description: ℹ️ This enum is non-exhaustive.
+    MarkerType:
+      type: string
+      enum:
+      - biomarker
+      - panel
+      title: MarkerType
+      description: ℹ️ This enum is non-exhaustive.
     ClientFacingMarkerComplete:
       properties:
         id:
@@ -884,14 +794,72 @@ components:
         slug: hemoglobin-a1c
         type: biomarker
         unit: '%'
-    LabTestStatus:
+    AoE:
+      properties:
+        questions:
+          items:
+            $ref: '#/components/schemas/Question'
+          type: array
+          title: Questions
+      type: object
+      required:
+      - questions
+      title: AoE
+    QuestionType:
       type: string
       enum:
-      - active
-      - pending_approval
-      - inactive
-      title: LabTestStatus
+      - choice
+      - text
+      - numeric
+      - multi_choice
+      title: QuestionType
       description: ℹ️ This enum is non-exhaustive.
+    Question:
+      properties:
+        id:
+          type: integer
+          format: int64
+          title: Id
+        required:
+          type: boolean
+          title: Required
+        code:
+          type: string
+          title: Code
+        value:
+          type: string
+          title: Value
+        type:
+          $ref: '#/components/schemas/QuestionType'
+          description: ℹ️ This enum is non-exhaustive.
+        sequence:
+          type: integer
+          title: Sequence
+        answers:
+          items:
+            $ref: '#/components/schemas/Answer'
+          type: array
+          title: Answers
+        constraint:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Constraint
+        default:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Default
+      type: object
+      required:
+      - id
+      - required
+      - code
+      - value
+      - type
+      - sequence
+      - answers
+      title: Question
     GetMarkersResponse:
       properties:
         markers:
@@ -931,53 +899,196 @@ components:
       - size
       - pages
       title: GetMarkersResponse
-    LabTestSampleType:
-      type: string
-      enum:
-      - dried_blood_spot
-      - arm_collector
-      - serum
-      - saliva
-      - urine
-      - stool
-      title: LabTestSampleType
-      description: The type of sample used to perform a lab test. ℹ️ This enum is non-exhaustive.
-    Labs:
-      type: string
-      enum:
-      - ayumetrix
-      - spiriplex
-      - ussl
-      - quest
-      - sonora_quest
-      - labcorp
-      - bioreference
-      - us_biotek
-      - manual
-      - sanocardio
-      - ihd
-      - nexus
-      - my_uti
-      - crl
-      title: Labs
-      description: ℹ️ This enum is non-exhaustive.
-    Answer:
+    AddOnOrder:
+      properties:
+        marker_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Marker Ids
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+      type: object
+      title: AddOnOrder
+    LabTestResourcesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ClientFacingLabTest'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+          description: The cursor for fetching the next page, or `null` to fetch the first page.
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: LabTestResourcesResponse
+    ClientFacingMarker:
       properties:
         id:
           type: integer
           title: Id
-        code:
+        name:
           type: string
-          title: Code
-        value:
+          title: Name
+        slug:
           type: string
-          title: Value
+          title: Slug
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        lab_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Lab Id
+        provider_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Provider Id
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/MarkerType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        unit:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Unit
+        price:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price
+        aoe:
+          anyOf:
+          - $ref: '#/components/schemas/AoE'
+          - type: 'null'
+        a_la_carte_enabled:
+          type: boolean
+          title: A La Carte Enabled
+          default: false
+        common_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Common Tat Days
+        worst_case_tat_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Worst Case Tat Days
+        is_orderable:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Is Orderable
+          default: true
       type: object
       required:
       - id
-      - code
-      - value
-      title: Answer
+      - name
+      - slug
+      title: ClientFacingMarker
+      example:
+        aoe:
+          questions:
+          - answers:
+            - code: answer_code
+              id: 1
+              value: answer_value
+            code: question_code
+            id: 1
+            value: question_value
+        common_tat_days: 3
+        description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+        id: 1
+        is_orderable: true
+        lab_id: 1
+        name: Hemoglobin A1c
+        price: '10.00'
+        provider_id: '1234'
+        slug: hemoglobin-a1c
+        type: biomarker
+        unit: '%'
+        worst_case_tat_days: 5
+    LabTestCollectionMethod:
+      type: string
+      enum:
+      - testkit
+      - walk_in_test
+      - at_home_phlebotomy
+      - on_site_collection
+      title: LabTestCollectionMethod
+      description: The method used to perform a lab test. ℹ️ This enum is non-exhaustive.
+    ClientFacingLab:
+      properties:
+        id:
+          type: integer
+          title: Id
+        slug:
+          type: string
+          title: Slug
+        name:
+          type: string
+          title: Name
+        first_line_address:
+          type: string
+          title: First Line Address
+        city:
+          type: string
+          title: City
+        zipcode:
+          type: string
+          title: Zipcode
+        collection_methods:
+          items:
+            $ref: '#/components/schemas/LabTestCollectionMethod'
+          type: array
+          title: Collection Methods
+        sample_types:
+          items:
+            $ref: '#/components/schemas/LabTestSampleType'
+          type: array
+          title: Sample Types
+      type: object
+      required:
+      - id
+      - slug
+      - name
+      - first_line_address
+      - city
+      - zipcode
+      - collection_methods
+      - sample_types
+      title: ClientFacingLab
+      example:
+        city: San Francisco
+        collection_methods:
+        - testkit
+        first_line_address: 123 Main St
+        id: 1
+        name: LabCorp
+        sample_types:
+        - saliva
+        slug: labcorp
+        zipcode: '91789'
     OrderSetRequest:
       properties:
         lab_test_ids:
@@ -1000,6 +1111,68 @@ components:
           title: Lab Account Id
       type: object
       title: OrderSetRequest
+    UpdateLabTestRequest:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        active:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Active
+      type: object
+      title: UpdateLabTestRequest
+    CreateLabTestRequest:
+      properties:
+        marker_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Marker Ids
+        provider_ids:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Provider Ids
+        name:
+          type: string
+          title: Name
+        method:
+          $ref: '#/components/schemas/LabTestCollectionMethod'
+          description: ℹ️ This enum is non-exhaustive.
+        description:
+          type: string
+          title: Description
+        fasting:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Fasting
+          default: false
+        lab_account_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Lab Account Id
+        lab_slug:
+          anyOf:
+          - $ref: '#/components/schemas/Labs'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - name
+      - method
+      - description
+      title: CreateLabTestRequest
     ClientFacingResult:
       properties:
         id:
@@ -1166,64 +1339,7 @@ components:
           price: 10
           sample_type: dried blood spot
           status: active
-    LabTestCollectionMethod:
-      type: string
-      enum:
-      - testkit
-      - walk_in_test
-      - at_home_phlebotomy
-      - on_site_collection
-      title: LabTestCollectionMethod
-      description: The method used to perform a lab test. ℹ️ This enum is non-exhaustive.
-    CreateLabTestRequest:
-      properties:
-        marker_ids:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Marker Ids
-        provider_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Provider Ids
-        name:
-          type: string
-          title: Name
-        method:
-          $ref: '#/components/schemas/LabTestCollectionMethod'
-          description: ℹ️ This enum is non-exhaustive.
-        description:
-          type: string
-          title: Description
-        fasting:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Fasting
-          default: false
-        lab_account_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Lab Account Id
-        lab_slug:
-          anyOf:
-          - $ref: '#/components/schemas/Labs'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - name
-      - method
-      - description
-      title: CreateLabTestRequest
-    ClientFacingMarker:
+    ClientFacingLoinc:
       properties:
         id:
           type: integer
@@ -1234,190 +1350,74 @@ components:
         slug:
           type: string
           title: Slug
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        lab_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Lab Id
-        provider_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Provider Id
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/MarkerType'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
+        code:
+          type: string
+          title: Code
         unit:
           anyOf:
           - type: string
           - type: 'null'
           title: Unit
-        price:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Price
-        aoe:
-          anyOf:
-          - $ref: '#/components/schemas/AoE'
-          - type: 'null'
-        a_la_carte_enabled:
-          type: boolean
-          title: A La Carte Enabled
-          default: false
-        common_tat_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Common Tat Days
-        worst_case_tat_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Worst Case Tat Days
-        is_orderable:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Is Orderable
-          default: true
       type: object
       required:
       - id
       - name
       - slug
-      title: ClientFacingMarker
+      - code
+      title: ClientFacingLoinc
       example:
-        aoe:
-          questions:
-          - answers:
-            - code: answer_code
-              id: 1
-              value: answer_value
-            code: question_code
-            id: 1
-            value: question_value
-        common_tat_days: 3
-        description: Hemoglobin A1c is a form of hemoglobin that is measured identify your average blood sugar levels over the past 3 months.
+        code: 1234-1
         id: 1
-        is_orderable: true
-        lab_id: 1
         name: Hemoglobin A1c
-        price: '10.00'
-        provider_id: '1234'
         slug: hemoglobin-a1c
-        type: biomarker
         unit: '%'
-        worst_case_tat_days: 5
-    UpdateLabTestRequest:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        active:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Active
-      type: object
-      title: UpdateLabTestRequest
-    MarkerType:
+    Labs:
       type: string
       enum:
-      - biomarker
-      - panel
-      title: MarkerType
+      - ayumetrix
+      - spiriplex
+      - ussl
+      - quest
+      - sonora_quest
+      - labcorp
+      - bioreference
+      - us_biotek
+      - manual
+      - sanocardio
+      - ihd
+      - nexus
+      - my_uti
+      - crl
+      title: Labs
       description: ℹ️ This enum is non-exhaustive.
-    Question:
+    LabTestSampleType:
+      type: string
+      enum:
+      - dried_blood_spot
+      - arm_collector
+      - serum
+      - saliva
+      - urine
+      - stool
+      title: LabTestSampleType
+      description: The type of sample used to perform a lab test. ℹ️ This enum is non-exhaustive.
+    Answer:
       properties:
         id:
           type: integer
-          format: int64
           title: Id
-        required:
-          type: boolean
-          title: Required
         code:
           type: string
           title: Code
         value:
           type: string
           title: Value
-        type:
-          $ref: '#/components/schemas/QuestionType'
-          description: ℹ️ This enum is non-exhaustive.
-        sequence:
-          type: integer
-          title: Sequence
-        answers:
-          items:
-            $ref: '#/components/schemas/Answer'
-          type: array
-          title: Answers
-        constraint:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Constraint
-        default:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Default
       type: object
       required:
       - id
-      - required
       - code
       - value
-      - type
-      - sequence
-      - answers
-      title: Question
-    AddOnOrder:
-      properties:
-        marker_ids:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Marker Ids
-        provider_ids:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Provider Ids
-      type: object
-      title: AddOnOrder
-    LabTestGenerationMethodFilter:
-      type: string
-      enum:
-      - auto
-      - manual
-      - all
-      title: LabTestGenerationMethodFilter
-      description: ℹ️ This enum is non-exhaustive.
-    QuestionType:
-      type: string
-      enum:
-      - choice
-      - text
-      - numeric
-      - multi_choice
-      title: QuestionType
-      description: ℹ️ This enum is non-exhaustive.
+      title: Answer
   securitySchemes:
     apiKeyAuth:
       type: apiKey

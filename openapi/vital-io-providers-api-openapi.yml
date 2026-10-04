@@ -53,73 +53,6 @@ paths:
       x-fern-sdk-method-name: get_all
 components:
   schemas:
-    SourceAuthType:
-      type: string
-      enum:
-      - oauth
-      - team_oauth
-      - sdk
-      - password
-      - email
-      - app
-      - ''
-      title: SourceAuthType
-      x-fern-enum:
-        ? ''
-        : name: Empty
-      description: ℹ️ This enum is non-exhaustive.
-    ClientFacingProviderDetailed:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of source of information
-        slug:
-          type: string
-          title: Slug
-          description: Slug for designated source
-        description:
-          type: string
-          title: Description
-          description: Description of source of information
-        logo:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Logo
-          description: URL for source logo
-        auth_type:
-          anyOf:
-          - $ref: '#/components/schemas/SourceAuthType'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        supported_resources:
-          items:
-            $ref: '#/components/schemas/Resource'
-          type: array
-          title: Supported Resources
-          default: []
-      type: object
-      required:
-      - name
-      - slug
-      - description
-      - logo
-      title: Provider
-      example:
-        auth_type: oauth
-        logo: https://logo_url.com
-        name: Oura
-        slug: oura
-        supported_resources:
-        - workouts
-        - sleep
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Resource:
       type: string
       enum:
@@ -195,6 +128,73 @@ components:
       - hypnogram
       title: ClientFacingResource
       x-fern-type-name: ClientFacingResource
+      description: ℹ️ This enum is non-exhaustive.
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ClientFacingProviderDetailed:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        description:
+          type: string
+          title: Description
+          description: Description of source of information
+        logo:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Logo
+          description: URL for source logo
+        auth_type:
+          anyOf:
+          - $ref: '#/components/schemas/SourceAuthType'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        supported_resources:
+          items:
+            $ref: '#/components/schemas/Resource'
+          type: array
+          title: Supported Resources
+          default: []
+      type: object
+      required:
+      - name
+      - slug
+      - description
+      - logo
+      title: Provider
+      example:
+        auth_type: oauth
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+        supported_resources:
+        - workouts
+        - sleep
+    SourceAuthType:
+      type: string
+      enum:
+      - oauth
+      - team_oauth
+      - sdk
+      - password
+      - email
+      - app
+      - ''
+      title: SourceAuthType
+      x-fern-enum:
+        ? ''
+        : name: Empty
       description: ℹ️ This enum is non-exhaustive.
   securitySchemes:
     apiKeyAuth:

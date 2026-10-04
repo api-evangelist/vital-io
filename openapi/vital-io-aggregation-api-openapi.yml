@@ -44,6 +44,12 @@ webhooks:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ContinuousQueryResultTableChanges:
       properties:
         query_id:
@@ -111,12 +117,6 @@ components:
       - team_id
       - data
       title: ClientFacingContinuousQueryResultTableChanged
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     apiKeyAuth:
       type: apiKey

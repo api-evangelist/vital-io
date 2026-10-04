@@ -655,290 +655,18 @@ paths:
       x-fern-sdk-method-name: create_portal_url
 components:
   schemas:
-    TimeseriesMetricPoint:
+    CompanyDetails:
       properties:
-        date:
+        name:
           type: string
-          format: date-time
-          title: Date
-        value:
-          type: number
-          title: Value
-        all:
-          type: number
-          title: All
-      type: object
-      required:
-      - date
-      - value
-      - all
-      title: TimeseriesMetricPoint
-    HTTPValidationError:
-      properties:
-        detail:
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    GenderIdentity:
-      type: string
-      enum:
-      - male
-      - female
-      - female_to_male_ftm_transgender_male_trans_man
-      - male_to_female_mtf_transgender_female_trans_woman
-      - genderqueer
-      - other
-      title: GenderIdentity
-      description: ℹ️ This enum is non-exhaustive.
-    CreateUserPortalURLResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-        expires_in:
-          type: integer
-          title: Expires In
-      type: object
-      required:
-      - url
-      - expires_in
-      title: CreateUserPortalURLResponse
-    UserPatchBody:
-      properties:
-        fallback_time_zone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Fallback Time Zone
-          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
-        fallback_birth_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Fallback Birth Date
-          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
-        ingestion_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Ingestion Start
-          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
-        ingestion_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Ingestion End
-          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
-        client_user_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Client User Id
-          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
-      type: object
-      title: UserPatchBody
-    Gender:
-      type: string
-      enum:
-      - female
-      - male
-      - other
-      - unknown
-      title: Gender
-      description: ℹ️ This enum is non-exhaustive.
-    UserSuccessResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-          description: Whether operation was successful or not
-      type: object
-      required:
-      - success
-      title: UserSuccessResponse
-      example:
-        success: true
-    UserRefreshSuccessResponse:
-      properties:
-        success:
-          type: boolean
-          const: true
-          title: Success
-          description: Whether operation was successful or not
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
-        refreshed_sources:
-          items:
-            type: string
-          type: array
-          title: Refreshed Sources
-        in_progress_sources:
-          items:
-            type: string
-          type: array
-          title: In Progress Sources
-        failed_sources:
-          items:
-            type: string
-          type: array
-          title: Failed Sources
-      type: object
-      required:
-      - success
-      - user_id
-      - refreshed_sources
-      - in_progress_sources
-      - failed_sources
-      title: UserRefreshSuccessResponse
-      example:
-        failed_sources:
-        - oura/sleep
-        in_progress_sources: []
-        refreshed_sources:
-        - withings/workouts
-        - withings/sleep
-        - withings/body
-        - withings/vitals/blood_pressure
-        - withings/activity
-        success: true
-        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
-    UserInfoCreateRequest:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        phone_number:
-          type: string
-          title: Phone Number
-        gender:
-          type: string
-          title: Gender
-        dob:
-          type: string
-          format: date
-          title: Dob
+          title: Name
         address:
-          $ref: '#/components/schemas/UserAddress'
-        medical_proxy:
-          anyOf:
-          - $ref: '#/components/schemas/GuarantorDetails'
-          - type: 'null'
-        race:
-          anyOf:
-          - $ref: '#/components/schemas/Race'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        ethnicity:
-          anyOf:
-          - $ref: '#/components/schemas/Ethnicity'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        sexual_orientation:
-          anyOf:
-          - $ref: '#/components/schemas/SexualOrientation'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        gender_identity:
-          anyOf:
-          - $ref: '#/components/schemas/GenderIdentity'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
+          $ref: '#/components/schemas/Address'
       type: object
       required:
-      - first_name
-      - last_name
-      - email
-      - phone_number
-      - gender
-      - dob
+      - name
       - address
-      title: UserInfoCreateRequest
-    UserAddress:
-      properties:
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-          default: ''
-        country:
-          type: string
-          title: Country
-        zip:
-          type: string
-          title: Zip
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        access_notes:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Access Notes
-      type: object
-      required:
-      - first_line
-      - country
-      - zip
-      - city
-      - state
-      title: UserAddress
-    UserCreateBody:
-      properties:
-        client_user_id:
-          type: string
-          title: Client User Id
-          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
-        fallback_time_zone:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Fallback Time Zone
-          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
-        fallback_birth_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Fallback Birth Date
-          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
-        ingestion_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Ingestion Start
-          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
-        ingestion_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Ingestion End
-          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
-      type: object
-      required:
-      - client_user_id
-      title: UserCreateBody
+      title: CompanyDetails
     CreateInsuranceRequest:
       properties:
         payor_code:
@@ -972,6 +700,20 @@ components:
       - relationship
       - insured
       title: CreateInsuranceRequest
+    ClientUserIDConflictResponse:
+      properties:
+        detail:
+          $ref: '#/components/schemas/ClientUserIDConflict'
+      type: object
+      required:
+      - detail
+      title: ClientUserIDConflictResponse
+      example:
+        detail:
+          created_on: '2023-02-27T12:31:24+00:00'
+          error_message: Client user id already exists.
+          error_type: INVALID_REQUEST
+          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
     UserRefreshErrorResponse:
       properties:
         success:
@@ -1003,12 +745,56 @@ components:
         failed_sources: []
         success: false
         user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
-    FallbackTimeZone:
+    HTTPValidationError:
       properties:
-        id:
+        detail:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Address:
+      properties:
+        first_line:
           type: string
-          title: Id
-          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+            maxLength: 1000
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: Address
+    FallbackBirthDate:
+      properties:
+        value:
+          type: string
+          format: date
+          title: Value
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
         source_slug:
           type: string
           title: Source Slug
@@ -1019,453 +805,53 @@ components:
           title: Updated At
       type: object
       required:
-      - id
+      - value
       - source_slug
       - updated_at
-      title: FallbackTimeZone
-    ResourceAvailability:
+      title: FallbackBirthDate
+    PaginatedUsersResponse:
       properties:
-        status:
-          $ref: '#/components/schemas/Availability'
-          description: ℹ️ This enum is non-exhaustive.
-        scope_requirements:
-          anyOf:
-          - $ref: '#/components/schemas/ScopeRequirementsGrants'
-          - type: 'null'
+        users:
+          items:
+            $ref: '#/components/schemas/ClientFacingUser'
+          type: array
+          title: Users
+        total:
+          type: integer
+          title: Total
+        offset:
+          type: integer
+          title: Offset
+        limit:
+          type: integer
+          title: Limit
       type: object
       required:
-      - status
-      title: ResourceAvailability
-    ClientUserIDConflict:
+      - users
+      - total
+      - offset
+      - limit
+      title: PaginatedUsersResponse
+    ConnectedSourceClientFacing:
       properties:
-        error_type:
-          type: string
-          title: Error Type
-        error_message:
-          type: string
-          title: Error Message
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        created_on:
-          type: string
-          format: date-time
-          title: Created On
-      type: object
-      required:
-      - error_type
-      - error_message
-      - user_id
-      - created_on
-      title: ClientUserIDConflict
-    ClientFacingDevice:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
         provider:
-          type: string
-          title: Provider
-        source_type:
-          type: string
-          enum:
-          - unknown
-          - phone
-          - watch
-          - app
-          - multiple_sources
-          - fingerprick
-          - cuff
-          - manual_scan
-          - automatic
-          - insulin_pump
-          - scale
-          - chest_strap
-          - ring
-          - lab
-          - exercise_machine
-          - earphone
-          title: Source Type
-          description: ℹ️ This enum is non-exhaustive.
-        app_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: App Id
-        device_manufacturer:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Device Manufacturer
-        device_model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Device Model
-        device_version:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Device Version
-        device_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Device Id
-      type: object
-      required:
-      - id
-      - user_id
-      - provider
-      - source_type
-      title: Device Data
-      example:
-        device_id: F-31-A4C138BB9EF5
-        device_manufacturer: Fitbit
-        device_model: Aria Air
-        device_version: '1.0'
-        id: 00000000-0000-0000-0000-000000000000
-        provider: fitbit
-        source_type: scale
-        user_id: 00000000-0000-0000-0000-000000000000
-    UserSignInTokenResponse:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-        sign_in_token:
-          type: string
-          title: Sign In Token
-      type: object
-      required:
-      - user_id
-      - sign_in_token
-      title: UserSignInTokenResponse
-    ResponsibleRelationship:
-      type: string
-      enum:
-      - Self
-      - Spouse
-      - Other
-      title: ResponsibleRelationship
-      description: ℹ️ This enum is non-exhaustive.
-    vital_core__schemas__db_schemas__lab_test__insurance__PersonDetails:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        gender:
-          $ref: '#/components/schemas/Gender'
-          description: ℹ️ This enum is non-exhaustive.
-        address:
-          $ref: '#/components/schemas/Address'
-        dob:
-          type: string
-          format: date
-          title: Dob
-        email:
-          type: string
-          title: Email
-        phone_number:
-          type: string
-          title: Phone Number
-      type: object
-      required:
-      - first_name
-      - last_name
-      - gender
-      - address
-      - dob
-      - email
-      - phone_number
-      title: PersonDetails
-    ScopeRequirementsGrants:
-      properties:
-        user_granted:
-          $ref: '#/components/schemas/ScopeRequirements_str_'
-        user_denied:
-          $ref: '#/components/schemas/ScopeRequirements_str_'
-      type: object
-      required:
-      - user_granted
-      - user_denied
-      title: ScopeRequirementsGrants
-    Ethnicity:
-      type: string
-      enum:
-      - hispanic
-      - non_hispanic
-      - ashkenazi_jewish
-      - other
-      title: Ethnicity
-      description: ℹ️ This enum is non-exhaustive.
-    ClientFacingInsurance:
-      properties:
-        member_id:
-          type: string
-          title: Member Id
-        payor_code:
-          type: string
-          title: Payor Code
-        relationship:
-          $ref: '#/components/schemas/ResponsibleRelationship'
-          description: ℹ️ This enum is non-exhaustive.
-        insured:
-          $ref: '#/components/schemas/vital_core__schemas__db_schemas__lab_test__insurance__PersonDetails'
-        company:
-          $ref: '#/components/schemas/CompanyDetails'
-        group_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Group Id
-        guarantor:
-          anyOf:
-          - $ref: '#/components/schemas/GuarantorDetails'
-          - type: 'null'
-        is_primary:
-          type: boolean
-          title: Is Primary
-          default: true
-      type: object
-      required:
-      - member_id
-      - payor_code
-      - relationship
-      - insured
-      - company
-      title: ClientFacingInsurance
-    Race:
-      type: string
-      enum:
-      - african_american_or_black
-      - asian
-      - indigenous_native_american_alaska_native
-      - other
-      - pacific_islander_or_hawaiian
-      - white_caucasian
-      title: Race
-      description: ℹ️ This enum is non-exhaustive.
-    ClientUserIDConflictResponse:
-      properties:
-        detail:
-          $ref: '#/components/schemas/ClientUserIDConflict'
-      type: object
-      required:
-      - detail
-      title: ClientUserIDConflictResponse
-      example:
-        detail:
-          created_on: '2023-02-27T12:31:24+00:00'
-          error_message: Client user id already exists.
-          error_type: INVALID_REQUEST
-          user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
-    Availability:
-      type: string
-      enum:
-      - available
-      - unavailable
-      title: Availability
-      description: ℹ️ This enum is non-exhaustive.
-    CompanyDetails:
-      properties:
-        name:
-          type: string
-          title: Name
-        address:
-          $ref: '#/components/schemas/Address'
-      type: object
-      required:
-      - name
-      - address
-      title: CompanyDetails
-    SexualOrientation:
-      type: string
-      enum:
-      - lesbian_gay_or_homosexual
-      - heterosexual_or_straight
-      - bisexual
-      - dont_know
-      - other
-      title: SexualOrientation
-      description: ℹ️ This enum is non-exhaustive.
-    ClientFacingUser:
-      properties:
-        user_id:
-          type: string
-          format: uuid
-          title: User Id
-          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
-        team_id:
-          type: string
-          format: uuid
-          title: Team Id
-          description: Your team id.
-        client_user_id:
-          type: string
-          title: Client User Id
-          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+          $ref: '#/components/schemas/ClientFacingProvider'
+          description: The provider of this connected source.
         created_on:
           type: string
           format: date-time
           title: Created On
           description: When your item is created
-        connected_sources:
-          items:
-            $ref: '#/components/schemas/ConnectedSourceClientFacing'
-          type: array
-          title: Connected Sources
-          description: A list of the users connected sources.
-        fallback_time_zone:
-          anyOf:
-          - $ref: '#/components/schemas/FallbackTimeZone'
-          - type: 'null'
-          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
-        fallback_birth_date:
-          anyOf:
-          - $ref: '#/components/schemas/FallbackBirthDate'
-          - type: 'null'
-          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
-        ingestion_start:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Ingestion Start
-          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
-        ingestion_end:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Ingestion End
-          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        source:
+          $ref: '#/components/schemas/ClientFacingProvider'
+          description: Deprecated. Use `provider` instead. Subject to removal after 1 Jan 2024.
+          deprecated: true
       type: object
       required:
-      - user_id
-      - team_id
-      - client_user_id
+      - provider
       - created_on
-      - connected_sources
-      - fallback_time_zone
-      title: User
-      example:
-        client_user_id: ZTEwZjNjMjctOTI2ZS00M2Vm
-        connected_sources:
-        - created_on: '2026-05-20T13:43:42+00:00'
-          source:
-            logo: logo_url
-            name: Oura
-            slug: oura
-        created_on: '2026-05-20T13:43:42+00:00'
-        fallback_birth_date:
-          source_slug: manual
-          updated_at: '2026-05-20T13:43:42+00:00'
-          value: '1989-09-12'
-        fallback_time_zone:
-          id: Europe/London
-          source_slug: manual
-          updated_at: '2026-05-20T13:43:42+00:00'
-        team_id: 56bd81c9-6219-4000-a775-ae85526eba18
-        user_id: 56bd81c9-6219-4000-a775-ae85526eba18
-    GuarantorDetails:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        address:
-          $ref: '#/components/schemas/Address'
-        phone_number:
-          type: string
-          title: Phone Number
-        household_income:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Household Income
-        household_size:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Household Size
-        email:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Email
-      type: object
-      required:
-      - first_name
-      - last_name
-      - address
-      - phone_number
-      title: GuarantorDetails
-    ClientFacingProvider:
-      properties:
-        name:
-          type: string
-          title: Name
-          description: Name of source of information
-        slug:
-          type: string
-          title: Slug
-          description: Slug for designated source
-        logo:
-          type: string
-          title: Logo
-          description: URL for source logo
-      type: object
-      required:
-      - name
-      - slug
-      - logo
-      title: Provider
-      description: A vendor, a service, or a platform which Vital can connect with.
-      example:
-        logo: https://logo_url.com
-        name: Oura
-        slug: oura
-    ClientFacingConnectionErrorDetails:
-      properties:
-        error_type:
-          type: string
-          enum:
-          - token_refresh_failed
-          - webhook_registration_failed
-          - user_not_found
-          - deregistered_per_provider
-          - required_scopes_not_granted
-          - provider_credential_error
-          - provider_password_expired
-          - unknown
-          title: Error Type
-          description: ℹ️ This enum is non-exhaustive.
-        error_message:
-          type: string
-          title: Error Message
-        errored_at:
-          type: string
-          format: date-time
-          title: Errored At
-      type: object
-      required:
-      - error_type
-      - error_message
-      - errored_at
-      title: ConnectionErrorDetails
+      - source
+      title: ConnectedSourceClientFacing
     ClientFacingProviderWithStatus:
       properties:
         name:
@@ -1550,270 +936,6 @@ components:
             status: available
         slug: garmin
         status: error
-    Address:
-      properties:
-        first_line:
-          type: string
-          title: First Line
-        second_line:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Second Line
-          default: ''
-        country:
-          type: string
-          title: Country
-        zip:
-          type: string
-          title: Zip
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        access_notes:
-          anyOf:
-          - type: string
-            maxLength: 1000
-          - type: 'null'
-          title: Access Notes
-      type: object
-      required:
-      - first_line
-      - country
-      - zip
-      - city
-      - state
-      title: Address
-    PaginatedUsersResponse:
-      properties:
-        users:
-          items:
-            $ref: '#/components/schemas/ClientFacingUser'
-          type: array
-          title: Users
-        total:
-          type: integer
-          title: Total
-        offset:
-          type: integer
-          title: Offset
-        limit:
-          type: integer
-          title: Limit
-      type: object
-      required:
-      - users
-      - total
-      - offset
-      - limit
-      title: PaginatedUsersResponse
-    Providers:
-      type: string
-      enum:
-      - oura
-      - fitbit
-      - garmin
-      - whoop
-      - strava
-      - renpho
-      - peloton
-      - wahoo
-      - zwift
-      - freestyle_libre
-      - abbott_libreview
-      - tandem_source
-      - freestyle_libre_ble
-      - eight_sleep
-      - withings
-      - apple_health_kit
-      - manual
-      - ihealth
-      - google_fit
-      - beurer_api
-      - beurer_ble
-      - omron
-      - omron_ble
-      - onetouch_ble
-      - accuchek_ble
-      - contour_ble
-      - dexcom
-      - dexcom_v3
-      - hammerhead
-      - my_fitness_pal
-      - health_connect
-      - samsung_health
-      - polar
-      - cronometer
-      - kardia
-      - whoop_v2
-      - ultrahuman
-      - my_fitness_pal_v2
-      - map_my_fitness
-      - runkeeper
-      title: Providers
-      description: ℹ️ This enum is non-exhaustive.
-    ScopeRequirements_str_:
-      properties:
-        required:
-          items:
-            type: string
-          type: array
-          title: Required
-        optional:
-          items:
-            type: string
-          type: array
-          title: Optional
-      type: object
-      required:
-      - required
-      - optional
-      title: ScopeRequirements[str]
-    CreateUserPortalURLBody:
-      properties:
-        context:
-          type: string
-          enum:
-          - launch
-          - communications
-          title: Context
-          description: '`launch`: Generates a short-lived (minutes) portal URL that is intended for launching a user from your
-
-            authenticated web context directly into the Junction User Portal. This URL is not suitable for asynchronous
-
-            communications due to its verbosity as well as short-lived nature.
-
-
-            `communications`: Generates a long-lived (weeks) but shortened portal URL that is suitable for Emails, SMS
-
-            messages and other communication channels. Users may be asked to verify their identity with Email and SMS
-
-            authentication, e.g., when they open a short link on a new device. ℹ️ This enum is non-exhaustive.'
-        order_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Order Id
-          description: If specified, the generated URL will deeplink to the specified Order.
-      type: object
-      required:
-      - context
-      title: CreateUserPortalURLBody
-    MetricsResult:
-      properties:
-        team_id:
-          anyOf:
-          - type: string
-          - type: string
-            format: uuid
-          title: Team Id
-        number_of_connected_sources:
-          type: integer
-          title: Number Of Connected Sources
-          default: 0
-        number_of_users:
-          type: integer
-          title: Number Of Users
-          default: 0
-        number_of_errored_connected_sources:
-          type: integer
-          title: Number Of Errored Connected Sources
-          default: 0
-        number_of_connected_sources_by_week:
-          items:
-            $ref: '#/components/schemas/TimeseriesMetricPoint'
-          type: array
-          title: Number Of Connected Sources By Week
-          default: []
-        number_of_ordered_tests:
-          type: integer
-          title: Number Of Ordered Tests
-          default: 0
-      type: object
-      required:
-      - team_id
-      title: MetricsResult
-    UserInfo:
-      properties:
-        first_name:
-          type: string
-          title: First Name
-        last_name:
-          type: string
-          title: Last Name
-        email:
-          type: string
-          title: Email
-        phone_number:
-          type: string
-          title: Phone Number
-        gender:
-          type: string
-          title: Gender
-        dob:
-          type: string
-          format: date
-          title: Dob
-        address:
-          $ref: '#/components/schemas/UserAddress'
-        medical_proxy:
-          anyOf:
-          - $ref: '#/components/schemas/GuarantorDetails'
-          - type: 'null'
-        race:
-          anyOf:
-          - $ref: '#/components/schemas/Race'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        ethnicity:
-          anyOf:
-          - $ref: '#/components/schemas/Ethnicity'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        sexual_orientation:
-          anyOf:
-          - $ref: '#/components/schemas/SexualOrientation'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-        gender_identity:
-          anyOf:
-          - $ref: '#/components/schemas/GenderIdentity'
-          - type: 'null'
-          description: ℹ️ This enum is non-exhaustive.
-      type: object
-      required:
-      - first_name
-      - last_name
-      - email
-      - phone_number
-      - gender
-      - dob
-      - address
-      title: UserInfo
-    ConnectedSourceClientFacing:
-      properties:
-        provider:
-          $ref: '#/components/schemas/ClientFacingProvider'
-          description: The provider of this connected source.
-        created_on:
-          type: string
-          format: date-time
-          title: Created On
-          description: When your item is created
-        source:
-          $ref: '#/components/schemas/ClientFacingProvider'
-          description: Deprecated. Use `provider` instead. Subject to removal after 1 Jan 2024.
-          deprecated: true
-      type: object
-      required:
-      - provider
-      - created_on
-      - source
-      title: ConnectedSourceClientFacing
     Resource:
       type: string
       enum:
@@ -1890,13 +1012,567 @@ components:
       title: ClientFacingResource
       x-fern-type-name: ClientFacingResource
       description: ℹ️ This enum is non-exhaustive.
-    FallbackBirthDate:
+    UserInfo:
       properties:
-        value:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          title: Email
+        phone_number:
+          type: string
+          title: Phone Number
+        gender:
+          type: string
+          title: Gender
+        dob:
           type: string
           format: date
-          title: Value
+          title: Dob
+        address:
+          $ref: '#/components/schemas/UserAddress'
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      - phone_number
+      - gender
+      - dob
+      - address
+      title: UserInfo
+    ClientFacingProvider:
+      properties:
+        name:
+          type: string
+          title: Name
+          description: Name of source of information
+        slug:
+          type: string
+          title: Slug
+          description: Slug for designated source
+        logo:
+          type: string
+          title: Logo
+          description: URL for source logo
+      type: object
+      required:
+      - name
+      - slug
+      - logo
+      title: Provider
+      description: A vendor, a service, or a platform which Vital can connect with.
+      example:
+        logo: https://logo_url.com
+        name: Oura
+        slug: oura
+    UserSignInTokenResponse:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        sign_in_token:
+          type: string
+          title: Sign In Token
+      type: object
+      required:
+      - user_id
+      - sign_in_token
+      title: UserSignInTokenResponse
+    Availability:
+      type: string
+      enum:
+      - available
+      - unavailable
+      title: Availability
+      description: ℹ️ This enum is non-exhaustive.
+    ClientFacingDevice:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        provider:
+          type: string
+          title: Provider
+        source_type:
+          type: string
+          enum:
+          - unknown
+          - phone
+          - watch
+          - app
+          - multiple_sources
+          - fingerprick
+          - cuff
+          - manual_scan
+          - automatic
+          - insulin_pump
+          - scale
+          - chest_strap
+          - ring
+          - lab
+          - exercise_machine
+          - earphone
+          title: Source Type
+          description: ℹ️ This enum is non-exhaustive.
+        app_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: App Id
+        device_manufacturer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Manufacturer
+        device_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Model
+        device_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Version
+        device_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Device Id
+      type: object
+      required:
+      - id
+      - user_id
+      - provider
+      - source_type
+      title: Device Data
+      example:
+        device_id: F-31-A4C138BB9EF5
+        device_manufacturer: Fitbit
+        device_model: Aria Air
+        device_version: '1.0'
+        id: 00000000-0000-0000-0000-000000000000
+        provider: fitbit
+        source_type: scale
+        user_id: 00000000-0000-0000-0000-000000000000
+    ScopeRequirements_str_:
+      properties:
+        required:
+          items:
+            type: string
+          type: array
+          title: Required
+        optional:
+          items:
+            type: string
+          type: array
+          title: Optional
+      type: object
+      required:
+      - required
+      - optional
+      title: ScopeRequirements[str]
+    Ethnicity:
+      type: string
+      enum:
+      - hispanic
+      - non_hispanic
+      - ashkenazi_jewish
+      - other
+      title: Ethnicity
+      description: ℹ️ This enum is non-exhaustive.
+    ScopeRequirementsGrants:
+      properties:
+        user_granted:
+          $ref: '#/components/schemas/ScopeRequirements_str_'
+        user_denied:
+          $ref: '#/components/schemas/ScopeRequirements_str_'
+      type: object
+      required:
+      - user_granted
+      - user_denied
+      title: ScopeRequirementsGrants
+    UserRefreshSuccessResponse:
+      properties:
+        success:
+          type: boolean
+          const: true
+          title: Success
+          description: Whether operation was successful or not
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        refreshed_sources:
+          items:
+            type: string
+          type: array
+          title: Refreshed Sources
+        in_progress_sources:
+          items:
+            type: string
+          type: array
+          title: In Progress Sources
+        failed_sources:
+          items:
+            type: string
+          type: array
+          title: Failed Sources
+      type: object
+      required:
+      - success
+      - user_id
+      - refreshed_sources
+      - in_progress_sources
+      - failed_sources
+      title: UserRefreshSuccessResponse
+      example:
+        failed_sources:
+        - oura/sleep
+        in_progress_sources: []
+        refreshed_sources:
+        - withings/workouts
+        - withings/sleep
+        - withings/body
+        - withings/vitals/blood_pressure
+        - withings/activity
+        success: true
+        user_id: 1449752e-0d8a-40e0-9206-91ab099b2537
+    vital_core__schemas__db_schemas__lab_test__insurance__PersonDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        gender:
+          $ref: '#/components/schemas/Gender'
+          description: ℹ️ This enum is non-exhaustive.
+        address:
+          $ref: '#/components/schemas/Address'
+        dob:
+          type: string
+          format: date
+          title: Dob
+        email:
+          type: string
+          title: Email
+        phone_number:
+          type: string
+          title: Phone Number
+      type: object
+      required:
+      - first_name
+      - last_name
+      - gender
+      - address
+      - dob
+      - email
+      - phone_number
+      title: PersonDetails
+    UserCreateBody:
+      properties:
+        client_user_id:
+          type: string
+          title: Client User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        fallback_time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fallback Time Zone
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        fallback_birth_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Fallback Birth Date
           description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        ingestion_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion Start
+          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        ingestion_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion End
+          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+      type: object
+      required:
+      - client_user_id
+      title: UserCreateBody
+    ClientFacingUser:
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+          description: User id returned by vital create user request. This id should be stored in your database against the user and used for all interactions with the vital api.
+        team_id:
+          type: string
+          format: uuid
+          title: Team Id
+          description: Your team id.
+        client_user_id:
+          type: string
+          title: Client User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+          description: When your item is created
+        connected_sources:
+          items:
+            $ref: '#/components/schemas/ConnectedSourceClientFacing'
+          type: array
+          title: Connected Sources
+          description: A list of the users connected sources.
+        fallback_time_zone:
+          anyOf:
+          - $ref: '#/components/schemas/FallbackTimeZone'
+          - type: 'null'
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        fallback_birth_date:
+          anyOf:
+          - $ref: '#/components/schemas/FallbackBirthDate'
+          - type: 'null'
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        ingestion_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion Start
+          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        ingestion_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion End
+          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+      type: object
+      required:
+      - user_id
+      - team_id
+      - client_user_id
+      - created_on
+      - connected_sources
+      - fallback_time_zone
+      title: User
+      example:
+        client_user_id: ZTEwZjNjMjctOTI2ZS00M2Vm
+        connected_sources:
+        - created_on: '2026-05-20T13:43:42+00:00'
+          source:
+            logo: logo_url
+            name: Oura
+            slug: oura
+        created_on: '2026-05-20T13:43:42+00:00'
+        fallback_birth_date:
+          source_slug: manual
+          updated_at: '2026-05-20T13:43:42+00:00'
+          value: '1989-09-12'
+        fallback_time_zone:
+          id: Europe/London
+          source_slug: manual
+          updated_at: '2026-05-20T13:43:42+00:00'
+        team_id: 56bd81c9-6219-4000-a775-ae85526eba18
+        user_id: 56bd81c9-6219-4000-a775-ae85526eba18
+    ResponsibleRelationship:
+      type: string
+      enum:
+      - Self
+      - Spouse
+      - Other
+      title: ResponsibleRelationship
+      description: ℹ️ This enum is non-exhaustive.
+    ResourceAvailability:
+      properties:
+        status:
+          $ref: '#/components/schemas/Availability'
+          description: ℹ️ This enum is non-exhaustive.
+        scope_requirements:
+          anyOf:
+          - $ref: '#/components/schemas/ScopeRequirementsGrants'
+          - type: 'null'
+      type: object
+      required:
+      - status
+      title: ResourceAvailability
+    ClientFacingInsurance:
+      properties:
+        member_id:
+          type: string
+          title: Member Id
+        payor_code:
+          type: string
+          title: Payor Code
+        relationship:
+          $ref: '#/components/schemas/ResponsibleRelationship'
+          description: ℹ️ This enum is non-exhaustive.
+        insured:
+          $ref: '#/components/schemas/vital_core__schemas__db_schemas__lab_test__insurance__PersonDetails'
+        company:
+          $ref: '#/components/schemas/CompanyDetails'
+        group_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Group Id
+        guarantor:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+        is_primary:
+          type: boolean
+          title: Is Primary
+          default: true
+      type: object
+      required:
+      - member_id
+      - payor_code
+      - relationship
+      - insured
+      - company
+      title: ClientFacingInsurance
+    UserAddress:
+      properties:
+        first_line:
+          type: string
+          title: First Line
+        second_line:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Second Line
+          default: ''
+        country:
+          type: string
+          title: Country
+        zip:
+          type: string
+          title: Zip
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        access_notes:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Access Notes
+      type: object
+      required:
+      - first_line
+      - country
+      - zip
+      - city
+      - state
+      title: UserAddress
+    Gender:
+      type: string
+      enum:
+      - female
+      - male
+      - other
+      - unknown
+      title: Gender
+      description: ℹ️ This enum is non-exhaustive.
+    GenderIdentity:
+      type: string
+      enum:
+      - male
+      - female
+      - female_to_male_ftm_transgender_male_trans_man
+      - male_to_female_mtf_transgender_female_trans_woman
+      - genderqueer
+      - other
+      title: GenderIdentity
+      description: ℹ️ This enum is non-exhaustive.
+    CreateUserPortalURLBody:
+      properties:
+        context:
+          type: string
+          enum:
+          - launch
+          - communications
+          title: Context
+          description: '`launch`: Generates a short-lived (minutes) portal URL that is intended for launching a user from your
+
+            authenticated web context directly into the Junction User Portal. This URL is not suitable for asynchronous
+
+            communications due to its verbosity as well as short-lived nature.
+
+
+            `communications`: Generates a long-lived (weeks) but shortened portal URL that is suitable for Emails, SMS
+
+            messages and other communication channels. Users may be asked to verify their identity with Email and SMS
+
+            authentication, e.g., when they open a short link on a new device. ℹ️ This enum is non-exhaustive.'
+        order_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Order Id
+          description: If specified, the generated URL will deeplink to the specified Order.
+      type: object
+      required:
+      - context
+      title: CreateUserPortalURLBody
+    FallbackTimeZone:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
         source_slug:
           type: string
           title: Source Slug
@@ -1907,10 +1583,334 @@ components:
           title: Updated At
       type: object
       required:
-      - value
+      - id
       - source_slug
       - updated_at
-      title: FallbackBirthDate
+      title: FallbackTimeZone
+    UserSuccessResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+          description: Whether operation was successful or not
+      type: object
+      required:
+      - success
+      title: UserSuccessResponse
+      example:
+        success: true
+    UserInfoCreateRequest:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        phone_number:
+          type: string
+          title: Phone Number
+        gender:
+          type: string
+          title: Gender
+        dob:
+          type: string
+          format: date
+          title: Dob
+        address:
+          $ref: '#/components/schemas/UserAddress'
+        medical_proxy:
+          anyOf:
+          - $ref: '#/components/schemas/GuarantorDetails'
+          - type: 'null'
+        race:
+          anyOf:
+          - $ref: '#/components/schemas/Race'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        ethnicity:
+          anyOf:
+          - $ref: '#/components/schemas/Ethnicity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        sexual_orientation:
+          anyOf:
+          - $ref: '#/components/schemas/SexualOrientation'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+        gender_identity:
+          anyOf:
+          - $ref: '#/components/schemas/GenderIdentity'
+          - type: 'null'
+          description: ℹ️ This enum is non-exhaustive.
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email
+      - phone_number
+      - gender
+      - dob
+      - address
+      title: UserInfoCreateRequest
+    ClientFacingConnectionErrorDetails:
+      properties:
+        error_type:
+          type: string
+          enum:
+          - token_refresh_failed
+          - webhook_registration_failed
+          - user_not_found
+          - deregistered_per_provider
+          - required_scopes_not_granted
+          - provider_credential_error
+          - provider_password_expired
+          - unknown
+          title: Error Type
+          description: ℹ️ This enum is non-exhaustive.
+        error_message:
+          type: string
+          title: Error Message
+        errored_at:
+          type: string
+          format: date-time
+          title: Errored At
+      type: object
+      required:
+      - error_type
+      - error_message
+      - errored_at
+      title: ConnectionErrorDetails
+    CreateUserPortalURLResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        expires_in:
+          type: integer
+          title: Expires In
+      type: object
+      required:
+      - url
+      - expires_in
+      title: CreateUserPortalURLResponse
+    SexualOrientation:
+      type: string
+      enum:
+      - lesbian_gay_or_homosexual
+      - heterosexual_or_straight
+      - bisexual
+      - dont_know
+      - other
+      title: SexualOrientation
+      description: ℹ️ This enum is non-exhaustive.
+    GuarantorDetails:
+      properties:
+        first_name:
+          type: string
+          title: First Name
+        last_name:
+          type: string
+          title: Last Name
+        address:
+          $ref: '#/components/schemas/Address'
+        phone_number:
+          type: string
+          title: Phone Number
+        household_income:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Income
+        household_size:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Household Size
+        email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Email
+      type: object
+      required:
+      - first_name
+      - last_name
+      - address
+      - phone_number
+      title: GuarantorDetails
+    UserPatchBody:
+      properties:
+        fallback_time_zone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Fallback Time Zone
+          description: "\n    Fallback time zone of the user, in the form of a valid IANA tzdatabase identifier (e.g., `Europe/London` or `America/Los_Angeles`).\n    Used when pulling data from sources that are completely time zone agnostic (e.g., all time is relative to UTC clock, without any time zone attributions on data points).\n    "
+        fallback_birth_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Fallback Birth Date
+          description: Fallback date of birth of the user, in YYYY-mm-dd format. Used for calculating max heartrate for providers that don not provide users' age.
+        ingestion_start:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion Start
+          description: Starting bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        ingestion_end:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Ingestion End
+          description: Ending bound for user [data ingestion bounds](https://docs.tryvital.io/wearables/providers/data-ingestion-bounds).
+        client_user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Client User Id
+          description: A unique ID representing the end user. Typically this will be a user ID from your application. Personally identifiable information, such as an email address or phone number, should not be used in the client_user_id.
+      type: object
+      title: UserPatchBody
+    Providers:
+      type: string
+      enum:
+      - oura
+      - fitbit
+      - garmin
+      - whoop
+      - strava
+      - renpho
+      - peloton
+      - wahoo
+      - zwift
+      - freestyle_libre
+      - abbott_libreview
+      - tandem_source
+      - freestyle_libre_ble
+      - eight_sleep
+      - withings
+      - apple_health_kit
+      - manual
+      - ihealth
+      - google_fit
+      - beurer_api
+      - beurer_ble
+      - omron
+      - omron_ble
+      - onetouch_ble
+      - accuchek_ble
+      - contour_ble
+      - dexcom
+      - dexcom_v3
+      - hammerhead
+      - my_fitness_pal
+      - health_connect
+      - samsung_health
+      - polar
+      - cronometer
+      - kardia
+      - whoop_v2
+      - ultrahuman
+      - my_fitness_pal_v2
+      - map_my_fitness
+      - runkeeper
+      title: Providers
+      description: ℹ️ This enum is non-exhaustive.
+    ClientUserIDConflict:
+      properties:
+        error_type:
+          type: string
+          title: Error Type
+        error_message:
+          type: string
+          title: Error Message
+        user_id:
+          type: string
+          format: uuid
+          title: User Id
+        created_on:
+          type: string
+          format: date-time
+          title: Created On
+      type: object
+      required:
+      - error_type
+      - error_message
+      - user_id
+      - created_on
+      title: ClientUserIDConflict
+    TimeseriesMetricPoint:
+      properties:
+        date:
+          type: string
+          format: date-time
+          title: Date
+        value:
+          type: number
+          title: Value
+        all:
+          type: number
+          title: All
+      type: object
+      required:
+      - date
+      - value
+      - all
+      title: TimeseriesMetricPoint
+    MetricsResult:
+      properties:
+        team_id:
+          anyOf:
+          - type: string
+          - type: string
+            format: uuid
+          title: Team Id
+        number_of_connected_sources:
+          type: integer
+          title: Number Of Connected Sources
+          default: 0
+        number_of_users:
+          type: integer
+          title: Number Of Users
+          default: 0
+        number_of_errored_connected_sources:
+          type: integer
+          title: Number Of Errored Connected Sources
+          default: 0
+        number_of_connected_sources_by_week:
+          items:
+            $ref: '#/components/schemas/TimeseriesMetricPoint'
+          type: array
+          title: Number Of Connected Sources By Week
+          default: []
+        number_of_ordered_tests:
+          type: integer
+          title: Number Of Ordered Tests
+          default: 0
+      type: object
+      required:
+      - team_id
+      title: MetricsResult
+    Race:
+      type: string
+      enum:
+      - african_american_or_black
+      - asian
+      - indigenous_native_american_alaska_native
+      - other
+      - pacific_islander_or_hawaiian
+      - white_caucasian
+      title: Race
+      description: ℹ️ This enum is non-exhaustive.
   securitySchemes:
     apiKeyAuth:
       type: apiKey
